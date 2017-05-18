@@ -1,0 +1,45 @@
+@import "variables.css";
+@import "reset.css";
+@import "fonts.css";
+@import "icons.css";
+@import "tabs.css";
+@import "slider.css";
+
+@import "blocks/header.css";
+@import "blocks/about.css";
+@import "blocks/join.css";
+@import "blocks/joined.css";
+@import "blocks/map.css";
+@import "blocks/statistic.css";
+@import "blocks/explain.css";
+@import "blocks/docs.css";
+@import "blocks/contacts.css";
+@import "blocks/declarations.css";
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.header {
+  flex: 0 0 100vh;
+}
+
+.main {
+  flex: 1 1 auto;
+  width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.footer {
+  flex: 0 0 100px;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1;
+  border-top: #b9dd2f 3px solid;
+}
+
+.link {
+  color: #4880ed;
+}

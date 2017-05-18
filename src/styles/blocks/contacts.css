@@ -1,0 +1,22 @@
+.contacts {
+  margin-bottom: 130px;
+
+  &__form {
+    margin-top: 42px;
+    max-width: 400px;
+  }
+
+  &__form-title {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 26px;
+  }
+
+  &__form-row {
+    margin-bottom: 24px;
+  }
+
+  &__form-submit-row {
+    margin-top: 60px;
+  }
+}

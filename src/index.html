@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>NHS Portal</title>
+
+    <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+
+<header class="header">
+    <header class="header__head">
+        <div class="header__logo">
+            <a href="#">
+                <img src="images/logo.png" alt="NHS Logo">
+            </a>
+        </div>
+        <nav class="header__nav">
+            <ul>
+                <li>
+                    <a class="header__nav-link" href="#">Про нас</a>
+                </li>
+                <li>
+                    <a class="header__nav-link" href="#">Долучитися</a>
+                </li>
+                <li>
+                    <a class="header__nav-link" href="#">Мапа</a>
+                </li>
+                <li>
+                    <a class="header__nav-link" href="#">Статистика</a>
+                </li>
+                <li>
+                    <a class="header__nav-link" href="#">Пояснення</a>
+                </li>
+                <li>
+                    <a class="header__nav-link" href="#">Документи</a>
+                </li>
+                <li>
+                    <a class="header__nav-link" href="#">Контакти</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <article class="header__main">
+        <h1>Національна Служба Здоров’я України</h1>
+        <h2>Піклуємося про ваше здоров’я!</h2>
+    </article>
+    <footer class="header__footer">
+        <a class="header__main-link" href="#">
+            Дізнатися як це працює
+            <i class="icon icon_name_arrow-right"></i>
+        </a>
+    </footer>
+</header>
+<main class="main">
+    <section class="about">
+        <header class="about__header">
+            <h3>про нас</h3>
+        </header>
+        <article class="about__main">
+            Національна служба здоров'я України - центральний орган виконавчої влади, <br />
+            що забезпечує <b>рівний та якісний медичний захист громадян України</b> в межах гарантованого <br />
+            державою пакета медичної допомоги шляхом стратегічних закупівель медичних послуг <br />
+            <b>за рахунок коштів державного бюджету.</b>
+
+            <a href="#" class="about__main-link">
+                Проект постанови Кабінету Міністрів України <br />
+                "Про утворення Національної служби здоров'я України"
+            </a>
+        </article>
+    </section>
+    <section class="join">
+        <header class="join__header">
+            <h3>долучитися</h3>
+        </header>
+        <article class="join__main">
+            <div class="join__item">
+                <div class="join__item-icon join__item-icon_color_green">
+                    <i class="icon icon_name_clinic"></i>
+                </div>
+                Медичним<br />
+                закладам
+            </div>
+            <div class="join__item">
+                <div class="join__item-icon join__item-icon_color_blue">
+                    <i class="icon icon_name_doctors"></i>
+                </div>
+                Лікарям
+            </div>
+            <div class="join__item">
+                <div class="join__item-icon join__item-icon_color_yellow">
+                    <i class="icon icon_name_persons"></i>
+                </div>
+                Пацієнтам
+            </div>
+        </article>
+    </section>
+    <section class="joined">
+        <header class="joined__header">
+            <h3>До нас вже приєдналися</h3>
+        </header>
+        <article class="joined__main">
+            <div class="joined__item">
+                <div class="joined__item-count">7902</div>
+                Медичних <br />
+                закладів
+            </div>
+            <div class="joined__item">
+                <div class="joined__item-count">32901</div>
+                Лікарів
+            </div>
+            <div class="joined__item">
+                <div class="joined__item-count">92874</div>
+                Пацієнтів
+            </div>
+        </article>
+    </section>
+    <section class="map">
+        <header class="map__header">
+            <h3>мапа проекту</h3>
+        </header>
+        <article class="map__main">
+            <div class="map__tooltip">
+                <div class="map__tooltip-title">
+                    Чернігівська <br />
+                    область
+                </div>
+                <dl class="map__tooltip-data">
+                    <dt>1903</dt>
+                    <dd>медзакладів</dd>
+                    <dt>19367</dt>
+                    <dd>лікарів</dd>
+                    <dt>32987</dt>
+                    <dd>декларацій підписано</dd>
+                </dl>
+            </div>
+        </article>
+    </section>
+    <section class="statistic">
+        <header class="statistic__header">
+            <h3>статистика</h3>
+        </header>
+        <article class="statistic__main">
+            <section class="tabs">
+                <header class="tabs__header">
+                    <ul class="tabs__nav">
+                        <li class="tabs__nav-item">
+                            Динаміка появи <br />
+                            закладів, лікарів, декларацій
+                        </li>
+                        <li class="tabs__nav-item">
+                            Віковий та статевий розподіл <br />
+                            лікарів та пацієнтів
+                        </li>
+                        <li class="tabs__nav-item tabs__nav-item_active">
+                            Кількість <br />
+                            декларацій
+                        </li>
+                        <li class="tabs__nav-item">
+                            Зміна <br />
+                            декларацій
+                        </li>
+                    </ul>
+                </header>
+                <article class="tabs__main statistic__tabs-content">
+                    <section class="tabs__slide">
+                        <section class="declarations">
+                            <div class="declarations__graph">
+                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
+                                <div class="declarations__total">
+                                    <div class="declarations__total-value"></div>
+                                    Загальна кількість
+                                    декларацій
+                                </div>
+                            </div>
+                            <div class="declarations__data">
+                                <div class="declarations__title">
+                                    Розподіл загальної кількості підписаних декларацій
+                                </div>
+                                <ul class="declarations__tabs">
+                                    <li class="declarations__tabs-item declarations__tabs-item_active">
+                                        По областях
+                                    </li>
+                                    <li class="declarations__tabs-item">
+                                        По населених пунктах
+                                    </li>
+                                </ul>
+
+                                <ul class="declarations__list"></ul>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="tabs__slide">
+                        <section class="declarations">
+                            <div class="declarations__graph">
+                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
+                                <div class="declarations__total">
+                                    <div class="declarations__total-value"></div>
+                                    Загальна кількість
+                                    декларацій
+                                </div>
+                            </div>
+                            <div class="declarations__data">
+                                <div class="declarations__title">
+                                    Розподіл загальної кількості підписаних декларацій
+                                </div>
+                                <ul class="declarations__tabs">
+                                    <li class="declarations__tabs-item declarations__tabs-item_active">
+                                        По областях
+                                    </li>
+                                    <li class="declarations__tabs-item">
+                                        По населених пунктах
+                                    </li>
+                                </ul>
+
+                                <ul class="declarations__list"></ul>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="tabs__slide tabs__slide_active">
+                        <section class="declarations">
+                            <div class="declarations__graph">
+                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
+                                <div class="declarations__total">
+                                    <div class="declarations__total-value"></div>
+                                    Загальна кількість
+                                    декларацій
+                                </div>
+                            </div>
+                            <div class="declarations__data">
+                                <div class="declarations__title">
+                                    Розподіл загальної кількості підписаних декларацій
+                                </div>
+                                <ul class="declarations__tabs">
+                                    <li class="declarations__tabs-item declarations__tabs-item_active">
+                                        По областях
+                                    </li>
+                                    <li class="declarations__tabs-item">
+                                        По населених пунктах
+                                    </li>
+                                </ul>
+
+                                <ul class="declarations__list"></ul>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="tabs__slide">
+                        <section class="declarations">
+                            <div class="declarations__graph">
+                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
+                                <div class="declarations__total">
+                                    <div class="declarations__total-value"></div>
+                                    Загальна кількість
+                                    декларацій
+                                </div>
+                            </div>
+                            <div class="declarations__data">
+                                <div class="declarations__title">
+                                    Розподіл загальної кількості підписаних декларацій
+                                </div>
+                                <ul class="declarations__tabs">
+                                    <li class="declarations__tabs-item declarations__tabs-item_active">
+                                        По областях
+                                    </li>
+                                    <li class="declarations__tabs-item">
+                                        По населених пунктах
+                                    </li>
+                                </ul>
+
+                                <ul class="declarations__list"></ul>
+                            </div>
+                        </section>
+                    </section>
+                </article>
+            </section>
+        </article>
+    </section>
+    <section class="explain">
+        <header class="explain__header">
+            <h3>ПОЯСНЕННЯ</h3>
+        </header>
+        <article class="explain__main">
+            <section class="tabs">
+                <header class="tabs__header">
+                    <ul class="tabs__nav">
+                        <li class="tabs__nav-item tabs__nav-item_active">
+                            Всім
+                        </li>
+                        <li class="tabs__nav-item">
+                            Розробникам
+                        </li>
+                        <li class="tabs__nav-item">
+                            Закладам
+                        </li>
+                        <li class="tabs__nav-item">
+                            Лікарі
+                        </li>
+                        <li class="tabs__nav-item">
+                            Пацієнтам
+                        </li>
+                        <li class="tabs__nav-item">
+                            Аптекам
+                        </li>
+                        <li class="tabs__nav-item">
+                            Діагностичним центрам
+                        </li>
+                    </ul>
+                </header>
+                <article class="tabs__main explain__tabs-content">
+                    <section class="tabs__slide tabs__slide_active">
+                        <ul class="explain__list">
+                            <li class="explain__item">
+                                <h4>Як отримати ЕЦП юридичної особи</h4>
+                                <time>20.05.2017</time>
+                                Декілька слів про те, як
+                                отримати ЕЦП якщо
+                                раптом виявилося, що
+                                ви юридична особа...
+                            </li>
+                            <li class="explain__item">
+                                <h4>Доступ до даних пацієнта</h4>
+                                <time>20.05.2017</time>
+                                Як отримати дані
+                                пацієнта? Чи є життя
+                                після читання Ніцше?
+                                Що робити якщо?
+                            </li>
+                            <li class="explain__item">
+                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
+                                <time>20.05.2017</time>
+                                Тут така довга назва, що
+                                навіть підзаголовку
+                                не треба
+                            </li>
+                            <li class="explain__item">
+                                <h4>Привілеї лікарям Бонуси аптекам</h4>
+                                <time>20.05.2017</time>
+                                Яких бонусів вам ще треба?
+                                Що це за забаганки?
+                                Вам шо мало того, шо
+                                вже є? Нє ну ви бачили
+                                таке?! Поїзд їде воно лізе
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="tabs__slide">
+                        <ul class="explain__list">
+                            <li class="explain__item">
+                                <h4>Як отримати ЕЦП юридичної особи</h4>
+                                <time>20.05.2017</time>
+                                Декілька слів про те, як
+                                отримати ЕЦП якщо
+                                раптом виявилося, що
+                                ви юридична особа...
+                            </li>
+                            <li class="explain__item">
+                                <h4>Доступ до даних пацієнта</h4>
+                                <time>20.05.2017</time>
+                                Як отримати дані
+                                пацієнта? Чи є життя
+                                після читання Ніцше?
+                                Що робити якщо?
+                            </li>
+                            <li class="explain__item">
+                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
+                                <time>20.05.2017</time>
+                                Тут така довга назва, що
+                                навіть підзаголовку
+                                не треба
+                            </li>
+                            <li class="explain__item">
+                                <h4>Привілеї лікарям Бонуси аптекам</h4>
+                                <time>20.05.2017</time>
+                                Яких бонусів вам ще треба?
+                                Що це за забаганки?
+                                Вам шо мало того, шо
+                                вже є? Нє ну ви бачили
+                                таке?! Поїзд їде воно лізе
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="tabs__slide">
+                        <ul class="explain__list">
+                            <li class="explain__item">
+                                <h4>Як отримати ЕЦП юридичної особи</h4>
+                                <time>20.05.2017</time>
+                                Декілька слів про те, як
+                                отримати ЕЦП якщо
+                                раптом виявилося, що
+                                ви юридична особа...
+                            </li>
+                            <li class="explain__item">
+                                <h4>Доступ до даних пацієнта</h4>
+                                <time>20.05.2017</time>
+                                Як отримати дані
+                                пацієнта? Чи є життя
+                                після читання Ніцше?
+                                Що робити якщо?
+                            </li>
+                            <li class="explain__item">
+                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
+                                <time>20.05.2017</time>
+                                Тут така довга назва, що
+                                навіть підзаголовку
+                                не треба
+                            </li>
+                            <li class="explain__item">
+                                <h4>Привілеї лікарям Бонуси аптекам</h4>
+                                <time>20.05.2017</time>
+                                Яких бонусів вам ще треба?
+                                Що це за забаганки?
+                                Вам шо мало того, шо
+                                вже є? Нє ну ви бачили
+                                таке?! Поїзд їде воно лізе
+                            </li>
+                        </ul>
+                    </section>
+                </article>
+            </section>
+        </article>
+    </section>
+    <section class="docs">
+        <header class="docs__header">
+            <h3>документи</h3>
+        </header>
+        <article class="docs__main">
+            <section class="slider">
+                <div class="slider__main docs__slider-content">
+                    <div class="slider__slide slider__slide_active">
+                        <ul class="docs__list">
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Інструктивні
+                                    матеріали
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="slider__slide">
+                        <ul class="docs__list">
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Інструктивні
+                                    матеріали
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="slider__slide">
+                        <ul class="docs__list">
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Інструктивні
+                                    матеріали
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                            <li class="docs__item">
+                                <a href="#">
+                                    <div class="docs__item-icon">
+                                        <i class="icon icon_name_doc"></i>
+                                        PDF
+                                    </div>
+                                    Закон про державні
+                                    фінансові гарантії
+                                    надання медичних
+                                    послуг і лікарських
+                                    засобів
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </section>
+    <section class="contacts">
+        <header class="contacts__header">
+            <h3>КОНТАКТИ</h3>
+        </header>
+        <article class="contacts__main">
+            <p>
+                Національна Служба Здоров’я України <br />
+                вул. Грушевського 7, <br />
+                м. Київ, 01601
+            </p>
+
+            <p>
+                тел. (044)253-61-94, <br />
+                факс (044)253-40-17
+            </p>
+
+            <p>
+                <a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>
+            </p>
+
+            <form class="contacts__form">
+                <div class="contacts__form-title">
+                    Зворотній зв’язок
+                </div>
+                <div class="contacts__form-row">
+                    <input type="text" name="name" placeholder="Ваше ім’я" />
+                </div>
+                <div class="contacts__form-row">
+                    <input type="text" name="email" placeholder="Email" />
+                </div>
+                <div class="contacts__form-row">
+                    <textarea name="message" placeholder="Текст повідомлення"></textarea>
+                </div>
+                <div class="contacts__form-submit-row">
+                    <button type="submit">
+                        надіслати
+                    </button>
+                </div>
+            </form>
+        </article>
+    </section>
+</main>
+<footer class="footer">
+    ©2017 All Rights Recerved
+</footer>
+<script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>
+<script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+</body>
+</html>

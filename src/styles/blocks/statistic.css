@@ -1,0 +1,8 @@
+.statistic {
+  padding-bottom: 60px;
+  border-bottom: #dad9d8 1px solid;
+
+  &__tabs-content {
+    height: 520px;
+  }
+}

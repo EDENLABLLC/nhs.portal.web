@@ -1,0 +1,68 @@
+.tabs {
+
+  &__header {
+    position: relative;
+    margin: 0 60px;
+    border-bottom: #dad9d8 1px solid;
+  }
+
+  &__nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    list-style: none;
+    margin-bottom: 4px;
+  }
+
+  &__nav-item {
+    display: inline-block;
+    padding-bottom: 38px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &_active {
+      font-weight: 700;
+      //box-shadow: 0 5px 0 0 #4880ed;
+    }
+
+    &_marker {
+      box-shadow: 0 5px 0 0 #4880ed;
+    }
+
+    &:hover {
+      //font-weight: 700;
+    }
+  }
+
+  &__main {
+    position: relative;
+    margin-top: 60px;
+    //overflow-x: hidden;
+  }
+
+  &__slide {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateX(100%);
+    will-change: transform;
+
+    &_active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &__marker {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 5px;
+    background-color: #4880ed;
+    z-index: 1;
+  }
+}
