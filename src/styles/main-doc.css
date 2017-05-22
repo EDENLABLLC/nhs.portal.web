@@ -2,20 +2,10 @@
 @import "reset.css";
 @import "fonts.css";
 @import "icons.css";
-@import "tabs.css";
-@import "slider.css";
 
 @import "blocks/nav.css";
-@import "blocks/header.css";
-@import "blocks/about.css";
-@import "blocks/join.css";
-@import "blocks/joined.css";
-@import "blocks/map.css";
-@import "blocks/statistic.css";
-@import "blocks/explain.css";
-@import "blocks/docs.css";
-@import "blocks/contacts.css";
-@import "blocks/declarations.css";
+@import "blocks/header-doc.css";
+@import "blocks/article.css";
 
 body {
   display: flex;
@@ -23,8 +13,9 @@ body {
 }
 
 .header {
-  flex: 0 0 100vh;
-  min-height: 500px;
+  flex: 0 0 40px;
+  width: var(--max-content-width);
+  margin: 0 auto;
 }
 
 .main {

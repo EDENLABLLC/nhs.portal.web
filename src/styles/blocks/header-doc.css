@@ -1,0 +1,29 @@
+.header {
+  padding: 54px 0;
+
+  &__logo {
+    display: inline-block;
+    margin-right: 43px;
+
+    img {
+      height: 35px;
+    }
+  }
+
+  &__back {
+    margin-top: 40px;
+  }
+
+  &__back-link {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #4880ed;
+
+    i {
+      margin: -3px 10px 0 0;
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -21,12 +21,16 @@ const SRC_PATH = './src';
 const DIST_PATH = './dist';
 const STYLES_PATH = `${SRC_PATH}/styles`;
 const SCRIPTS_PATH = `${SRC_PATH}/scripts`;
-const STYLES_SRC = `${STYLES_PATH}/main.css`;
+const STYLES_SRC = [
+  `${STYLES_PATH}/main.css`,
+  `${STYLES_PATH}/main-doc.css`,
+  `${STYLES_PATH}/main-map.css`
+];
 const SCRIPTS_SRC = `${SCRIPTS_PATH}/main.js`;
 const STYLES_DIST = 'app.css';
 const SCRIPTS_DIST = `${DIST_PATH}/app.js`;
 const COPY_PATHS = [
-  `${SRC_PATH}/index.html`,
+  `${SRC_PATH}/*.html`,
   `${SRC_PATH}/favicon.ico`,
 ];
 const FONTS_PATH = `${SRC_PATH}/fonts/**`;
@@ -41,7 +45,7 @@ gulp.task('build:scripts', () => (
 gulp.task('build:styles', () => (
   gulp.src(STYLES_SRC).pipe(postcss([
     CSSImport(), CSSNested(), CSSAutoPrefixer({ browsers: ['last 2 versions'] }), CSSVariables(), CSSMinify()
-  ])).pipe(rename(STYLES_DIST)).pipe(gulp.dest(DIST_PATH)).pipe(connect.reload())
+  ])).pipe(rename({ suffix: '.min' })).pipe(gulp.dest(DIST_PATH)).pipe(connect.reload())
 ));
 
 gulp.task('copy:fonts', () => (
@@ -64,9 +68,9 @@ gulp.task('build', ['build:scripts', 'build:styles', 'build:images', 'copy']);
 
 gulp.task('watch', ['build'], () => {
   gulp.watch(`${SCRIPTS_PATH}/**/*.js`, ['build:scripts']);
-gulp.watch(`${STYLES_PATH}/**/*.css`, ['build:styles']);
-gulp.watch(`${SRC_PATH}/images/**/*`, ['build:images']);
-gulp.watch(COPY_PATHS, ['copy']);
+  gulp.watch(`${STYLES_PATH}/**/*.css`, ['build:styles']);
+  gulp.watch(`${SRC_PATH}/images/**/*`, ['build:images']);
+  gulp.watch(COPY_PATHS, ['copy']);
 });
 
 gulp.task('dev', ['watch'], () => {

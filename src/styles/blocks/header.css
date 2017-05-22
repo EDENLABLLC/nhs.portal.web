@@ -45,26 +45,4 @@
       height: 35px;
     }
   }
-
-  &__nav {
-    display: inline-block;
-    vertical-align: top;
-    line-height: 35px;
-
-    &-link {
-      display: inline-block;
-      margin-right: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    ul {
-      list-style: none;
-
-      li {
-        display: inline-block;
-      }
-    }
-  }
 }
