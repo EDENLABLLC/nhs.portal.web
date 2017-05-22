@@ -43,7 +43,7 @@
       height: 32px;
     }
 
-    &:hover {
+    &_active {
       transform: scale(2.5);
 
       &::after {
@@ -68,18 +68,26 @@
     background-color: #fff;
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-50px);
     transition: all 0.2s ease;
     z-index: 2;
 
     &_show {
       opacity: 1;
       visibility: visible;
+      transform: translateY(0);
     }
 
     &-title {
       font-size: 14px;
       line-height: 18px;
       margin-bottom: 20px;
+    }
+
+    &-link {
+      color: #4880ed;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     &-data {

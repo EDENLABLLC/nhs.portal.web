@@ -62,28 +62,47 @@ export default class Map extends BEM {
       fragment.appendChild(point);
     });
 
+    this.$tooltip.addEventListener('mouseover', this, false);
+    this.$tooltip.addEventListener('mouseout', this, false);
+
     this.elem('main').appendChild(fragment);
   }
 
   handleEvent({ target, type }) {
+    if (type === 'mouseover' && target.dataset.index) {
+      this.$tooltip.style.top = target.style.top;
+      this.$tooltip.style.left = target.style.left;
+    }
+
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       switch (type) {
         case 'mouseout':
           this.delMod(this.$tooltip, 'tooltip', 'show');
+          this.delMod(this.$active, 'point', 'active');
           break;
         case 'mouseover':
           const data = this.data[target.dataset.index];
-          const $tooltipData = this.$tooltip.querySelectorAll(`${buildClass('map', 'tooltip-data')} dt`);
 
-          this.$tooltip.querySelector(buildClass('map', 'tooltip-title')).textContent = data.region_name;
+          if (data) {
+            const $tooltipData = this.$tooltip.querySelectorAll(`${buildClass('map', 'tooltip-data')} dt`);
 
-          $tooltipData[0].textContent = data.medical_system_providers;
-          $tooltipData[1].textContent = data.doctors;
-          $tooltipData[2].textContent = data.declarations_signed;
+            this.$tooltip.style.top = target.style.top;
+            this.$tooltip.style.left = target.style.left;
 
-          this.$tooltip.style.top = target.style.top;
-          this.$tooltip.style.left = target.style.left;
+            this.$active && this.delMod(this.$active, 'point', 'active');
+            this.setMod(this.$tooltip, 'tooltip', 'show');
+
+            this.$tooltip.querySelector(buildClass('map', 'tooltip-title')).textContent = data.region_name;
+            this.$active = target;
+
+            $tooltipData[0].textContent = data.medical_system_providers;
+            $tooltipData[1].textContent = data.doctors;
+            $tooltipData[2].textContent = data.declarations_signed;
+
+            this.setMod(this.$active, 'point', 'active');
+          }
+
           this.setMod(this.$tooltip, 'tooltip', 'show');
           break;
       }
