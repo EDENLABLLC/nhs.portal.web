@@ -329,243 +329,33 @@ clarification_types: [Всім, Розробникам, Закладам, Лік
         <article class="docs__main">
             <section class="slider">
                 <div class="slider__main docs__slider-content">
-                    <div class="slider__slide slider__slide_active">
+                  {% for document in site.data.documents %}
+                    {% assign loopindex = forloop.index | modulo: 6 %}
+
+                    {% capture document_layout %}
+                      <li class="docs__item">
+                        <a href="{{ document.link }}">
+                          <div class="docs__item-icon">
+                            <i class="icon icon_name_doc"></i>
+                            {{ document.type }}
+                          </div>
+                          {{ document.name }}
+                        </a>
+                      </li>
+                    {% endcapture %}
+
+                    {% if loopindex == 1 %}
+                      <div class="slider__slide {% if forloop.first %} slider__slide_active {% endif %}">
                         <ul class="docs__list">
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Інструктивні
-                                    матеріали
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
+                          {{ document_layout }}
+                    {% elsif loopindex == 0 %}
+                        {{ document_layout }}
                         </ul>
-                    </div>
-                    <div class="slider__slide">
-                        <ul class="docs__list">
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Інструктивні
-                                    матеріали
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="slider__slide">
-                        <ul class="docs__list">
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Інструктивні
-                                    матеріали
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                            <li class="docs__item">
-                                <a href="#">
-                                    <div class="docs__item-icon">
-                                        <i class="icon icon_name_doc"></i>
-                                        PDF
-                                    </div>
-                                    Закон про державні
-                                    фінансові гарантії
-                                    надання медичних
-                                    послуг і лікарських
-                                    засобів
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                      </div>
+                    {% else %}
+                      {{ document_layout }}
+                    {% endif %}
+                  {% endfor %}
                 </div>
             </section>
         </article>
