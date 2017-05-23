@@ -1,3 +1,8 @@
+---
+title: Головна
+clarification_types: [Всім, Розробникам, Закладам, Лікарям, Пацієнтам, Аптекам, Діагностичним центрам]
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,32 +19,32 @@
 <header class="header">
     <header class="header__head">
         <div class="header__logo">
-            <a href="#">
+            <a href="/">
                 <img src="images/logo.png" alt="NHS Logo">
             </a>
         </div>
         <nav class="nav">
             <ul>
                 <li>
-                    <a class="nav__link" href="#about">Про нас</a>
+                    <a class="nav__link" href="/#about">Про нас</a>
                 </li>
                 <li>
-                    <a class="nav__link" href="#join">Долучитися</a>
+                    <a class="nav__link" href="/#join">Долучитися</a>
                 </li>
                 <li>
-                    <a class="nav__link" href="#map">Мапа</a>
+                    <a class="nav__link" href="/#map">Мапа</a>
                 </li>
                 <li>
-                    <a class="nav__link" href="#statistic">Статистика</a>
+                    <a class="nav__link" href="/#statistic">Статистика</a>
                 </li>
                 <li>
-                    <a class="nav__link" href="#explain">Пояснення</a>
+                    <a class="nav__link" href="/#explain">Пояснення</a>
                 </li>
                 <li>
-                    <a class="nav__link" href="#documents">Документи</a>
+                    <a class="nav__link" href="/#documents">Документи</a>
                 </li>
                 <li>
-                    <a class="nav__link" href="#contacts">Контакти</a>
+                    <a class="nav__link" href="/#contacts">Контакти</a>
                 </li>
             </ul>
         </nav>
@@ -289,282 +294,30 @@
             <section class="tabs">
                 <header class="tabs__header">
                     <ul class="tabs__nav">
-                        <li class="tabs__nav-item tabs__nav-item_active">
-                            Всім
+                      {% for type in page.clarification_types %}
+                        <li class="tabs__nav-item {% if forloop.first %} tabs__nav-item_active {% endif %}">
+                            {{ type }}
                         </li>
-                        <li class="tabs__nav-item">
-                            Розробникам
-                        </li>
-                        <li class="tabs__nav-item">
-                            Закладам
-                        </li>
-                        <li class="tabs__nav-item">
-                            Лікарі
-                        </li>
-                        <li class="tabs__nav-item">
-                            Пацієнтам
-                        </li>
-                        <li class="tabs__nav-item">
-                            Аптекам
-                        </li>
-                        <li class="tabs__nav-item">
-                            Діагностичним центрам
-                        </li>
+                      {% endfor %}
                     </ul>
                 </header>
                 <article class="tabs__main explain__tabs-content">
-                    <section class="tabs__slide tabs__slide_active">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="tabs__slide">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="tabs__slide">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="tabs__slide">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="tabs__slide">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="tabs__slide">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="tabs__slide">
-                        <ul class="explain__list">
-                            <li class="explain__item">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20.05.2017</time>
-                                Декілька слів про те, як
-                                отримати ЕЦП якщо
-                                раптом виявилося, що
-                                ви юридична особа...
-                            </li>
-                            <li class="explain__item">
-                                <h4>Доступ до даних пацієнта</h4>
-                                <time>20.05.2017</time>
-                                Як отримати дані
-                                пацієнта? Чи є життя
-                                після читання Ніцше?
-                                Що робити якщо?
-                            </li>
-                            <li class="explain__item">
-                                <h4>Пояснення з дуже дуже-дуже довгою назвою з декількох незрозумілих слів</h4>
-                                <time>20.05.2017</time>
-                                Тут така довга назва, що
-                                навіть підзаголовку
-                                не треба
-                            </li>
-                            <li class="explain__item">
-                                <h4>Привілеї лікарям Бонуси аптекам</h4>
-                                <time>20.05.2017</time>
-                                Яких бонусів вам ще треба?
-                                Що це за забаганки?
-                                Вам шо мало того, шо
-                                вже є? Нє ну ви бачили
-                                таке?! Поїзд їде воно лізе
-                            </li>
-                        </ul>
-                    </section>
+                  {% for type in page.clarification_types %}
+                  {% assign isTypesLoopFirst = forloop.first %}
+                    <div class="tabs__slide {% if forloop.first %} tabs__slide_active {% endif %}">
+                      <div class="explain__list">
+                        {% for clarification in site.clarifications %}
+                          {% if isTypesLoopFirst or clarification.clarification_types contains type %}
+                            <a class="explain__item" href="{{ clarification.url }}">
+                                <h4>{{ clarification.title }}</h4>
+                                <time>{{ clarification.date | date: '%d-%m-%Y' }}</time>
+                                {{ clarification.excerpt }}
+                            </a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endfor %}
                 </article>
             </section>
         </article>

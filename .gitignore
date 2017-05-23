@@ -16,3 +16,4 @@ node_modules
 .publish
 .DS_Store
 dist
+.tmp
