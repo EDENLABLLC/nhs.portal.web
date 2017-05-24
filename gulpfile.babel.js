@@ -103,13 +103,23 @@ gulp.task('dev', ['watch'], () => {
 });
 
 gulp.task('prefix', () => (
-  gulp.src(`${TMP_PATH}/*.html`).pipe(prefix('/nhs.portal.web')).pipe(gulp.dest(TMP_PATH))
+  gulp.src(`${DIST_PATH}/**/*.html`)
+  .pipe(prefix('/nhs.portal.web', [
+    {match: "a[href]", attr: "href"}, // this selector was added to the default set of selectors
+    {match: "script[src]", attr: "src"},
+    {match: "link[href]", attr: "href"},
+    {match: "img[src]", attr: "src"},
+    {match: "input[src]", attr: "src"},
+    {match: "img[data-ng-src]", attr: "data-ng-src"}
+  ]))
+  .pipe(gulp.dest(DIST_PATH))
 ));
 
 gulp.task('production', ['build'], () => (
   gulp.src(SCRIPTS_DIST).pipe(uglify()).pipe(gulp.dest(TMP_PATH))
 ));
 
-gulp.task('deploy', ['production', 'prefix'], () => (
+gulp.task('deploy:build', sequence('production', 'prefix'));
+gulp.task('deploy', ['deploy:build'], () => (
   gulp.src(`${DIST_PATH}/**/*`).pipe(ghPages()))
 );
