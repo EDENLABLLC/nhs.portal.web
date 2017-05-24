@@ -15,5 +15,7 @@ node_modules
 .idea
 .publish
 .DS_Store
-dist
 .tmp
+_site
+.jekyll-metadata
+export

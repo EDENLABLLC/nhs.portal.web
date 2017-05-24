@@ -24,89 +24,57 @@ import prefix from 'gulp-prefix';
 import cp from 'child_process';
 
 const SRC_PATH = './src';
-const TMP_PATH = './.tmp';
-const DIST_PATH = './dist';
+const TMP_PATH = './dist';
+const EXPORT_PATH = './export';
 
 const STYLES_PATH = `${SRC_PATH}/styles`;
+const STYLES_DIST = `${TMP_PATH}/styles`;
+
 const SCRIPTS_PATH = `${SRC_PATH}/scripts`;
-const STYLES_SRC = [
-  `${STYLES_PATH}/main.css`,
-  `${STYLES_PATH}/main-doc.css`,
-  `${STYLES_PATH}/main-map.css`
-];
+const SCRIPTS_DIST = `${TMP_PATH}/scripts`;
 const SCRIPTS_SRC = `${SCRIPTS_PATH}/main.js`;
-const STYLES_DIST = 'app.css';
-const SCRIPTS_DIST = `${TMP_PATH}/app.js`;
-const COPY_PATHS = [
-  `${SRC_PATH}/*.html`,
-  `${SRC_PATH}/favicon.ico`,
-  `${SRC_PATH}/_config.yml`,
-  `${SRC_PATH}/_*/**/*`,
-];
-const FONTS_PATH = `${SRC_PATH}/fonts/**`;
 
 gulp.task('clean', () => (
   del([
-    DIST_PATH,
-    `${DIST_PATH}/**/*`,
-    TMP_PATH,
-    `${TMP_PATH}/**/*`,
+    SCRIPTS_DIST, STYLES_DIST
   ])
 ))
 
 gulp.task('build:scripts', () => (
   browserify({ entries: SCRIPTS_SRC, debug: true }).transform(babelify).bundle()
-    .pipe(source(SCRIPTS_DIST))
-    .pipe(gulp.dest(''))
+    .pipe(source(`app.js`))
+    .pipe(gulp.dest(SCRIPTS_DIST))
     .pipe(connect.reload())
 ));
 
 gulp.task('build:styles', () => (
-  gulp.src(STYLES_SRC).pipe(postcss([
+  gulp.src(`${STYLES_PATH}/main*.css`).pipe(postcss([
     CSSImport(), CSSNested(), CSSAutoPrefixer({ browsers: ['last 2 versions'] }), CSSVariables(), CSSMinify()
-  ])).pipe(rename({ suffix: '.min' })).pipe(gulp.dest(TMP_PATH)).pipe(connect.reload())
-));
-
-gulp.task('copy:fonts', () => (
-  gulp.src(FONTS_PATH).pipe(gulp.dest(`${TMP_PATH}/fonts`))
-));
-
-gulp.task('copy:data', () => (
-  gulp.src(`${SRC_PATH}/data/**`).pipe(gulp.dest(`${TMP_PATH}/data`))
-));
-
-gulp.task('copy', ['copy:fonts', 'copy:data'], () => (
-  gulp.src(COPY_PATHS, { base: SRC_PATH }).pipe(gulp.dest(TMP_PATH)).pipe(connect.reload())
-));
-
-gulp.task('build:images', () => (
-  gulp.src(`${SRC_PATH}/images/**/*`).pipe(gulp.dest(`${TMP_PATH}/images`)).pipe(connect.reload())
-));
-
-gulp.task('jekyll:serve', () => (
-  cp.spawn('jekyll', ['serve', '--watch', '--incremental'], { stdio: 'inherit' }) // Adding incremental reduces build time.
-    .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
+  ])).pipe(rename({ suffix: '.min' })).pipe(gulp.dest(STYLES_DIST)).pipe(connect.reload())
 ));
 
 gulp.task('build:jekyll', (cb) => (
-  cp.spawn('jekyll', ['build'], { stdio: 'inherit' }) // Adding incremental reduces build time.
+  cp.spawn('jekyll', ['build', '--config', './dist/_config.yml', '--dest', EXPORT_PATH], { stdio: 'inherit' }) // Adding incremental reduces build time.
     .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
     .on('close', cb)
 ));
 
-gulp.task('build', sequence(['build:scripts', 'build:styles', 'build:images', 'copy']));
+gulp.task('serve', () => (
+  cp.spawn('jekyll', ['serve', '--config', './dist/_config.yml', '--incremental'], { stdio: 'inherit' }) // Adding incremental reduces build time.
+    .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
+));
+
+gulp.task('build', sequence('clean', ['build:scripts', 'build:styles']));
 
 gulp.task('watch', ['build'], () => {
   gulp.watch(`${SCRIPTS_PATH}/**/*.js`, ['build:scripts']);
   gulp.watch(`${STYLES_PATH}/**/*.css`, ['build:styles']);
-  gulp.watch(`${SRC_PATH}/images/**/*`, ['build:images']);
-  gulp.watch(COPY_PATHS, ['copy']);
 });
 
-gulp.task('dev', ['watch', 'jekyll:serve']);
+gulp.task('dev', sequence('watch', 'serve'));
 
 gulp.task('prefix', () => (
-  gulp.src(`${DIST_PATH}/**/*.html`)
+  gulp.src(`${EXPORT_PATH}/**/*.html`)
   .pipe(prefix('/nhs.portal.web', [
     {match: "a[href]", attr: "href"}, // this selector was added to the default set of selectors
     {match: "script[src]", attr: "src"},
@@ -115,14 +83,14 @@ gulp.task('prefix', () => (
     {match: "input[src]", attr: "src"},
     {match: "img[data-ng-src]", attr: "data-ng-src"}
   ]))
-  .pipe(gulp.dest(DIST_PATH))
+  .pipe(gulp.dest(EXPORT_PATH))
 ));
 
 gulp.task('production', ['build'], () => (
-  gulp.src(SCRIPTS_DIST).pipe(uglify()).pipe(gulp.dest(TMP_PATH))
+  gulp.src(`${SCRIPTS_DIST}/*.js`).pipe(uglify()).pipe(gulp.dest(SCRIPTS_DIST))
 ));
 
 gulp.task('deploy:build', sequence('production', 'build:jekyll', 'prefix'));
 gulp.task('deploy', ['deploy:build'], () => (
-  gulp.src(`${DIST_PATH}/**/*`).pipe(ghPages()))
+  gulp.src(`${EXPORT_PATH}/**/*`).pipe(ghPages()))
 );

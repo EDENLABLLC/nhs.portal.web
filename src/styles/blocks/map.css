@@ -10,7 +10,7 @@
     position: relative;
     height: 630px;
     margin-bottom: 40px;
-    background: url('images/map.png') no-repeat;
+    background: url('../images/map.png') no-repeat;
     background-size: 100%;
   }
 

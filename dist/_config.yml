@@ -1,11 +1,11 @@
----
 title: Nhs.Portal.Web
 timezone: UTC
 collections:
   clarifications:
     title: Clarifications
     output: true
-    permalink: "/:collection/:name.html"
+    permalink: "/:collection/:name"
+    pretty: true
   posts:
     title: Posts
     output: true
@@ -18,8 +18,7 @@ defaults:
     type: clarifications
   values:
     layout: document
-source: tmp
-destination: dist
+source: dist
 gems:
 - jekyll-sitemap
 - jekyll-seo-tag

@@ -22,7 +22,7 @@
   &__input {
     margin-bottom: 25px;
     padding-left: 70px;
-    background: url('images/icons/search.png') 25px center no-repeat;
+    background: url('../images/icons/search.png') 25px center no-repeat;
     background-size: 23px;
   }
 
