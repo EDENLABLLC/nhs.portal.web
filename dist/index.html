@@ -10,7 +10,6 @@ clarification_types:
 - "Діагностичним центрам"
 date: '2017-05-24T14:42:52.381Z'
 ---
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -334,17 +333,17 @@ date: '2017-05-24T14:42:52.381Z'
         <article class="docs__main">
             <section class="slider">
                 <div class="slider__main docs__slider-content">
-                  {% for document in site.data.documents.documents %}
+                  {% for document in site.documents %}
                     {% assign loopindex = forloop.index | modulo: 6 %}
 
                     {% capture document_layout %}
                       <li class="docs__item">
-                        <a href="{{ document.link }}">
+                        <a href="{{% if document.file_url%}}{{ document.file_url }}{{% else %}}{{ document.file }}{{% endif %}}">
                           <div class="docs__item-icon">
                             <i class="icon icon_name_doc"></i>
                             {{ document.type }}
                           </div>
-                          {{ document.name }}
+                           {{ document.title }}
                         </a>
                       </li>
                     {% endcapture %}
