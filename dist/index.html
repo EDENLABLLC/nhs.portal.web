@@ -352,7 +352,7 @@ date: '2017-05-24T14:42:52.381Z'
                       <div class="slider__slide {% if forloop.first %} slider__slide_active {% endif %}">
                         <ul class="docs__list">
                           {{ document_layout }}
-                    {% elsif loopindex == 0 %}
+                    {% elsif loopindex == 0 or forloop.last %}
                         {{ document_layout }}
                         </ul>
                       </div>
