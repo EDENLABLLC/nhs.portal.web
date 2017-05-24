@@ -1,11 +1,11 @@
 ---
 title: Mitte me visa vetustas tumulis
-date: 2017-02-12 00:00:00 Z
 excerpt: Lorem markdownum forti vestem recordor, et tamen. Trepidante vagos quid confessis
   iacet meliora relictus circueunt discite;
 clarification_types:
-- Розробникам
-- Закладам
+- "Розробникам"
+- "Закладам"
+date: '2017-02-12T00:00:00.000+00:00'
 ---
 
 ## Ora sonus in Pleias nobilitas hi morsu
