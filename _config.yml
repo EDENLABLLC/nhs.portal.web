@@ -10,7 +10,6 @@ collections:
     permalink: "/:collection/:name"
     pretty: true
   documents:
-    title: Documents
     output: false
 defaults:
 - scope:
