@@ -60,7 +60,7 @@ gulp.task('build:jekyll', (cb) => (
 ));
 
 gulp.task('serve', () => (
-  cp.spawn('jekyll', ['serve', '--config', './dist/_config.yml', '--incremental'], { stdio: 'inherit' }) // Adding incremental reduces build time.
+  cp.spawn('jekyll', ['serve', '--incremental'], { stdio: 'inherit' }) // Adding incremental reduces build time.
     .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
 ));
 
