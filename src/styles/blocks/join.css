@@ -1,0 +1,61 @@
+.join {
+  padding-bottom: 60px;
+  border-bottom: #dad9d8 1px solid;
+
+  &__main {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+
+  &__item {
+    flex: 1 1 33%;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+  }
+
+  &__item-icon {
+    position: relative;
+    width: 135px;
+    height: 135px;
+    line-height: 132px;
+    margin: 0 auto 30px auto;
+    border-radius: 50%;
+
+    &::after, &::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      right: 16px;
+      bottom: 16px;
+      box-shadow: 0 0 18px 0 hsla(0, 0%, 0%, 0.12);
+      border-radius: 50%;
+    }
+
+    &::before {
+      left: 30px;
+      top: 30px;
+      right: 30px;
+      bottom: 30px;
+    }
+
+    &_color_green {
+      background-color: #c2e639;
+    }
+
+    &_color_blue {
+      background-color: #3f7fe7;
+    }
+
+    &_color_yellow {
+      background-color: #f7df4a;
+    }
+
+    i {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}

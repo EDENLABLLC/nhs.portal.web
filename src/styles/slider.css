@@ -1,0 +1,40 @@
+.slider {
+  position: relative;
+  overflow-x: hidden;
+
+  &__slide {
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateX(100%);
+    will-change: transform;
+
+    &_active {
+      transform: translateX(0);
+    }
+  }
+
+  &__markers {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin-top: 30px;
+    font-size: 0;
+    list-style: none;
+  }
+
+  &__marker {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #5691f1;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.5;
+
+    &_active {
+      opacity: 1;
+    }
+  }
+}

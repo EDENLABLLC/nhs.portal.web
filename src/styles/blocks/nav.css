@@ -1,0 +1,25 @@
+.nav {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 35px;
+
+  &__link {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__link_active {
+    color: #4880ed;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      display: inline-block;
+    }
+  }
+}

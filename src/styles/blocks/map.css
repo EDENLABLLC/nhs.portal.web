@@ -1,0 +1,117 @@
+.map {
+  padding-bottom: 60px;
+  border-bottom: #dad9d8 1px solid;
+
+  &__header {
+    padding-bottom: 32px;
+  }
+
+  &__main {
+    position: relative;
+    height: 630px;
+    margin-bottom: 40px;
+    background: url('../images/map.png') no-repeat;
+    background-size: 100%;
+  }
+
+  &__point {
+    position: absolute;
+    margin: 1px 0 0 1px;
+    width: 18px;
+    height: 18px;
+    background-color: #528ded;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &::after, &::before {
+      content: "";
+      display: block;
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: transparent;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+
+    &::before {
+      width: 32px;
+      height: 32px;
+    }
+
+    &_active {
+      transform: scale(2.5);
+
+      &::after {
+        background-color: #fff;
+      }
+
+      &::before {
+        background-color: rgba(72, 128, 237, 0);
+        box-shadow: 0 0 9px rgba(174, 174, 174, 0.75);
+      }
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    margin: 68px 0 0 9px;
+    padding: 32px;
+    left: 453px;
+    top: 170px;
+    width: 245px;
+    border: 1px solid #dad9d8;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50px);
+    transition: all 0.2s ease;
+    z-index: 2;
+
+    &_show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    &-title {
+      font-size: 14px;
+      line-height: 18px;
+      margin-bottom: 20px;
+    }
+
+    &-link {
+      color: #4880ed;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    &-data {
+      dt {
+        display: block;
+        font-size: 30px;
+      }
+
+      dd {
+        display: block;
+        margin-bottom: 20px;
+        line-height: 22px;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: -1px;
+      top: -19px;
+      bottom: -1px;
+      width: 2px;
+      background-color: #5691f1;
+    }
+  }
+}
