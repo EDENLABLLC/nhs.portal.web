@@ -1,7 +1,6 @@
+---
 title: Nhs.Portal.Web
 timezone: UTC
-source: tmp
-destination: dist
 collections:
   clarifications:
     title: Clarifications
@@ -14,11 +13,13 @@ collections:
     title: Uploads
     output: true
 defaults:
-  - scope:
-      path: ""
-      type: clarifications
-    values:
-      layout: document
+- scope:
+    path: ''
+    type: clarifications
+  values:
+    layout: document
+source: tmp
+destination: dist
 gems:
-  - jekyll-sitemap
-  - jekyll-seo-tag
+- jekyll-sitemap
+- jekyll-seo-tag
