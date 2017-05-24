@@ -1,0 +1,10 @@
+collections:
+  clarifications:
+    output: true
+    permalink: /:collection/:name.html
+defaults:
+  - scope:
+      path: ""
+      type: clarifications
+    values:
+      layout: document
