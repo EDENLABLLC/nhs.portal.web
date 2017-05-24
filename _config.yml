@@ -1,5 +1,7 @@
 ---
-title: Nhs.Portal.Web
+title: Національна служба здоров'я
+description: Офіційний сайт державного підприємства "Національна служба здоров'я"
+lang: uk_UA
 timezone: UTC
 collections:
   clarifications:
