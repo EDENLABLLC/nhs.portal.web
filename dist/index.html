@@ -336,7 +336,7 @@ clarification_types:
         <article class="docs__main">
             <section class="slider">
                 <div class="slider__main docs__slider-content">
-                  {% for document in site.data.documents %}
+                  {% for document in site.data.documents.documents %}
                     {% assign loopindex = forloop.index | modulo: 6 %}
 
                     {% capture document_layout %}
