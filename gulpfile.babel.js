@@ -40,6 +40,7 @@ const SCRIPTS_DIST = `${TMP_PATH}/app.js`;
 const COPY_PATHS = [
   `${SRC_PATH}/*.html`,
   `${SRC_PATH}/favicon.ico`,
+  `${SRC_PATH}/_config.yml`,
   `${SRC_PATH}/_*/**/*`,
 ];
 const FONTS_PATH = `${SRC_PATH}/fonts/**`;
@@ -82,25 +83,27 @@ gulp.task('build:images', () => (
   gulp.src(`${SRC_PATH}/images/**/*`).pipe(gulp.dest(`${TMP_PATH}/images`)).pipe(connect.reload())
 ));
 
+gulp.task('jekyll:serve', () => (
+  cp.spawn('jekyll', ['serve', '--watch', '--incremental'], { stdio: 'inherit' }) // Adding incremental reduces build time.
+    .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
+));
+
 gulp.task('build:jekyll', (cb) => (
-  cp.spawn('jekyll', ['build', '-s', TMP_PATH, '-d', DIST_PATH, '--config', './_config.yml'], { stdio: 'inherit' }) // Adding incremental reduces build time.
+  cp.spawn('jekyll', ['build'], { stdio: 'inherit' }) // Adding incremental reduces build time.
     .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
     .on('close', cb)
 ));
 
-gulp.task('build', sequence(['build:scripts', 'build:styles', 'build:images', 'copy'], 'build:jekyll'));
+gulp.task('build', sequence(['build:scripts', 'build:styles', 'build:images', 'copy']));
 
 gulp.task('watch', ['build'], () => {
   gulp.watch(`${SCRIPTS_PATH}/**/*.js`, ['build:scripts']);
   gulp.watch(`${STYLES_PATH}/**/*.css`, ['build:styles']);
   gulp.watch(`${SRC_PATH}/images/**/*`, ['build:images']);
   gulp.watch(COPY_PATHS, ['copy']);
-  gulp.watch(`${TMP_PATH}/**/*`, ['build:jekyll']);
 });
 
-gulp.task('dev', ['watch'], () => {
-  connect.server({ root: DIST_PATH, port: 8080, livereload: true });
-});
+gulp.task('dev', ['watch', 'jekyll:serve']);
 
 gulp.task('prefix', () => (
   gulp.src(`${DIST_PATH}/**/*.html`)
@@ -119,7 +122,7 @@ gulp.task('production', ['build'], () => (
   gulp.src(SCRIPTS_DIST).pipe(uglify()).pipe(gulp.dest(TMP_PATH))
 ));
 
-gulp.task('deploy:build', sequence('production', 'prefix'));
+gulp.task('deploy:build', sequence('production', 'build:jekyll', 'prefix'));
 gulp.task('deploy', ['deploy:build'], () => (
   gulp.src(`${DIST_PATH}/**/*`).pipe(ghPages()))
 );

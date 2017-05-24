@@ -1,3 +1,5 @@
+source: tmp
+destination: dist
 collections:
   clarifications:
     output: true
@@ -8,3 +10,6 @@ defaults:
       type: clarifications
     values:
       layout: document
+gems:
+  - jekyll-sitemap
+  - jekyll-seo-tag
