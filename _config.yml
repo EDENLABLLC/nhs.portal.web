@@ -9,6 +9,9 @@ collections:
     output: true
     permalink: "/:collection/:name"
     pretty: true
+  documents:
+    title: Documents
+    output: false
 defaults:
 - scope:
     path: ''
