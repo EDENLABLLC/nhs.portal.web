@@ -1,7 +1,10 @@
 ---
 title: Mitte me visa vetustas tumulis
-excerpt: Lorem markdownum forti vestem recordor, et tamen. Trepidante vagos quid confessis iacet meliora relictus circueunt discite;
-clarification_types: [Розробникам,Закладам]
+excerpt: Lorem markdownum forti vestem recordor, et tamen. Trepidante vagos quid confessis
+  iacet meliora relictus circueunt discite;
+clarification_types:
+- Розробникам
+- Закладам
 ---
 
 ## Ora sonus in Pleias nobilitas hi morsu

@@ -1,10 +1,20 @@
+---
+title: Nhs.Portal.Web
+timezone: UTC
 collections:
   clarifications:
+    title: Clarifications
     output: true
-    permalink: /:collection/:name.html
+    permalink: "/:collection/:name.html"
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
 defaults:
-  - scope:
-      path: ""
-      type: clarifications
-    values:
-      layout: document
+- scope:
+    path: ''
+    type: clarifications
+  values:
+    layout: document
