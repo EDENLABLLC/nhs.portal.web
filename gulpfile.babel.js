@@ -32,19 +32,25 @@ const STYLES_DIST = `${TMP_PATH}/styles`;
 
 const SCRIPTS_PATH = `${SRC_PATH}/scripts`;
 const SCRIPTS_DIST = `${TMP_PATH}/scripts`;
-const SCRIPTS_SRC = `${SCRIPTS_PATH}/main.js`;
+const SCRIPTS_SRC = [
+  `${SCRIPTS_PATH}/main.js`,
+  `${SCRIPTS_PATH}/main-map.js`
+];
 
 gulp.task('clean', () => (
   del([
     SCRIPTS_DIST, STYLES_DIST, EXPORT_PATH,
   ])
-))
+));
 
 gulp.task('build:scripts', () => (
-  browserify({ entries: SCRIPTS_SRC, debug: true }).transform(babelify).bundle()
-    .pipe(source(`app.js`))
-    .pipe(gulp.dest(SCRIPTS_DIST))
-    .pipe(connect.reload())
+  SCRIPTS_SRC.map((src) => (
+    browserify({ entries: src, debug: true }).transform(babelify).bundle()
+      .pipe(source(src))
+      .pipe(rename({ suffix: '.min', dirname: 'scripts' }))
+      .pipe(gulp.dest(TMP_PATH))
+      .pipe(connect.reload())
+  ))
 ));
 
 gulp.task('build:styles', () => (
