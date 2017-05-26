@@ -1,0 +1,18 @@
+.error {
+  margin: 100px 0;
+  text-align: center;
+
+  &__header,
+  &__footer {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__main {
+    font-size: 100px;
+    font-weight: 200;
+    line-height: 100px;
+    margin: 30px 0;
+  }
+}
