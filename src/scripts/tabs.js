@@ -7,7 +7,7 @@ const PANEL_ANIMATION_OPTIONS = {
 };
 
 export default class Tabs extends BEM {
-  constructor(node) {
+  constructor(node, { autoHeight = false } = {}) {
     super('tabs', node);
 
     this.$controls = this.elems('nav-item');
@@ -16,6 +16,18 @@ export default class Tabs extends BEM {
     this.$marker = document.createElement('div');
     this.$marker.classList.add(selector(this.name, 'marker'));
     this.elem('header').appendChild(this.$marker);
+
+    if (autoHeight) {
+      const maxHeight = this.$slides.reduce((target, item) => {
+        if (item.clientHeight > target) {
+          target = item.clientHeight;
+        }
+
+        return target;
+      }, 0);
+
+      this.elem('main').style.height = `${maxHeight}px`;
+    }
 
     this.currentIndex = this.getIndexByElem(this.elem('nav-item', 'active'));
 
