@@ -2,10 +2,12 @@
 @import "reset.css";
 @import "fonts.css";
 @import "icons.css";
+@import "tabs.css";
 
 @import "blocks/nav.css";
 @import "blocks/header-doc.css";
 @import "blocks/article.css";
+@import "blocks/clarifications.css";
 
 body {
   display: flex;

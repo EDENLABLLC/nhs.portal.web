@@ -1,13 +1,5 @@
 ---
 title: "Головна"
-clarification_types:
-- "Всім"
-- "Розробникам"
-- "Закладам"
-- "Лікарям"
-- "Пацієнтам"
-- "Аптекам"
-- "Діагностичним центрам"
 date: '2017-05-24T14:42:52.381Z'
 ---
 <!DOCTYPE html>
@@ -298,7 +290,7 @@ date: '2017-05-24T14:42:52.381Z'
             <section class="tabs">
                 <header class="tabs__header">
                     <ul class="tabs__nav">
-                      {% for type in page.clarification_types %}
+                      {% for type in site.clarificationTypes %}
                         <li class="tabs__nav-item {% if forloop.first %} tabs__nav-item_active {% endif %}">
                             {{ type }}
                         </li>
@@ -306,11 +298,11 @@ date: '2017-05-24T14:42:52.381Z'
                     </ul>
                 </header>
                 <article class="tabs__main explain__tabs-content">
-                  {% for type in page.clarification_types %}
+                  {% for type in site.clarificationTypes %}
                   {% assign isTypesLoopFirst = forloop.first %}
                     <div class="tabs__slide {% if forloop.first %} tabs__slide_active {% endif %}">
                       <div class="explain__list">
-                        {% for clarification in site.clarifications %}
+                        {% for clarification in site.clarifications limit:4 %}
                           {% if isTypesLoopFirst or clarification.clarification_types contains type %}
                             <a class="explain__item" href="{{ clarification.url }}">
                                 <h4>{{ clarification.title }}</h4>
@@ -325,6 +317,9 @@ date: '2017-05-24T14:42:52.381Z'
                 </article>
             </section>
         </article>
+        <footer class="explain__footer">
+            <a href="clarifications.html">Показати більше</a>
+        </footer>
     </section>
     <section class="docs" id="documents">
         <header class="docs__header">
