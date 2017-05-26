@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>/clarifications/2017-02-12-lorem-ipsum-2</loc>
+<lastmod>2017-02-12T00:00:00+00:00</lastmod>
+</url>
+<url>
 <loc>/clarifications/2017-02-12-lorem-ipsum</loc>
 <lastmod>2017-02-12T00:00:00+00:00</lastmod>
 </url>
@@ -17,6 +21,9 @@
 <lastmod>2017-05-24T19:27:00+00:00</lastmod>
 </url>
 <url>
+<loc>/clarifications.html</loc>
+</url>
+<url>
 <loc>/</loc>
 </url>
 <url>
@@ -24,10 +31,10 @@
 </url>
 <url>
 <loc>/admin/index.html</loc>
-<lastmod>2017-05-26T15:46:06+00:00</lastmod>
+<lastmod>2017-05-26T15:48:57+00:00</lastmod>
 </url>
 <url>
 <loc>/uploads/2017/05/24/Osnovi-pedagogiki-IPSA.pdf</loc>
-<lastmod>2017-05-26T15:46:03+00:00</lastmod>
+<lastmod>2017-05-26T15:48:54+00:00</lastmod>
 </url>
 </urlset>
