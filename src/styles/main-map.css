@@ -18,10 +18,10 @@ body {
 
   &__logo {
     display: inline-block;
-    margin-right: 43px;
+    margin-right: 90px;
 
     img {
-      height: 35px;
+      height: 40px;
     }
   }
 }

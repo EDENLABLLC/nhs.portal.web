@@ -1,7 +1,7 @@
 .nav {
   display: inline-block;
   vertical-align: top;
-  line-height: 35px;
+  line-height: 40px;
 
   &__link {
     display: inline-block;
