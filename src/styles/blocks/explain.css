@@ -20,4 +20,12 @@
       margin-right: 0;
     }
   }
+
+  &__footer {
+    margin-top: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+  }
 }
