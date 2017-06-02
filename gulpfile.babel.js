@@ -61,7 +61,7 @@ gulp.task('build:styles', () => (
 ));
 
 gulp.task('build:jekyll', (cb) => (
-  cp.spawn('jekyll', ['build', '--config', './dist/_config.yml', '--dest', EXPORT_PATH], { stdio: 'inherit' }) // Adding incremental reduces build time.
+  cp.spawn('jekyll', ['build', '--config', './_config.yml', '--dest', EXPORT_PATH], { stdio: 'inherit' }) // Adding incremental reduces build time.
     .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
     .on('close', cb)
 ));
