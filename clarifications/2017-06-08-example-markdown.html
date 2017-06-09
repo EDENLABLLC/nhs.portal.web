@@ -65,179 +65,189 @@
         <time>12-02-2017</time>
     </header>
     <article class="article__main">
-        <h1 id="github-flavored-markdown">GitHub Flavored Markdown</h1>
+        <h1 id="h1">H1</h1>
+<h2 id="h2">H2</h2>
+<h3 id="h3">H3</h3>
+<h4 id="h4">H4</h4>
+<h5 id="h5">H5</h5>
+<h6 id="h6">H6</h6>
 
-<p><em>View the <a href="http://github.github.com/github-flavored-markdown/sample_content.html">source of this content</a>.</em></p>
+<p>Alternatively, for H1 and H2, an underline-ish style:</p>
 
-<p>Let’s get the whole “linebreak” thing out of the way. The next paragraph contains two phrases separated by a single newline character:</p>
+<h1 id="alt-h1">Alt-H1</h1>
 
-<p>Roses are red
-Violets are blue</p>
+<h2 id="alt-h2">Alt-H2</h2>
 
-<p>The next paragraph has the same phrases, but now they are separated by two spaces and a newline character:</p>
+<p>Emphasis, aka italics, with <em>asterisks</em> or <em>underscores</em>.</p>
 
-<p>Roses are red<br />
-Violets are blue</p>
+<p>Strong emphasis, aka bold, with <strong>asterisks</strong> or <strong>underscores</strong>.</p>
 
-<p>Oh, and one thing I cannot stand is the mangling of words with multiple underscores in them like perform_complicated_task or do_this_and_do_that_and_another_thing.</p>
+<p>Combined emphasis with <strong>asterisks and <em>underscores</em></strong>.</p>
 
-<h2 id="a-bit-of-the-github-spice">A bit of the GitHub spice</h2>
-
-<p>In addition to the changes in the previous section, certain references are auto-linked:</p>
-
-<ul>
-  <li>SHA: be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2</li>
-  <li>User@SHA ref: mojombo@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2</li>
-  <li>User/Project@SHA: mojombo/god@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2</li>
-  <li>#Num: #1</li>
-  <li>User/#Num: mojombo#1</li>
-  <li>User/Project#Num: mojombo/god#1</li>
-</ul>
-
-<p>These are dangerous goodies though, and we need to make sure email addresses don’t get mangled:</p>
-
-<p>My email addy is tom@github.com.</p>
-
-<h2 id="math-is-hard-lets-go-shopping">Math is hard, let’s go shopping</h2>
-
-<p>In first grade I learned that 5 &gt; 3 and 2 &lt; 7. Maybe some arrows. 1 -&gt; 2 -&gt; 3. 9 &lt;- 8 &lt;- 7.</p>
-
-<p>Triangles man! a^2 + b^2 = c^2</p>
-
-<h2 id="we-all-like-making-lists">We all like making lists</h2>
-
-<p>The above header should be an H2 tag. Now, for a list of fruits:</p>
-
-<ul>
-  <li>Red Apples</li>
-  <li>Purple Grapes</li>
-  <li>Green Kiwifruits</li>
-</ul>
-
-<p>Let’s get crazy:</p>
+<p>Strikethrough uses two tildes. <del>Scratch this.</del></p>
 
 <ol>
-  <li>
-    <p>This is a list item with two paragraphs. Lorem ipsum dolor
-sit amet, consectetuer adipiscing elit. Aliquam hendrerit
-mi posuere lectus.</p>
-
-    <p>Vestibulum enim wisi, viverra nec, fringilla in, laoreet
-vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
-sit amet velit.</p>
-  </li>
-  <li>
-    <p>Suspendisse id sem consectetuer libero luctus adipiscing.</p>
-  </li>
+  <li>First ordered list item</li>
+  <li>Another item
+⋅⋅* Unordered sub-list.</li>
+  <li>Actual numbers don’t matter, just that it’s a number
+⋅⋅1. Ordered sub-list</li>
+  <li>And another item.</li>
 </ol>
 
-<p>What about some code <strong>in</strong> a list? That’s insane, right?</p>
+<p>⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we’ll use three here to also align the raw Markdown).</p>
 
-<ol>
-  <li>
-    <p>In Ruby you can map like this:</p>
+<p>⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> ['a', 'b'].map { |x| x.uppercase }
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>In Rails, you can do a shortcut:</p>
+<ul>
+  <li>Unordered list can use asterisks</li>
+  <li>Or minuses</li>
+  <li>Or pluses</li>
+</ul>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> ['a', 'b'].map(&amp;:uppercase)
-</code></pre>
-    </div>
-  </li>
-</ol>
+<p><a href="https://www.google.com">I’m an inline-style link</a></p>
 
-<p>Some people seem to like definition lists</p>
+<p><a href="https://www.google.com" title="Google's Homepage">I’m an inline-style link with title</a></p>
 
-<dl>
-  <dt>Lower cost</dt>
-  <dd>The new version of this product costs significantly less than the previous one!</dd>
-  <dt>Easier to use</dt>
-  <dd>We've changed the product so that it's much easier to use!</dd>
-</dl>
+<p><a href="https://www.mozilla.org">I’m a reference-style link</a></p>
 
-<h2 id="i-am-a-robot">I am a robot</h2>
+<p><a href="/nhs.portal.web/../blob/master/LICENSE">I’m a relative reference to a repository file</a></p>
 
-<p>Maybe you want to print <code class="highlighter-rouge">robot</code> to the console 1000 times. Why not?</p>
+<p><a href="http://slashdot.org">You can use numbers for reference-style link definitions</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def robot_invasion
-  puts("robot " * 1000)
-end
+<p>Or leave it empty and use the <a href="http://www.reddit.com">link text itself</a>.</p>
+
+<p>URLs and URLs in angle brackets will automatically get turned into links.
+http://www.example.com or <a href="http://www.example.com">http://www.example.com</a> and sometimes
+example.com (but not on Github, for example).</p>
+
+<p>Some text to show that the reference links can follow later.</p>
+
+<p>Here’s our logo (hover to see the title text):</p>
+
+<p>Inline-style:
+<img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="Logo Title Text 1" /></p>
+
+<p>Reference-style:
+<img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="Logo Title Text 2" /></p>
+
+<p>Inline <code class="highlighter-rouge">code</code> has <code class="highlighter-rouge">back-ticks around</code> it.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="s2">"JavaScript syntax highlighting"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
 </code></pre>
 </div>
 
-<p>You see, that was formatted as code because it’s been indented by four spaces.</p>
-
-<p>How about we throw some angle braces and ampersands in there?</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="footer"&gt;
-    &amp;copy; 2004 Foo Corporation
-&lt;/div&gt;
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">"Python syntax highlighting"</span>
+<span class="k">print</span> <span class="n">s</span>
 </code></pre>
 </div>
 
-<h2 id="set-in-stone">Set in stone</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>No language indicated, so no syntax highlighting.
+But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
+</code></pre>
+</div>
 
-<p>Preformatted blocks are useful for ASCII art:</p>
-
-<pre>
-             ,-.
-    ,     ,-.   ,-.
-   / \   (   )-(   )
-   \ |  ,.&gt;-(   )-&lt;
-    \|,' (   )-(   )
-     Y ___`-'   `-'
-     |/__/   `-'
-     |
-     |
-     |    -hrr-
-  ___|_____________
-</pre>
-
-<h2 id="playing-the-blame-game">Playing the blame game</h2>
-
-<p>If you need to blame someone, the best way to do so is by quoting them:</p>
-
-<blockquote>
-  <p>I, at any rate, am convinced that He does not throw dice.</p>
-</blockquote>
-
-<p>Or perhaps someone a little less eloquent:</p>
-
-<blockquote>
-  <p>I wish you’d have given me this written question ahead of time so I
-could plan for it… I’m sure something will pop into my head here in
-the midst of this press conference, with all the pressure of trying to
-come up with answer, but it hadn’t yet…</p>
-
-  <p>I don’t want to sound like
-I have made no mistakes. I’m confident I have. I just haven’t - you
-just put me under the spot here, and maybe I’m not as quick on my feet
-as I should be in coming up with one.</p>
-</blockquote>
-
-<h2 id="table-for-two">Table for two</h2>
+<p>Colons can be used to align columns.</p>
 
 <table>
-  <tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
-  </tr>
-  <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
-  </tr>
-  <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Tables</th>
+      <th style="text-align: center">Are</th>
+      <th style="text-align: right">Cool</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>col 3 is</td>
+      <td style="text-align: center">right-aligned</td>
+      <td style="text-align: right">$1600</td>
+    </tr>
+    <tr>
+      <td>col 2 is</td>
+      <td style="text-align: center">centered</td>
+      <td style="text-align: right">$12</td>
+    </tr>
+    <tr>
+      <td>zebra stripes</td>
+      <td style="text-align: center">are neat</td>
+      <td style="text-align: right">$1</td>
+    </tr>
+  </tbody>
 </table>
 
-<h2 id="crazy-linking-action">Crazy linking action</h2>
+<p>There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don’t need to make the
+raw Markdown line up prettily. You can also use inline Markdown.</p>
 
-<p>I get 10 times more traffic from <a href="http://google.com/" title="Google">Google</a> than from
-<a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Markdown</th>
+      <th>Less</th>
+      <th>Pretty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>Still</em></td>
+      <td><code class="highlighter-rouge">renders</code></td>
+      <td><strong>nicely</strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
 
+<blockquote>
+  <p>Blockquotes are very handy in email to emulate reply text.
+This line is part of the same quote.</p>
+</blockquote>
+
+<p>Quote break.</p>
+
+<blockquote>
+  <p>This is a very long line that will still be quoted properly when it wraps. Oh boy let’s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can <em>put</em> <strong>Markdown</strong> into a blockquote.</p>
+</blockquote>
+
+<dl>
+  <dt>Definition list</dt>
+  <dd>Is something people use sometimes.</dd>
+
+  <dt>Markdown in HTML</dt>
+  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+
+<p>Three or more…</p>
+
+<hr />
+
+<p>Hyphens</p>
+
+<hr />
+
+<p>Asterisks</p>
+
+<hr />
+
+<p>Underscores</p>
+
+<p>Here’s a line for us to start with.</p>
+
+<p>This line is separated from the one above by two newlines, so it will be a <em>separate paragraph</em>.</p>
+
+<p>This line is also a separate paragraph, but…
+This line is only separated by a single newline, so it’s a separate line in the <em>same paragraph</em>.</p>
+
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=YOUTUBE_VIDEO_ID_HERE " target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a></p>
+
+<p><a href="http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
 
     </article>
     <footer class="article__footer">
