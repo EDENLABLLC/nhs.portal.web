@@ -379,23 +379,21 @@ date: '2017-05-24T14:42:52.381Z'
                 <a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>
             </p>
 
-            <form class="contacts__form">
+            <form class="feedback contacts__form">
                 <div class="contacts__form-title">
                     Зворотній зв’язок
                 </div>
                 <div class="contacts__form-row">
-                    <input type="text" name="name" placeholder="Ваше ім’я" />
+                    <input required class="feedback__name" type="text" name="name" placeholder="Ваше ім’я" />
                 </div>
                 <div class="contacts__form-row">
-                    <input type="text" name="email" placeholder="Email" />
-                </div>
-                <div class="contacts__form-row">
-                    <textarea name="message" placeholder="Текст повідомлення"></textarea>
+                    <textarea required class="feedback__message" name="message" placeholder="Текст повідомлення"></textarea>
                 </div>
                 <div class="contacts__form-submit-row">
-                    <button type="submit">
+                    <button class="feedback__submit" type="submit">
                         надіслати
                     </button>
+                    <a class="feedback__mailto" hidden></a>
                 </div>
             </form>
         </article>
