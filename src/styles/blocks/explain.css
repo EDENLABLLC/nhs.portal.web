@@ -15,6 +15,7 @@
 
   &__item {
     margin-right: 20px;
+    flex: 0 0 200px;
 
     &:last-of-type {
       margin-right: 0;
