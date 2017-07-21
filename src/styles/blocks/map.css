@@ -114,4 +114,15 @@
       background-color: #5691f1;
     }
   }
+
+  &__footer {
+    text-align: center;
+  }
+
+  &__link {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4880ed;
+    text-transform: uppercase;
+  }
 }

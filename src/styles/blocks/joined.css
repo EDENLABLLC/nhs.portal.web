@@ -1,6 +1,6 @@
 .joined {
-  padding-bottom: 60px;
-  border-bottom: #dad9d8 1px solid;
+  //padding-bottom: 60px;
+  //border-bottom: #dad9d8 1px solid;
 
   &__main {
     display: flex;

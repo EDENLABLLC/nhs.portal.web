@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.header {
+  flex: 0 0 40px;
+  padding: 24px 0;
+  text-align: center;
+
+  &__logo {
+    display: inline-block;
+    margin-right: 90px;
+
+    img {
+      height: 40px;
+    }
+  }
+}
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.footer {
+  flex: 0 0 100px;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1;
+  border-top: #b9dd2f 3px solid;
+}
+
+.link {
+  color: #4880ed;
+}
