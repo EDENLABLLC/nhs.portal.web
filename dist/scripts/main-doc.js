@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 211);
+/******/ 	return __webpack_require__(__webpack_require__.s = 212);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -73,18 +73,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
-/***/ 211:
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__(212);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi ./src/scripts/main-doc.js\n// module id = 211\n// module chunks = 2\n\n//# sourceURL=webpack:///multi_./src/scripts/main-doc.js?");
-
-/***/ }),
-
 /***/ 212:
 /***/ (function(module, exports, __webpack_require__) {
 
+eval("module.exports = __webpack_require__(213);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi ./src/scripts/main-doc.js\n// module id = 212\n// module chunks = 2\n\n//# sourceURL=webpack:///multi_./src/scripts/main-doc.js?");
+
+/***/ }),
+
+/***/ 213:
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
-eval("\n\nvar _dom = __webpack_require__(15);\n\nvar _tabs = __webpack_require__(69);\n\nvar _tabs2 = _interopRequireDefault(_tabs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n(0, _dom.$)('.tabs').forEach(function (node) {\n  return new _tabs2.default(node, { autoHeight: true });\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/main-doc.js\n// module id = 212\n// module chunks = 2\n\n//# sourceURL=webpack:///./src/scripts/main-doc.js?");
+eval("\n\nvar _dom = __webpack_require__(15);\n\nvar _tabs = __webpack_require__(69);\n\nvar _tabs2 = _interopRequireDefault(_tabs);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n(0, _dom.$)('.tabs').forEach(function (node) {\n  return new _tabs2.default(node, { autoHeight: true });\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/main-doc.js\n// module id = 213\n// module chunks = 2\n\n//# sourceURL=webpack:///./src/scripts/main-doc.js?");
 
 /***/ }),
 
