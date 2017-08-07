@@ -1,1323 +1,196 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (root) {
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 213);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 117:
+/***/ (function(module, exports, __webpack_require__) {
 
-  // Store setTimeout reference so promise-polyfill will be unaffected by
-  // other code modifying setTimeout (like sinon.useFakeTimers())
-  var setTimeoutFunc = setTimeout;
-
-  function noop() {}
-  
-  // Polyfill for Function.prototype.bind
-  function bind(fn, thisArg) {
-    return function () {
-      fn.apply(thisArg, arguments);
-    };
-  }
-
-  function Promise(fn) {
-    if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
-    if (typeof fn !== 'function') throw new TypeError('not a function');
-    this._state = 0;
-    this._handled = false;
-    this._value = undefined;
-    this._deferreds = [];
-
-    doResolve(fn, this);
-  }
-
-  function handle(self, deferred) {
-    while (self._state === 3) {
-      self = self._value;
-    }
-    if (self._state === 0) {
-      self._deferreds.push(deferred);
-      return;
-    }
-    self._handled = true;
-    Promise._immediateFn(function () {
-      var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
-      if (cb === null) {
-        (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
-        return;
-      }
-      var ret;
-      try {
-        ret = cb(self._value);
-      } catch (e) {
-        reject(deferred.promise, e);
-        return;
-      }
-      resolve(deferred.promise, ret);
-    });
-  }
-
-  function resolve(self, newValue) {
-    try {
-      // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
-      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-        var then = newValue.then;
-        if (newValue instanceof Promise) {
-          self._state = 3;
-          self._value = newValue;
-          finale(self);
-          return;
-        } else if (typeof then === 'function') {
-          doResolve(bind(then, newValue), self);
-          return;
-        }
-      }
-      self._state = 1;
-      self._value = newValue;
-      finale(self);
-    } catch (e) {
-      reject(self, e);
-    }
-  }
-
-  function reject(self, newValue) {
-    self._state = 2;
-    self._value = newValue;
-    finale(self);
-  }
-
-  function finale(self) {
-    if (self._state === 2 && self._deferreds.length === 0) {
-      Promise._immediateFn(function() {
-        if (!self._handled) {
-          Promise._unhandledRejectionFn(self._value);
-        }
-      });
-    }
-
-    for (var i = 0, len = self._deferreds.length; i < len; i++) {
-      handle(self, self._deferreds[i]);
-    }
-    self._deferreds = null;
-  }
-
-  function Handler(onFulfilled, onRejected, promise) {
-    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
-    this.onRejected = typeof onRejected === 'function' ? onRejected : null;
-    this.promise = promise;
-  }
-
-  /**
-   * Take a potentially misbehaving resolver function and make sure
-   * onFulfilled and onRejected are only called once.
-   *
-   * Makes no guarantees about asynchrony.
-   */
-  function doResolve(fn, self) {
-    var done = false;
-    try {
-      fn(function (value) {
-        if (done) return;
-        done = true;
-        resolve(self, value);
-      }, function (reason) {
-        if (done) return;
-        done = true;
-        reject(self, reason);
-      });
-    } catch (ex) {
-      if (done) return;
-      done = true;
-      reject(self, ex);
-    }
-  }
-
-  Promise.prototype['catch'] = function (onRejected) {
-    return this.then(null, onRejected);
-  };
-
-  Promise.prototype.then = function (onFulfilled, onRejected) {
-    var prom = new (this.constructor)(noop);
-
-    handle(this, new Handler(onFulfilled, onRejected, prom));
-    return prom;
-  };
-
-  Promise.all = function (arr) {
-    var args = Array.prototype.slice.call(arr);
-
-    return new Promise(function (resolve, reject) {
-      if (args.length === 0) return resolve([]);
-      var remaining = args.length;
-
-      function res(i, val) {
-        try {
-          if (val && (typeof val === 'object' || typeof val === 'function')) {
-            var then = val.then;
-            if (typeof then === 'function') {
-              then.call(val, function (val) {
-                res(i, val);
-              }, reject);
-              return;
-            }
-          }
-          args[i] = val;
-          if (--remaining === 0) {
-            resolve(args);
-          }
-        } catch (ex) {
-          reject(ex);
-        }
-      }
-
-      for (var i = 0; i < args.length; i++) {
-        res(i, args[i]);
-      }
-    });
-  };
-
-  Promise.resolve = function (value) {
-    if (value && typeof value === 'object' && value.constructor === Promise) {
-      return value;
-    }
-
-    return new Promise(function (resolve) {
-      resolve(value);
-    });
-  };
-
-  Promise.reject = function (value) {
-    return new Promise(function (resolve, reject) {
-      reject(value);
-    });
-  };
-
-  Promise.race = function (values) {
-    return new Promise(function (resolve, reject) {
-      for (var i = 0, len = values.length; i < len; i++) {
-        values[i].then(resolve, reject);
-      }
-    });
-  };
-
-  // Use polyfill for setImmediate for performance gains
-  Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||
-    function (fn) {
-      setTimeoutFunc(fn, 0);
-    };
-
-  Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
-    if (typeof console !== 'undefined' && console) {
-      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
-    }
-  };
-
-  /**
-   * Set the immediate function to execute callbacks
-   * @param fn {function} Function to execute
-   * @deprecated
-   */
-  Promise._setImmediateFn = function _setImmediateFn(fn) {
-    Promise._immediateFn = fn;
-  };
-
-  /**
-   * Change the function to execute on unhandled rejection
-   * @param {function} fn Function to execute on unhandled rejection
-   * @deprecated
-   */
-  Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
-    Promise._unhandledRejectionFn = fn;
-  };
-  
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Promise;
-  } else if (!root.Promise) {
-    root.Promise = Promise;
-  }
-
-})(this);
-
-},{}],2:[function(require,module,exports){
-/*
- * smoothscroll polyfill - v0.3.5
- * https://iamdustan.github.io/smoothscroll
- * 2016 (c) Dustan Kasten, Jeremias Menichelli - MIT License
- */
-
-(function(w, d, undefined) {
-  'use strict';
-
-  /*
-   * aliases
-   * w: window global object
-   * d: document
-   * undefined: undefined
-   */
-
-  // polyfill
-  function polyfill() {
-    // return when scrollBehavior interface is supported
-    if ('scrollBehavior' in d.documentElement.style) {
-      return;
-    }
-
-    /*
-     * globals
-     */
-    var Element = w.HTMLElement || w.Element;
-    var SCROLL_TIME = 468;
-
-    /*
-     * object gathering original scroll methods
-     */
-    var original = {
-      scroll: w.scroll || w.scrollTo,
-      scrollBy: w.scrollBy,
-      elScroll: Element.prototype.scroll || scrollElement,
-      scrollIntoView: Element.prototype.scrollIntoView
-    };
-
-    /*
-     * define timing method
-     */
-    var now = w.performance && w.performance.now
-      ? w.performance.now.bind(w.performance) : Date.now;
-
-    /**
-     * changes scroll position inside an element
-     * @method scrollElement
-     * @param {Number} x
-     * @param {Number} y
-     */
-    function scrollElement(x, y) {
-      this.scrollLeft = x;
-      this.scrollTop = y;
-    }
-
-    /**
-     * returns result of applying ease math function to a number
-     * @method ease
-     * @param {Number} k
-     * @returns {Number}
-     */
-    function ease(k) {
-      return 0.5 * (1 - Math.cos(Math.PI * k));
-    }
-
-    /**
-     * indicates if a smooth behavior should be applied
-     * @method shouldBailOut
-     * @param {Number|Object} x
-     * @returns {Boolean}
-     */
-    function shouldBailOut(x) {
-      if (typeof x !== 'object'
-            || x === null
-            || x.behavior === undefined
-            || x.behavior === 'auto'
-            || x.behavior === 'instant') {
-        // first arg not an object/null
-        // or behavior is auto, instant or undefined
-        return true;
-      }
-
-      if (typeof x === 'object'
-            && x.behavior === 'smooth') {
-        // first argument is an object and behavior is smooth
-        return false;
-      }
-
-      // throw error when behavior is not supported
-      throw new TypeError('behavior not valid');
-    }
-
-    /**
-     * finds scrollable parent of an element
-     * @method findScrollableParent
-     * @param {Node} el
-     * @returns {Node} el
-     */
-    function findScrollableParent(el) {
-      var isBody;
-      var hasScrollableSpace;
-      var hasVisibleOverflow;
-
-      do {
-        el = el.parentNode;
-
-        // set condition variables
-        isBody = el === d.body;
-        hasScrollableSpace =
-          el.clientHeight < el.scrollHeight ||
-          el.clientWidth < el.scrollWidth;
-        hasVisibleOverflow =
-          w.getComputedStyle(el, null).overflow === 'visible';
-      } while (!isBody && !(hasScrollableSpace && !hasVisibleOverflow));
-
-      isBody = hasScrollableSpace = hasVisibleOverflow = null;
-
-      return el;
-    }
-
-    /**
-     * self invoked function that, given a context, steps through scrolling
-     * @method step
-     * @param {Object} context
-     */
-    function step(context) {
-      var time = now();
-      var value;
-      var currentX;
-      var currentY;
-      var elapsed = (time - context.startTime) / SCROLL_TIME;
-
-      // avoid elapsed times higher than one
-      elapsed = elapsed > 1 ? 1 : elapsed;
-
-      // apply easing to elapsed time
-      value = ease(elapsed);
-
-      currentX = context.startX + (context.x - context.startX) * value;
-      currentY = context.startY + (context.y - context.startY) * value;
-
-      context.method.call(context.scrollable, currentX, currentY);
-
-      // scroll more if we have not reached our destination
-      if (currentX !== context.x || currentY !== context.y) {
-        w.requestAnimationFrame(step.bind(w, context));
-      }
-    }
-
-    /**
-     * scrolls window with a smooth behavior
-     * @method smoothScroll
-     * @param {Object|Node} el
-     * @param {Number} x
-     * @param {Number} y
-     */
-    function smoothScroll(el, x, y) {
-      var scrollable;
-      var startX;
-      var startY;
-      var method;
-      var startTime = now();
-
-      // define scroll context
-      if (el === d.body) {
-        scrollable = w;
-        startX = w.scrollX || w.pageXOffset;
-        startY = w.scrollY || w.pageYOffset;
-        method = original.scroll;
-      } else {
-        scrollable = el;
-        startX = el.scrollLeft;
-        startY = el.scrollTop;
-        method = scrollElement;
-      }
-
-      // scroll looping over a frame
-      step({
-        scrollable: scrollable,
-        method: method,
-        startTime: startTime,
-        startX: startX,
-        startY: startY,
-        x: x,
-        y: y
-      });
-    }
-
-    /*
-     * ORIGINAL METHODS OVERRIDES
-     */
-
-    // w.scroll and w.scrollTo
-    w.scroll = w.scrollTo = function() {
-      // avoid smooth behavior if not required
-      if (shouldBailOut(arguments[0])) {
-        original.scroll.call(
-          w,
-          arguments[0].left || arguments[0],
-          arguments[0].top || arguments[1]
-        );
-        return;
-      }
-
-      // LET THE SMOOTHNESS BEGIN!
-      smoothScroll.call(
-        w,
-        d.body,
-        ~~arguments[0].left,
-        ~~arguments[0].top
-      );
-    };
-
-    // w.scrollBy
-    w.scrollBy = function() {
-      // avoid smooth behavior if not required
-      if (shouldBailOut(arguments[0])) {
-        original.scrollBy.call(
-          w,
-          arguments[0].left || arguments[0],
-          arguments[0].top || arguments[1]
-        );
-        return;
-      }
-
-      // LET THE SMOOTHNESS BEGIN!
-      smoothScroll.call(
-        w,
-        d.body,
-        ~~arguments[0].left + (w.scrollX || w.pageXOffset),
-        ~~arguments[0].top + (w.scrollY || w.pageYOffset)
-      );
-    };
-
-    // Element.prototype.scroll and Element.prototype.scrollTo
-    Element.prototype.scroll = Element.prototype.scrollTo = function() {
-      // avoid smooth behavior if not required
-      if (shouldBailOut(arguments[0])) {
-        original.elScroll.call(
-            this,
-            arguments[0].left || arguments[0],
-            arguments[0].top || arguments[1]
-        );
-        return;
-      }
-
-      // LET THE SMOOTHNESS BEGIN!
-      smoothScroll.call(
-          this,
-          this,
-          arguments[0].left,
-          arguments[0].top
-      );
-    };
-
-    // Element.prototype.scrollBy
-    Element.prototype.scrollBy = function() {
-      var arg0 = arguments[0];
-
-      if (typeof arg0 === 'object') {
-        this.scroll({
-          left: arg0.left + this.scrollLeft,
-          top: arg0.top + this.scrollTop,
-          behavior: arg0.behavior
-        });
-      } else {
-        this.scroll(
-          this.scrollLeft + arg0,
-          this.scrollTop + arguments[1]
-        );
-      }
-    };
-
-    // Element.prototype.scrollIntoView
-    Element.prototype.scrollIntoView = function() {
-      // avoid smooth behavior if not required
-      if (shouldBailOut(arguments[0])) {
-        original.scrollIntoView.call(this, arguments[0] || true);
-        return;
-      }
-
-      // LET THE SMOOTHNESS BEGIN!
-      var scrollableParent = findScrollableParent(this);
-      var parentRects = scrollableParent.getBoundingClientRect();
-      var clientRects = this.getBoundingClientRect();
-
-      if (scrollableParent !== d.body) {
-        // reveal element inside parent
-        smoothScroll.call(
-          this,
-          scrollableParent,
-          scrollableParent.scrollLeft + clientRects.left - parentRects.left,
-          scrollableParent.scrollTop + clientRects.top - parentRects.top
-        );
-        // reveal parent in viewport
-        w.scrollBy({
-          left: parentRects.left,
-          top: parentRects.top,
-          behavior: 'smooth'
-        });
-      } else {
-        // reveal element in viewport
-        w.scrollBy({
-          left: clientRects.left,
-          top: clientRects.top,
-          behavior: 'smooth'
-        });
-      }
-    };
-  }
-
-  if (typeof exports === 'object') {
-    // commonjs
-    module.exports = { polyfill: polyfill };
-  } else {
-    // global
-    polyfill();
-  }
-})(window, document);
-
-},{}],3:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var toArray = exports.toArray = function toArray(arrayLike) {
-  if (Array.isArray(arrayLike)) {
-    return arrayLike;
-  }
-
-  if (arrayLike instanceof Node) {
-    return [arrayLike];
-  }
-
-  return Array.prototype.slice.call(arrayLike);
-};
-
-var $ = exports.$ = function $(selector) {
-  var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-  return toArray(context.querySelectorAll.call(context, selector));
-};
-
-var selector = exports.selector = function selector(block, elem, modName, modVal) {
-  return block + '__' + elem + (modName ? modVal ? '_' + modName + '_' + modVal : '_' + modName : '');
-};
-
-var buildClass = exports.buildClass = function buildClass() {
-  return '.' + selector.apply(undefined, arguments);
-};
-
-var BEM = exports.BEM = function (_ref) {
-  _inherits(BEM, _ref);
-
-  function BEM(name, node) {
-    _classCallCheck(this, BEM);
-
-    var _this = _possibleConstructorReturn(this, (BEM.__proto__ || Object.getPrototypeOf(BEM)).call(this));
-
-    _this.node = node;
-    _this.name = name;
-    return _this;
-  }
-
-  _createClass(BEM, [{
-    key: 'elem',
-    value: function elem(name, modName, modVal) {
-      return this.node.querySelector(buildClass(this.name, name, modName, modVal));
-    }
-  }, {
-    key: 'elems',
-    value: function elems(name, modName, modVal) {
-      return $(buildClass(this.name, name, modName, modVal), this.node);
-    }
-  }, {
-    key: 'setMod',
-    value: function setMod(elem, elemName, modName, modValue) {
-      var _this2 = this;
-
-      toArray(elem).forEach(function (node) {
-        return node.classList.add(selector(_this2.name, elemName, modName, modValue));
-      });
-
-      return this;
-    }
-  }, {
-    key: 'delMod',
-    value: function delMod(elem, elemName, modName) {
-      var _this3 = this;
-
-      toArray(elem).forEach(function (node) {
-        return node.classList.remove(selector(_this3.name, elemName, modName));
-      });
-
-      return this;
-    }
-  }]);
-
-  return BEM;
-}(null);
-
-},{}],4:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _dom = require('./dom');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Feedback = function (_BEM) {
-  _inherits(Feedback, _BEM);
-
-  function Feedback(node) {
-    _classCallCheck(this, Feedback);
-
-    var _this = _possibleConstructorReturn(this, (Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call(this, 'feedback', node));
-
-    _this.$name = _this.elem('name');
-    _this.$message = _this.elem('message');
-    _this.$mailTo = _this.elem('mailto');
-
-    node.onsubmit = function (e) {
-      e.preventDefault();
-
-      _this.$mailTo.href = 'mailto:info@nszu.gov.ua?subject=\u0417\u0432\u043E\u0440\u043E\u0442\u043D\u0456\u0439 \u0437\u0432\u2019\u044F\u0437\u043E\u043A \u0432\u0456\u0434 ' + _this.$name.value + '&body=' + _this.$message.value;
-      _this.$mailTo.click();
-      return false;
-    };
-    return _this;
-  }
-
-  return Feedback;
-}(_dom.BEM);
-
-exports.default = Feedback;
-module.exports = exports['default'];
-
-},{"./dom":3}],5:[function(require,module,exports){
-'use strict';
-
-var _promisePolyfill = require('promise-polyfill');
-
-var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
-
-var _smoothscrollPolyfill = require('smoothscroll-polyfill');
-
-var _smoothscrollPolyfill2 = _interopRequireDefault(_smoothscrollPolyfill);
-
-var _dom = require('./dom');
-
-var _utils = require('./utils');
-
-var _nav = require('./nav');
-
-var _nav2 = _interopRequireDefault(_nav);
-
-var _tabs = require('./tabs');
-
-var _tabs2 = _interopRequireDefault(_tabs);
-
-var _slider = require('./slider');
-
-var _slider2 = _interopRequireDefault(_slider);
-
-var _map = require('./map');
-
-var _map2 = _interopRequireDefault(_map);
-
-var _statistic = require('./statistic');
-
-var _statistic2 = _interopRequireDefault(_statistic);
-
-var _feedback = require('./feedback');
-
-var _feedback2 = _interopRequireDefault(_feedback);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-if (!window.Promise) {
-  window.Promise = _promisePolyfill2.default;
-}
-
-_smoothscrollPolyfill2.default.polyfill();
-
-(0, _dom.$)('.nav').forEach(function (node) {
-  return new _nav2.default(node);
-});
-(0, _dom.$)('.tabs').forEach(function (node) {
-  return new _tabs2.default(node);
-});
-(0, _dom.$)('.slider').forEach(function (node) {
-  return new _slider2.default(node);
-});
-(0, _dom.$)('.feedback').forEach(function (node) {
-  return new _feedback2.default(node);
-});
-
-(0, _utils.fetchJSON)('data/stats.json').then(function (data) {
-  (0, _dom.$)('.map').forEach(function (node) {
-    return new _map2.default(node, data.slice());
-  });
-  (0, _dom.$)('.declarations').forEach(function (node) {
-    return new _statistic2.default(node, data);
-  });
-});
-
-},{"./dom":3,"./feedback":4,"./map":6,"./nav":7,"./slider":8,"./statistic":9,"./tabs":10,"./utils":11,"promise-polyfill":1,"smoothscroll-polyfill":2}],6:[function(require,module,exports){
 "use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar objectToQuery = function objectToQuery(target) {\n  return '?' + Object.keys(target).reduce(function (arr, key) {\n    return arr.push(key + '=' + target[key]) && arr;\n  }, []).join('&');\n};\n\nvar numberFormatting = exports.numberFormatting = function numberFormatting(number) {\n  return number.toFixed(2).replace(/(\\d)(?=(\\d{3})+\\.)/g, '$1 ').split('.')[0];\n};\n\nvar fetchJSON = exports.fetchJSON = function fetchJSON(url) {\n  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { method: 'GET' };\n  return new Promise(function (resolve, reject) {\n    var request = new XMLHttpRequest();\n\n    if (options.body && options.method === 'GET') {\n      url += objectToQuery(options.body);\n    }\n\n    request.onreadystatechange = function () {\n      if (request.readyState !== 4) {\n        return;\n      }\n\n      resolve(JSON.parse(request.responseText));\n    };\n\n    request.onerror = reject;\n    request.open(options.method || 'GET', url);\n    request.send(options.body ? JSON.stringify(options.body) : null);\n  });\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/utils.js\n// module id = 117\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/utils.js?");
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+/***/ }),
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+/***/ 15:
+/***/ (function(module, exports, __webpack_require__) {
 
-var _dom = require("./dom");
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar toArray = exports.toArray = function toArray(arrayLike) {\n  if (Array.isArray(arrayLike)) {\n    return arrayLike;\n  }\n\n  if (arrayLike instanceof Node) {\n    return [arrayLike];\n  }\n\n  return Array.prototype.slice.call(arrayLike);\n};\n\nvar $ = exports.$ = function $(selector) {\n  var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;\n  return toArray(context.querySelectorAll.call(context, selector));\n};\n\nvar selector = exports.selector = function selector(block, elem, modName, modVal) {\n  return block + '__' + elem + (modName ? modVal ? '_' + modName + '_' + modVal : '_' + modName : '');\n};\n\nvar buildClass = exports.buildClass = function buildClass() {\n  return '.' + selector.apply(undefined, arguments);\n};\n\nvar BEM = exports.BEM = function (_ref) {\n  _inherits(BEM, _ref);\n\n  function BEM(name, node) {\n    _classCallCheck(this, BEM);\n\n    var _this = _possibleConstructorReturn(this, (BEM.__proto__ || Object.getPrototypeOf(BEM)).call(this));\n\n    _this.node = node;\n    _this.name = name;\n    return _this;\n  }\n\n  _createClass(BEM, [{\n    key: 'elem',\n    value: function elem(name, modName, modVal) {\n      return this.node.querySelector(buildClass(this.name, name, modName, modVal));\n    }\n  }, {\n    key: 'elems',\n    value: function elems(name, modName, modVal) {\n      return $(buildClass(this.name, name, modName, modVal), this.node);\n    }\n  }, {\n    key: 'setMod',\n    value: function setMod(elem, elemName, modName, modValue) {\n      var _this2 = this;\n\n      toArray(elem).forEach(function (node) {\n        return node.classList.add(selector(_this2.name, elemName, modName, modValue));\n      });\n\n      return this;\n    }\n  }, {\n    key: 'delMod',\n    value: function delMod(elem, elemName, modName) {\n      var _this3 = this;\n\n      toArray(elem).forEach(function (node) {\n        return node.classList.remove(selector(_this3.name, elemName, modName));\n      });\n\n      return this;\n    }\n  }]);\n\n  return BEM;\n}(null);\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/dom.js\n// module id = 15\n// module chunks = 1 2\n\n//# sourceURL=webpack:///./src/scripts/dom.js?");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/***/ }),
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+/***/ 213:
+/***/ (function(module, exports, __webpack_require__) {
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var HOVER_DEBOUNCE_TIMEOUT = 200;
+eval("module.exports = __webpack_require__(214);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi ./src/scripts/main.js\n// module id = 213\n// module chunks = 1\n\n//# sourceURL=webpack:///multi_./src/scripts/main.js?");
 
-var REGION_POINT_MAP = {
-  "Київ": { left: 453, top: 170 },
-  "Луцьк": { left: 153, top: 100 },
-  "Львов": { left: 83, top: 206 },
-  "Ужгород": { left: 48, top: 312 },
-  "Ивано-Франковск": { left: 153, top: 312 },
-  "Черновцы": { left: 207, top: 329 },
-  "Тернополь": { left: 188, top: 241 },
-  "Ровно": { left: 241, top: 100 },
-  "Хмельницкий": { left: 259, top: 206 },
-  "Житомир": { left: 347, top: 153 },
-  "Винница": { left: 365, top: 277 },
-  "Черкассы": { left: 523, top: 241 },
-  "Кировоград": { left: 541, top: 312 },
-  "Полтава": { left: 646, top: 188 },
-  "Чернигов": { left: 541, top: 65 },
-  "Суммы": { left: 646, top: 100 },
-  "Харьков": { left: 770, top: 205 },
-  "Луганск": { left: 911, top: 259 },
-  "Днепропетровск": { left: 682, top: 311 },
-  "Донецк": { left: 840, top: 347 },
-  "Запорожье": { left: 752, top: 417 },
-  "Херсон": { left: 629, top: 452 },
-  "Николаев": { left: 523, top: 399 },
-  "Одесса": { left: 453, top: 435 },
-  "Крым": { left: 664, top: 558 }
-};
+/***/ }),
 
-var createPoint = function createPoint(_ref) {
-  var left = _ref.left,
-      top = _ref.top;
+/***/ 214:
+/***/ (function(module, exports, __webpack_require__) {
 
-  var node = document.createElement('div');
+"use strict";
+eval("\n\nvar _promisePolyfill = __webpack_require__(215);\n\nvar _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);\n\nvar _smoothscrollPolyfill = __webpack_require__(219);\n\nvar _smoothscrollPolyfill2 = _interopRequireDefault(_smoothscrollPolyfill);\n\nvar _dom = __webpack_require__(15);\n\nvar _utils = __webpack_require__(117);\n\nvar _nav = __webpack_require__(220);\n\nvar _nav2 = _interopRequireDefault(_nav);\n\nvar _tabs = __webpack_require__(69);\n\nvar _tabs2 = _interopRequireDefault(_tabs);\n\nvar _slider = __webpack_require__(221);\n\nvar _slider2 = _interopRequireDefault(_slider);\n\nvar _map = __webpack_require__(222);\n\nvar _map2 = _interopRequireDefault(_map);\n\nvar _statistic = __webpack_require__(223);\n\nvar _statistic2 = _interopRequireDefault(_statistic);\n\nvar _feedback = __webpack_require__(224);\n\nvar _feedback2 = _interopRequireDefault(_feedback);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nif (!window.Promise) {\n  window.Promise = _promisePolyfill2.default;\n}\n\n_smoothscrollPolyfill2.default.polyfill();\n\n(0, _dom.$)('.nav').forEach(function (node) {\n  return new _nav2.default(node);\n});\n(0, _dom.$)('.tabs').forEach(function (node) {\n  return new _tabs2.default(node);\n});\n(0, _dom.$)('.slider').forEach(function (node) {\n  return new _slider2.default(node);\n});\n(0, _dom.$)('.feedback').forEach(function (node) {\n  return new _feedback2.default(node);\n});\n\n(0, _utils.fetchJSON)('data/stats.json').then(function (data) {\n  (0, _dom.$)('.map').forEach(function (node) {\n    return new _map2.default(node, data.slice());\n  });\n  (0, _dom.$)('.declarations').forEach(function (node) {\n    return new _statistic2.default(node, data);\n  });\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/main.js\n// module id = 214\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
 
-  node.classList.add('map__point');
-  node.style.left = left + "px";
-  node.style.top = top + "px";
+/***/ }),
 
-  return node;
-};
+/***/ 215:
+/***/ (function(module, exports, __webpack_require__) {
 
-var Map = function (_BEM) {
-  _inherits(Map, _BEM);
+eval("/* WEBPACK VAR INJECTION */(function(setImmediate) {(function (root) {\n\n  // Store setTimeout reference so promise-polyfill will be unaffected by\n  // other code modifying setTimeout (like sinon.useFakeTimers())\n  var setTimeoutFunc = setTimeout;\n\n  function noop() {}\n  \n  // Polyfill for Function.prototype.bind\n  function bind(fn, thisArg) {\n    return function () {\n      fn.apply(thisArg, arguments);\n    };\n  }\n\n  function Promise(fn) {\n    if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');\n    if (typeof fn !== 'function') throw new TypeError('not a function');\n    this._state = 0;\n    this._handled = false;\n    this._value = undefined;\n    this._deferreds = [];\n\n    doResolve(fn, this);\n  }\n\n  function handle(self, deferred) {\n    while (self._state === 3) {\n      self = self._value;\n    }\n    if (self._state === 0) {\n      self._deferreds.push(deferred);\n      return;\n    }\n    self._handled = true;\n    Promise._immediateFn(function () {\n      var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;\n      if (cb === null) {\n        (self._state === 1 ? resolve : reject)(deferred.promise, self._value);\n        return;\n      }\n      var ret;\n      try {\n        ret = cb(self._value);\n      } catch (e) {\n        reject(deferred.promise, e);\n        return;\n      }\n      resolve(deferred.promise, ret);\n    });\n  }\n\n  function resolve(self, newValue) {\n    try {\n      // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure\n      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');\n      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {\n        var then = newValue.then;\n        if (newValue instanceof Promise) {\n          self._state = 3;\n          self._value = newValue;\n          finale(self);\n          return;\n        } else if (typeof then === 'function') {\n          doResolve(bind(then, newValue), self);\n          return;\n        }\n      }\n      self._state = 1;\n      self._value = newValue;\n      finale(self);\n    } catch (e) {\n      reject(self, e);\n    }\n  }\n\n  function reject(self, newValue) {\n    self._state = 2;\n    self._value = newValue;\n    finale(self);\n  }\n\n  function finale(self) {\n    if (self._state === 2 && self._deferreds.length === 0) {\n      Promise._immediateFn(function() {\n        if (!self._handled) {\n          Promise._unhandledRejectionFn(self._value);\n        }\n      });\n    }\n\n    for (var i = 0, len = self._deferreds.length; i < len; i++) {\n      handle(self, self._deferreds[i]);\n    }\n    self._deferreds = null;\n  }\n\n  function Handler(onFulfilled, onRejected, promise) {\n    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;\n    this.onRejected = typeof onRejected === 'function' ? onRejected : null;\n    this.promise = promise;\n  }\n\n  /**\n   * Take a potentially misbehaving resolver function and make sure\n   * onFulfilled and onRejected are only called once.\n   *\n   * Makes no guarantees about asynchrony.\n   */\n  function doResolve(fn, self) {\n    var done = false;\n    try {\n      fn(function (value) {\n        if (done) return;\n        done = true;\n        resolve(self, value);\n      }, function (reason) {\n        if (done) return;\n        done = true;\n        reject(self, reason);\n      });\n    } catch (ex) {\n      if (done) return;\n      done = true;\n      reject(self, ex);\n    }\n  }\n\n  Promise.prototype['catch'] = function (onRejected) {\n    return this.then(null, onRejected);\n  };\n\n  Promise.prototype.then = function (onFulfilled, onRejected) {\n    var prom = new (this.constructor)(noop);\n\n    handle(this, new Handler(onFulfilled, onRejected, prom));\n    return prom;\n  };\n\n  Promise.all = function (arr) {\n    var args = Array.prototype.slice.call(arr);\n\n    return new Promise(function (resolve, reject) {\n      if (args.length === 0) return resolve([]);\n      var remaining = args.length;\n\n      function res(i, val) {\n        try {\n          if (val && (typeof val === 'object' || typeof val === 'function')) {\n            var then = val.then;\n            if (typeof then === 'function') {\n              then.call(val, function (val) {\n                res(i, val);\n              }, reject);\n              return;\n            }\n          }\n          args[i] = val;\n          if (--remaining === 0) {\n            resolve(args);\n          }\n        } catch (ex) {\n          reject(ex);\n        }\n      }\n\n      for (var i = 0; i < args.length; i++) {\n        res(i, args[i]);\n      }\n    });\n  };\n\n  Promise.resolve = function (value) {\n    if (value && typeof value === 'object' && value.constructor === Promise) {\n      return value;\n    }\n\n    return new Promise(function (resolve) {\n      resolve(value);\n    });\n  };\n\n  Promise.reject = function (value) {\n    return new Promise(function (resolve, reject) {\n      reject(value);\n    });\n  };\n\n  Promise.race = function (values) {\n    return new Promise(function (resolve, reject) {\n      for (var i = 0, len = values.length; i < len; i++) {\n        values[i].then(resolve, reject);\n      }\n    });\n  };\n\n  // Use polyfill for setImmediate for performance gains\n  Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||\n    function (fn) {\n      setTimeoutFunc(fn, 0);\n    };\n\n  Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {\n    if (typeof console !== 'undefined' && console) {\n      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console\n    }\n  };\n\n  /**\n   * Set the immediate function to execute callbacks\n   * @param fn {function} Function to execute\n   * @deprecated\n   */\n  Promise._setImmediateFn = function _setImmediateFn(fn) {\n    Promise._immediateFn = fn;\n  };\n\n  /**\n   * Change the function to execute on unhandled rejection\n   * @param {function} fn Function to execute on unhandled rejection\n   * @deprecated\n   */\n  Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {\n    Promise._unhandledRejectionFn = fn;\n  };\n  \n  if (typeof module !== 'undefined' && module.exports) {\n    module.exports = Promise;\n  } else if (!root.Promise) {\n    root.Promise = Promise;\n  }\n\n})(this);\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(216).setImmediate))\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/promise-polyfill/promise.js\n// module id = 215\n// module chunks = 1\n\n//# sourceURL=webpack:///./node_modules/promise-polyfill/promise.js?");
 
-  function Map(node, data) {
-    _classCallCheck(this, Map);
+/***/ }),
 
-    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, 'map', node));
+/***/ 216:
+/***/ (function(module, exports, __webpack_require__) {
 
-    _this.data = [];
-    _this.timeout = null;
+eval("var apply = Function.prototype.apply;\n\n// DOM APIs, for completeness\n\nexports.setTimeout = function() {\n  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);\n};\nexports.setInterval = function() {\n  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);\n};\nexports.clearTimeout =\nexports.clearInterval = function(timeout) {\n  if (timeout) {\n    timeout.close();\n  }\n};\n\nfunction Timeout(id, clearFn) {\n  this._id = id;\n  this._clearFn = clearFn;\n}\nTimeout.prototype.unref = Timeout.prototype.ref = function() {};\nTimeout.prototype.close = function() {\n  this._clearFn.call(window, this._id);\n};\n\n// Does not start the time, just sets up the members needed.\nexports.enroll = function(item, msecs) {\n  clearTimeout(item._idleTimeoutId);\n  item._idleTimeout = msecs;\n};\n\nexports.unenroll = function(item) {\n  clearTimeout(item._idleTimeoutId);\n  item._idleTimeout = -1;\n};\n\nexports._unrefActive = exports.active = function(item) {\n  clearTimeout(item._idleTimeoutId);\n\n  var msecs = item._idleTimeout;\n  if (msecs >= 0) {\n    item._idleTimeoutId = setTimeout(function onTimeout() {\n      if (item._onTimeout)\n        item._onTimeout();\n    }, msecs);\n  }\n};\n\n// setimmediate attaches itself to the global object\n__webpack_require__(217);\nvar global = __webpack_require__(218);\nexports.setImmediate = global.setImmediate;\nexports.clearImmediate = global.clearImmediate;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/node-libs-browser/node_modules/timers-browserify/main.js\n// module id = 216\n// module chunks = 1\n\n//# sourceURL=webpack:///./node_modules/node-libs-browser/node_modules/timers-browserify/main.js?");
 
+/***/ }),
 
-    _this.data = data;
-    _this.$tooltip = _this.elem('tooltip');
+/***/ 217:
+/***/ (function(module, exports, __webpack_require__) {
 
-    var fragment = document.createDocumentFragment();
+eval("/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {\n    \"use strict\";\n\n    if (global.setImmediate) {\n        return;\n    }\n\n    var nextHandle = 1; // Spec says greater than zero\n    var tasksByHandle = {};\n    var currentlyRunningATask = false;\n    var doc = global.document;\n    var registerImmediate;\n\n    function setImmediate(callback) {\n      // Callback can either be a function or a string\n      if (typeof callback !== \"function\") {\n        callback = new Function(\"\" + callback);\n      }\n      // Copy function arguments\n      var args = new Array(arguments.length - 1);\n      for (var i = 0; i < args.length; i++) {\n          args[i] = arguments[i + 1];\n      }\n      // Store and register the task\n      var task = { callback: callback, args: args };\n      tasksByHandle[nextHandle] = task;\n      registerImmediate(nextHandle);\n      return nextHandle++;\n    }\n\n    function clearImmediate(handle) {\n        delete tasksByHandle[handle];\n    }\n\n    function run(task) {\n        var callback = task.callback;\n        var args = task.args;\n        switch (args.length) {\n        case 0:\n            callback();\n            break;\n        case 1:\n            callback(args[0]);\n            break;\n        case 2:\n            callback(args[0], args[1]);\n            break;\n        case 3:\n            callback(args[0], args[1], args[2]);\n            break;\n        default:\n            callback.apply(undefined, args);\n            break;\n        }\n    }\n\n    function runIfPresent(handle) {\n        // From the spec: \"Wait until any invocations of this algorithm started before this one have completed.\"\n        // So if we're currently running a task, we'll need to delay this invocation.\n        if (currentlyRunningATask) {\n            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a\n            // \"too much recursion\" error.\n            setTimeout(runIfPresent, 0, handle);\n        } else {\n            var task = tasksByHandle[handle];\n            if (task) {\n                currentlyRunningATask = true;\n                try {\n                    run(task);\n                } finally {\n                    clearImmediate(handle);\n                    currentlyRunningATask = false;\n                }\n            }\n        }\n    }\n\n    function installNextTickImplementation() {\n        registerImmediate = function(handle) {\n            process.nextTick(function () { runIfPresent(handle); });\n        };\n    }\n\n    function canUsePostMessage() {\n        // The test against `importScripts` prevents this implementation from being installed inside a web worker,\n        // where `global.postMessage` means something completely different and can't be used for this purpose.\n        if (global.postMessage && !global.importScripts) {\n            var postMessageIsAsynchronous = true;\n            var oldOnMessage = global.onmessage;\n            global.onmessage = function() {\n                postMessageIsAsynchronous = false;\n            };\n            global.postMessage(\"\", \"*\");\n            global.onmessage = oldOnMessage;\n            return postMessageIsAsynchronous;\n        }\n    }\n\n    function installPostMessageImplementation() {\n        // Installs an event handler on `global` for the `message` event: see\n        // * https://developer.mozilla.org/en/DOM/window.postMessage\n        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages\n\n        var messagePrefix = \"setImmediate$\" + Math.random() + \"$\";\n        var onGlobalMessage = function(event) {\n            if (event.source === global &&\n                typeof event.data === \"string\" &&\n                event.data.indexOf(messagePrefix) === 0) {\n                runIfPresent(+event.data.slice(messagePrefix.length));\n            }\n        };\n\n        if (global.addEventListener) {\n            global.addEventListener(\"message\", onGlobalMessage, false);\n        } else {\n            global.attachEvent(\"onmessage\", onGlobalMessage);\n        }\n\n        registerImmediate = function(handle) {\n            global.postMessage(messagePrefix + handle, \"*\");\n        };\n    }\n\n    function installMessageChannelImplementation() {\n        var channel = new MessageChannel();\n        channel.port1.onmessage = function(event) {\n            var handle = event.data;\n            runIfPresent(handle);\n        };\n\n        registerImmediate = function(handle) {\n            channel.port2.postMessage(handle);\n        };\n    }\n\n    function installReadyStateChangeImplementation() {\n        var html = doc.documentElement;\n        registerImmediate = function(handle) {\n            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted\n            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.\n            var script = doc.createElement(\"script\");\n            script.onreadystatechange = function () {\n                runIfPresent(handle);\n                script.onreadystatechange = null;\n                html.removeChild(script);\n                script = null;\n            };\n            html.appendChild(script);\n        };\n    }\n\n    function installSetTimeoutImplementation() {\n        registerImmediate = function(handle) {\n            setTimeout(runIfPresent, 0, handle);\n        };\n    }\n\n    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.\n    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);\n    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;\n\n    // Don't get fooled by e.g. browserify environments.\n    if ({}.toString.call(global.process) === \"[object process]\") {\n        // For Node.js before 0.9\n        installNextTickImplementation();\n\n    } else if (canUsePostMessage()) {\n        // For non-IE10 modern browsers\n        installPostMessageImplementation();\n\n    } else if (global.MessageChannel) {\n        // For web workers, where supported\n        installMessageChannelImplementation();\n\n    } else if (doc && \"onreadystatechange\" in doc.createElement(\"script\")) {\n        // For IE 6–8\n        installReadyStateChangeImplementation();\n\n    } else {\n        // For older browsers\n        installSetTimeoutImplementation();\n    }\n\n    attachTo.setImmediate = setImmediate;\n    attachTo.clearImmediate = clearImmediate;\n}(typeof self === \"undefined\" ? typeof global === \"undefined\" ? this : global : self));\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30), __webpack_require__(22)))\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/setimmediate/setImmediate.js\n// module id = 217\n// module chunks = 1\n\n//# sourceURL=webpack:///./node_modules/setimmediate/setImmediate.js?");
 
-    data.forEach(function (item, index) {
-      var point = createPoint(REGION_POINT_MAP[item.region_name]);
-      point.dataset.index = index;
+/***/ }),
 
-      point.addEventListener('mouseover', _this, false);
-      point.addEventListener('mouseout', _this, false);
+/***/ 218:
+/***/ (function(module, exports, __webpack_require__) {
 
-      fragment.appendChild(point);
-    });
+eval("/* WEBPACK VAR INJECTION */(function(global) {var win;\n\nif (typeof window !== \"undefined\") {\n    win = window;\n} else if (typeof global !== \"undefined\") {\n    win = global;\n} else if (typeof self !== \"undefined\"){\n    win = self;\n} else {\n    win = {};\n}\n\nmodule.exports = win;\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/global/window.js\n// module id = 218\n// module chunks = 1\n\n//# sourceURL=webpack:///./node_modules/global/window.js?");
 
-    _this.$tooltip.addEventListener('mouseover', _this, false);
-    _this.$tooltip.addEventListener('mouseout', _this, false);
+/***/ }),
 
-    _this.elem('main').appendChild(fragment);
-    return _this;
-  }
+/***/ 219:
+/***/ (function(module, exports, __webpack_require__) {
 
-  _createClass(Map, [{
-    key: "handleEvent",
-    value: function handleEvent(_ref2) {
-      var _this2 = this;
+eval("/*\n * smoothscroll polyfill - v0.3.5\n * https://iamdustan.github.io/smoothscroll\n * 2016 (c) Dustan Kasten, Jeremias Menichelli - MIT License\n */\n\n(function(w, d, undefined) {\n  'use strict';\n\n  /*\n   * aliases\n   * w: window global object\n   * d: document\n   * undefined: undefined\n   */\n\n  // polyfill\n  function polyfill() {\n    // return when scrollBehavior interface is supported\n    if ('scrollBehavior' in d.documentElement.style) {\n      return;\n    }\n\n    /*\n     * globals\n     */\n    var Element = w.HTMLElement || w.Element;\n    var SCROLL_TIME = 468;\n\n    /*\n     * object gathering original scroll methods\n     */\n    var original = {\n      scroll: w.scroll || w.scrollTo,\n      scrollBy: w.scrollBy,\n      elScroll: Element.prototype.scroll || scrollElement,\n      scrollIntoView: Element.prototype.scrollIntoView\n    };\n\n    /*\n     * define timing method\n     */\n    var now = w.performance && w.performance.now\n      ? w.performance.now.bind(w.performance) : Date.now;\n\n    /**\n     * changes scroll position inside an element\n     * @method scrollElement\n     * @param {Number} x\n     * @param {Number} y\n     */\n    function scrollElement(x, y) {\n      this.scrollLeft = x;\n      this.scrollTop = y;\n    }\n\n    /**\n     * returns result of applying ease math function to a number\n     * @method ease\n     * @param {Number} k\n     * @returns {Number}\n     */\n    function ease(k) {\n      return 0.5 * (1 - Math.cos(Math.PI * k));\n    }\n\n    /**\n     * indicates if a smooth behavior should be applied\n     * @method shouldBailOut\n     * @param {Number|Object} x\n     * @returns {Boolean}\n     */\n    function shouldBailOut(x) {\n      if (typeof x !== 'object'\n            || x === null\n            || x.behavior === undefined\n            || x.behavior === 'auto'\n            || x.behavior === 'instant') {\n        // first arg not an object/null\n        // or behavior is auto, instant or undefined\n        return true;\n      }\n\n      if (typeof x === 'object'\n            && x.behavior === 'smooth') {\n        // first argument is an object and behavior is smooth\n        return false;\n      }\n\n      // throw error when behavior is not supported\n      throw new TypeError('behavior not valid');\n    }\n\n    /**\n     * finds scrollable parent of an element\n     * @method findScrollableParent\n     * @param {Node} el\n     * @returns {Node} el\n     */\n    function findScrollableParent(el) {\n      var isBody;\n      var hasScrollableSpace;\n      var hasVisibleOverflow;\n\n      do {\n        el = el.parentNode;\n\n        // set condition variables\n        isBody = el === d.body;\n        hasScrollableSpace =\n          el.clientHeight < el.scrollHeight ||\n          el.clientWidth < el.scrollWidth;\n        hasVisibleOverflow =\n          w.getComputedStyle(el, null).overflow === 'visible';\n      } while (!isBody && !(hasScrollableSpace && !hasVisibleOverflow));\n\n      isBody = hasScrollableSpace = hasVisibleOverflow = null;\n\n      return el;\n    }\n\n    /**\n     * self invoked function that, given a context, steps through scrolling\n     * @method step\n     * @param {Object} context\n     */\n    function step(context) {\n      var time = now();\n      var value;\n      var currentX;\n      var currentY;\n      var elapsed = (time - context.startTime) / SCROLL_TIME;\n\n      // avoid elapsed times higher than one\n      elapsed = elapsed > 1 ? 1 : elapsed;\n\n      // apply easing to elapsed time\n      value = ease(elapsed);\n\n      currentX = context.startX + (context.x - context.startX) * value;\n      currentY = context.startY + (context.y - context.startY) * value;\n\n      context.method.call(context.scrollable, currentX, currentY);\n\n      // scroll more if we have not reached our destination\n      if (currentX !== context.x || currentY !== context.y) {\n        w.requestAnimationFrame(step.bind(w, context));\n      }\n    }\n\n    /**\n     * scrolls window with a smooth behavior\n     * @method smoothScroll\n     * @param {Object|Node} el\n     * @param {Number} x\n     * @param {Number} y\n     */\n    function smoothScroll(el, x, y) {\n      var scrollable;\n      var startX;\n      var startY;\n      var method;\n      var startTime = now();\n\n      // define scroll context\n      if (el === d.body) {\n        scrollable = w;\n        startX = w.scrollX || w.pageXOffset;\n        startY = w.scrollY || w.pageYOffset;\n        method = original.scroll;\n      } else {\n        scrollable = el;\n        startX = el.scrollLeft;\n        startY = el.scrollTop;\n        method = scrollElement;\n      }\n\n      // scroll looping over a frame\n      step({\n        scrollable: scrollable,\n        method: method,\n        startTime: startTime,\n        startX: startX,\n        startY: startY,\n        x: x,\n        y: y\n      });\n    }\n\n    /*\n     * ORIGINAL METHODS OVERRIDES\n     */\n\n    // w.scroll and w.scrollTo\n    w.scroll = w.scrollTo = function() {\n      // avoid smooth behavior if not required\n      if (shouldBailOut(arguments[0])) {\n        original.scroll.call(\n          w,\n          arguments[0].left || arguments[0],\n          arguments[0].top || arguments[1]\n        );\n        return;\n      }\n\n      // LET THE SMOOTHNESS BEGIN!\n      smoothScroll.call(\n        w,\n        d.body,\n        ~~arguments[0].left,\n        ~~arguments[0].top\n      );\n    };\n\n    // w.scrollBy\n    w.scrollBy = function() {\n      // avoid smooth behavior if not required\n      if (shouldBailOut(arguments[0])) {\n        original.scrollBy.call(\n          w,\n          arguments[0].left || arguments[0],\n          arguments[0].top || arguments[1]\n        );\n        return;\n      }\n\n      // LET THE SMOOTHNESS BEGIN!\n      smoothScroll.call(\n        w,\n        d.body,\n        ~~arguments[0].left + (w.scrollX || w.pageXOffset),\n        ~~arguments[0].top + (w.scrollY || w.pageYOffset)\n      );\n    };\n\n    // Element.prototype.scroll and Element.prototype.scrollTo\n    Element.prototype.scroll = Element.prototype.scrollTo = function() {\n      // avoid smooth behavior if not required\n      if (shouldBailOut(arguments[0])) {\n        original.elScroll.call(\n            this,\n            arguments[0].left || arguments[0],\n            arguments[0].top || arguments[1]\n        );\n        return;\n      }\n\n      // LET THE SMOOTHNESS BEGIN!\n      smoothScroll.call(\n          this,\n          this,\n          arguments[0].left,\n          arguments[0].top\n      );\n    };\n\n    // Element.prototype.scrollBy\n    Element.prototype.scrollBy = function() {\n      var arg0 = arguments[0];\n\n      if (typeof arg0 === 'object') {\n        this.scroll({\n          left: arg0.left + this.scrollLeft,\n          top: arg0.top + this.scrollTop,\n          behavior: arg0.behavior\n        });\n      } else {\n        this.scroll(\n          this.scrollLeft + arg0,\n          this.scrollTop + arguments[1]\n        );\n      }\n    };\n\n    // Element.prototype.scrollIntoView\n    Element.prototype.scrollIntoView = function() {\n      // avoid smooth behavior if not required\n      if (shouldBailOut(arguments[0])) {\n        original.scrollIntoView.call(this, arguments[0] || true);\n        return;\n      }\n\n      // LET THE SMOOTHNESS BEGIN!\n      var scrollableParent = findScrollableParent(this);\n      var parentRects = scrollableParent.getBoundingClientRect();\n      var clientRects = this.getBoundingClientRect();\n\n      if (scrollableParent !== d.body) {\n        // reveal element inside parent\n        smoothScroll.call(\n          this,\n          scrollableParent,\n          scrollableParent.scrollLeft + clientRects.left - parentRects.left,\n          scrollableParent.scrollTop + clientRects.top - parentRects.top\n        );\n        // reveal parent in viewport\n        w.scrollBy({\n          left: parentRects.left,\n          top: parentRects.top,\n          behavior: 'smooth'\n        });\n      } else {\n        // reveal element in viewport\n        w.scrollBy({\n          left: clientRects.left,\n          top: clientRects.top,\n          behavior: 'smooth'\n        });\n      }\n    };\n  }\n\n  if (true) {\n    // commonjs\n    module.exports = { polyfill: polyfill };\n  } else {\n    // global\n    polyfill();\n  }\n})(window, document);\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/smoothscroll-polyfill/dist/smoothscroll.js\n// module id = 219\n// module chunks = 1\n\n//# sourceURL=webpack:///./node_modules/smoothscroll-polyfill/dist/smoothscroll.js?");
 
-      var target = _ref2.target,
-          type = _ref2.type;
+/***/ }),
 
-      if (type === 'mouseover' && target.dataset.index) {
-        this.$tooltip.style.top = target.style.top;
-        this.$tooltip.style.left = target.style.left;
-      }
+/***/ 22:
+/***/ (function(module, exports) {
 
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(function () {
-        switch (type) {
-          case 'mouseout':
-            _this2.delMod(_this2.$tooltip, 'tooltip', 'show');
-            _this2.delMod(_this2.$active, 'point', 'active');
-            break;
-          case 'mouseover':
-            var data = _this2.data[target.dataset.index];
+eval("// shim for using process in browser\nvar process = module.exports = {};\n\n// cached from whatever global is present so that test runners that stub it\n// don't break things.  But we need to wrap it in a try catch in case it is\n// wrapped in strict mode code which doesn't define any globals.  It's inside a\n// function because try/catches deoptimize in certain engines.\n\nvar cachedSetTimeout;\nvar cachedClearTimeout;\n\nfunction defaultSetTimout() {\n    throw new Error('setTimeout has not been defined');\n}\nfunction defaultClearTimeout () {\n    throw new Error('clearTimeout has not been defined');\n}\n(function () {\n    try {\n        if (typeof setTimeout === 'function') {\n            cachedSetTimeout = setTimeout;\n        } else {\n            cachedSetTimeout = defaultSetTimout;\n        }\n    } catch (e) {\n        cachedSetTimeout = defaultSetTimout;\n    }\n    try {\n        if (typeof clearTimeout === 'function') {\n            cachedClearTimeout = clearTimeout;\n        } else {\n            cachedClearTimeout = defaultClearTimeout;\n        }\n    } catch (e) {\n        cachedClearTimeout = defaultClearTimeout;\n    }\n} ())\nfunction runTimeout(fun) {\n    if (cachedSetTimeout === setTimeout) {\n        //normal enviroments in sane situations\n        return setTimeout(fun, 0);\n    }\n    // if setTimeout wasn't available but was latter defined\n    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {\n        cachedSetTimeout = setTimeout;\n        return setTimeout(fun, 0);\n    }\n    try {\n        // when when somebody has screwed with setTimeout but no I.E. maddness\n        return cachedSetTimeout(fun, 0);\n    } catch(e){\n        try {\n            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally\n            return cachedSetTimeout.call(null, fun, 0);\n        } catch(e){\n            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error\n            return cachedSetTimeout.call(this, fun, 0);\n        }\n    }\n\n\n}\nfunction runClearTimeout(marker) {\n    if (cachedClearTimeout === clearTimeout) {\n        //normal enviroments in sane situations\n        return clearTimeout(marker);\n    }\n    // if clearTimeout wasn't available but was latter defined\n    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {\n        cachedClearTimeout = clearTimeout;\n        return clearTimeout(marker);\n    }\n    try {\n        // when when somebody has screwed with setTimeout but no I.E. maddness\n        return cachedClearTimeout(marker);\n    } catch (e){\n        try {\n            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally\n            return cachedClearTimeout.call(null, marker);\n        } catch (e){\n            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.\n            // Some versions of I.E. have different rules for clearTimeout vs setTimeout\n            return cachedClearTimeout.call(this, marker);\n        }\n    }\n\n\n\n}\nvar queue = [];\nvar draining = false;\nvar currentQueue;\nvar queueIndex = -1;\n\nfunction cleanUpNextTick() {\n    if (!draining || !currentQueue) {\n        return;\n    }\n    draining = false;\n    if (currentQueue.length) {\n        queue = currentQueue.concat(queue);\n    } else {\n        queueIndex = -1;\n    }\n    if (queue.length) {\n        drainQueue();\n    }\n}\n\nfunction drainQueue() {\n    if (draining) {\n        return;\n    }\n    var timeout = runTimeout(cleanUpNextTick);\n    draining = true;\n\n    var len = queue.length;\n    while(len) {\n        currentQueue = queue;\n        queue = [];\n        while (++queueIndex < len) {\n            if (currentQueue) {\n                currentQueue[queueIndex].run();\n            }\n        }\n        queueIndex = -1;\n        len = queue.length;\n    }\n    currentQueue = null;\n    draining = false;\n    runClearTimeout(timeout);\n}\n\nprocess.nextTick = function (fun) {\n    var args = new Array(arguments.length - 1);\n    if (arguments.length > 1) {\n        for (var i = 1; i < arguments.length; i++) {\n            args[i - 1] = arguments[i];\n        }\n    }\n    queue.push(new Item(fun, args));\n    if (queue.length === 1 && !draining) {\n        runTimeout(drainQueue);\n    }\n};\n\n// v8 likes predictible objects\nfunction Item(fun, array) {\n    this.fun = fun;\n    this.array = array;\n}\nItem.prototype.run = function () {\n    this.fun.apply(null, this.array);\n};\nprocess.title = 'browser';\nprocess.browser = true;\nprocess.env = {};\nprocess.argv = [];\nprocess.version = ''; // empty string to avoid regexp issues\nprocess.versions = {};\n\nfunction noop() {}\n\nprocess.on = noop;\nprocess.addListener = noop;\nprocess.once = noop;\nprocess.off = noop;\nprocess.removeListener = noop;\nprocess.removeAllListeners = noop;\nprocess.emit = noop;\nprocess.prependListener = noop;\nprocess.prependOnceListener = noop;\n\nprocess.listeners = function (name) { return [] }\n\nprocess.binding = function (name) {\n    throw new Error('process.binding is not supported');\n};\n\nprocess.cwd = function () { return '/' };\nprocess.chdir = function (dir) {\n    throw new Error('process.chdir is not supported');\n};\nprocess.umask = function() { return 0; };\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/process/browser.js\n// module id = 22\n// module chunks = 0 1\n\n//# sourceURL=webpack:///./node_modules/process/browser.js?");
 
-            if (data) {
-              var $tooltipData = _this2.$tooltip.querySelectorAll((0, _dom.buildClass)('map', 'tooltip-data') + " dt");
+/***/ }),
 
-              _this2.$tooltip.style.top = target.style.top;
-              _this2.$tooltip.style.left = target.style.left;
+/***/ 220:
+/***/ (function(module, exports, __webpack_require__) {
 
-              _this2.$active && _this2.delMod(_this2.$active, 'point', 'active');
-              _this2.setMod(_this2.$tooltip, 'tooltip', 'show');
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar Nav = function Nav(node) {\n  _classCallCheck(this, Nav);\n\n  node.addEventListener('click', function (e) {\n    e.preventDefault();\n\n    if (e.target.href === undefined) {\n      return;\n    }\n\n    var to = e.target.href.split('#')[1];\n\n    var _document$getElementB = document.getElementById(to).getBoundingClientRect(),\n        top = _document$getElementB.top;\n\n    window.scroll({ top: top + window.scrollY - 50, left: 0, behavior: 'smooth' });\n  });\n};\n\nexports.default = Nav;\nmodule.exports = exports['default'];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/nav.js\n// module id = 220\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/nav.js?");
 
-              _this2.$tooltip.querySelector((0, _dom.buildClass)('map', 'tooltip-title')).textContent = data.region_name;
-              _this2.$active = target;
+/***/ }),
 
-              $tooltipData[0].textContent = data.medical_system_providers;
-              $tooltipData[1].textContent = data.doctors;
-              $tooltipData[2].textContent = data.declarations_signed;
+/***/ 221:
+/***/ (function(module, exports, __webpack_require__) {
 
-              _this2.setMod(_this2.$active, 'point', 'active');
-            }
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _dom = __webpack_require__(15);\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar createMarker = function createMarker() {\n  var active = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n\n  var node = document.createElement('li');\n\n  node.classList.add((0, _dom.selector)('slider', 'marker'));\n  active && node.classList.add((0, _dom.selector)('slider', 'marker', 'active'));\n\n  return node;\n};\n\nvar Slider = function (_BEM) {\n  _inherits(Slider, _BEM);\n\n  function Slider(node) {\n    _classCallCheck(this, Slider);\n\n    var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, 'slider', node));\n\n    _this.currentIndex = 0;\n\n    _this.$slides = _this.elems('slide');\n\n    _this.$markers = [];\n\n    _this.$control = document.createElement('ul');\n    _this.$control.classList.add((0, _dom.selector)(_this.name, 'markers'));\n\n    _this.$slides.forEach(function (node, index) {\n      var marker = createMarker(index === _this.currentIndex);\n      _this.$control.appendChild(marker);\n      _this.$markers.push(marker);\n    });\n\n    _this.$control.addEventListener('click', function (_ref) {\n      var target = _ref.target;\n\n      if (!target.closest((0, _dom.buildClass)(_this.name, 'marker'))) {\n        return;\n      }\n\n      var toIndex = _this.getIndexByElem(target);\n\n      if (toIndex === _this.currentIndex) {\n        return;\n      }\n\n      _this.delMod(_this.elem('marker', 'active'), 'marker', 'active');\n      _this.setMod(target, 'marker', 'active');\n\n      _this.slide(toIndex);\n    }, false);\n\n    _this.node.appendChild(_this.$control);\n    return _this;\n  }\n\n  _createClass(Slider, [{\n    key: 'slide',\n    value: function slide(index) {\n      var isNext = this.currentIndex < index;\n\n      this.$slides[this.currentIndex].animate([{ transform: 'translateX(0)' }, { transform: 'translateX(' + (isNext ? '-' : '') + '100%)' }], this.constructor.ANIMATION_OPTIONS);\n\n      this.$slides[index].animate([{ transform: 'translateX(' + (isNext ? '' : '-') + '100%)' }, { transform: 'translateX(0)' }], this.constructor.ANIMATION_OPTIONS);\n\n      this.currentIndex = index;\n    }\n  }, {\n    key: 'getIndexByElem',\n    value: function getIndexByElem(elem) {\n      var index = -1;\n\n      this.$markers.some(function (node, i) {\n        if (node === elem) {\n          index = i;\n          return true;\n        }\n      });\n\n      return index;\n    }\n  }]);\n\n  return Slider;\n}(_dom.BEM);\n\nSlider.ANIMATION_OPTIONS = {\n  duration: 300,\n  fill: 'forwards',\n  easing: 'ease-in-out'\n};\nexports.default = Slider;\nmodule.exports = exports['default'];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/slider.js\n// module id = 221\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/slider.js?");
 
-            _this2.setMod(_this2.$tooltip, 'tooltip', 'show');
-            break;
-        }
-      }, HOVER_DEBOUNCE_TIMEOUT);
-    }
-  }]);
+/***/ }),
 
-  return Map;
-}(_dom.BEM);
+/***/ 222:
+/***/ (function(module, exports, __webpack_require__) {
 
-exports.default = Map;
-module.exports = exports["default"];
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _dom = __webpack_require__(15);\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar HOVER_DEBOUNCE_TIMEOUT = 200;\n\nvar REGION_POINT_MAP = {\n  \"Київ\": { left: 453, top: 170 },\n  \"Луцьк\": { left: 153, top: 100 },\n  \"Львов\": { left: 83, top: 206 },\n  \"Ужгород\": { left: 48, top: 312 },\n  \"Ивано-Франковск\": { left: 153, top: 312 },\n  \"Черновцы\": { left: 207, top: 329 },\n  \"Тернополь\": { left: 188, top: 241 },\n  \"Ровно\": { left: 241, top: 100 },\n  \"Хмельницкий\": { left: 259, top: 206 },\n  \"Житомир\": { left: 347, top: 153 },\n  \"Винница\": { left: 365, top: 277 },\n  \"Черкассы\": { left: 523, top: 241 },\n  \"Кировоград\": { left: 541, top: 312 },\n  \"Полтава\": { left: 646, top: 188 },\n  \"Чернигов\": { left: 541, top: 65 },\n  \"Суммы\": { left: 646, top: 100 },\n  \"Харьков\": { left: 770, top: 205 },\n  \"Луганск\": { left: 911, top: 259 },\n  \"Днепропетровск\": { left: 682, top: 311 },\n  \"Донецк\": { left: 840, top: 347 },\n  \"Запорожье\": { left: 752, top: 417 },\n  \"Херсон\": { left: 629, top: 452 },\n  \"Николаев\": { left: 523, top: 399 },\n  \"Одесса\": { left: 453, top: 435 },\n  \"Крым\": { left: 664, top: 558 }\n};\n\nvar createPoint = function createPoint(_ref) {\n  var left = _ref.left,\n      top = _ref.top;\n\n  var node = document.createElement('div');\n\n  node.classList.add('map__point');\n  node.style.left = left + \"px\";\n  node.style.top = top + \"px\";\n\n  return node;\n};\n\nvar Map = function (_BEM) {\n  _inherits(Map, _BEM);\n\n  function Map(node, data) {\n    _classCallCheck(this, Map);\n\n    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, 'map', node));\n\n    _this.data = [];\n    _this.timeout = null;\n\n\n    _this.data = data;\n    _this.$tooltip = _this.elem('tooltip');\n\n    var fragment = document.createDocumentFragment();\n\n    data.forEach(function (item, index) {\n      var point = createPoint(REGION_POINT_MAP[item.region_name]);\n      point.dataset.index = index;\n\n      point.addEventListener('mouseover', _this, false);\n      point.addEventListener('mouseout', _this, false);\n\n      fragment.appendChild(point);\n    });\n\n    _this.$tooltip.addEventListener('mouseover', _this, false);\n    _this.$tooltip.addEventListener('mouseout', _this, false);\n\n    _this.elem('main').appendChild(fragment);\n    return _this;\n  }\n\n  _createClass(Map, [{\n    key: \"handleEvent\",\n    value: function handleEvent(_ref2) {\n      var _this2 = this;\n\n      var target = _ref2.target,\n          type = _ref2.type;\n\n      if (type === 'mouseover' && target.dataset.index) {\n        this.$tooltip.style.top = target.style.top;\n        this.$tooltip.style.left = target.style.left;\n      }\n\n      clearTimeout(this.timeout);\n      this.timeout = setTimeout(function () {\n        switch (type) {\n          case 'mouseout':\n            _this2.delMod(_this2.$tooltip, 'tooltip', 'show');\n            _this2.delMod(_this2.$active, 'point', 'active');\n            break;\n          case 'mouseover':\n            var data = _this2.data[target.dataset.index];\n\n            if (data) {\n              var $tooltipData = _this2.$tooltip.querySelectorAll((0, _dom.buildClass)('map', 'tooltip-data') + \" dt\");\n\n              _this2.$tooltip.style.top = target.style.top;\n              _this2.$tooltip.style.left = target.style.left;\n\n              _this2.$active && _this2.delMod(_this2.$active, 'point', 'active');\n              _this2.setMod(_this2.$tooltip, 'tooltip', 'show');\n\n              _this2.$tooltip.querySelector((0, _dom.buildClass)('map', 'tooltip-title')).textContent = data.region_name;\n              _this2.$active = target;\n\n              $tooltipData[0].textContent = data.medical_system_providers;\n              $tooltipData[1].textContent = data.doctors;\n              $tooltipData[2].textContent = data.declarations_signed;\n\n              _this2.setMod(_this2.$active, 'point', 'active');\n            }\n\n            _this2.setMod(_this2.$tooltip, 'tooltip', 'show');\n            break;\n        }\n      }, HOVER_DEBOUNCE_TIMEOUT);\n    }\n  }]);\n\n  return Map;\n}(_dom.BEM);\n\nexports.default = Map;\nmodule.exports = exports[\"default\"];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/map.js\n// module id = 222\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/map.js?");
 
-},{"./dom":3}],7:[function(require,module,exports){
-'use strict';
+/***/ }),
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+/***/ 223:
+/***/ (function(module, exports, __webpack_require__) {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _dom = __webpack_require__(15);\n\nvar _utils = __webpack_require__(117);\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar COLORS_MAP = ['#90c8e6', '#b097c6', '#dfb0d0', '#e3aab8', '#afd5e7', '#c7b2d5', '#e9c7df', '#ecc7cf', '#f1eec9', '#ced8e2', '#5da892', '#5296cd', '#a3d7f2', '#f3f1a0', '#bcdad5', '#71b7a8', '#5ca9dc', '#dc91a3', '#d8816f', '#e2a394', '#7566aa', '#cadfeb', '#ddd2df', '#f4d9b5', '#d381b2'];\n\nvar createListItemNode = function createListItemNode(title, value, color) {\n  var $li = document.createElement('li');\n  var $span = document.createElement('span');\n  var $value = document.createElement('div');\n\n  $li.classList.add((0, _dom.selector)('declarations', 'list-item'));\n  $li.textContent = title;\n\n  $span.style.backgroundColor = color;\n\n  $value.classList.add((0, _dom.selector)('declarations', 'list-item-value'));\n  $value.textContent = (0, _utils.numberFormatting)(value);\n\n  $li.prepend($span);\n  $li.append($value);\n\n  return $li;\n};\n\nvar Statistic = function (_BEM) {\n  _inherits(Statistic, _BEM);\n\n  function Statistic(node, data) {\n    _classCallCheck(this, Statistic);\n\n    var _this = _possibleConstructorReturn(this, (Statistic.__proto__ || Object.getPrototypeOf(Statistic)).call(this, 'declarations', node));\n\n    var fragment = document.createDocumentFragment();\n\n    _this.$canvas = _this.elem('graph-canvas');\n    _this.context = _this.$canvas.getContext('2d');\n\n    var total = data.reduce(function (target, _ref) {\n      var declarations = _ref.declarations;\n      return target + declarations;\n    }, 0);\n\n    data.sort(function (a, b) {\n      return a.declarations < b.declarations ? 1 : -1;\n    });\n\n    var x = 490,\n        y = 490,\n        r = 480,\n        s = 0;\n\n\n    data.forEach(function (item, index) {\n      var $item = createListItemNode(item.region_name, item.declarations, COLORS_MAP[index]);\n\n      fragment.appendChild($item);\n\n      var radians = item.declarations / data[0].declarations * 360 * (Math.PI / 360);\n\n      _this.context.beginPath();\n      _this.context.lineWidth = 6;\n      _this.context.strokeStyle = COLORS_MAP[index];\n      _this.context.arc(x, y, r - 20 * index, s, radians, false);\n      _this.context.stroke();\n    });\n\n    _this.elem('list').appendChild(fragment);\n    _this.elem('total-value').textContent = (0, _utils.numberFormatting)(total);\n    return _this;\n  }\n\n  return Statistic;\n}(_dom.BEM);\n\nexports.default = Statistic;\nmodule.exports = exports['default'];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/statistic.js\n// module id = 223\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/statistic.js?");
 
-var Nav = function Nav(node) {
-  _classCallCheck(this, Nav);
+/***/ }),
 
-  node.addEventListener('click', function (e) {
-    e.preventDefault();
+/***/ 224:
+/***/ (function(module, exports, __webpack_require__) {
 
-    if (e.target.href === undefined) {
-      return;
-    }
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _dom = __webpack_require__(15);\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Feedback = function (_BEM) {\n  _inherits(Feedback, _BEM);\n\n  function Feedback(node) {\n    _classCallCheck(this, Feedback);\n\n    var _this = _possibleConstructorReturn(this, (Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call(this, 'feedback', node));\n\n    _this.$name = _this.elem('name');\n    _this.$message = _this.elem('message');\n    _this.$mailTo = _this.elem('mailto');\n\n    node.onsubmit = function (e) {\n      e.preventDefault();\n\n      _this.$mailTo.href = 'mailto:info@nszu.gov.ua?subject=\\u0417\\u0432\\u043E\\u0440\\u043E\\u0442\\u043D\\u0456\\u0439 \\u0437\\u0432\\u2019\\u044F\\u0437\\u043E\\u043A \\u0432\\u0456\\u0434 ' + _this.$name.value + '&body=' + _this.$message.value;\n      _this.$mailTo.click();\n      return false;\n    };\n    return _this;\n  }\n\n  return Feedback;\n}(_dom.BEM);\n\nexports.default = Feedback;\nmodule.exports = exports['default'];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/feedback.js\n// module id = 224\n// module chunks = 1\n\n//# sourceURL=webpack:///./src/scripts/feedback.js?");
 
-    var to = e.target.href.split('#')[1];
+/***/ }),
 
-    var _document$getElementB = document.getElementById(to).getBoundingClientRect(),
-        top = _document$getElementB.top;
+/***/ 30:
+/***/ (function(module, exports) {
 
-    window.scroll({ top: top + window.scrollY - 50, left: 0, behavior: 'smooth' });
-  });
-};
+eval("var g;\r\n\r\n// This works in non-strict mode\r\ng = (function() {\r\n\treturn this;\r\n})();\r\n\r\ntry {\r\n\t// This works if eval is allowed (see CSP)\r\n\tg = g || Function(\"return this\")() || (1,eval)(\"this\");\r\n} catch(e) {\r\n\t// This works if the window reference is available\r\n\tif(typeof window === \"object\")\r\n\t\tg = window;\r\n}\r\n\r\n// g can still be undefined, but nothing to do about it...\r\n// We return undefined, instead of nothing here, so it's\r\n// easier to handle this case. if(!global) { ...}\r\n\r\nmodule.exports = g;\r\n\n\n//////////////////\n// WEBPACK FOOTER\n// (webpack)/buildin/global.js\n// module id = 30\n// module chunks = 0 1\n\n//# sourceURL=webpack:///(webpack)/buildin/global.js?");
 
-exports.default = Nav;
-module.exports = exports['default'];
+/***/ }),
 
-},{}],8:[function(require,module,exports){
-'use strict';
+/***/ 69:
+/***/ (function(module, exports, __webpack_require__) {
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _dom = __webpack_require__(15);\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar PANEL_ANIMATION_OPTIONS = {\n  duration: 300,\n  fill: 'forwards',\n  easing: 'ease-in-out'\n};\n\nvar Tabs = function (_BEM) {\n  _inherits(Tabs, _BEM);\n\n  function Tabs(node) {\n    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},\n        _ref$autoHeight = _ref.autoHeight,\n        autoHeight = _ref$autoHeight === undefined ? false : _ref$autoHeight;\n\n    _classCallCheck(this, Tabs);\n\n    var _this = _possibleConstructorReturn(this, (Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call(this, 'tabs', node));\n\n    _this.$controls = _this.elems('nav-item');\n    _this.$slides = _this.elems('slide');\n\n    _this.$marker = document.createElement('div');\n    _this.$marker.classList.add((0, _dom.selector)(_this.name, 'marker'));\n    _this.elem('header').appendChild(_this.$marker);\n\n    if (autoHeight) {\n      var maxHeight = _this.$slides.reduce(function (target, item) {\n        if (item.clientHeight > target) {\n          target = item.clientHeight;\n        }\n\n        return target;\n      }, 0);\n\n      _this.elem('main').style.height = maxHeight + 'px';\n    }\n\n    _this.currentIndex = _this.getIndexByElem(_this.elem('nav-item', 'active'));\n\n    _this.elem('nav').addEventListener('click', function (e) {\n      if (!e.target.closest((0, _dom.buildClass)(_this.name, 'nav-item'))) {\n        return;\n      }\n\n      var toIndex = _this.getIndexByElem(e.target);\n\n      if (toIndex === _this.currentIndex) {\n        return;\n      }\n\n      _this.delMod(_this.elem('nav-item', 'active'), 'nav-item', 'active');\n      _this.setMod(e.target, 'nav-item', 'active');\n\n      _this.animatePanels(toIndex);\n      _this.animateMarker(toIndex);\n\n      _this.currentIndex = toIndex;\n    }, false);\n\n    _this.setMod(_this.elem('nav-item', 'active'), 'nav-item', 'marker');\n    return _this;\n  }\n\n  _createClass(Tabs, [{\n    key: 'animatePanels',\n    value: function animatePanels(index) {\n      var current = this.currentIndex;\n      var isNext = current < index;\n\n      current !== undefined && this.$slides[current].animate([{ transform: 'translateX(0)', opacity: 1 }, { transform: 'translateX(' + (isNext ? '-' : '') + '100%)', opacity: 0 }], PANEL_ANIMATION_OPTIONS);\n\n      this.$slides[index].animate([{ transform: 'translateX(' + (isNext ? '' : '-') + '100%)', opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }], PANEL_ANIMATION_OPTIONS);\n    }\n  }, {\n    key: 'animateMarker',\n    value: function animateMarker(index) {\n      var _this2 = this;\n\n      var current = {\n        left: this.$controls[this.currentIndex].offsetLeft,\n        width: this.$controls[this.currentIndex].clientWidth\n      };\n\n      var left = this.$controls[index].offsetLeft;\n      var width = this.$controls[index].clientWidth;\n\n      var player = this.$marker.animate([{\n        transform: 'translateX(' + current.left + 'px)',\n        width: current.width + 'px'\n      }, {\n        transform: 'translateX(' + left + 'px)',\n        width: width + 'px'\n      }], _extends({}, PANEL_ANIMATION_OPTIONS, { fill: 'none' }));\n\n      player.onfinish = function () {\n        _this2.setMod(_this2.$controls[index], 'nav-item', 'marker');\n      };\n\n      this.delMod(this.$controls[this.currentIndex], 'nav-item', 'marker');\n    }\n  }, {\n    key: 'getIndexByElem',\n    value: function getIndexByElem(elem) {\n      var index = -1;\n\n      this.$controls.some(function (node, i) {\n        if (node === elem) {\n          index = i;\n          return true;\n        }\n      });\n\n      return index;\n    }\n  }]);\n\n  return Tabs;\n}(_dom.BEM);\n\nexports.default = Tabs;\nmodule.exports = exports['default'];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/scripts/tabs.js\n// module id = 69\n// module chunks = 1 2\n\n//# sourceURL=webpack:///./src/scripts/tabs.js?");
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+/***/ })
 
-var _dom = require('./dom');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var createMarker = function createMarker() {
-  var active = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-  var node = document.createElement('li');
-
-  node.classList.add((0, _dom.selector)('slider', 'marker'));
-  active && node.classList.add((0, _dom.selector)('slider', 'marker', 'active'));
-
-  return node;
-};
-
-var Slider = function (_BEM) {
-  _inherits(Slider, _BEM);
-
-  function Slider(node) {
-    _classCallCheck(this, Slider);
-
-    var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, 'slider', node));
-
-    _this.currentIndex = 0;
-
-    _this.$slides = _this.elems('slide');
-
-    _this.$markers = [];
-
-    _this.$control = document.createElement('ul');
-    _this.$control.classList.add((0, _dom.selector)(_this.name, 'markers'));
-
-    _this.$slides.forEach(function (node, index) {
-      var marker = createMarker(index === _this.currentIndex);
-      _this.$control.appendChild(marker);
-      _this.$markers.push(marker);
-    });
-
-    _this.$control.addEventListener('click', function (_ref) {
-      var target = _ref.target;
-
-      if (!target.closest((0, _dom.buildClass)(_this.name, 'marker'))) {
-        return;
-      }
-
-      var toIndex = _this.getIndexByElem(target);
-
-      if (toIndex === _this.currentIndex) {
-        return;
-      }
-
-      _this.delMod(_this.elem('marker', 'active'), 'marker', 'active');
-      _this.setMod(target, 'marker', 'active');
-
-      _this.slide(toIndex);
-    }, false);
-
-    _this.node.appendChild(_this.$control);
-    return _this;
-  }
-
-  _createClass(Slider, [{
-    key: 'slide',
-    value: function slide(index) {
-      var isNext = this.currentIndex < index;
-
-      this.$slides[this.currentIndex].animate([{ transform: 'translateX(0)' }, { transform: 'translateX(' + (isNext ? '-' : '') + '100%)' }], this.constructor.ANIMATION_OPTIONS);
-
-      this.$slides[index].animate([{ transform: 'translateX(' + (isNext ? '' : '-') + '100%)' }, { transform: 'translateX(0)' }], this.constructor.ANIMATION_OPTIONS);
-
-      this.currentIndex = index;
-    }
-  }, {
-    key: 'getIndexByElem',
-    value: function getIndexByElem(elem) {
-      var index = -1;
-
-      this.$markers.some(function (node, i) {
-        if (node === elem) {
-          index = i;
-          return true;
-        }
-      });
-
-      return index;
-    }
-  }]);
-
-  return Slider;
-}(_dom.BEM);
-
-Slider.ANIMATION_OPTIONS = {
-  duration: 300,
-  fill: 'forwards',
-  easing: 'ease-in-out'
-};
-exports.default = Slider;
-module.exports = exports['default'];
-
-},{"./dom":3}],9:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _dom = require('./dom');
-
-var _utils = require('./utils');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var COLORS_MAP = ['#90c8e6', '#b097c6', '#dfb0d0', '#e3aab8', '#afd5e7', '#c7b2d5', '#e9c7df', '#ecc7cf', '#f1eec9', '#ced8e2', '#5da892', '#5296cd', '#a3d7f2', '#f3f1a0', '#bcdad5', '#71b7a8', '#5ca9dc', '#dc91a3', '#d8816f', '#e2a394', '#7566aa', '#cadfeb', '#ddd2df', '#f4d9b5', '#d381b2'];
-
-var createListItemNode = function createListItemNode(title, value, color) {
-  var $li = document.createElement('li');
-  var $span = document.createElement('span');
-  var $value = document.createElement('div');
-
-  $li.classList.add((0, _dom.selector)('declarations', 'list-item'));
-  $li.textContent = title;
-
-  $span.style.backgroundColor = color;
-
-  $value.classList.add((0, _dom.selector)('declarations', 'list-item-value'));
-  $value.textContent = (0, _utils.numberFormatting)(value);
-
-  $li.prepend($span);
-  $li.append($value);
-
-  return $li;
-};
-
-var Statistic = function (_BEM) {
-  _inherits(Statistic, _BEM);
-
-  function Statistic(node, data) {
-    _classCallCheck(this, Statistic);
-
-    var _this = _possibleConstructorReturn(this, (Statistic.__proto__ || Object.getPrototypeOf(Statistic)).call(this, 'declarations', node));
-
-    var fragment = document.createDocumentFragment();
-
-    _this.$canvas = _this.elem('graph-canvas');
-    _this.context = _this.$canvas.getContext('2d');
-
-    var total = data.reduce(function (target, _ref) {
-      var declarations = _ref.declarations;
-      return target + declarations;
-    }, 0);
-
-    data.sort(function (a, b) {
-      return a.declarations < b.declarations ? 1 : -1;
-    });
-
-    var x = 490,
-        y = 490,
-        r = 480,
-        s = 0;
-
-
-    data.forEach(function (item, index) {
-      var $item = createListItemNode(item.region_name, item.declarations, COLORS_MAP[index]);
-
-      fragment.appendChild($item);
-
-      var radians = item.declarations / data[0].declarations * 360 * (Math.PI / 360);
-
-      _this.context.beginPath();
-      _this.context.lineWidth = 6;
-      _this.context.strokeStyle = COLORS_MAP[index];
-      _this.context.arc(x, y, r - 20 * index, s, radians, false);
-      _this.context.stroke();
-    });
-
-    _this.elem('list').appendChild(fragment);
-    _this.elem('total-value').textContent = (0, _utils.numberFormatting)(total);
-    return _this;
-  }
-
-  return Statistic;
-}(_dom.BEM);
-
-exports.default = Statistic;
-module.exports = exports['default'];
-
-},{"./dom":3,"./utils":11}],10:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dom = require('./dom');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PANEL_ANIMATION_OPTIONS = {
-  duration: 300,
-  fill: 'forwards',
-  easing: 'ease-in-out'
-};
-
-var Tabs = function (_BEM) {
-  _inherits(Tabs, _BEM);
-
-  function Tabs(node) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        _ref$autoHeight = _ref.autoHeight,
-        autoHeight = _ref$autoHeight === undefined ? false : _ref$autoHeight;
-
-    _classCallCheck(this, Tabs);
-
-    var _this = _possibleConstructorReturn(this, (Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call(this, 'tabs', node));
-
-    _this.$controls = _this.elems('nav-item');
-    _this.$slides = _this.elems('slide');
-
-    _this.$marker = document.createElement('div');
-    _this.$marker.classList.add((0, _dom.selector)(_this.name, 'marker'));
-    _this.elem('header').appendChild(_this.$marker);
-
-    if (autoHeight) {
-      var maxHeight = _this.$slides.reduce(function (target, item) {
-        if (item.clientHeight > target) {
-          target = item.clientHeight;
-        }
-
-        return target;
-      }, 0);
-
-      _this.elem('main').style.height = maxHeight + 'px';
-    }
-
-    _this.currentIndex = _this.getIndexByElem(_this.elem('nav-item', 'active'));
-
-    _this.elem('nav').addEventListener('click', function (e) {
-      if (!e.target.closest((0, _dom.buildClass)(_this.name, 'nav-item'))) {
-        return;
-      }
-
-      var toIndex = _this.getIndexByElem(e.target);
-
-      if (toIndex === _this.currentIndex) {
-        return;
-      }
-
-      _this.delMod(_this.elem('nav-item', 'active'), 'nav-item', 'active');
-      _this.setMod(e.target, 'nav-item', 'active');
-
-      _this.animatePanels(toIndex);
-      _this.animateMarker(toIndex);
-
-      _this.currentIndex = toIndex;
-    }, false);
-
-    _this.setMod(_this.elem('nav-item', 'active'), 'nav-item', 'marker');
-    return _this;
-  }
-
-  _createClass(Tabs, [{
-    key: 'animatePanels',
-    value: function animatePanels(index) {
-      var current = this.currentIndex;
-      var isNext = current < index;
-
-      current !== undefined && this.$slides[current].animate([{ transform: 'translateX(0)', opacity: 1 }, { transform: 'translateX(' + (isNext ? '-' : '') + '100%)', opacity: 0 }], PANEL_ANIMATION_OPTIONS);
-
-      this.$slides[index].animate([{ transform: 'translateX(' + (isNext ? '' : '-') + '100%)', opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }], PANEL_ANIMATION_OPTIONS);
-    }
-  }, {
-    key: 'animateMarker',
-    value: function animateMarker(index) {
-      var _this2 = this;
-
-      var current = {
-        left: this.$controls[this.currentIndex].offsetLeft,
-        width: this.$controls[this.currentIndex].clientWidth
-      };
-
-      var left = this.$controls[index].offsetLeft;
-      var width = this.$controls[index].clientWidth;
-
-      var player = this.$marker.animate([{
-        transform: 'translateX(' + current.left + 'px)',
-        width: current.width + 'px'
-      }, {
-        transform: 'translateX(' + left + 'px)',
-        width: width + 'px'
-      }], _extends({}, PANEL_ANIMATION_OPTIONS, { fill: 'none' }));
-
-      player.onfinish = function () {
-        _this2.setMod(_this2.$controls[index], 'nav-item', 'marker');
-      };
-
-      this.delMod(this.$controls[this.currentIndex], 'nav-item', 'marker');
-    }
-  }, {
-    key: 'getIndexByElem',
-    value: function getIndexByElem(elem) {
-      var index = -1;
-
-      this.$controls.some(function (node, i) {
-        if (node === elem) {
-          index = i;
-          return true;
-        }
-      });
-
-      return index;
-    }
-  }]);
-
-  return Tabs;
-}(_dom.BEM);
-
-exports.default = Tabs;
-module.exports = exports['default'];
-
-},{"./dom":3}],11:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var objectToQuery = function objectToQuery(target) {
-  return '?' + Object.keys(target).reduce(function (arr, key) {
-    return arr.push(key + '=' + target[key]) && arr;
-  }, []).join('&');
-};
-
-var numberFormatting = exports.numberFormatting = function numberFormatting(number) {
-  return number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1 ').split('.')[0];
-};
-
-var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { method: 'GET' };
-  return new Promise(function (resolve, reject) {
-    var request = new XMLHttpRequest();
-
-    if (options.body && options.method === 'GET') {
-      url += objectToQuery(options.body);
-    }
-
-    request.onreadystatechange = function () {
-      if (request.readyState !== 4) {
-        return;
-      }
-
-      resolve(JSON.parse(request.responseText));
-    };
-
-    request.onerror = reject;
-    request.open(options.method || 'GET', url);
-    request.send(options.body ? JSON.stringify(options.body) : null);
-  });
-};
-
-},{}]},{},[5]);
+/******/ });
