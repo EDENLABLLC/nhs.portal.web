@@ -17,6 +17,111 @@ const geolocation = (
   })
 );
 
+const FIXTURE = [
+  {
+    "type": "CLINIC",
+    "name": "Бориспільське відділення Клініки Odessa",
+    "id": "df22a21e-998f-47fa-9cc1-f5c7cdc51867",
+    "coordinates": {
+      "longitude": 30.2501845,
+      "latitude": 50.3130679
+    },
+    "contacts": {
+      "phones": [
+        {
+          "type": "MOBILE",
+          "number": "+380503410870"
+        }
+      ],
+      "email": "sp.virny+51@gmail.com"
+    },
+    "addresses": [
+      {
+        "zip": "02090",
+        "type": "REGISTRATION",
+        "street_type": "STREET",
+        "street": "вул. Ніжинська",
+        "settlement_type": "CITY",
+        "settlement_id": "707dbc55-cb6b-4aaa-97c1-2a1e03476100",
+        "settlement": "СОРОКИ-ЛЬВІВСЬКІ",
+        "region": "ПУСТОМИТІВСЬКИЙ",
+        "country": "UA",
+        "building": "15",
+        "area": "ЛЬВІВСЬКА",
+        "apartment": "23"
+      }
+    ]
+  },
+  {
+    "type": "FAP",
+    "name": "Бориспільське відділення Клініки Борис",
+    "id": "0d96b5b9-1640-46e0-a912-5c16ee7cbf61",
+    "coordinates": {
+      "longitude": 30.3001845,
+      "latitude": 50.5430679
+    },
+    "contacts": {
+      "phones": [
+        {
+          "type": "MOBILE",
+          "number": "+380503410870"
+        }
+      ],
+      "email": "sp.virny+51@gmail.com"
+    },
+    "addresses": [
+      {
+        "zip": "02090",
+        "type": "REGISTRATION",
+        "street_type": "STREET",
+        "street": "вул. Ніжинська",
+        "settlement_type": "CITY",
+        "settlement_id": "707dbc55-cb6b-4aaa-97c1-2a1e03476100",
+        "settlement": "СОРОКИ-ЛЬВІВСЬКІ",
+        "region": "ПУСТОМИТІВСЬКИЙ",
+        "country": "UA",
+        "building": "15",
+        "area": "ЛЬВІВСЬКА",
+        "apartment": "23"
+      }
+    ]
+  },
+  {
+    "type": "AMBULANT_CLINIC",
+    "name": "Бориспільське відділення Клініки Борис",
+    "id": "e8ca8de5-e9be-4e9c-86d6-3472fc6bdc8d",
+    "coordinates": {
+      "longitude": 30.4001845,
+      "latitude": 50.3430679
+    },
+    "contacts": {
+      "phones": [
+        {
+          "type": "MOBILE",
+          "number": "+380503410870"
+        }
+      ],
+      "email": "sp.virny+51@gmail.com"
+    },
+    "addresses": [
+      {
+        "zip": "02090",
+        "type": "REGISTRATION",
+        "street_type": "STREET",
+        "street": "вул. Ніжинська",
+        "settlement_type": "CITY",
+        "settlement_id": "707dbc55-cb6b-4aaa-97c1-2a1e03476100",
+        "settlement": "СОРОКИ-ЛЬВІВСЬКІ",
+        "region": "ПУСТОМИТІВСЬКИЙ",
+        "country": "UA",
+        "building": "15",
+        "area": "ЛЬВІВСЬКА",
+        "apartment": "23"
+      }
+    ]
+  }
+];
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -24,14 +129,19 @@ export default class App extends React.Component {
     this.state = {
       center: { lat: 50.4021368, lng: 30.4525107 },
       bounds: null,
-      type: null,
+      type: 'CLINIC',
       search: null,
       zoom: 11
     };
+
     this.onBoundsChanged = this.onBoundsChanged.bind(this);
     this.onMapMounted = this.onMapMounted.bind(this);
     this.onSearchUpdate = this.onSearchUpdate.bind(this);
     this.onSearchTypeUpdate = this.onSearchTypeUpdate.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMarkerOver = this.onMarkerOver.bind(this);
+    this.onMarkerOut = this.onMarkerOut.bind(this);
+
     this.fetchData = debounceFn(this.fetchData, 600);
 
     this.map = null;
@@ -73,6 +183,38 @@ export default class App extends React.Component {
     });
   }
 
+  onMarkerClick(item) {
+    console.log('onMarkerClick', item);
+    this.setActiveMarker(item);
+    // this.setCenter(item.coordinates)
+  }
+  onMarkerOver(item) {
+    console.log('setHover', item);
+    this.setState({
+      hoverItem: item,
+    });
+  }
+  onMarkerOut() {
+    this.setState({
+      hoverItem: null,
+    });
+  }
+
+  setCenter(coordinates) {
+    this.setState({
+      center: {
+        lat: coordinates.latitude,
+        lng: coordinates.longitude,
+      },
+    });
+  }
+
+  setActiveMarker(item) {
+    this.setState({
+      activeItem: item,
+    });
+  }
+
   fetchData() {
     const topRight = this.state.bounds.getNorthEast();
     const bottomLeft = this.state.bounds.getSouthWest();
@@ -85,11 +227,15 @@ export default class App extends React.Component {
         lefttop_longitude: bottomLeft.lng(),
         rightbottom_latitude: bottomLeft.lat(),
         rightbottom_longitude: topRight.lng(),
+        type: this.state.type,
+        name: this.state.search,
       }
     )).then((resp) => {
       console.log(resp);
       return resp.json().then((json) => {
-        console.log('json', json);
+        this.setState({
+          items: json.data,
+        })
       })
     })
   }
@@ -98,6 +244,7 @@ export default class App extends React.Component {
     return (
       <section className="search">
           <Aside
+            type={this.state.type}
             onSeachUpdate={this.onSearchUpdate}
             onSearchTypeUpdate={this.onSearchTypeUpdate}
           />
@@ -105,6 +252,9 @@ export default class App extends React.Component {
             defaultZoom={11}
             bounds={this.state.bounds}
             center={this.state.center}
+            onMarkerClick={this.onMarkerClick}
+            onMarkerOver={this.onMarkerOver}
+            onMarkerOut={this.onMarkerOut}
             onMapMounted={this.onMapMounted}
             onBoundsChanged={this.onBoundsChanged}
             containerElement={
@@ -113,6 +263,9 @@ export default class App extends React.Component {
             mapElement={
               <div style={{ height: `100%` }} />
             }
+            activeMarker={this.state.activeItem}
+            hoverMarker={this.state.hoverItem}
+            markers={this.state.items}
           />
       </section>
     );

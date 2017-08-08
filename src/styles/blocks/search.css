@@ -1,3 +1,15 @@
+
+@keyframes slideIn {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
 .search {
   flex: 1 1 auto;
   display: flex;
@@ -66,28 +78,42 @@
     width: 250px !important;
     overflow: visible !important;
     pointer-events: none;
+    cursor: pointer;
     z-index: -1;
+  }
+
+  .infoBox {
+    & > img {
+      display: none;
+    }
   }
 
   &__map-tooltip {
     width: 250px;
-    height: 330px;
+    /*height: 140px;*/
     padding: 32px;
     background-color: #fff;
     border: #dad9d8 1px solid;
     line-height: 20px !important;
     font: 14px 'GothamPro';
+    opacity: 1;
+    animation: slideIn 200ms ease-in-out forwards;
 
     &::before {
       content: "";
       display: block;
       position: absolute;
-      left: -1px;
+      left: 0;
       top: -10px;
-      bottom: 3px;
+      bottom: 0;
       width: 2px;
       background-color: #4880ed;
       z-index: 2;
+    }
+
+    &--active {
+      animation: none;
+      transform: translateY(15px);
     }
   }
 

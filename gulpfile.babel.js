@@ -46,14 +46,15 @@ gulp.task('clean', () => (
   ])
 ));
 
-gulp.task('build:scripts', () => (
+gulp.task('build:scripts', (done) => {
   gulp.src(SCRIPTS_SRC)
     .pipe(webpack({
       ...require('./webpack.config.js'),
       watch: process.env.WATCH !== 'false'
     }, require('webpack')))
     .pipe(gulp.dest(SCRIPTS_DIST))
-));
+  if (process.env.WATCH !== 'false') done();
+});
 
 gulp.task('build:styles', () => (
   gulp.src(`${STYLES_PATH}/main*.css`).pipe(postcss([

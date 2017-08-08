@@ -1,18 +1,28 @@
 import React from 'react';
+import classnames from 'classnames';
 
-export default () => (
+const types = [
+  { type: 'CLINIC', title: 'Клініки' },
+  { type: 'AMBULANT_CLINIC', title: 'Амбулаторії' },
+  { type: 'FAP', title: 'Аптеки' },
+];
+
+export default ({ type, onSearchTypeUpdate }) => (
   <aside className="search__aside">
       <input placeholder="Пошук" type="text" className="search__input" />
       <ul className="search__nav">
-          <li className="search__nav-item">
-              Заклади первинної медичної допомоги
+        {types.map(typeItem => (
+          <li
+            className={classnames(
+              'search__nav-item',
+              type === typeItem.type && 'search__nav-item_active'
+            )}
+            onClick={type !== typeItem.type && (() => onSearchTypeUpdate(typeItem.type))}
+            key={typeItem.type}
+          >
+            {typeItem.title}
           </li>
-          <li className="search__nav-item">
-              Аптеки
-          </li>
-          <li className="search__nav-item search__nav-item_active">
-              Діагностичні центри
-          </li>
+        ))}
       </ul>
       <ul className="search__result" />
   </aside>
