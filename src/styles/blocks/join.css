@@ -41,6 +41,11 @@
       bottom: 30px;
     }
 
+    i {
+      width: 35px;
+      height: 35px;
+    }
+
     &_color_green {
       background-color: #c2e639;
     }

@@ -36,4 +36,9 @@
     background-image: url('../images/icons/doc.png');
     background-size: 100%;
   }
+
+  &_name_admin {
+    background-image: url('../images/icons/admin.svg');
+    background-size: 100%;
+  }
 }
