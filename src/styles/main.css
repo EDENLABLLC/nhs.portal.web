@@ -23,8 +23,7 @@ body {
 }
 
 .header {
-  flex: 0 0 100vh;
-  min-height: 500px;
+  flex: 0 0 370px;
 }
 
 .main {

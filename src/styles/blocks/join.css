@@ -41,6 +41,11 @@
       bottom: 30px;
     }
 
+    i {
+      width: 35px;
+      height: 35px;
+    }
+
     &_color_green {
       background-color: #c2e639;
     }
@@ -53,9 +58,12 @@
       background-color: #f7df4a;
     }
 
-    i {
-      width: 35px;
-      height: 35px;
+    &_color_pink {
+      background-color: #d374e1;
+
+      i {
+        width: 29px;
+      }
     }
   }
 }
