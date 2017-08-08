@@ -20,11 +20,14 @@
 
   &__aside {
     flex: 0 0 480px;
-    padding: 16px 60px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   &__map {
     flex: 1 1 auto;
+    transform: translate3d(0, 0, 0);
   }
 
   &__input {
@@ -32,6 +35,11 @@
     padding-left: 70px;
     background: url('../images/icons/search.png') 25px center no-repeat;
     background-size: 23px;
+  }
+
+  &__header {
+    padding: 16px 60px;
+    flex: 0 0 auto;
   }
 
   &__nav {
@@ -54,8 +62,19 @@
   }
 
   &__result {
-    margin-top: 36px;
+    padding: 0 60px;
     list-style: none;
+    flex: 1 1 auto;
+    overflow: auto;
+    transform: translate3d(0, 0, 0);
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 36px;
+      width: 100%;
+    }
   }
 
   &__result-item {

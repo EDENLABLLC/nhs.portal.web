@@ -17,3 +17,23 @@ export const createUrl = (endpoint, options) => {
   );
   return Url.format(url);
 };
+
+export const replaceQuery = (filter, { location, router }) => {
+  const newFilter = {
+    ...location.query,
+    ...filter,
+  };
+
+  const query = Object.keys(newFilter).reduce((target, key) => {
+    if (newFilter[key]) {
+      target[key] = newFilter[key]; // eslint-disable-line
+    }
+
+    return target;
+  }, { });
+
+  router.replace({
+    ...location,
+    query,
+  });
+};

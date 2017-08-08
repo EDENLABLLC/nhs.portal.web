@@ -1,11 +1,11 @@
 import React from 'react';
 import throttleFn from 'lodash/throttle';
 import debounceFn from 'lodash/debounce';
-
+import withRouter from 'react-router/lib/withRouter';
 
 import Aside from './Aside';
 import Map from '../components/Map';
-import { createUrl } from '../helpers/url';
+import { createUrl, replaceQuery } from '../helpers/url';
 
 const geolocation = (
   navigator.geolocation ?
@@ -17,115 +17,11 @@ const geolocation = (
   })
 );
 
-const FIXTURE = [
-  {
-    "type": "CLINIC",
-    "name": "Бориспільське відділення Клініки Odessa",
-    "id": "df22a21e-998f-47fa-9cc1-f5c7cdc51867",
-    "coordinates": {
-      "longitude": 30.2501845,
-      "latitude": 50.3130679
-    },
-    "contacts": {
-      "phones": [
-        {
-          "type": "MOBILE",
-          "number": "+380503410870"
-        }
-      ],
-      "email": "sp.virny+51@gmail.com"
-    },
-    "addresses": [
-      {
-        "zip": "02090",
-        "type": "REGISTRATION",
-        "street_type": "STREET",
-        "street": "вул. Ніжинська",
-        "settlement_type": "CITY",
-        "settlement_id": "707dbc55-cb6b-4aaa-97c1-2a1e03476100",
-        "settlement": "СОРОКИ-ЛЬВІВСЬКІ",
-        "region": "ПУСТОМИТІВСЬКИЙ",
-        "country": "UA",
-        "building": "15",
-        "area": "ЛЬВІВСЬКА",
-        "apartment": "23"
-      }
-    ]
-  },
-  {
-    "type": "FAP",
-    "name": "Бориспільське відділення Клініки Борис",
-    "id": "0d96b5b9-1640-46e0-a912-5c16ee7cbf61",
-    "coordinates": {
-      "longitude": 30.3001845,
-      "latitude": 50.5430679
-    },
-    "contacts": {
-      "phones": [
-        {
-          "type": "MOBILE",
-          "number": "+380503410870"
-        }
-      ],
-      "email": "sp.virny+51@gmail.com"
-    },
-    "addresses": [
-      {
-        "zip": "02090",
-        "type": "REGISTRATION",
-        "street_type": "STREET",
-        "street": "вул. Ніжинська",
-        "settlement_type": "CITY",
-        "settlement_id": "707dbc55-cb6b-4aaa-97c1-2a1e03476100",
-        "settlement": "СОРОКИ-ЛЬВІВСЬКІ",
-        "region": "ПУСТОМИТІВСЬКИЙ",
-        "country": "UA",
-        "building": "15",
-        "area": "ЛЬВІВСЬКА",
-        "apartment": "23"
-      }
-    ]
-  },
-  {
-    "type": "AMBULANT_CLINIC",
-    "name": "Бориспільське відділення Клініки Борис",
-    "id": "e8ca8de5-e9be-4e9c-86d6-3472fc6bdc8d",
-    "coordinates": {
-      "longitude": 30.4001845,
-      "latitude": 50.3430679
-    },
-    "contacts": {
-      "phones": [
-        {
-          "type": "MOBILE",
-          "number": "+380503410870"
-        }
-      ],
-      "email": "sp.virny+51@gmail.com"
-    },
-    "addresses": [
-      {
-        "zip": "02090",
-        "type": "REGISTRATION",
-        "street_type": "STREET",
-        "street": "вул. Ніжинська",
-        "settlement_type": "CITY",
-        "settlement_id": "707dbc55-cb6b-4aaa-97c1-2a1e03476100",
-        "settlement": "СОРОКИ-ЛЬВІВСЬКІ",
-        "region": "ПУСТОМИТІВСЬКИЙ",
-        "country": "UA",
-        "building": "15",
-        "area": "ЛЬВІВСЬКА",
-        "apartment": "23"
-      }
-    ]
-  }
-];
-
-
+@withRouter
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       center: { lat: 50.4021368, lng: 30.4525107 },
       bounds: null,
@@ -141,22 +37,19 @@ export default class App extends React.Component {
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMarkerOver = this.onMarkerOver.bind(this);
     this.onMarkerOut = this.onMarkerOut.bind(this);
+    this.onClickSearchItem = this.onClickSearchItem.bind(this);
 
     this.fetchData = debounceFn(this.fetchData, 600);
 
     this.map = null;
-
-    geolocation.getCurrentPosition((position) => {
-      this.setState({
-        center: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        },
-      });
-    });
   }
   onBoundsChanged(v) {
     if (!this.map) return;
+    if (!this.mounted) {
+      this.mounted = true;
+      return;
+    }
+
     this.setState({
       bounds: this.map.getBounds(),
       center: this.map.getCenter(),
@@ -184,12 +77,12 @@ export default class App extends React.Component {
   }
 
   onMarkerClick(item) {
-    console.log('onMarkerClick', item);
-    this.setActiveMarker(item);
-    // this.setCenter(item.coordinates)
+    this.setActiveItem(item);
+  }
+  onClickSearchItem(item) {
+    this.setActiveItem(item);
   }
   onMarkerOver(item) {
-    console.log('setHover', item);
     this.setState({
       hoverItem: item,
     });
@@ -209,13 +102,15 @@ export default class App extends React.Component {
     });
   }
 
-  setActiveMarker(item) {
+  setActiveItem(item) {
     this.setState({
       activeItem: item,
     });
   }
 
   fetchData() {
+
+    if (!this.state.bounds) return;
     const topRight = this.state.bounds.getNorthEast();
     const bottomLeft = this.state.bounds.getSouthWest();
 
@@ -244,9 +139,12 @@ export default class App extends React.Component {
     return (
       <section className="search">
           <Aside
+            items={this.state.items}
+            activeItem={this.state.activeItem}
             type={this.state.type}
             onSeachUpdate={this.onSearchUpdate}
             onSearchTypeUpdate={this.onSearchTypeUpdate}
+            onClickSearchItem={this.onClickSearchItem}
           />
           <Map
             defaultZoom={11}

@@ -6,7 +6,8 @@
 @import "blocks/nav.css";
 @import "blocks/search.css";
 
-body {
+.map-page {
+  height: 100vh;
   display: flex;
   flex-flow: column nowrap;
 }

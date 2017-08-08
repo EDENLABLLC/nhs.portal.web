@@ -21,6 +21,25 @@ export default withGoogleMap(({
     ref={onMapMounted}
     {...props}
   >
+    { activeMarker && (
+      <Marker
+        {...{
+          position: {
+            lat: activeMarker.coordinates.latitude,
+            lng: activeMarker.coordinates.longitude,
+          },
+          key: `${activeMarker.id}_active`,
+          zIndex: 3,
+          defaultAnimation: 0,
+          icon: {
+            url: 'images/icons/marker.png',
+            scaledSize: new google.maps.Size(33, 47),
+            anchor: new google.maps.Point(17, 60),
+          },
+          onClick: () => onMarkerClick(activeMarker)
+        }}
+      ></Marker>
+    )}
     {markers.map((marker, index) => (
         <Marker
           {...{
@@ -29,7 +48,7 @@ export default withGoogleMap(({
               lng: marker.coordinates.longitude,
             },
             key: marker.id,
-            zIndex: 10,
+            zIndex: 2,
             defaultAnimation: 0,
             icon: (activeMarker && marker.id === activeMarker.id) ? {
               path: google.maps.SymbolPath.CIRCLE,
@@ -50,25 +69,6 @@ export default withGoogleMap(({
           }}
         />
       ))}
-      { activeMarker && (
-        <Marker
-          {...{
-            position: {
-              lat: activeMarker.coordinates.latitude,
-              lng: activeMarker.coordinates.longitude,
-            },
-            key: `${activeMarker.id}_active`,
-            zIndex: 1,
-            defaultAnimation: 0,
-            icon: {
-              url: 'images/icons/marker.png',
-              scaledSize: new google.maps.Size(33, 47),
-              anchor: new google.maps.Point(17, 60),
-            },
-            onClick: () => onMarkerClick(activeMarker)
-          }}
-        ></Marker>
-      )}
       { hoverMarker && (
         <Marker
           {...{

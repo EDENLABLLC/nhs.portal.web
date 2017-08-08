@@ -1,8 +1,9 @@
 import React from 'react';
+import classnames from 'classnames';
 
-export default ({ name, address, phones = [] }) => (
-  <li className="search__result-item">
-    <div class="search__result-item-title">
+export default ({ active, name, address, onClick, phones = [] }) => (
+  <li className={classnames('search__result-item', active && 'search__result-item_active')} onClick={onClick}>
+    <div className="search__result-item-title">
         {name}
     </div>
     {address.settlement} <br />
