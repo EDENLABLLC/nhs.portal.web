@@ -15,7 +15,7 @@ body {
 }
 
 .header {
-  flex: 0 0 40px;
+  flex: 0 0 auto;
   width: var(--max-content-width);
   margin: 0 auto;
 }

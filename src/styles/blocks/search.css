@@ -1,3 +1,15 @@
+
+@keyframes slideIn {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
 .search {
   flex: 1 1 auto;
   display: flex;
@@ -7,12 +19,25 @@
   align-content: stretch;
 
   &__aside {
-    flex: 0 0 480px;
-    padding: 16px 60px;
+    flex: 0 0 auto;
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   &__map {
     flex: 1 1 auto;
+    transform: translate3d(0, 0, 0);
+    position: relative;
+
+    &__el {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
 
   &__input {
@@ -22,9 +47,14 @@
     background-size: 23px;
   }
 
+  &__header {
+    padding: 16px 60px 0;
+    flex: 0 0 auto;
+    border-bottom: #dad9d8 1px solid;
+  }
+
   &__nav {
     list-style: none;
-    border-bottom: #dad9d8 1px solid;
     margin: 0 -60px;
     padding: 0 60px 10px;
   }
@@ -42,8 +72,19 @@
   }
 
   &__result {
-    margin-top: 36px;
+    padding: 0 60px;
     list-style: none;
+    flex: 1 1 auto;
+    overflow: auto;
+    transform: translate3d(0, 0, 0);
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 36px;
+      width: 100%;
+    }
   }
 
   &__result-item {
@@ -66,28 +107,42 @@
     width: 250px !important;
     overflow: visible !important;
     pointer-events: none;
+    cursor: pointer;
     z-index: -1;
+  }
+
+  .infoBox {
+    & > img {
+      display: none;
+    }
   }
 
   &__map-tooltip {
     width: 250px;
-    height: 330px;
+    /*height: 140px;*/
     padding: 32px;
     background-color: #fff;
     border: #dad9d8 1px solid;
     line-height: 20px !important;
     font: 14px 'GothamPro';
+    opacity: 1;
+    animation: slideIn 200ms ease-in-out forwards;
 
     &::before {
       content: "";
       display: block;
       position: absolute;
-      left: -1px;
+      left: 0;
       top: -10px;
-      bottom: 3px;
+      bottom: 0;
       width: 2px;
       background-color: #4880ed;
       z-index: 2;
+    }
+
+    &--active {
+      animation: none;
+      transform: translateY(15px);
     }
   }
 
