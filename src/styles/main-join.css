@@ -1,0 +1,134 @@
+@import "variables.css";
+@import "reset.css";
+@import "fonts.css";
+@import "defaults.css";
+@import "tabs.css";
+@import "tooltip.css";
+
+@import "blocks/nav.css";
+
+.join-page {
+  width: var(--max-content-width);
+  margin: 0 auto;
+
+  &__title {
+    margin: 70px 0;
+    font-size: 45px;
+    line-height: 50px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  &__tabs {
+    min-height: 1000px;
+  }
+}
+
+.join-rules {
+  margin: 0 60px;
+
+  &__title {
+    font-size: 21px;
+    line-height: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  &__sub-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 40px 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  &__list-tooltip {
+    margin-bottom: 8px;
+    margin-left: -6px;
+  }
+
+  &__list-item {
+    flex: 1 1 auto;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 700;
+    line-height: 25px;
+    color: #4880ed;
+    font-size: 21px;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 67px;
+      width: 1px;
+      background-color: #dad9d8;
+    }
+
+    &:last-child {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__next-list {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    counter-reset: next-list;
+    list-style: none;
+  }
+
+  &__next-list-item {
+    position: relative;
+    width: 400px;
+    height: 120px;
+    padding-left: 70px;
+    counter-increment: next-list;
+
+    &::before {
+      content: counter(next-list);
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      text-align: center;
+      color: #4880ed;
+      font-size: 70px;
+      line-height: 70px;
+      font-weight: 300;
+    }
+  }
+
+  &__next-list_one {
+    height: 240px;
+  }
+
+  &__next-list_two {
+    height: 485px;
+  }
+
+  &__next-list_three {
+    height: 385px;
+  }
+
+  &__footer {
+    text-align: center;
+  }
+}

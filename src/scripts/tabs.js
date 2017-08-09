@@ -32,18 +32,20 @@ export default class Tabs extends BEM {
     this.currentIndex = this.getIndexByElem(this.elem('nav-item', 'active'));
 
     this.elem('nav').addEventListener('click', (e) => {
-      if (!e.target.closest(buildClass(this.name, 'nav-item'))) {
+      const $elem = e.target.closest(buildClass(this.name, 'nav-item'));
+
+      if (!$elem) {
         return;
       }
 
-      const toIndex = this.getIndexByElem(e.target);
+      const toIndex = this.getIndexByElem($elem);
 
       if (toIndex === this.currentIndex) {
         return;
       }
 
       this.delMod(this.elem('nav-item', 'active'), 'nav-item', 'active');
-      this.setMod(e.target, 'nav-item', 'active');
+      this.setMod($elem, 'nav-item', 'active');
 
       this.animatePanels(toIndex);
       this.animateMarker(toIndex);
@@ -86,10 +88,11 @@ export default class Tabs extends BEM {
         transform: `translateX(${left}px)`,
         width: `${width}px`
       }
-    ], {...PANEL_ANIMATION_OPTIONS, fill: 'none'});
+    ], {...PANEL_ANIMATION_OPTIONS });
 
     player.onfinish = () => {
       this.setMod(this.$controls[index], 'nav-item', 'marker');
+      requestAnimationFrame(() => player.cancel());
     };
 
     this.delMod(this.$controls[this.currentIndex], 'nav-item', 'marker')
