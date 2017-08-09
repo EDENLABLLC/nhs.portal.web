@@ -70,10 +70,13 @@
     "express": "^4.14.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
+    "preact": "^8.2.1",
     "promise-polyfill": "^6.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-maps": "^7.2.0",
+    "react-infinite-scroll": "^0.1.5",
+    "react-infinite-scroller": "^1.0.14",
     "react-lite": "^0.15.37",
     "smoothscroll-polyfill": "^0.3.5"
   }

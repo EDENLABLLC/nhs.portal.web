@@ -38,13 +38,13 @@
   }
 
   &__header {
-    padding: 16px 60px;
+    padding: 16px 60px 0;
     flex: 0 0 auto;
+    border-bottom: #dad9d8 1px solid;
   }
 
   &__nav {
     list-style: none;
-    border-bottom: #dad9d8 1px solid;
     margin: 0 -60px;
     padding: 0 60px 10px;
   }

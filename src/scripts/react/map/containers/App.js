@@ -1,21 +1,13 @@
 import React from 'react';
 import throttleFn from 'lodash/throttle';
 import debounceFn from 'lodash/debounce';
+import pickFn from 'lodash/pick';
+
 import withRouter from 'react-router/lib/withRouter';
 
 import Aside from './Aside';
 import Map from '../components/Map';
-import { createUrl, replaceQuery } from '../helpers/url';
-
-const geolocation = (
-  navigator.geolocation ?
-  navigator.geolocation :
-  ({
-    getCurrentPosition(success, failure) {
-      failure && failure(`Your browser doesn't support geolocation.`);
-    },
-  })
-);
+import { createUrl } from '../helpers/url';
 
 @withRouter
 export default class App extends React.Component {
@@ -27,28 +19,36 @@ export default class App extends React.Component {
       bounds: null,
       type: 'CLINIC',
       search: null,
-      zoom: 11
+      zoom: 11,
+      items: [],
+      isLoading: false,
+      pagination: {
+        page_number: null,
+        page_size: null,
+        total_entries: null,
+        total_pages: null,
+      },
     };
 
-    this.onBoundsChanged = this.onBoundsChanged.bind(this);
+    this.onBoundsChanged = debounceFn(this.onBoundsChanged.bind(this), 2000);
     this.onMapMounted = this.onMapMounted.bind(this);
-    this.onSearchUpdate = this.onSearchUpdate.bind(this);
+    this.onSearchUpdate = debounceFn(this.onSearchUpdate.bind(this), 1000);
     this.onSearchTypeUpdate = this.onSearchTypeUpdate.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMarkerOver = this.onMarkerOver.bind(this);
     this.onMarkerOut = this.onMarkerOut.bind(this);
     this.onClickSearchItem = this.onClickSearchItem.bind(this);
 
-    this.fetchData = debounceFn(this.fetchData, 600);
+    this.onMountList = this.onMountList.bind(this);
+    this.onLoadMore = this.onLoadMore.bind(this);
+
+    this.fetchData = this.fetchData.bind(this);
 
     this.map = null;
+
   }
   onBoundsChanged(v) {
     if (!this.map) return;
-    if (!this.mounted) {
-      this.mounted = true;
-      return;
-    }
 
     this.setState({
       bounds: this.map.getBounds(),
@@ -59,23 +59,39 @@ export default class App extends React.Component {
   }
   onMapMounted(map) {
     this.map = map;
-    this.fetchData();
-  }
-  onSearchUpdate(search) {
     this.setState({
-      search: search,
+      bounds: this.map.getBounds(),
+      center: this.map.getCenter(),
+    }, () => {
+      setTimeout(() => {
+        this.fetchData();
+      });
+    });
+  }
+  onSearchUpdate(value) {
+    this.setState({
+      search: value,
     }, () => {
       this.fetchData();
     });
+  }
+  onMountList(list) {
+    this.list = list;
   }
   onSearchTypeUpdate(type) {
     this.setState({
       type: type,
     }, () => {
-      this.fetchData();
+      setTimeout(() => {
+        this.fetchData();
+      });
     });
   }
-
+  onLoadMore() {
+    return this.fetchData({
+      page: this.state.pagination.page_number + 1
+    });
+  }
   onMarkerClick(item) {
     this.setActiveItem(item);
   }
@@ -108,31 +124,45 @@ export default class App extends React.Component {
     });
   }
 
-  fetchData() {
+  fetchData({ page = 1 } = {}) {
 
+    console.log('fetchData', this.state);
     if (!this.state.bounds) return;
-    const topRight = this.state.bounds.getNorthEast();
-    const bottomLeft = this.state.bounds.getSouthWest();
+    if (this.state.isLoading) return;
 
-    console.log('fetch', this.state, topRight, bottomLeft);
-    return fetch(createUrl(
-      'http://dev.ehealth.world/reports/stats/divisions/map',
-      {
-        lefttop_latitude: topRight.lat(),
-        lefttop_longitude: bottomLeft.lng(),
-        rightbottom_latitude: bottomLeft.lat(),
-        rightbottom_longitude: topRight.lng(),
-        type: this.state.type,
-        name: this.state.search,
-      }
-    )).then((resp) => {
-      console.log(resp);
-      return resp.json().then((json) => {
-        this.setState({
-          items: json.data,
+    return this.setState({
+      isLoading: true,
+    }, () => {
+
+      const newSet = page === 1;
+
+      const topRight = this.state.bounds.getNorthEast();
+      const bottomLeft = this.state.bounds.getSouthWest();
+
+      return fetch(createUrl(
+        'http://dev.ehealth.world/reports/stats/divisions/map',
+        {
+          lefttop_latitude: topRight.lat(),
+          lefttop_longitude: bottomLeft.lng(),
+          rightbottom_latitude: bottomLeft.lat(),
+          rightbottom_longitude: topRight.lng(),
+          type: this.state.type,
+          name: this.state.search,
+          page_size: 100,
+          page: page,
+        }
+      )).then((resp) => {
+        return resp.json().then((json) => {
+          this.setState({
+            isLoading: false,
+            items: newSet ? json.data.entries : this.state.items.concat(json.data.entries),
+            pagination: pickFn(json.data, ['page_number', 'page_size', 'total_entries', 'total_pages']),
+          }, () => {
+            if (this.list && newSet) this.list.scrollTop = 0;
+          });
         })
       })
-    })
+    });
   }
 
   render() {
@@ -142,9 +172,13 @@ export default class App extends React.Component {
             items={this.state.items}
             activeItem={this.state.activeItem}
             type={this.state.type}
-            onSeachUpdate={this.onSearchUpdate}
+            onSearchUpdate={this.onSearchUpdate}
             onSearchTypeUpdate={this.onSearchTypeUpdate}
             onClickSearchItem={this.onClickSearchItem}
+            onLoadMore={this.onLoadMore}
+            hasMore={this.state.pagination.page_number <= this.state.pagination.total_pages}
+            isLoading={this.state.isLoading}
+            onMountList={this.onMountList}
           />
           <Map
             defaultZoom={11}

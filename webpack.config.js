@@ -38,13 +38,7 @@ const config = webpackMerge(
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },
       }),
-    ],
-    // resolve: {
-    //   alias: {
-    //     'react': 'react-lite',
-    //     'react-dom': 'react-lite'
-    //   }
-    // }
+    ]
   },
   genConfig
 );

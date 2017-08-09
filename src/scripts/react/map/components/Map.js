@@ -1,9 +1,11 @@
 import React from 'react';
+import uniqBy from 'lodash/uniqBy';
+
 import GoogleMap from 'react-google-maps/lib/GoogleMap';
 import withGoogleMap from 'react-google-maps/lib/withGoogleMap';
 import Marker from 'react-google-maps/lib/Marker';
-import InfoWindow from 'react-google-maps/lib/InfoWindow';
 import InfoBox from 'react-google-maps/lib/addons/InfoBox';
+import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
 
 import SearchMapTooltip from '../components/SearchMapTooltip';
 
@@ -40,35 +42,37 @@ export default withGoogleMap(({
         }}
       ></Marker>
     )}
-    {markers.map((marker, index) => (
-        <Marker
-          {...{
-            position: {
-              lat: marker.coordinates.latitude,
-              lng: marker.coordinates.longitude,
-            },
-            key: marker.id,
-            zIndex: 2,
-            defaultAnimation: 0,
-            icon: (activeMarker && marker.id === activeMarker.id) ? {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 8,
-              strokeColor: '#4880ed',
-              fillOpacity: 1,
-              fillColor: '#ffffff',
-              strokeWeight: 6
-            } : {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 4,
-              strokeColor: '#4880ed',
-              fillOpacity: 1,
-              fillColor: '#4880ed'
-            },
-            onMouseOver: () => onMarkerOver(marker),
-            onClick: () => onMarkerClick(marker)
-          }}
-        />
-      ))}
+    <MarkerClusterer>
+      {uniqBy(markers.concat([activeMarker, hoverMarker]).filter(i => i), 'id').map((marker, index) => (
+          <Marker
+            {...{
+              position: {
+                lat: marker.coordinates.latitude,
+                lng: marker.coordinates.longitude,
+              },
+              key: marker.id,
+              zIndex: 2,
+              defaultAnimation: 0,
+              icon: (activeMarker && marker.id === activeMarker.id) ? {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 8,
+                strokeColor: '#4880ed',
+                fillOpacity: 1,
+                fillColor: '#ffffff',
+                strokeWeight: 6
+              } : {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 4,
+                strokeColor: '#4880ed',
+                fillOpacity: 1,
+                fillColor: '#4880ed'
+              },
+              onMouseOver: () => onMarkerOver(marker),
+              onClick: () => onMarkerClick(marker)
+            }}
+          />
+        ))}
+      </MarkerClusterer>
       { hoverMarker && (
         <Marker
           {...{
