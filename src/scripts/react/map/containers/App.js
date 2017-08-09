@@ -135,6 +135,7 @@ export default class App extends React.Component {
     }, () => {
 
       const newSet = page === 1;
+      const oldTopScroll = this.list.scrollTop;
 
       const topRight = this.state.bounds.getNorthEast();
       const bottomLeft = this.state.bounds.getSouthWest();
@@ -155,10 +156,11 @@ export default class App extends React.Component {
         return resp.json().then((json) => {
           this.setState({
             isLoading: false,
-            items: newSet ? json.data.entries : this.state.items.concat(json.data.entries),
+            items: newSet ? json.data.entries : [].concat(this.state.items).concat(json.data.entries),
             pagination: pickFn(json.data, ['page_number', 'page_size', 'total_entries', 'total_pages']),
           }, () => {
             if (this.list && newSet) this.list.scrollTop = 0;
+            else this.list.scrollTop = oldTopScroll;
           });
         })
       })
@@ -193,7 +195,7 @@ export default class App extends React.Component {
               <div className="search__map" />
             }
             mapElement={
-              <div style={{ height: `100%` }} />
+              <div className="search__map__el" />
             }
             activeMarker={this.state.activeItem}
             hoverMarker={this.state.hoverItem}

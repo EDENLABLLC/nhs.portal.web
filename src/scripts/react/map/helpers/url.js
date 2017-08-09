@@ -1,6 +1,8 @@
 import Url from 'url';
 import qs from 'qs';
 
+Object.entries = Object.entries || (object => Object.keys(object).map(i => [i, object[i]]));
+
 export const createUrl = (endpoint, options) => {
   const url = Url.parse(endpoint, false);
 
