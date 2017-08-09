@@ -3,31 +3,33 @@ import { BEM, buildClass } from './dom';
 const HOVER_DEBOUNCE_TIMEOUT = 200;
 
 const REGION_POINT_MAP = {
-  "Київ": { left: 453, top: 170 },
-  "Луцьк": { left: 153, top: 100 },
-  "Львов": { left: 83, top: 206 },
-  "Ужгород": { left: 48, top: 312 },
-  "Ивано-Франковск": { left: 153, top: 312 },
-  "Черновцы": { left: 207, top: 329 },
-  "Тернополь": { left: 188, top: 241 },
-  "Ровно": { left: 241, top: 100 },
-  "Хмельницкий": { left: 259, top: 206 },
-  "Житомир": { left: 347, top: 153 },
-  "Винница": { left: 365, top: 277 },
-  "Черкассы": { left: 523, top: 241 },
-  "Кировоград": { left: 541, top: 312 },
-  "Полтава": { left: 646, top: 188 },
-  "Чернигов": { left: 541, top: 65 },
-  "Суммы": { left: 646, top: 100 },
-  "Харьков": { left: 770, top: 205 },
-  "Луганск": { left: 911, top: 259 },
-  "Днепропетровск": { left: 682, top: 311 },
-  "Донецк": { left: 840, top: 347 },
-  "Запорожье": { left: 752, top: 417 },
-  "Херсон": { left: 629, top: 452 },
-  "Николаев": { left: 523, top: 399 },
-  "Одесса": { left: 453, top: 435 },
-  "Крым": { left: 664, top: 558 }
+  "М.КИЇВ": { left: 453, top: 175 },
+  "КИЇВСЬКА": { left: 453, top: 140 },
+  "ВОЛИНСЬКА": { left: 153, top: 100 },
+  "ЛЬВІВСЬКА": { left: 83, top: 206 },
+  "ЗАКАРПАТСЬКА": { left: 48, top: 312 },
+  "ІВАНО-ФРАНКІВСЬКА": { left: 153, top: 312 },
+  "ЧЕРНІВЕЦЬКА": { left: 207, top: 329 },
+  "ТЕРНОПІЛЬСЬКА": { left: 188, top: 241 },
+  "РІВНЕНСЬКА": { left: 241, top: 100 },
+  "ХМЕЛЬНИЦЬКА": { left: 259, top: 206 },
+  "ЖИТОМИРСЬКА": { left: 347, top: 153 },
+  "ВІННИЦЬКА": { left: 365, top: 277 },
+  "ЧЕРКАСЬКА": { left: 523, top: 241 },
+  "КІРОВОГРАДСЬКА": { left: 541, top: 312 },
+  "ПОЛТАВСЬКА": { left: 646, top: 188 },
+  "ЧЕРНІГІВСЬКА": { left: 541, top: 65 },
+  "СУМСЬКА": { left: 646, top: 100 },
+  "ХАРКІВСЬКА": { left: 770, top: 205 },
+  "ЛУГАНСЬКА": { left: 911, top: 259 },
+  "ДНІПРОПЕТРОВСЬКА": { left: 682, top: 311 },
+  "ДОНЕЦЬКА": { left: 840, top: 347 },
+  "ЗАПОРІЗЬКА": { left: 752, top: 417 },
+  "ХЕРСОНСЬКА": { left: 629, top: 452 },
+  "МИКОЛАЇВСЬКА": { left: 523, top: 399 },
+  "ОДЕСЬКА": { left: 453, top: 435 },
+  "АВТОНОМНА РЕСПУБЛІКА КРИМ": { left: 664, top: 558 },
+  "М.СЕВАСТОПОЛЬ": { left: 614, top: 588 }
 };
 
 const createPoint = ({ left, top }) => {
@@ -44,6 +46,7 @@ export default class Map extends BEM {
   data = [];
   timeout = null;
 
+
   constructor(node, data) {
     super('map', node);
 
@@ -53,7 +56,7 @@ export default class Map extends BEM {
     const fragment = document.createDocumentFragment();
 
     data.forEach((item, index) => {
-      const point = createPoint(REGION_POINT_MAP[item.region_name]);
+      const point = createPoint(REGION_POINT_MAP[item.region.name]);
       point.dataset.index = index;
 
       point.addEventListener('mouseover', this, false);
@@ -93,12 +96,12 @@ export default class Map extends BEM {
             this.$active && this.delMod(this.$active, 'point', 'active');
             this.setMod(this.$tooltip, 'tooltip', 'show');
 
-            this.$tooltip.querySelector(buildClass('map', 'tooltip-title')).textContent = data.region_name;
+            this.$tooltip.querySelector(buildClass('map', 'tooltip-title')).textContent = data.region.name;
             this.$active = target;
 
-            $tooltipData[0].textContent = data.medical_system_providers;
-            $tooltipData[1].textContent = data.doctors;
-            $tooltipData[2].textContent = data.declarations_signed;
+            $tooltipData[0].textContent = data.stats.msps;
+            $tooltipData[1].textContent = data.stats.doctors;
+            $tooltipData[2].textContent = data.stats.declarations;
 
             this.setMod(this.$active, 'point', 'active');
           }
