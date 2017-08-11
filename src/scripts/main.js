@@ -29,39 +29,10 @@ fetchJSON('data/stats.json').then(data => {
   // $('.declarations').forEach(node => new Statistic(node, data));
 });
 
-const REGION__MAP = {
-  "Київ": 502,
-  "Луцьк": 523,
-  "Львов": 423,
-  "Ужгород": 324,
-  "Ивано-Франковск": 232,
-  "Черновцы": 252,
-  "Тернополь": 232,
-  "Ровно": 200,
-  "Хмельницкий": 182,
-  "Житомир": 132,
-  "Винница": 92,
-  "Черкассы": 82,
-  "Кировоград": 66,
-  "Полтава": 50,
-  "Чернигов": 32,
-  "Суммы": 12,
-  "Харьков": 9,
-  "Луганск": 8,
-  "Днепропетровск": 7,
-  "Донецк": 6,
-  "Запорожье": 5,
-  "Херсон": 4,
-  "Николаев": 3,
-  "Одесса": 2,
-  "Крым": 1,
-};
-
-// Dinamical number of declaraion, mis, doctors
+// Dinamical number of declarations, mis, doctors
 const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
 // const dinamical_doctors = document.getElementById('declarations__graph-canvas').getContext('2d');
 // const dinamical_mis = document.getElementById('declarations__graph-canvas').getContext('2d');
-
 const DATA = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [{
@@ -71,7 +42,6 @@ const DATA = {
     data: [0, 10, 12, 22, 29, 30, 45],
   }]
 };
-
 const customTooltips = function(tooltip) {
   // Tooltip Element
   let tooltipEl = document.getElementById('chartjs-tooltip');
@@ -132,7 +102,6 @@ const customTooltips = function(tooltip) {
   tooltipEl.style.fontStyle = tooltip._fontStyle;
   tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
 };
-
 const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
   type: 'line',
   data: DATA,
@@ -176,10 +145,35 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
   }
 });
 
-
 // Number of declarations, mis, doctors
 const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
-
+const REGION__MAP = {
+  "Київ": 502,
+  "Луцьк": 523,
+  "Львов": 423,
+  "Ужгород": 324,
+  "Ивано-Франковск": 232,
+  "Черновцы": 252,
+  "Тернополь": 232,
+  "Ровно": 200,
+  "Хмельницкий": 182,
+  "Житомир": 132,
+  "Винница": 92,
+  "Черкассы": 82,
+  "Кировоград": 66,
+  "Полтава": 50,
+  "Чернигов": 32,
+  "Суммы": 12,
+  "Харьков": 9,
+  "Луганск": 8,
+  "Днепропетровск": 7,
+  "Донецк": 6,
+  "Запорожье": 5,
+  "Херсон": 4,
+  "Николаев": 3,
+  "Одесса": 2,
+  "Крым": 1,
+};
 const REGION_DECLARATIONS = {
   labels: Object.keys(REGION__MAP).map( i => i),
   datasets: [{
@@ -188,7 +182,6 @@ const REGION_DECLARATIONS = {
     data: Object.values(REGION__MAP).map( i => i),
   }],
 };
-
 
 const NUMBER_BY_REGION = new Chart(NUMBER_BY_REGION_DECLARATION, {
   type: 'horizontalBar',
