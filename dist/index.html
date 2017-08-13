@@ -148,31 +148,87 @@ date: '2017-05-24T14:42:52.381Z'
             <section class="tabs">
                 <header class="tabs__header">
                     <ul class="tabs__nav">
-                        <li class="tabs__nav-item">
-                            Заклади
-                        </li>
-                        <li class="tabs__nav-item">
-                            Лікарі
-                        </li>
                         <li class="tabs__nav-item tabs__nav-item_active">
-                            Декларації
+                            Динаміка реєстрації<br />  закладів, лікарів, декларацій
+                        </li>
+                        <li class="tabs__nav-item">
+                            Кількість закладів, лікарів, декларацій<br />  по регіонах
                         </li>
                     </ul>
                 </header>
                 <article class="tabs__main statistic__tabs-content">
                     <section class="tabs__slide tabs__slide_active">
-                        <section class="declarations">
-                            <canvas id="declarations__graph-canvas" width="800" height="500"></canvas>
+                        <section>
+                            <section class="tabs">
+                                <header class="tabs__header">
+                                    <p class="tabs__header-title">Кількість закладів, лікарів, декларацій  по регіонах </p>
+                                    <ul class="tabs__nav">
+                                        <li class="tabs__nav-item tabs__nav-item_active">
+                                            Заклади
+                                        </li>
+                                        <li class="tabs__nav-item">
+                                            Лікарі
+                                        </li>
+                                        <li class="tabs__nav-item">
+                                            Декларації
+                                        </li>
+                                    </ul>
+                                </header>
+                                <article class="tabs__main statistic__tabs-content">
+                                    <section class="tabs__slide tabs__slide_active">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations__graph-canvas2" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations__graph-canvas3" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                </article>
+                            </section>
                         </section>
                     </section>
                     <section class="tabs__slide">
-                        <section class="declarations">
-                            <canvas id="declarations_number__graph-canvas" width="800" height="500"></canvas>
-                        </section>
-                    </section>
-                    <section class="tabs__slide">
-                        <section class="declarations">
-
+                        <section>
+                            <section class="tabs">
+                                <header class="tabs__header">
+                                    <p class="tabs__header-title">Кількість закладів, лікарів, декларацій  по регіонах</p>
+                                    <ul class="tabs__nav">
+                                        <li class="tabs__nav-item tabs__nav-item_active">
+                                            Заклади
+                                        </li>
+                                        <li class="tabs__nav-item">
+                                            Лікарі
+                                        </li>
+                                        <li class="tabs__nav-item ">
+                                            Декларації
+                                        </li>
+                                    </ul>
+                                </header>
+                                <article class="tabs__main statistic__tabs-content">
+                                    <section class="tabs__slide tabs__slide_active">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations_number__graph-canvas2" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations_number__graph-canvas3" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                </article>
+                            </section>
                         </section>
                     </section>
                 </article>
