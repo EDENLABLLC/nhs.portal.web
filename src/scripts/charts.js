@@ -1,30 +1,4 @@
-const REGION__MAP = {
-  "Київ": 502,
-  "Луцьк": 523,
-  "Львов": 423,
-  "Ужгород": 324,
-  "Ивано-Франковск": 232,
-  "Черновцы": 252,
-  "Тернополь": 232,
-  "Ровно": 200,
-  "Хмельницкий": 182,
-  "Житомир": 132,
-  "Винница": 92,
-  "Черкассы": 82,
-  "Кировоград": 66,
-  "Полтава": 50,
-  "Чернигов": 32,
-  "Суммы": 12,
-  "Харьков": 9,
-  "Луганск": 8,
-  "Днепропетровск": 7,
-  "Донецк": 6,
-  "Запорожье": 5,
-  "Херсон": 4,
-  "Николаев": 3,
-  "Одесса": 2,
-  "Крым": 1,
-};
+
 
 const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
 
@@ -90,102 +64,98 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
   }
 });
 
-// Number of declarations, mis, doctors
-const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
 
-
-const REGION_DECLARATIONS = {
-  labels: Object.keys(REGION__MAP).map( i => i),
-  datasets: [{
-    backgroundColor: 'rgb(98, 164, 240)',
-    borderColor: 'rgb(72,98,237)',
-    data: Object.values(REGION__MAP).map( i => i),
-  }],
-};
-
-const NUMBER_BY_REGION = new Chart(NUMBER_BY_REGION_DECLARATION, {
-  type: 'horizontalBar',
-  data: REGION_DECLARATIONS,
-  onAnimationComplete: function() {
-    console.log(this.chart);
-    let ctx = this.chart.ctx;
-    ctx.font = this.scale.font;
-    ctx.fillStyle = this.scale.textColor;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-
-    this.datasets.forEach(function(dataset)  {
-      dataset.bars.forEach(function(bar) {
-        ctx.fillText(bar.value, bar.x, bar.y - 5);
-      });
-    })
-  },
-  scaleLineColor: "rgba(0,0,0,0)",
-  options: {
-    title: {
-      display: false,
-    },
-    legend: {
-      display: false,
-      labels: {
-        padding: 20,
-      }
-    },
-    tooltipTemplate: "<%= value %>",
-    scales: {
-      xAxes: [{
-        gridLines: {
-          display: true,
-          lineWidth: 0,
-          drawTicks: false,
-          drawBorder: false,
-          color: "rgba(0,0,0,0)",
-          zeroLineWidth: 1,
-        },
-        ticks: {
-          display: false,
-        }
+export const RegionsCharts = (elem, names, values)  =>
+  new Chart(elem, {
+    type: 'horizontalBar',
+    data: {
+      labels: names,
+      datasets: [{
+        backgroundColor: 'rgb(98, 164, 240)',
+        borderColor: 'rgb(72,98,237)',
+        data: values,
       }],
-      yAxes: [{
-        barPercentage: 0.95,
-        categoryPercentage: 1,
-        ticks: {
-          padding: 25,
-        },
-        gridLines: {
-          display: false,
-          drawBorder: false,
-          drawTicks: false,
-        },
-      }]
     },
-    tooltips: {
-      enabled: false
-    },
-    hover: {
-      animationDuration: 0
-    },
-    animation: {
-      duration: 1,
-      onComplete: function () {
-        let chartInstance = this.chart,
-          ctx = chartInstance.ctx;
-        ctx.font = Chart.helpers.fontString(14, '700', 'GothamPro');
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
-        ctx.fillStyle = '#000';
+    onAnimationComplete: function() {
+      console.log(this.chart);
+      let ctx = this.chart.ctx;
+      ctx.font = this.scale.font;
+      ctx.fillStyle = this.scale.textColor;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
 
-        this.data.datasets.forEach(function (dataset, i) {
-          let meta = chartInstance.controller.getDatasetMeta(i);
-          meta.data.forEach(function (bar, index) {
-            let data = dataset.data[index];
-            ctx.fillText(data, bar._model.x + 20, bar._model.y + 7);
-          });
+      this.datasets.forEach(function(dataset)  {
+        dataset.bars.forEach(function(bar) {
+          ctx.fillText(bar.value, bar.x, bar.y - 5);
         });
+      })
+    },
+    scaleLineColor: "rgba(0,0,0,0)",
+    options: {
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
+        labels: {
+          padding: 20,
+        }
+      },
+      tooltipTemplate: "<%= value %>",
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: true,
+            lineWidth: 0,
+            drawTicks: false,
+            drawBorder: false,
+            color: "rgba(0,0,0,0)",
+            zeroLineWidth: 1,
+          },
+          ticks: {
+            display: false,
+          }
+        }],
+        yAxes: [{
+          barPercentage: 0.95,
+          categoryPercentage: 1,
+          ticks: {
+            padding: 25,
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false,
+            drawTicks: false,
+          },
+        }]
+      },
+      tooltips: {
+        enabled: false
+      },
+      hover: {
+        animationDuration: 0
+      },
+      animation: {
+        duration: 1,
+        onComplete: function () {
+          let chartInstance = this.chart,
+            ctx = chartInstance.ctx;
+          ctx.font = Chart.helpers.fontString(14, '700', 'GothamPro');
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.fillStyle = '#000';
+
+          this.data.datasets.forEach(function (dataset, i) {
+            let meta = chartInstance.controller.getDatasetMeta(i);
+            meta.data.forEach(function (bar, index) {
+              let data = dataset.data[index];
+              ctx.fillText(data, bar._model.x + 30, bar._model.y + 7);
+            });
+          });
+        }
       }
     }
-  }
-});
+  });
 
 
 // not used
