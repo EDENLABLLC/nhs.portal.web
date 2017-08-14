@@ -110,6 +110,12 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
       display: true,
       text: 'Chart.js Line Chart - Custom Tooltips',
     },
+    // legend: {
+    //   display: false,
+    //   labels: {
+    //     padding: 40,
+    //   }
+    // },
     scales: {
       xAxes: [{
         gridLines: {
@@ -117,6 +123,7 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
           drawTicks: true,
           zeroLineWidth: 1,
           zeroLineColor: "rgba(232,232,232,1)",
+
         },
       }],
       yAxes: [{
@@ -126,6 +133,9 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
           zeroLineWidth: 1,
           zeroLineColor: "rgba(232,232,232,1)",
         },
+        // ticks: {
+        //   tickMarkLength: 40,
+        // }
       }]
     },
     tooltips: {
@@ -147,6 +157,7 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
 
 // Number of declarations, mis, doctors
 const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
+
 const REGION__MAP = {
   "Київ": 502,
   "Луцьк": 523,
@@ -212,14 +223,15 @@ const NUMBER_BY_REGION = new Chart(NUMBER_BY_REGION_DECLARATION, {
       }
     },
     tooltipTemplate: "<%= value %>",
-    scaleLineColor: "rgba(0,0,0,0)",
     scales: {
       xAxes: [{
         gridLines: {
+          display: true,
           lineWidth: 0,
-          display: false,
-          drawBorder: false,
           drawTicks: false,
+          drawBorder: false,
+          color: "rgba(0,0,0,0)",
+          zeroLineWidth: 1,
         },
         ticks: {
           display: false,
