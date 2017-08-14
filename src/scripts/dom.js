@@ -20,6 +20,20 @@ export const selector = (block, elem, modName, modVal) => (
 
 export const buildClass = (...args) => `.${selector(...args)}`;
 
+export const getParents = (target, parent = document) => {
+  const parents = [];
+  let p = target.parentNode;
+
+  while (p !== parent) {
+    let o = p;
+    parents.push(o);
+    p = o.parentNode;
+  }
+  parents.push(parent);
+
+  return parents;
+};
+
 export class BEM extends null {
   constructor(name, node) {
     super();
@@ -32,7 +46,12 @@ export class BEM extends null {
   }
 
   elems(name, modName, modVal) {
-    return $(buildClass(this.name, name, modName, modVal), this.node);
+    return $(buildClass(this.name, name, modName, modVal), this.node).filter(node => {
+      const $parents = getParents(node, this.node);
+      const $firstBlock = $parents.filter(parent => parent.classList.contains(this.name))[0];
+
+      return $firstBlock === this.node;
+    });
   }
 
   setMod(elem, elemName, modName, modValue) {
