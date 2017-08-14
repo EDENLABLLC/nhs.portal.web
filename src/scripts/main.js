@@ -31,8 +31,10 @@ fetchJSON('data/stats.json').then(data => {
 
 // Dinamical number of declarations, mis, doctors
 const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
+
 // const dinamical_doctors = document.getElementById('declarations__graph-canvas').getContext('2d');
 // const dinamical_mis = document.getElementById('declarations__graph-canvas').getContext('2d');
+
 const DATA = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [{
@@ -42,8 +44,10 @@ const DATA = {
     data: [0, 10, 12, 22, 29, 30, 45],
   }]
 };
+
 const customTooltips = function(tooltip) {
   // Tooltip Element
+  console.log('tooltip', tooltip);
   let tooltipEl = document.getElementById('chartjs-tooltip');
   if (!tooltipEl) {
     tooltipEl = document.createElement('div');
@@ -150,7 +154,15 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
       borderColor: 'rgba(0,0,0,1)',
       borderWidth: 1,
       caretPadding: 40,
-      cornerRadius: 0
+      cornerRadius: 0,
+      callbacks: {
+        title: function(tooltipItem, data) {
+          return data['labels'][tooltipItem[0]['index']];
+        },
+        label: function(tooltipItem, data) {
+          return data['datasets'][0]['data'][tooltipItem['index']];
+        },
+      },
     }
   }
 });
