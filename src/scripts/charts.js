@@ -1,4 +1,4 @@
-
+import { $ } from './dom';
 
 const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
 
@@ -12,13 +12,12 @@ const DATA = {
   }]
 };
 
-const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
+export const dinamicMonthChart = new Chart(dinamical_declaration, {
   type: 'line',
   data: DATA,
   options: {
     title: {
-      display: true,
-      text: 'Chart.js Line Chart - Custom Tooltips',
+      display: false,
     },
     scales: {
       xAxes: [{
@@ -40,26 +39,104 @@ const dinamicalDeclarationChart = new Chart(dinamical_declaration, {
       }]
     },
     tooltips: {
-      position: 'nearest',
-      intersect: false,
-      yPadding: 20,
-      xPadding: 30,
-      caretSize: 0,
-      backgroundColor: '#fff',
-      titleFontColor: '#000',
-      bodyFontColor: '#000',
-      borderColor: 'rgba(0,0,0,1)',
-      borderWidth: 1,
-      caretPadding: 0,
-      cornerRadius: 0,
-      callbacks: {
-        title: function(tooltipItem, data) {
-          return data['labels'][tooltipItem[0]['index']];
-        },
-        label: function(tooltipItem, data) {
-          return data['datasets'][0]['data'][tooltipItem['index']];
-        },
-      },
+      enabled: false,
+      custom: function(tooltip) {
+        // Tooltip Element
+        let tooltipEl = $('#chartjs-tooltip')[0];
+        if (!tooltipEl) {
+          const el = document.createElement('div');
+          el.setAttribute("id", "chartjs-tooltip");
+          $('#declarations__graph-canvas')[0].offsetParent.appendChild(el);
+          tooltipEl = $('#chartjs-tooltip')[0];
+        }
+        // Hide if no tooltip
+        if (!tooltip.opacity) {
+          tooltipEl.style.opacity = 0;
+          // $('.chartjs-wrap canvas').forEach(function(index, el) {
+          //   $(el).style.cursor = 'default';
+          // });
+          return;
+        }
+        $('#' + this._chart.canvas.id)[0].style.cursor = 'pointer';
+        // Set caret Position
+        // tooltipEl.classList.remove('above below no-transform');
+        // tooltipEl.classList.remove('above');
+        // tooltipEl.classList.remove('below');
+        tooltipEl.classList.remove('no-transform');
+        if (tooltip.yAlign) {
+          tooltipEl.classList.add(tooltip.yAlign);
+        } else {
+          tooltipEl.classList.add('no-transform');
+        }
+        // Set Text
+        if (tooltip.body) {
+          let titleLines = tooltip.title[0] || [];
+          let bodyLines = tooltip.body;
+          console.log('tooltip', tooltip);
+          let innerHtml = document.createElement('div');
+          innerHtml.innerHTML = null;
+
+          let title = document.createElement('div');
+          let value = document.createElement('div');
+          title.innerText = titleLines;
+          value.innerText = tooltip.dataPoints[0].yLabel + ' лікаря';
+          Object.assign(title.style, {
+            color: '#17184e',
+            fontSize: '16px',
+            lineHeight: '1.5em',
+          });
+
+          Object.assign(value.style, {
+            color: '#292b37',
+            fontSize: '16px',
+            fontWeight: 700,
+            lineHeight: '1.5em',
+          });
+
+          innerHtml.appendChild(title);
+          innerHtml.appendChild(value);
+          while (tooltipEl.firstChild) {
+            tooltipEl.removeChild(tooltipEl.firstChild);
+          }
+          tooltipEl.appendChild(innerHtml);
+        }
+        let top = 0;
+
+        if (tooltip.yAlign) {
+          let ch = 0;
+          if (tooltip.caretHeight) {
+            ch = tooltip.caretHeight;
+          }
+          if (tooltip.yAlign == 'above') {
+            top = tooltip.y - ch - tooltip.caretPadding;
+          } else {
+            top = tooltip.y + ch + tooltip.caretPadding;
+          }
+        }
+
+        let elem = $('#declarations__graph-canvas')[0];
+        const position = {
+          left: elem.offsetLeft,
+          top: elem.offsetTop,
+        };
+
+        // Display, position, and set styles for font
+        Object.assign(tooltipEl.style, {
+          opacity: 1,
+          position: 'absolute',
+          width: tooltip.width ? (tooltip.width + 'px') : 'auto',
+          left: position.left + tooltip.x + 'px',
+          top: position.top + top + 'px',
+          zIndex: 99,
+          backgroundColor: '#fff',
+          border: '1px solid #d6d6d6',
+          fontSize: tooltip.fontSize,
+          fontStyle: tooltip._fontStyle,
+          padding: tooltip.yPadding + 'px ' + tooltip.xPadding + 'px',
+          paddingRight: "100px",
+          _bodyFontFamily: 'Gotham Pro',
+        });
+      }
     }
   }
 });
@@ -118,7 +195,7 @@ export const RegionsCharts = (elem, names, values)  =>
         }],
         yAxes: [{
           barPercentage: 0.95,
-          categoryPercentage: 1,
+          // categoryPercentage: 1,
           ticks: {
             padding: 25,
           },
@@ -157,66 +234,3 @@ export const RegionsCharts = (elem, names, values)  =>
     }
   });
 
-
-// not used
-const customTooltips = function(tooltip) {
-  // Tooltip Element
-  console.log('tooltip', tooltip);
-  let tooltipEl = document.getElementById('chartjs-tooltip');
-  if (!tooltipEl) {
-    tooltipEl = document.createElement('div');
-    tooltipEl.id = 'chartjs-tooltip';
-    tooltipEl.innerHTML = "<table></table>";
-    this._chart.canvas.offsetParent.appendChild(tooltipEl);
-  }
-  // Hide if no tooltip
-  if (tooltip.opacity === 0) {
-    tooltipEl.style.opacity = 0;
-    return;
-  }
-  // Set caret Position
-  tooltipEl.classList.remove('above', 'below', 'no-transform');
-  if (tooltip.yAlign) {
-    tooltipEl.classList.add(tooltip.yAlign);
-  } else {
-    tooltipEl.classList.add('no-transform');
-  }
-  function getBody(bodyItem) {
-    return bodyItem.lines;
-  }
-
-  // Set Text
-  if (tooltip.body) {
-    const titleLines = tooltip.title || [];
-    const bodyLines = tooltip.body.map(getBody);
-    let innerHtml = '<thead>';
-    titleLines.forEach(function(title) {
-      innerHtml += '<tr><th>' + title + '</th></tr>';
-    });
-    innerHtml += '</thead><tbody>';
-    bodyLines.forEach(function(body, i) {
-      const colors = tooltip.labelColors[i];
-      let style = 'background:' + colors.backgroundColor;
-      style += '; border-color:' + colors.borderColor;
-      style += '; border-width: 2px';
-      let span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-      innerHtml += '<tr><td>' + span + body + '</td></tr>';
-    });
-    innerHtml += '</tbody>';
-    let tableRoot = tooltipEl.querySelector('table');
-    tableRoot.innerHTML = innerHtml;
-  }
-  let positionY = this._eventPosition.x;
-  let positionX = this._eventPosition.y;
-  console.log('position', this, positionY, positionX);
-  console.log('tooltip', tooltip.caretX, tooltip.caretX);
-
-  // Display, position, and set styles for font
-  tooltipEl.style.opacity = 1;
-  tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-  tooltipEl.style.top = positionY + tooltip.caretY + 'px';
-  tooltipEl.style.fontFamily = tooltip._fontFamily;
-  tooltipEl.style.fontSize = tooltip.fontSize;
-  tooltipEl.style.fontStyle = tooltip._fontStyle;
-  tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
-};

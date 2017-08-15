@@ -28,6 +28,13 @@ fetchJSON('data/stats.json').then(data => {
   $('.declarations').forEach(node => new Statistic(node, data));
 });
 
+
+
+// fetchJSON('http://dev.ehealth.world/reports/stats/' +
+//   'histogram?from_date=2017-07-01&to_date=2017-07-01&interval=DAY').then(data => {
+//     console.log(data);
+// });
+
 fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
   //$('.map').forEach(node => new Map(node, data.data));
   const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
