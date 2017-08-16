@@ -51,24 +51,3 @@
     z-index: 4;
   }
 }
-
-#chartjs-tooltip.below {
-  transform: translate(-50%, 0);
-}
-
-#chartjs-tooltip.above {
-  transform: translate(-50%, -100%);
-}
-
-#chartjs-tooltip.below:before,
-#chartjs-tooltip.above:before {
-  position: absolute;
-  width: 1px;
-  display: block;
-  background-color: #ccc;
-  height: 100px;
-  left: 0;
-  content: '';
-  z-index: 1000;
-}
-

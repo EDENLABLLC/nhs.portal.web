@@ -30,10 +30,13 @@ fetchJSON('data/stats.json').then(data => {
 
 
 
-// fetchJSON('http://dev.ehealth.world/reports/stats/' +
-//   'histogram?from_date=2017-07-01&to_date=2017-07-01&interval=DAY').then(data => {
-//     console.log(data);
-// });
+fetchJSON('http://dev.ehealth.world/reports/stats/' +
+  'histogram?from_date=2017-07-01&to_date=2017-07-31&interval=DAY').then(data => {
+    console.log(data);
+  // const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
+  // const MONTH_REGION_MSPS = document.getElementById('msps__graph-canvas').getContext('2d');
+  // const MONTH_REGION_DOCTORS= document.getElementById('doctors__graph-canvas').getContext('2d');
+});
 
 fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
   //$('.map').forEach(node => new Map(node, data.data));

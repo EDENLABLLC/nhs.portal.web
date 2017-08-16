@@ -12,6 +12,17 @@ const DATA = {
   }]
 };
 
+
+let addRule = (function (style) {
+  let sheet = document.head.appendChild(style).sheet;
+  return function (selector, css) {
+    let propText = typeof css === "string" ? css : Object.keys(css).map(function (p) {
+      return p + ":" + (p === "content" ? "'" + css[p] + "'" : css[p]);
+    }).join(";");
+    sheet.insertRule(selector + "{" + propText + "}", sheet.cssRules.length);
+  };
+})(document.createElement("style"));
+
 export const dinamicMonthChart = new Chart(dinamical_declaration, {
   type: 'line',
   data: DATA,
@@ -52,16 +63,15 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
         // Hide if no tooltip
         if (!tooltip.opacity) {
           tooltipEl.style.opacity = 0;
-          // $('.chartjs-wrap canvas').forEach(function(index, el) {
+          // $('canvas').forEach(function(index, el) {
           //   $(el).style.cursor = 'default';
           // });
           return;
         }
         $('#' + this._chart.canvas.id)[0].style.cursor = 'pointer';
         // Set caret Position
-        // tooltipEl.classList.remove('above below no-transform');
-        // tooltipEl.classList.remove('above');
-        // tooltipEl.classList.remove('below');
+        tooltipEl.classList.remove('above');
+        tooltipEl.classList.remove('below');
         tooltipEl.classList.remove('no-transform');
         if (tooltip.yAlign) {
           tooltipEl.classList.add(tooltip.yAlign);
@@ -72,14 +82,13 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
         if (tooltip.body) {
           let titleLines = tooltip.title[0] || [];
           let bodyLines = tooltip.body;
-          console.log('tooltip', tooltip);
           let innerHtml = document.createElement('div');
           innerHtml.innerHTML = null;
 
           let title = document.createElement('div');
           let value = document.createElement('div');
           title.innerText = titleLines;
-          value.innerText = tooltip.dataPoints[0].yLabel + ' лікаря';
+          value.innerHTML = '<span>' + tooltip.dataPoints[0].yLabel + ' лікаря' + '</span>' ;
           Object.assign(title.style, {
             color: '#17184e',
             fontSize: '16px',
@@ -117,14 +126,16 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
         let elem = $('#declarations__graph-canvas')[0];
         const position = {
           left: elem.offsetLeft,
-          top: elem.offsetTop,
+          top: elem.offsetTop - 100,
         };
+        let height = 580 - tooltip.caretY - 74;
 
         // Display, position, and set styles for font
         Object.assign(tooltipEl.style, {
           opacity: 1,
           position: 'absolute',
-          width: tooltip.width ? (tooltip.width + 'px') : 'auto',
+          width: '200px',
+          height: '75px',
           left: position.left + tooltip.x + 'px',
           top: position.top + top + 'px',
           zIndex: 99,
@@ -132,9 +143,20 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           border: '1px solid #d6d6d6',
           fontSize: tooltip.fontSize,
           fontStyle: tooltip._fontStyle,
-          padding: tooltip.yPadding + 'px ' + tooltip.xPadding + 'px',
-          paddingRight: "100px",
+          padding: '10px',
           _bodyFontFamily: 'Gotham Pro',
+          marginLeft: '-7px',
+        });
+        addRule("#chartjs-tooltip:before", {
+          content: "''",
+          position: "absolute",
+          background: "#4880ed",
+          display: "block",
+          width: "1px",
+          height: height + "px",
+          left: "-1px",
+          top: "74px",
+          zIndex: "100",
         });
       }
     }
@@ -154,7 +176,6 @@ export const RegionsCharts = (elem, names, values)  =>
       }],
     },
     onAnimationComplete: function() {
-      console.log(this.chart);
       let ctx = this.chart.ctx;
       ctx.font = this.scale.font;
       ctx.fillStyle = this.scale.textColor;
