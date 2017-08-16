@@ -17,6 +17,15 @@ export const $ = (selector, context = document) => (
 export const selector = (block, elem, modName, modVal) => (
   `${block}__${elem}${modName ? (modVal ? `_${modName}_${modVal}` : `_${modName}`) : ''}`
 );
+export const addRule = (function (style) {
+  let sheet = document.head.appendChild(style).sheet;
+  return function (selector, css) {
+    let propText = typeof css === "string" ? css : Object.keys(css).map(function (p) {
+      return p + ":" + (p === "content" ? "'" + css[p] + "'" : css[p]);
+    }).join(";");
+    sheet.insertRule(selector + "{" + propText + "}", sheet.cssRules.length);
+  };
+})(document.createElement("style"));
 
 export const buildClass = (...args) => `.${selector(...args)}`;
 

@@ -1,27 +1,16 @@
-import { $ } from './dom';
+import { $, addRule } from './dom';
 
 const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
 
 const DATA = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April"],
   datasets: [{
     label: "My First dataset",
     backgroundColor: 'rgb(98, 164, 240)',
     borderColor: 'rgb(72,98,237)',
-    data: [0, 10, 12, 22, 29, 30, 45],
+    data: [5, 10, 12, 20, 29, 30, 85, 70, 55, 30, 40],
   }]
 };
-
-
-let addRule = (function (style) {
-  let sheet = document.head.appendChild(style).sheet;
-  return function (selector, css) {
-    let propText = typeof css === "string" ? css : Object.keys(css).map(function (p) {
-      return p + ":" + (p === "content" ? "'" + css[p] + "'" : css[p]);
-    }).join(";");
-    sheet.insertRule(selector + "{" + propText + "}", sheet.cssRules.length);
-  };
-})(document.createElement("style"));
 
 export const dinamicMonthChart = new Chart(dinamical_declaration, {
   type: 'line',
@@ -52,6 +41,7 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
     tooltips: {
       enabled: false,
       custom: function(tooltip) {
+
         // Tooltip Element
         let tooltipEl = $('#chartjs-tooltip')[0];
         if (!tooltipEl) {
@@ -60,6 +50,7 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           $('#declarations__graph-canvas')[0].offsetParent.appendChild(el);
           tooltipEl = $('#chartjs-tooltip')[0];
         }
+
         // Hide if no tooltip
         if (!tooltip.opacity) {
           tooltipEl.style.opacity = 0;
@@ -68,16 +59,20 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           // });
           return;
         }
+
         $('#' + this._chart.canvas.id)[0].style.cursor = 'pointer';
+
         // Set caret Position
         tooltipEl.classList.remove('above');
         tooltipEl.classList.remove('below');
         tooltipEl.classList.remove('no-transform');
+
         if (tooltip.yAlign) {
           tooltipEl.classList.add(tooltip.yAlign);
         } else {
           tooltipEl.classList.add('no-transform');
         }
+
         // Set Text
         if (tooltip.body) {
           let titleLines = tooltip.title[0] || [];
@@ -109,6 +104,7 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           }
           tooltipEl.appendChild(innerHtml);
         }
+
         let top = 0;
 
         if (tooltip.yAlign) {
@@ -136,7 +132,6 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           position: 'absolute',
           width: '200px',
           height: '75px',
-          left: position.left + tooltip.x + 'px',
           top: position.top + top + 'px',
           zIndex: 99,
           backgroundColor: '#fff',
@@ -147,17 +142,43 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           _bodyFontFamily: 'Gotham Pro',
           marginLeft: '-7px',
         });
-        addRule("#chartjs-tooltip:before", {
-          content: "''",
-          position: "absolute",
-          background: "#4880ed",
-          display: "block",
-          width: "1px",
-          height: height + "px",
-          left: "-1px",
-          top: "74px",
-          zIndex: "100",
-        });
+        if (tooltip.xAlign === "left") {
+
+          Object.assign(tooltipEl.style, {
+            left: position.left + tooltip.caretX + 7 + 'px',
+          });
+
+          addRule("#chartjs-tooltip:before", {
+            content: "''",
+            position: "absolute",
+            background: "#4880ed",
+            display: "block",
+            width: "1px",
+            height: height + "px",
+            left: "-1px",
+            right: 'initial',
+            top: "74px",
+            zIndex: "100",
+          });
+        } else if (tooltip.xAlign === "right" || tooltip.xAlign === "center" ) {
+
+          Object.assign(tooltipEl.style, {
+            left: position.left + tooltip.caretX + 8 - 200 + 'px',
+          });
+
+          addRule("#chartjs-tooltip:before", {
+            content: "''",
+            position: "absolute",
+            background: "#4880ed",
+            display: "block",
+            width: "1px",
+            height: height + "px",
+            right: "-1px",
+            left: 'initial',
+            top: "74px",
+            zIndex: "100",
+          });
+        }
       }
     }
   }
