@@ -19,6 +19,9 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
     title: {
       display: false,
     },
+    legend: {
+      display: false
+    },
     scales: {
       xAxes: [{
         gridLines: {
