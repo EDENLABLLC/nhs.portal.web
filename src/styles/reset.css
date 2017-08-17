@@ -94,4 +94,9 @@ button {
   background-color: #5791ef;
   background-image: linear-gradient(to top, rgba(75, 133, 238, 0.67) 0%, rgba(116, 176, 248, 0.67) 99%, rgba(116, 176, 248, 0.67) 100%);
   cursor: pointer;
+
+}
+
+button.btn--small {
+  padding: 14px 28px;
 }

@@ -81,8 +81,7 @@ fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
 
 fetchJSON('http://dev.ehealth.world/reports/stats/').then(data => {
   const joined_items = $('.joined__item-count');
-
-  // joined_items[0].innerText = data.data.msps;
-  // joined_items[1].innerText = data.data.doctors;
-  // joined_items[2].innerText = data.data.declarations;
+  joined_items[0].innerText = data.data.msps;
+  joined_items[1].innerText = data.data.doctors;
+  joined_items[2].innerText = data.data.declarations;
 });

@@ -59,11 +59,12 @@
     }
 
     &_color_pink {
-      background-color: #d374e1;
+       background-color: #dd8de6;
+    }
 
-      i {
-        width: 29px;
-      }
+    i {
+      width: 35px;
+      height: 35px;
     }
   }
 }

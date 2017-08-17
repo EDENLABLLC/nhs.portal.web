@@ -6,11 +6,11 @@ import del from 'del';
 import postcss from 'gulp-postcss';
 import connect from 'gulp-connect';
 import rename from 'gulp-rename';
+import webpack from 'gulp-webpack';
 
-import browserify from 'browserify';
-import babelify from 'babelify';
 import source from 'vinyl-source-stream';
 import uglify from 'gulp-uglify';
+import buffer from 'gulp-buffer';
 
 import CSSNested from 'postcss-nested';
 import CSSImport from 'postcss-import';
@@ -20,6 +20,8 @@ import CSSAutoPrefixer from 'autoprefixer';
 
 import ghPages from 'gulp-gh-pages';
 import prefix from 'gulp-prefix';
+
+import notify from 'gulp-notify';
 
 import cp from 'child_process';
 
@@ -34,9 +36,9 @@ const SCRIPTS_PATH = `${SRC_PATH}/scripts`;
 const SCRIPTS_DIST = `${TMP_PATH}/scripts`;
 const SCRIPTS_SRC = [
   `${SCRIPTS_PATH}/main.js`,
-  `${SCRIPTS_PATH}/main-map.js`,
   `${SCRIPTS_PATH}/main-doc.js`,
-  `${SCRIPTS_PATH}/main-join.js`
+  `${SCRIPTS_PATH}/main-join.js`,
+  `${SCRIPTS_PATH}/react/map/index.js`
 ];
 
 gulp.task('clean', () => (
@@ -45,15 +47,15 @@ gulp.task('clean', () => (
   ])
 ));
 
-gulp.task('build:scripts', () => (
-  SCRIPTS_SRC.map((src) => (
-    browserify({ entries: src, debug: true }).transform(babelify).bundle()
-      .pipe(source(src))
-      .pipe(rename({ suffix: '.min', dirname: 'scripts' }))
-      .pipe(gulp.dest(TMP_PATH))
-      .pipe(connect.reload())
-  ))
-));
+gulp.task('build:scripts', (done) => {
+  gulp.src(SCRIPTS_SRC)
+    .pipe(webpack({
+      ...require('./webpack.config.js'),
+      watch: process.env.WATCH !== 'false'
+    }, require('webpack')))
+    .pipe(gulp.dest(SCRIPTS_DIST))
+  if (process.env.WATCH !== 'false') done();
+});
 
 gulp.task('build:styles', () => (
   gulp.src(`${STYLES_PATH}/main*.css`).pipe(postcss([
@@ -75,11 +77,13 @@ gulp.task('serve', () => (
 gulp.task('build', sequence('clean', ['build:scripts', 'build:styles']));
 
 gulp.task('watch', ['build'], () => {
-  gulp.watch(`${SCRIPTS_PATH}/**/*.js`, ['build:scripts']);
   gulp.watch(`${STYLES_PATH}/**/*.css`, ['build:styles']);
 });
 
-gulp.task('dev', sequence('watch', 'serve'));
+gulp.task('dev', (done) => {
+  process.env.WATCH = true;
+  return sequence(['watch', 'serve'])(done)
+});
 
 gulp.task('prefix', () => (
   gulp.src(`${EXPORT_PATH}/**/*.html`)
@@ -94,9 +98,11 @@ gulp.task('prefix', () => (
   .pipe(gulp.dest(EXPORT_PATH))
 ));
 
-gulp.task('production', ['build'], () => (
-  gulp.src(`${SCRIPTS_DIST}/*.js`).pipe(uglify()).pipe(gulp.dest(SCRIPTS_DIST))
-));
+gulp.task('production', (done) => {
+  process.env.NODE_ENV = 'production';
+  process.env.WATCH = 'false';
+  return sequence('build')(done);
+});
 
 gulp.task('deploy:build', sequence('production', 'build:jekyll', 'prefix'));
 gulp.task('deploy', ['deploy:build'], () => (

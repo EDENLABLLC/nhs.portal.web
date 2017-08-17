@@ -6,13 +6,15 @@
 @import "blocks/nav.css";
 @import "blocks/search.css";
 
-body {
+.map-page {
+  height: 100vh;
   display: flex;
   flex-flow: column nowrap;
 }
 
 .header {
-  flex: 0 0 40px;
+  flex: 0 0 auto;
+  min-height: 40px;
   padding: 24px 0;
   text-align: center;
 
