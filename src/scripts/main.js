@@ -36,7 +36,6 @@ fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01
     });
     return acc
   },[]);
-  console.log('DATA', DATA);
   DinamicalMonthChart(
     MONTH_REGION_DECLARATION,
     DATA.map(i => i.label),
