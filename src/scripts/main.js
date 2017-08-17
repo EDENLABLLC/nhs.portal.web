@@ -25,6 +25,7 @@ $('.slider').forEach(node => new Slider(node));
 $('.feedback').forEach(node => new Feedback(node));
 
 fetchJSON('data/stats.json').then(data => {
+  $('.map').forEach(node => new Map(node, data.slice()));
   $('.declarations').forEach(node => new Statistic(node, data));
 });
 
