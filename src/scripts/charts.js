@@ -1,20 +1,29 @@
 import { $, addRule } from './dom';
 
-const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
+// const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
 
-const DATA = {
-  labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April"],
-  datasets: [{
-    label: "My First dataset",
-    backgroundColor: 'rgb(98, 164, 240)',
-    borderColor: 'rgb(72,98,237)',
-    data: [5, 10, 12, 20, 29, 30, 85, 70, 55, 30, 40],
-  }]
-};
+// const DATA = {
+//   labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April"],
+//   datasets: [{
+//     backgroundColor: 'rgb(98, 164, 240)',
+//     borderColor: 'rgb(72,98,237)',
+//     data: [5, 10, 12, 20, 29, 30, 85, 70, 55, 30, 40],
+//   }]
+// };
 
-export const dinamicMonthChart = new Chart(dinamical_declaration, {
+const MONTHS = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня",  "Серпня", "Вересня", "Жовтеня",  "Листопада", "Грудня"];
+
+export const DinamicalMonthChart = (elem, names, values) =>
+  new Chart(elem, {
   type: 'line',
-  data: DATA,
+  data: {
+    labels: names,
+    datasets: [{
+      backgroundColor: 'rgb(98, 164, 240)',
+      borderColor: 'rgb(72,98,237)',
+      data: values,
+    }]
+  },
   options: {
     title: {
       display: false,
@@ -78,7 +87,8 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
 
         // Set Text
         if (tooltip.body) {
-          let titleLines = tooltip.title[0] || [];
+          const month = new Date().getMonth();
+          let titleLines = tooltip.title[0] + " " + MONTHS[month];
           let bodyLines = tooltip.body;
           let innerHtml = document.createElement('div');
           innerHtml.innerHTML = null;
@@ -86,7 +96,8 @@ export const dinamicMonthChart = new Chart(dinamical_declaration, {
           let title = document.createElement('div');
           let value = document.createElement('div');
           title.innerText = titleLines;
-          value.innerHTML = '<span>' + tooltip.dataPoints[0].yLabel + ' лікаря' + '</span>' ;
+          const doctor = tooltip.dataPoints[0].yLabel % 2 ? ' лікаря' : ' лікарів';
+          value.innerHTML = '<span>' + tooltip.dataPoints[0].yLabel + doctor + '</span>' ;
           Object.assign(title.style, {
             color: '#17184e',
             fontSize: '16px',

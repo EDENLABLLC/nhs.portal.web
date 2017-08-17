@@ -11,7 +11,7 @@ import Slider from './slider';
 import Map from './map';
 // import Statistic from './statistic';
 import Feedback from './feedback';
-import { RegionsCharts } from './charts';
+import { RegionsCharts, DinamicalMonthChart } from './charts';
 
 if (!window.Promise) {
   window.Promise = Promise;
@@ -28,14 +28,24 @@ fetchJSON('data/stats.json').then(data => {
   $('.declarations').forEach(node => new Statistic(node, data));
 });
 
-
-
-fetchJSON('http://dev.ehealth.world/reports/stats/' +
-  'histogram?from_date=2017-07-01&to_date=2017-07-31&interval=DAY').then(data => {
-    console.log(data);
-  // const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
-  // const MONTH_REGION_MSPS = document.getElementById('msps__graph-canvas').getContext('2d');
-  // const MONTH_REGION_DOCTORS= document.getElementById('doctors__graph-canvas').getContext('2d');
+const today = new Date().getDate();
+fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01&to_date=2017-07-'+
+  today + '&interval=DAY').then(data => {
+  const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
+  const DATA = data.data.reduce((acc, cur, index) => {
+    acc.push({
+      value: cur.declarations_active_start,
+      label: index,
+      ...cur.stats,
+    });
+    return acc
+  },[]);
+  console.log('DATA', DATA);
+  DinamicalMonthChart(
+    MONTH_REGION_DECLARATION,
+    DATA.map(i => i.label),
+    DATA.map(i => i.value),
+  );
 });
 
 fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
