@@ -1,16 +1,5 @@
 import { $, addRule } from './dom';
 
-// const dinamical_declaration = document.getElementById('declarations__graph-canvas').getContext('2d');
-
-// const DATA = {
-//   labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April"],
-//   datasets: [{
-//     backgroundColor: 'rgb(98, 164, 240)',
-//     borderColor: 'rgb(72,98,237)',
-//     data: [5, 10, 12, 20, 29, 30, 85, 70, 55, 30, 40],
-//   }]
-// };
-
 const MONTHS = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня",  "Серпня", "Вересня", "Жовтеня",  "Листопада", "Грудня"];
 
 export const DinamicalMonthChart = (elem, names, values) =>

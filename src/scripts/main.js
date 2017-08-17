@@ -9,7 +9,7 @@ import Nav from './nav';
 import Tabs from './tabs';
 import Slider from './slider';
 import Map from './map';
-// import Statistic from './statistic';
+
 import Feedback from './feedback';
 import { RegionsCharts, DinamicalMonthChart } from './charts';
 
@@ -35,7 +35,7 @@ fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01
   const DATA = data.data.reduce((acc, cur, index) => {
     acc.push({
       value: cur.declarations_active_start,
-      label: index,
+      label: index + 1,
       ...cur.stats,
     });
     return acc
@@ -49,7 +49,7 @@ fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01
 });
 
 fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
-  //$('.map').forEach(node => new Map(node, data.data));
+  $('.map').forEach(node => new Map(node, data.data));
   const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
   const NUMBER_BY_REGION_MSPS = document.getElementById('msp_number__graph-canvas').getContext('2d');
   const NUMBER_BY_REGION_DOCTORS= document.getElementById('doctors_number__graph-canvas').getContext('2d');
