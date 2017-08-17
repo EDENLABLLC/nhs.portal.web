@@ -24,11 +24,6 @@ $('.tabs').forEach(node => new Tabs(node));
 $('.slider').forEach(node => new Slider(node));
 $('.feedback').forEach(node => new Feedback(node));
 
-fetchJSON('data/stats.json').then(data => {
-  $('.map').forEach(node => new Map(node, data.slice()));
-  $('.declarations').forEach(node => new Statistic(node, data));
-});
-
 const today = new Date().getDate();
 fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01&to_date=2017-07-'+
   today + '&interval=DAY').then(data => {
