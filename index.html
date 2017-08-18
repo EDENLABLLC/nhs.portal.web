@@ -54,44 +54,28 @@
         </nav>
     </header>
     <article class="header__main">
-        <h1>Національна Служба Здоров’я України</h1>
         <h2>Піклуємося про ваше здоров’я!</h2>
+        <h1>eHealth - Національна об’єднана система електронних послуг у медицині</h1>
     </article>
     <footer class="header__footer">
         <a class="header__main-link" href="#">
-            Дізнатися як це працює
+            докладніше
             <i class="icon icon_name_arrow-right"></i>
         </a>
     </footer>
 </header>
 <main class="main">
-    <section class="about" id="about">
-        <header class="about__header">
-            <h3>про нас</h3>
-        </header>
-        <article class="about__main">
-            Національна служба здоров'я України - центральний орган виконавчої влади, <br />
-            що забезпечує <b>рівний та якісний медичний захист громадян України</b> в межах гарантованого <br />
-            державою пакета медичної допомоги шляхом стратегічних закупівель медичних послуг <br />
-            <b>за рахунок коштів державного бюджету.</b>
-
-            <a href="#" class="about__main-link">
-                Проект постанови Кабінету Міністрів України <br />
-                "Про утворення Національної служби здоров'я України"
-            </a>
-        </article>
-    </section>
     <section class="join" id="join">
         <header class="join__header">
-            <h3>долучитися</h3>
+            <h3>Дізнатись як співпрацювати з eHealth та долучитися</h3>
         </header>
         <article class="join__main">
             <div class="join__item">
                 <div class="join__item-icon join__item-icon_color_green">
                     <i class="icon icon_name_clinic"></i>
                 </div>
-                Медичним<br />
-                закладам
+                Керівникам <br />
+                медзакладів
             </div>
             <div class="join__item">
                 <div class="join__item-icon join__item-icon_color_blue">
@@ -104,6 +88,12 @@
                     <i class="icon icon_name_persons"></i>
                 </div>
                 Пацієнтам
+            </div>
+            <div class="join__item">
+                <div class="join__item-icon join__item-icon_color_pink">
+                    <i class="icon icon_name_employees"></i>
+                </div>
+                Працівникам  медзакладів
             </div>
         </article>
     </section>
@@ -129,7 +119,7 @@
     </section>
     <section class="map" id="map">
         <header class="map__header">
-            <h3>мапа проекту</h3>
+            <h3>Мапа регіонів</h3>
         </header>
         <article class="map__main">
             <div class="map__tooltip">
@@ -150,6 +140,12 @@
                 </a>
             </div>
         </article>
+        <footer class="map__footer">
+            <a class="map__link" href="/nhs.portal.web/map.html">
+                перейти до Мапи Лікарів
+                <i class="icon icon_name_arrow-right"></i>
+            </a>
+        </footer>
     </section>
     <section class="statistic" id="statistic">
         <header class="statistic__header">
@@ -159,131 +155,55 @@
             <section class="tabs">
                 <header class="tabs__header">
                     <ul class="tabs__nav">
-                        <li class="tabs__nav-item">
-                            Динаміка появи <br />
-                            закладів, лікарів, декларацій
-                        </li>
-                        <li class="tabs__nav-item">
-                            Віковий та статевий розподіл <br />
-                            лікарів та пацієнтів
-                        </li>
                         <li class="tabs__nav-item tabs__nav-item_active">
-                            Кількість <br />
-                            декларацій
+                            Динаміка реєстрації декларацій
                         </li>
                         <li class="tabs__nav-item">
-                            Зміна <br />
-                            декларацій
+                            Кількість закладів, лікарів, декларацій<br />  по регіонах
                         </li>
                     </ul>
                 </header>
                 <article class="tabs__main statistic__tabs-content">
-                    <section class="tabs__slide">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
-                        </section>
-                    </section>
-                    <section class="tabs__slide">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
-                        </section>
-                    </section>
                     <section class="tabs__slide tabs__slide_active">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
+                        <section>
+                            <canvas class="declarations__graph" id="declarations__graph-canvas" width="700" height="350"></canvas>
                         </section>
                     </section>
                     <section class="tabs__slide">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
+                        <section>
+                            <section class="tabs">
+                                <header class="tabs__header tabs__header-small">
+                                    <p class="tabs__header-title">Кількість закладів, лікарів, декларацій  по регіонах</p>
+                                    <ul class="tabs__nav tabs__nav-small">
+                                        <li class="tabs__nav-item tabs__nav-item_small tabs__nav-item_active">
+                                            Заклади
+                                        </li>
+                                        <li class="tabs__nav-item tabs__nav-item_small">
+                                            Лікарі
+                                        </li>
+                                        <li class="tabs__nav-item tabs__nav-item_small">
+                                            Декларації
+                                        </li>
+                                    </ul>
+                                </header>
+                                <article class="tabs__main tabs__main-smallc statistic__tabs-content">
+                                    <section class="tabs__slide tabs__slide_active">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="msp_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="doctors_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                </article>
+                            </section>
                         </section>
                     </section>
                 </article>
@@ -352,18 +272,18 @@
                           
                         
                           
-                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-06-08-example-markdown">
-                                <h4>Markdown example</h4>
-                                <time>12-02-2017</time>
-                                Example markdown document to show all available typo elements
-                            </a>
-                          
-                        
-                          
                             <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-20-how-to-get-esign">
                                 <h4>Як отримати ЕЦП юридичної особи</h4>
                                 <time>20-05-2017</time>
                                 Декілька слів про те, як отримати ЕЦП якщо раптом виявилося, що ви юридична особа...
+                            </a>
+                          
+                        
+                          
+                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-21-patient-data-access">
+                                <h4>Доступ до даних пацієнта 2</h4>
+                                <time>21-05-2017</time>
+                                Як отримати дані пацієнта? Чи є життя після читання Ніцше? Що робити якщо?
                             </a>
                           
                         
@@ -391,18 +311,18 @@
                           
                         
                           
-                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-06-08-example-markdown">
-                                <h4>Markdown example</h4>
-                                <time>12-02-2017</time>
-                                Example markdown document to show all available typo elements
-                            </a>
-                          
-                        
-                          
                             <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-20-how-to-get-esign">
                                 <h4>Як отримати ЕЦП юридичної особи</h4>
                                 <time>20-05-2017</time>
                                 Декілька слів про те, як отримати ЕЦП якщо раптом виявилося, що ви юридична особа...
+                            </a>
+                          
+                        
+                          
+                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-21-patient-data-access">
+                                <h4>Доступ до даних пацієнта 2</h4>
+                                <time>21-05-2017</time>
+                                Як отримати дані пацієнта? Чи є життя після читання Ніцше? Що робити якщо?
                             </a>
                           
                         
@@ -430,19 +350,13 @@
                           
                         
                           
-                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-06-08-example-markdown">
-                                <h4>Markdown example</h4>
-                                <time>12-02-2017</time>
-                                Example markdown document to show all available typo elements
-                            </a>
-                          
-                        
-                          
                             <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-20-how-to-get-esign">
                                 <h4>Як отримати ЕЦП юридичної особи</h4>
                                 <time>20-05-2017</time>
                                 Декілька слів про те, як отримати ЕЦП якщо раптом виявилося, що ви юридична особа...
                             </a>
+                          
+                        
                           
                         
                       </div>
@@ -451,8 +365,6 @@
                   
                     <div class="tabs__slide ">
                       <div class="explain__list">
-                        
-                          
                         
                           
                         
@@ -466,6 +378,29 @@
                             </a>
                           
                         
+                          
+                        
+                      </div>
+                    </div>
+                  
+                  
+                    <div class="tabs__slide ">
+                      <div class="explain__list">
+                        
+                          
+                        
+                          
+                        
+                          
+                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-20-how-to-get-esign">
+                                <h4>Як отримати ЕЦП юридичної особи</h4>
+                                <time>20-05-2017</time>
+                                Декілька слів про те, як отримати ЕЦП якщо раптом виявилося, що ви юридична особа...
+                            </a>
+                          
+                        
+                          
+                        
                       </div>
                     </div>
                   
@@ -480,10 +415,10 @@
                           
                         
                           
-                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-20-how-to-get-esign">
-                                <h4>Як отримати ЕЦП юридичної особи</h4>
-                                <time>20-05-2017</time>
-                                Декілька слів про те, як отримати ЕЦП якщо раптом виявилося, що ви юридична особа...
+                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-21-patient-data-access">
+                                <h4>Доступ до даних пацієнта 2</h4>
+                                <time>21-05-2017</time>
+                                Як отримати дані пацієнта? Чи є життя після читання Ніцше? Що робити якщо?
                             </a>
                           
                         
@@ -501,20 +436,11 @@
                           
                         
                           
-                        
-                      </div>
-                    </div>
-                  
-                  
-                    <div class="tabs__slide ">
-                      <div class="explain__list">
-                        
-                          
-                        
-                          
-                        
-                          
-                        
+                            <a class="explain__item" href="/nhs.portal.web/clarifications/2017-05-21-patient-data-access">
+                                <h4>Доступ до даних пацієнта 2</h4>
+                                <time>21-05-2017</time>
+                                Як отримати дані пацієнта? Чи є життя після читання Ніцше? Що робити якщо?
+                            </a>
                           
                         
                       </div>
@@ -523,6 +449,22 @@
                 </article>
             </section>
         </article>
+        <section class="explain__tags">
+            <div class="explain__tags-title">
+                Теги:
+            </div>
+            <ul class="explain__tags-list">
+                <li class="explain__tags-item">
+                    <a class="explain__tags-link" href="#">ЕЦП</a>
+                </li>
+                <li class="explain__tags-item">
+                    <a class="explain__tags-link" href="#">НСЗУ</a>
+                </li>
+                <li class="explain__tags-item">
+                    <a class="explain__tags-link" href="#">Пояснення</a>
+                </li>
+            </ul>
+        </section>
         <footer class="explain__footer">
             <a href="/nhs.portal.web/clarifications.html">Показати більше</a>
         </footer>
@@ -617,23 +559,21 @@
                 <a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>
             </p>
 
-            <form class="contacts__form">
+            <form class="feedback contacts__form">
                 <div class="contacts__form-title">
                     Зворотній зв’язок
                 </div>
                 <div class="contacts__form-row">
-                    <input type="text" name="name" placeholder="Ваше ім’я" />
+                    <input required class="feedback__name" type="text" name="name" placeholder="Ваше ім’я" />
                 </div>
                 <div class="contacts__form-row">
-                    <input type="text" name="email" placeholder="Email" />
-                </div>
-                <div class="contacts__form-row">
-                    <textarea name="message" placeholder="Текст повідомлення"></textarea>
+                    <textarea required class="feedback__message" name="message" placeholder="Текст повідомлення"></textarea>
                 </div>
                 <div class="contacts__form-submit-row">
-                    <button type="submit">
+                    <button class="feedback__submit" type="submit">
                         надіслати
                     </button>
+                    <a class="feedback__mailto" hidden></a>
                 </div>
             </form>
         </article>
@@ -644,7 +584,7 @@
 </footer>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>
 <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
-<script type="text/javascript" src="/nhs.portal.web/scripts/main.min.js"></script>
+<script type="text/javascript" src="/nhs.portal.web/scripts/main.js"></script>
 
 </body>
 </html>

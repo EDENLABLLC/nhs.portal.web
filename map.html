@@ -19,66 +19,48 @@
 
 </head>
 <body>
-    <header class="header">
-        <div class="header__logo">
-            <a href="#">
-                <img src="/nhs.portal.web/images/logo.svg" alt="NHS Logo">
-            </a>
-        </div>
-        <nav class="nav">
-            <ul>
-                <li>
-                    <a class="nav__link" href="#about">Про нас</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="#join">Долучитися</a>
-                </li>
-                <li>
-                    <a class="nav__link nav__link_active" href="#map">Мапа</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="#statistic">Статистика</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="#explain">Пояснення</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="#documents">Документи</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="#contacts">Контакти</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main class="main">
-        <section class="search">
-            <aside class="search__aside">
-                <input placeholder="Пошук" type="text" class="search__input">
+    <div class="map-page">
+      <header class="header">
+          <div class="header__logo">
+              <a href="/nhs.portal.web/">
+                  <img src="/nhs.portal.web/images/logo.svg" alt="NHS Logo">
+              </a>
+          </div>
+          <nav class="nav">
+              <ul>
+                  <li>
+                      <a class="nav__link" href="#about">Про нас</a>
+                  </li>
+                  <li>
+                      <a class="nav__link" href="#join">Долучитися</a>
+                  </li>
+                  <li>
+                      <a class="nav__link nav__link_active" href="#map">Мапа</a>
+                  </li>
+                  <li>
+                      <a class="nav__link" href="#statistic">Статистика</a>
+                  </li>
+                  <li>
+                      <a class="nav__link" href="#explain">Пояснення</a>
+                  </li>
+                  <li>
+                      <a class="nav__link" href="#documents">Документи</a>
+                  </li>
+                  <li>
+                      <a class="nav__link" href="#contacts">Контакти</a>
+                  </li>
+              </ul>
+          </nav>
+      </header>
+      <main class="main" id="map"></main>
+      <footer class="footer">
+          ©2017 All Rights Recerved
+      </footer>
+    </div>
 
-                <ul class="search__nav">
-                    <li class="search__nav-item">
-                        Заклади первинної медичної допомоги
-                    </li>
-                    <li class="search__nav-item">
-                        Аптеки
-                    </li>
-                    <li class="search__nav-item search__nav-item_active">
-                        Діагностичні центри
-                    </li>
-                </ul>
-
-                <ul class="search__result"></ul>
-            </aside>
-            <div id="map" class="search__map"></div>
-        </section>
-    </main>
-    <footer class="footer">
-        ©2017 All Rights Recerved
-    </footer>
-
-    <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEnlhRXQtwPRZhIvJ6bhNrfBJFP_XAZ6s"></script>
-    <script type="text/javascript" src="/nhs.portal.web/scripts/main-map.min.js"></script>
+    <script type="text/javascript" src="/nhs.portal.web/scripts/map.bundle.js" async defer></script>
+    <!-- <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
+    <script type="text/javascript" src="/scripts/main-map.min.js"></script> -->
 </body>
 </html>
