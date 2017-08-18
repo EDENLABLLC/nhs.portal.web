@@ -1,6 +1,5 @@
 .statistic {
-  padding-bottom: 60px;
-  border-bottom: #dad9d8 1px solid;
+  padding-bottom: 130px;
 
   &__tabs-content {
     height: 520px;

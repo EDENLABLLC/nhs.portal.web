@@ -15,6 +15,7 @@ export default class Tabs extends BEM {
 
     this.$marker = document.createElement('div');
     this.$marker.classList.add(selector(this.name, 'marker'));
+
     this.elem('header').appendChild(this.$marker);
 
     if (autoHeight) {

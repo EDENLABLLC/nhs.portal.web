@@ -17,8 +17,31 @@ export const $ = (selector, context = document) => (
 export const selector = (block, elem, modName, modVal) => (
   `${block}__${elem}${modName ? (modVal ? `_${modName}_${modVal}` : `_${modName}`) : ''}`
 );
+export const addRule = (function (style) {
+  let sheet = document.head.appendChild(style).sheet;
+  return function (selector, css) {
+    let propText = typeof css === "string" ? css : Object.keys(css).map(function (p) {
+      return p + ":" + (p === "content" ? "'" + css[p] + "'" : css[p]);
+    }).join(";");
+    sheet.insertRule(selector + "{" + propText + "}", sheet.cssRules.length);
+  };
+})(document.createElement("style"));
 
 export const buildClass = (...args) => `.${selector(...args)}`;
+
+export const getParents = (target, parent = document) => {
+  const parents = [];
+  let p = target.parentNode;
+
+  while (p !== parent) {
+    let o = p;
+    parents.push(o);
+    p = o.parentNode;
+  }
+  parents.push(parent);
+
+  return parents;
+};
 
 export class BEM extends null {
   constructor(name, node) {
@@ -32,7 +55,12 @@ export class BEM extends null {
   }
 
   elems(name, modName, modVal) {
-    return $(buildClass(this.name, name, modName, modVal), this.node);
+    return $(buildClass(this.name, name, modName, modVal), this.node).filter(node => {
+      const $parents = getParents(node, this.node);
+      const $firstBlock = $parents.filter(parent => parent.classList.contains(this.name))[0];
+
+      return $firstBlock === this.node;
+    });
   }
 
   setMod(elem, elemName, modName, modValue) {

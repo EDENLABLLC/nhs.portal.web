@@ -147,131 +147,55 @@ date: '2017-05-24T14:42:52.381Z'
             <section class="tabs">
                 <header class="tabs__header">
                     <ul class="tabs__nav">
-                        <li class="tabs__nav-item">
-                            Динаміка появи <br />
-                            закладів, лікарів, декларацій
-                        </li>
-                        <li class="tabs__nav-item">
-                            Віковий та статевий розподіл <br />
-                            лікарів та пацієнтів
-                        </li>
                         <li class="tabs__nav-item tabs__nav-item_active">
-                            Кількість <br />
-                            декларацій
+                            Динаміка реєстрації декларацій
                         </li>
                         <li class="tabs__nav-item">
-                            Зміна <br />
-                            декларацій
+                            Кількість закладів, лікарів, декларацій<br />  по регіонах
                         </li>
                     </ul>
                 </header>
                 <article class="tabs__main statistic__tabs-content">
-                    <section class="tabs__slide">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
-                        </section>
-                    </section>
-                    <section class="tabs__slide">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
-                        </section>
-                    </section>
                     <section class="tabs__slide tabs__slide_active">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
+                        <section>
+                            <canvas class="declarations__graph" id="declarations__graph-canvas" width="700" height="350"></canvas>
                         </section>
                     </section>
                     <section class="tabs__slide">
-                        <section class="declarations">
-                            <div class="declarations__graph">
-                                <canvas class="declarations__graph-canvas" width="1000" height="1000"></canvas>
-                                <div class="declarations__total">
-                                    <div class="declarations__total-value"></div>
-                                    Загальна кількість
-                                    декларацій
-                                </div>
-                            </div>
-                            <div class="declarations__data">
-                                <div class="declarations__title">
-                                    Розподіл загальної кількості підписаних декларацій
-                                </div>
-                                <ul class="declarations__tabs">
-                                    <li class="declarations__tabs-item declarations__tabs-item_active">
-                                        По областях
-                                    </li>
-                                    <li class="declarations__tabs-item">
-                                        По населених пунктах
-                                    </li>
-                                </ul>
-
-                                <ul class="declarations__list"></ul>
-                            </div>
+                        <section>
+                            <section class="tabs">
+                                <header class="tabs__header tabs__header-small">
+                                    <p class="tabs__header-title">Кількість закладів, лікарів, декларацій  по регіонах</p>
+                                    <ul class="tabs__nav tabs__nav-small">
+                                        <li class="tabs__nav-item tabs__nav-item_small tabs__nav-item_active">
+                                            Заклади
+                                        </li>
+                                        <li class="tabs__nav-item tabs__nav-item_small">
+                                            Лікарі
+                                        </li>
+                                        <li class="tabs__nav-item tabs__nav-item_small">
+                                            Декларації
+                                        </li>
+                                    </ul>
+                                </header>
+                                <article class="tabs__main tabs__main-smallc statistic__tabs-content">
+                                    <section class="tabs__slide tabs__slide_active">
+                                        <section>
+                                            <canvas class="declarations__graph" id="declarations_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="msp_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="doctors_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                </article>
+                            </section>
                         </section>
                     </section>
                 </article>
