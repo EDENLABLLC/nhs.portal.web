@@ -25,7 +25,7 @@ $('.slider').forEach(node => new Slider(node));
 $('.feedback').forEach(node => new Feedback(node));
 
 const today = new Date().getDate();
-fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01&to_date=2017-07-'+
+fetchJSON('https://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01&to_date=2017-07-'+
   today + '&interval=DAY').then(data => {
   const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
   const DATA = data.data.reduce((acc, cur, index) => {
@@ -43,7 +43,7 @@ fetchJSON('http://dev.ehealth.world/reports/stats/histogram?from_date=2017-07-01
   );
 });
 
-fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
+fetchJSON('https://dev.ehealth.world/reports/stats/regions').then(data => {
   $('.map').forEach(node => new Map(node, data.data));
   const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
   const NUMBER_BY_REGION_MSPS = document.getElementById('msp_number__graph-canvas').getContext('2d');
@@ -74,7 +74,7 @@ fetchJSON('http://dev.ehealth.world/reports/stats/regions').then(data => {
   );
 });
 
-fetchJSON('http://dev.ehealth.world/reports/stats/').then(data => {
+fetchJSON('https://dev.ehealth.world/reports/stats/').then(data => {
   const joined_items = $('.joined__item-count');
   joined_items[0].innerText = data.data.msps;
   joined_items[1].innerText = data.data.doctors;
