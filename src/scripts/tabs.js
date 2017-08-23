@@ -52,6 +52,10 @@ export default class Tabs extends BEM {
       this.animateMarker(toIndex);
 
       this.currentIndex = toIndex;
+
+      if ($elem.dataset.tab) {
+        location.hash = '#' + $elem.dataset.tab;
+      }
     }, false);
 
     this.setMod(this.elem('nav-item', 'active'), 'nav-item', 'marker');
@@ -110,5 +114,14 @@ export default class Tabs extends BEM {
     });
 
     return index;
+  }
+
+  selectElemByHash(hash) {
+    const elemWithHash = this.$controls.filter(node => node.dataset.tab === hash);
+    if (!elemWithHash[0]) return;
+    const elemIndex = this.$controls.indexOf(elemWithHash[0]);
+    this.animateMarker(elemIndex);
+    this.animatePanels(elemIndex);
+    this.currentIndex = elemIndex;
   }
 }

@@ -20,7 +20,10 @@ if (!window.Promise) {
 SmoothScroll.polyfill();
 
 $('.nav').forEach(node => new Nav(node));
-$('.tabs').forEach(node => new Tabs(node));
+$('.tabs').forEach(node => {
+  const tab = new Tabs(node);
+  tab.selectElemByHash(location.hash.slice(1));
+});
 $('.slider').forEach(node => new Slider(node));
 $('.feedback').forEach(node => new Feedback(node));
 
