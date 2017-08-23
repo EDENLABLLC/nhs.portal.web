@@ -26,7 +26,7 @@ PROJECT_VERSION=$(cat "${PROJECT_DIR}/package.json" \
 
 echo "[I] Building a Docker container '${PROJECT_NAME}' (version '${PROJECT_VERSION}') from path '${PROJECT_DIR}'.."
 
-# npm run export
+npm run export
 
 docker build --tag "${PROJECT_NAME}:${PROJECT_VERSION}" \
              --file "${PROJECT_DIR}/Dockerfile" \
