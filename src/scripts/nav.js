@@ -1,6 +1,8 @@
 export default class Nav {
   constructor(node) {
     node.addEventListener('click', e => {
+      if (e.target.href.indexOf('#') === -1) return;
+
       e.preventDefault();
 
       if (e.target.href === undefined) {

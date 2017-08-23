@@ -1,12 +1,11 @@
 body {
-  display: flex;
-  flex-flow: column nowrap;
 }
 
 .header {
-  flex: 0 0 40px;
+  height: 40px;
   padding: 24px 0;
   text-align: center;
+  overflow: hidden;
 
   &__logo {
     display: inline-block;
@@ -19,19 +18,18 @@ body {
 }
 
 .main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
+  min-height: calc(100vh - 40px - 100px);
+  overflow: hidden;
 }
 
 .footer {
-  flex: 0 0 100px;
+  height: 100px;
   padding: 40px 0;
   text-align: center;
   font-size: 10px;
   line-height: 1;
   border-top: #b9dd2f 3px solid;
+  overflow: hidden;
 }
 
 .link {

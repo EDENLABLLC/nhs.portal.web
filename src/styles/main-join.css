@@ -2,10 +2,12 @@
 @import "reset.css";
 @import "fonts.css";
 @import "defaults.css";
+@import "icons.css";
 @import "tabs.css";
 @import "tooltip.css";
 
 @import "blocks/nav.css";
+@import "blocks/header-doc.css";
 
 .join-page {
   width: var(--max-content-width);
