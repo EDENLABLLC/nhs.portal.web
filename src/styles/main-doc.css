@@ -10,24 +10,28 @@
 @import "blocks/clarifications.css";
 
 body {
-  display: flex;
-  flex-flow: column nowrap;
 }
 
 .header {
-  flex: 0 0 auto;
+  height: 218px;
+}
+
+.header__in {
   width: var(--max-content-width);
   margin: 0 auto;
 }
 
 .main {
-  flex: 1 1 auto;
+  min-height: calc(100vh - 218px - 100px);
+}
+
+.main__in {
   width: var(--max-content-width);
   margin: 0 auto;
 }
 
 .footer {
-  flex: 0 0 100px;
+  height: 100px;
   padding: 40px 0;
   text-align: center;
   font-size: 10px;

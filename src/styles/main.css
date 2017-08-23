@@ -18,27 +18,32 @@
 @import "blocks/declarations.css";
 
 body {
-  display: flex;
-  flex-flow: column nowrap;
+  min-width: 1280px;
 }
 
 .header {
-  flex: 0 0 370px;
+  height: 370px;
+  overflow: hidden;
 }
 
 .main {
-  flex: 1 1 auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.main__in {
   width: var(--max-content-width);
   margin: 0 auto;
 }
 
 .footer {
-  flex: 0 0 100px;
+  height: 100px;
   padding: 40px 0;
   text-align: center;
   font-size: 10px;
   line-height: 1;
   border-top: #b9dd2f 3px solid;
+  overflow: hidden;
 }
 
 .link {

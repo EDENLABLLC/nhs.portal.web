@@ -141,7 +141,7 @@ export default class App extends React.Component {
       const bottomLeft = this.state.bounds.getSouthWest();
 
       return fetch(createUrl(
-        'http://dev.ehealth.world/reports/stats/divisions/map',
+        'http://demo.ehealth.world/reports/stats/divisions/map',
         {
           lefttop_latitude: topRight.lat(),
           lefttop_longitude: bottomLeft.lng(),
