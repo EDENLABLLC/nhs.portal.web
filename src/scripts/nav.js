@@ -10,8 +10,10 @@ export default class Nav {
       }
 
       const to = e.target.href.split('#')[1];
-      const { top } = document.getElementById(to).getBoundingClientRect();
+      const toElement = document.getElementById(to);
+      if (!toElement) return null;
 
+      const { top } = toElement.getBoundingClientRect();
       window.scroll({ top: (top + window.scrollY) - 50, left: 0, behavior: 'smooth' });
     })
   }
