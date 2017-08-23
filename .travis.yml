@@ -14,11 +14,8 @@ env:
 node_js:
 - 7.5.0
 before_install:
-- npm run docker:up
 - chmod -R +x bin
 script:
-- npm run test
-- npm run lint
 - ./bin/version-increment.sh
 - ./bin/build.sh
 - ./bin/start.sh
