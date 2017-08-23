@@ -9,6 +9,8 @@ import Aside from './Aside';
 import Map from '../components/Map';
 import { createUrl } from '../helpers/url';
 
+const { API_ENDPOINT } = window.__CONFIG__;
+
 @withRouter
 export default class App extends React.Component {
   constructor(props) {
@@ -141,7 +143,7 @@ export default class App extends React.Component {
       const bottomLeft = this.state.bounds.getSouthWest();
 
       return fetch(createUrl(
-        'http://demo.ehealth.world/reports/stats/divisions/map',
+        `${API_ENDPOINT}/reports/stats/divisions/map`,
         {
           lefttop_latitude: topRight.lat(),
           lefttop_longitude: bottomLeft.lng(),

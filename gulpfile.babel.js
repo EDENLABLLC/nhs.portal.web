@@ -54,7 +54,7 @@ gulp.task('build:scripts', (done) => {
       watch: process.env.WATCH !== 'false'
     }, require('webpack')))
     .pipe(gulp.dest(SCRIPTS_DIST))
-  if (process.env.WATCH !== 'false') done();
+  if (process.env.WATCH === 'false') done();
 });
 
 gulp.task('build:styles', () => (
@@ -103,6 +103,8 @@ gulp.task('production', (done) => {
   process.env.WATCH = 'false';
   return sequence('build')(done);
 });
+
+gulp.task('export', sequence('production', 'build:jekyll'));
 
 gulp.task('deploy:build', sequence('production', 'build:jekyll', 'prefix'));
 gulp.task('deploy', ['deploy:build'], () => (

@@ -1,6 +1,6 @@
 {
   "name": "nhs.portal.web",
-  "version": "1.0.10",
+  "version": "1.0.0",
   "description": "NHS Portal Landing",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "dev": "gulp dev",
     "build": "gulp production",
     "deploy": "gulp deploy",
+    "export": "gulp export",
     "test": "echo \"Error: no test specified\""
   },
   "author": "Nebo#15",
