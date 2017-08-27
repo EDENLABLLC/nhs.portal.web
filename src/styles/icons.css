@@ -6,9 +6,19 @@
   background-repeat: no-repeat;
   background-position: center center;
 
-  &_name_arrow-right {
+  &_name_arrow-right,
+  &_name_arrow-left {
     background-image: url('../images/icons/arrow-right.svg');
     width: 36px;
+  }
+
+  &_name_caret-bottom {
+    background-image: url('../images/icons/caret-bottom.svg');
+    width: 10px;
+  }
+
+  &_name_arrow-left {
+    transform: rotate(180deg);
   }
 
   &_name_clinic {

@@ -17,6 +17,11 @@ collections:
     output: true
     permalink: "/:collection/:name"
     pretty: true
+  providers:
+    title: Providers
+    output: true
+    permalink: "/:collection/:name"
+    pretty: true
   documents:
     output: false
 defaults:
@@ -25,6 +30,11 @@ defaults:
     type: clarifications
   values:
     layout: document
+- scope:
+    path: ''
+    type: providers
+  values:
+    layout: provider
 source: dist
 gems:
 - jekyll-sitemap

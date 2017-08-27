@@ -7,4 +7,4 @@ import Back from './back';
 fetchJSON('data/search.json').then(data => {
   $('.search').forEach(node => new Search(node, data));
 });
-$('.js-back-link').forEach(node => new Back(node));
+// $('.js-back-link').forEach(node => new Back(node));

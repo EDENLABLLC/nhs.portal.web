@@ -9,11 +9,9 @@
 @import "blocks/article.css";
 @import "blocks/clarifications.css";
 
-body {
-}
+@import "blocks/providers-page.css";
 
-.header {
-  height: 218px;
+body {
 }
 
 .header__in {
@@ -21,8 +19,10 @@ body {
   margin: 0 auto;
 }
 
+
+
 .main {
-  min-height: calc(100vh - 218px - 100px);
+  min-height: calc(100vh - 155px - 100px);
 }
 
 .main__in {

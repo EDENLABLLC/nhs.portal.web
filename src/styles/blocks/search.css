@@ -20,7 +20,7 @@
 
   &__aside {
     flex: 0 0 auto;
-    width: 480px;
+    width: 384px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -45,10 +45,26 @@
     padding-left: 70px;
     background: url('../images/icons/search.png') 25px center no-repeat;
     background-size: 23px;
+    width: 260px;
+    margin-left: 5px;
   }
 
+  &__back {
+    color: #4880ed;
+    text-transform: uppercase;
+    margin: 0 0 30px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+
+    .icon {
+      margin-right: 10px;
+      margin-top: -3px;
+    }
+  }
   &__header {
-    padding: 16px 60px 0;
+    padding: 12px 60px 0;
     flex: 0 0 auto;
     border-bottom: #dad9d8 1px solid;
   }
@@ -56,13 +72,14 @@
   &__nav {
     list-style: none;
     margin: 0 -60px;
-    padding: 0 60px 10px;
+    padding: 0 60px 5px;
   }
 
   &__nav-item {
     line-height: 1;
     margin-bottom: 20px;
     font-weight: 700;
+    font-size: 14px;
     cursor: pointer;
 
     &_active {
@@ -73,7 +90,6 @@
 
   &__result {
     padding: 0 60px;
-    list-style: none;
     flex: 1 1 auto;
     overflow: auto;
     transform: translate3d(0, 0, 0);
@@ -82,13 +98,25 @@
     &::after {
       content: '';
       display: block;
-      height: 36px;
+      height: 20px;
       width: 100%;
     }
   }
 
+  &__result-list {
+    list-style: none;
+  }
+
+  &__result-total {
+    font-weight: bold;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
   &__result-item {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 14px;
     cursor: pointer;
 
@@ -156,5 +184,16 @@
       font-size: 14px;
       line-height: 14px;
     }
+  }
+
+  &__more {
+    font-size: 12px;
+    color: #4880ed;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 16px 0;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
   }
 }

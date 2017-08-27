@@ -53,8 +53,10 @@ gulp.task('build:scripts', (done) => {
       ...require('./webpack.config.js'),
       watch: process.env.WATCH !== 'false'
     }, require('webpack')))
-    .pipe(gulp.dest(SCRIPTS_DIST))
-  if (process.env.WATCH === 'false') done();
+    .pipe(gulp.dest(SCRIPTS_DIST));
+
+  done();
+  // if (process.env.WATCH === 'false') done();
 });
 
 gulp.task('build:styles', () => (
@@ -81,7 +83,7 @@ gulp.task('watch', ['build'], () => {
 });
 
 gulp.task('dev', (done) => {
-  process.env.WATCH = true;
+  process.env.WATCH = 'true';
   return sequence(['watch', 'serve'])(done)
 });
 

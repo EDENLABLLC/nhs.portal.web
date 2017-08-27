@@ -7,4 +7,4 @@ $('.tabs').forEach(node => {
   tab.selectElemByHash(location.hash.slice(1));
   return tab;
 });
-$('.js-back-link').forEach(node => new Back(node));
+// $('.js-back-link').forEach(node => new Back(node));

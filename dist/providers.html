@@ -1,0 +1,65 @@
+---
+title: "Долучитися"
+activeNav: "join"
+backLink: "/join.html"
+backTitle: "Назад"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Долучитися | {{ site.title }}</title>
+    {% include meta.html %}
+    <link rel="stylesheet" type="text/css" href="/styles/main-doc.min.css">
+
+    {% seo title=false %}
+</head>
+<body>
+    <header class="header">
+      <div class="header__in">
+        <div class="header__logo">
+            <a href="/">
+                <img src="images/logo.svg" alt="NHS Logo">
+            </a>
+        </div>
+        {% include nav.html %}
+        {% include header-back.html %}
+    </header>
+    <main class="main">
+      <div class="main__in">
+        <section class="providers-page">
+            <h1 class="providers-page__title">Обрати медичну інформаційну систему</h1>
+            <p class="providers-page__subtitle">Для продовження роботи з системою eHealth,<br />оберіть одне з рішень медичних інформаційних систем</p>
+            <div class="providers-list">
+              {% for provider in site.providers %}
+                <div class="providers-list__item">
+                  <div><img src="{{ provider.logo }}" alt="{{ provider.title }}" /></div>
+                  <a href="#" class="providers-list__requirements">
+                    Технічні вимоги
+                    <i class="icon icon_name_caret-bottom"></i>
+                  </a>
+                  <div class="providers-list__item-tooltip">
+                    <p>{{ provider.requirements }}</p>
+                    <a href="{{ provider.url }}">Дізнатися більше про МІС</a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <div class="providers-page__back">
+              <a href="/join.html">
+                <i class="icon icon_name_arrow-left"></i>
+                Дізнатися як співпрацювати з eHealth
+              </a>
+            </div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+        ©2017 All Rights Recerved
+    </footer>
+
+    <script type="text/javascript" src="/scripts/config.js"></script>
+    <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
+    <script type="text/javascript" src="/scripts/main-join.js"></script>
+</body>
+</html>
