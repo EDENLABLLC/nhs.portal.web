@@ -5,9 +5,19 @@ export default ({ active, name, address, onClick, phones = [] }) => (
     <div className="search__result-item-title">
         {name}
     </div>
-    {address.settlement} <br />
-    {address.street}, {address.building} <br />
-    Тел.: {phones[0].number} <br />
-    Години роботи: Пн-Пт, 9:00-19:00
+    { active && (
+      <div>
+        {address.settlement} <br />
+        {address.street}, {address.building} <br />
+        Тел.: {phones[0].number} <br />
+        Години роботи: Пн-Пт, 9:00-19:00
+      </div>
+    )}
+    { !active && (
+      <div>
+        {address.street}, {address.building} <br />
+        Години роботи: Пн-Пт, 9:00-19:00
+      </div>
+    )}
   </li>
 )

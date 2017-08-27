@@ -22,6 +22,10 @@ export default ({
 }) => (
   <aside className="search__aside">
       <div className="search__header">
+        <a href="/" className="search__back">
+          <i className="icon icon_name_arrow-left" />
+          Повернутися
+        </a>
         <input placeholder="Пошук" type="text" className="search__input" onInput={(e) => onSearchUpdate(e.target.value)} />
         <ul className="search__nav">
           {types.map(typeItem => (
@@ -35,19 +39,26 @@ export default ({
           ))}
         </ul>
       </div>
-      <ul className="search__result" ref={onMountList}>
-        {items.map(i => (
-          <SearchResult
-            key={i.id}
-            {...i}
-            phones={i.contacts.phones}
-            address={i.addresses[0]}
-            active={activeItem === i}
-            onClick={() => onClickSearchItem(i)}
-          />
-        ))}
+      <div className="search__result" ref={onMountList}>
+        { !!items.length && (
+          <div className="search__result-total">
+            Знайдено {items.length} закрадів
+          </div>
+        )}
+        <ul className="search__result-list">
+          {items.map(i => (
+            <SearchResult
+              key={i.id}
+              {...i}
+              phones={i.contacts.phones}
+              address={i.addresses[0]}
+              active={activeItem === i}
+              onClick={() => onClickSearchItem(i)}
+            />
+          ))}
+        </ul>
         { isLoading && 'Шукаємо записи...'}
-        { !!items.length && hasMore && !isLoading  && <button onClick={onLoadMore}>Знайти ще</button>}
-      </ul>
+        { !!items.length && hasMore && !isLoading  && <a className="search__more" onClick={onLoadMore}>Показати більше</a>}
+      </div>
   </aside>
 );
