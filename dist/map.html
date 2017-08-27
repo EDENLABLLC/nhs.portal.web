@@ -1,5 +1,6 @@
 ---
 title: "Мапа"
+activeNav: "map"
 ---
 
 <!DOCTYPE html>
@@ -19,31 +20,7 @@ title: "Мапа"
                   <img src="images/logo.svg" alt="NHS Logo">
               </a>
           </div>
-          <nav class="nav">
-              <ul>
-                  <li>
-                      <a class="nav__link" href="/#about">Про нас</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/join.html">Долучитися</a>
-                  </li>
-                  <li>
-                      <a class="nav__link nav__link_active" href="/map.html">Мапа</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#statistic">Статистика</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#explain">Пояснення</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#documents">Документи</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#contacts">Контакти</a>
-                  </li>
-              </ul>
-          </nav>
+          {% include nav.html %}
       </header>
       <main class="main" id="map"></main>
       <footer class="footer">

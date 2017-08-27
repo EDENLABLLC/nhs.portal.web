@@ -84,7 +84,8 @@ textarea {
   height: 180px;
 }
 
-button {
+button,
+.btn {
   padding: 28px 62px;
   border: none;
   color: #fff;
@@ -95,8 +96,11 @@ button {
   background-image: linear-gradient(to top, rgba(75, 133, 238, 0.67) 0%, rgba(116, 176, 248, 0.67) 99%, rgba(116, 176, 248, 0.67) 100%);
   cursor: pointer;
 
-}
+  &:hover {
+    color: #fff;
+  }
 
-button.btn--small {
-  padding: 14px 28px;
+  &.btn--small {
+    padding: 14px 28px;
+  }
 }

@@ -14,38 +14,8 @@
                   <img src="/images/logo.svg" alt="NHS Logo">
               </a>
           </div>
-          <nav class="nav">
-              <ul>
-                  <li>
-                      <a class="nav__link" href="/#about">Про нас</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/join.html">Долучитися</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/map.html">Мапа</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#statistic">Статистика</a>
-                  </li>
-                  <li>
-                      <a class="nav__link nav__link_active" href="/clarifications.html">Пояснення</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#documents">Документи</a>
-                  </li>
-                  <li>
-                      <a class="nav__link" href="/#contacts">Контакти</a>
-                  </li>
-              </ul>
-          </nav>
-
-          <div class="header__back">
-              <a class="header__back-link js-back-link" href="/">
-                  <i class="icon icon_name_arrow-right"></i>
-                  назад на головну
-              </a>
-          </div>
+          {% include nav.html %}
+          {% include header-back.html %}
         </div>
     </header>
     <main class="main">

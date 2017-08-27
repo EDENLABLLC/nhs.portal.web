@@ -1,5 +1,8 @@
 ---
 title: "Долучитися"
+activeNav: "join"
+backLink: "/join.html"
+backTitle: "Назад"
 ---
 
 <!DOCTYPE html>
@@ -19,31 +22,8 @@ title: "Долучитися"
                 <img src="images/logo.svg" alt="NHS Logo">
             </a>
         </div>
-        <nav class="nav">
-            <ul>
-                <li>
-                    <a class="nav__link" href="/#about">Про нас</a>
-                </li>
-                <li>
-                    <a class="nav__link nav__link_active" href="/join.html">Долучитися</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="/map.html">Мапа</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="/#statistic">Статистика</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="/clarifications.html">Пояснення</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="/#documents">Документи</a>
-                </li>
-                <li>
-                    <a class="nav__link" href="/#contacts">Контакти</a>
-                </li>
-            </ul>
-        </nav>
+        {% include nav.html %}
+        {% include header-back.html %}
     </header>
     <main class="main">
       <div class="main__in">
@@ -51,72 +31,19 @@ title: "Долучитися"
             <h1 class="providers-page__title">Обрати медичну інформаційну систему</h1>
             <p class="providers-page__subtitle">Для продовження роботи з системою eHealth,<br />оберіть одне з рішень медичних інформаційних систем</p>
             <div class="providers-list">
-              <div class="providers-list__item">
-                <div><img src="/images/logos/mis_logo.png" alt="MIS Logo" /></div>
-                <a href="#" class="providers-list__requirements providers-list__requirements_active">
-                  Технічні вимоги
-                  <i class="icon icon_name_caret-bottom"></i>
-                </a>
-                <div class="providers-list__item-tooltip">
-                  <p>Ноутбук або персональний комп'ютер офісного рівня. Має працювати браузер Google Chrome останньої версії.</p>
-                  <a href="">Дізнатися більше про МІС</a>
+              {% for provider in site.providers %}
+                <div class="providers-list__item">
+                  <div><img src="{{ provider.logo }}" alt="{{ provider.title }}" /></div>
+                  <a href="#" class="providers-list__requirements">
+                    Технічні вимоги
+                    <i class="icon icon_name_caret-bottom"></i>
+                  </a>
+                  <div class="providers-list__item-tooltip">
+                    <p>{{ provider.requirements }}</p>
+                    <a href="{{ provider.url }}">Дізнатися більше про МІС</a>
+                  </div>
                 </div>
-              </div>
-              <div class="providers-list__item">
-                <div><img src="/images/logos/mis_logo.png" alt="MIS Logo" /></div>
-                <a href="#" class="providers-list__requirements">
-                  Технічні вимоги
-                  <i class="icon icon_name_caret-bottom"></i>
-                </a>
-                <div class="providers-list__item-tooltip">
-                  <p>Ноутбук або персональний комп'ютер офісного рівня. Має працювати браузер Google Chrome останньої версії.</p>
-                  <a href="">Дізнатися більше про МІС</a>
-                </div>
-              </div>
-              <div class="providers-list__item">
-                <div><img src="/images/logos/mis_logo.png" alt="MIS Logo" /></div>
-                <a href="#" class="providers-list__requirements">
-                  Технічні вимоги
-                  <i class="icon icon_name_caret-bottom"></i>
-                </a>
-                <div class="providers-list__item-tooltip">
-                  <p>Ноутбук або персональний комп'ютер офісного рівня. Має працювати браузер Google Chrome останньої версії.</p>
-                  <a href="">Дізнатися більше про МІС</a>
-                </div>
-              </div>
-              <div class="providers-list__item">
-                <div><img src="/images/logos/mis_logo.png" alt="MIS Logo" /></div>
-                <a href="#" class="providers-list__requirements">
-                  Технічні вимоги
-                  <i class="icon icon_name_caret-bottom"></i>
-                </a>
-                <div class="providers-list__item-tooltip">
-                  <p>Ноутбук або персональний комп'ютер офісного рівня. Має працювати браузер Google Chrome останньої версії.</p>
-                  <a href="">Дізнатися більше про МІС</a>
-                </div>
-              </div>
-              <div class="providers-list__item">
-                <div><img src="/images/logos/mis_logo.png" alt="MIS Logo" /></div>
-                <a href="#" class="providers-list__requirements">
-                  Технічні вимоги
-                  <i class="icon icon_name_caret-bottom"></i>
-                </a>
-                <div class="providers-list__item-tooltip">
-                  <p>Ноутбук або персональний комп'ютер офісного рівня. Має працювати браузер Google Chrome останньої версії.</p>
-                  <a href="">Дізнатися більше про МІС</a>
-                </div>
-              </div>
-              <div class="providers-list__item">
-                <div><img src="/images/logos/mis_logo.png" alt="MIS Logo" /></div>
-                <a href="#" class="providers-list__requirements">
-                  Технічні вимоги
-                  <i class="icon icon_name_caret-bottom"></i>
-                </a>
-                <div class="providers-list__item-tooltip">
-                  <p>Ноутбук або персональний комп'ютер офісного рівня. Має працювати браузер Google Chrome останньої версії.</p>
-                  <a href="">Дізнатися більше про МІС</a>
-                </div>
-              </div>
+              {% endfor %}
             </div>
             <div class="providers-page__back">
               <a href="/join.html">
