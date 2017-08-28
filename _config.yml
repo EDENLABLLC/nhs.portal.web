@@ -15,13 +15,11 @@ collections:
   clarifications:
     title: Clarifications
     output: true
-    permalink: "/:collection/:name"
-    pretty: true
+    permalink: /:collection/:name/
   providers:
     title: Providers
     output: true
-    permalink: "/:collection/:name"
-    pretty: true
+    permalink: /:collection/:name/
   documents:
     output: false
 defaults:
