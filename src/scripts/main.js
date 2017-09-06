@@ -29,23 +29,27 @@ $('.feedback').forEach(node => new Feedback(node));
 
 const { API_ENDPOINT } = window.__CONFIG__;
 
-const today = new Date().getDate();
-fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=2017-07-01&to_date=2017-07-${today}&interval=DAY`).then(data => {
-  const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
-  const DATA = data.data.reduce((acc, cur, index) => {
-    acc.push({
-      value: cur.declarations_active_start,
-      label: index + 1,
-      ...cur.stats,
-    });
-    return acc
-  },[]);
-  DinamicalMonthChart(
-    MONTH_REGION_DECLARATION,
-    DATA.map(i => i.label),
-    DATA.map(i => i.value),
-  );
-});
+const day = new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate();
+const month = new Date().getMonth() < 10 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
+const year = new Date().getFullYear();
+
+fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${year}-${month}-01&to_date=${year}-${month}-${day}&interval=DAY`)
+  .then(data => {
+    const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
+    const DATA = data.data.reduce((acc, cur, index) => {
+      acc.push({
+        value: cur.declarations_active_start,
+        label: index + 1,
+        ...cur.stats,
+      });
+      return acc
+    },[]);
+    DinamicalMonthChart(
+      MONTH_REGION_DECLARATION,
+      DATA.map(i => i.label),
+      DATA.map(i => i.value),
+    );
+  });
 
 fetchJSON(`${API_ENDPOINT}/reports/stats/regions`).then(data => {
   $('.map').forEach(node => new Map(node, data.data));
