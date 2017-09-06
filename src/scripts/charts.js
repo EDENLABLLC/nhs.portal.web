@@ -37,6 +37,11 @@ export const DinamicalMonthChart = (elem, names, values) =>
           zeroLineWidth: 1,
           zeroLineColor: "rgba(232,232,232,1)",
         },
+        ticks: {
+          beginAtZero:true,
+          min: 0,
+          max: Math.max.apply(this, values) + 1,
+        }
       }]
     },
     tooltips: {
@@ -128,6 +133,12 @@ export const DinamicalMonthChart = (elem, names, values) =>
           top: elem.offsetTop - 100,
         };
         let height = 580 - tooltip.caretY - 74;
+        if(tooltip.yAlign === 'top') {
+          height -= 29;
+        }
+        if(tooltip.yAlign === 'bottom') {
+          height += 29;
+        }
 
         // Display, position, and set styles for font
         Object.assign(tooltipEl.style, {
