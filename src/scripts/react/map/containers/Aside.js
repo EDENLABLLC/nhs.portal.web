@@ -46,7 +46,8 @@ export default ({
           </div>
         )}
         <ul className="search__result-list">
-          {items.map(i => (
+          {
+            items.length ? items.map(i => (
             <SearchResult
               key={i.id}
               {...i}
@@ -55,7 +56,8 @@ export default ({
               active={activeItem === i}
               onClick={() => onClickSearchItem(i)}
             />
-          ))}
+          )) : "Результати відсутні"
+          }
         </ul>
         { isLoading && 'Шукаємо записи...'}
         { !!items.length && hasMore && !isLoading  && <a className="search__more" onClick={onLoadMore}>Показати більше</a>}
