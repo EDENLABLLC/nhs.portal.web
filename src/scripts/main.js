@@ -67,18 +67,18 @@ fetchJSON(`${API_ENDPOINT}/reports/stats/regions`).then(data => {
 
   RegionsCharts(
     NUMBER_BY_REGION_DECLARATION,
-    DATA.map( i => i.region),
-    DATA.map(i => i.declarations).sort((a, b) => a - b).reverse()
+    DATA.sort((a, b) => a.declarations - b.declarations).reverse(),
+    'declarations'
   );
   RegionsCharts(
     NUMBER_BY_REGION_MSPS,
-    DATA.map( i => i.region),
-    DATA.map(i => i.msps).sort((a, b) => a - b).reverse()
+    DATA.sort((a, b) => a.msps - b.msps).reverse(),
+    'msps',
   );
   RegionsCharts(
     NUMBER_BY_REGION_DOCTORS,
-    DATA.map( i => i.region),
-    DATA.map(i => i.doctors).sort((a, b) => a - b).reverse()
+    DATA.sort((a, b) => a.doctors - b.doctors).reverse(),
+    'doctors',
   );
 });
 
