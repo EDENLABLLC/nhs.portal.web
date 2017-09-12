@@ -195,5 +195,6 @@
     font-weight: bold;
     display: block;
     cursor: pointer;
+    letter-spacing: 0.1em;
   }
 }

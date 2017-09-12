@@ -203,10 +203,11 @@ export const RegionsCharts = (elem, data, name)  =>
   new Chart(elem, {
     type: 'horizontalBar',
     data: {
-      labels: data.map(i => i.region),
+      labels: data.map(i =>
+        i.region.charAt(0).toUpperCase() + i.region.slice(1).toLowerCase()),
       datasets: [{
-        backgroundColor: 'rgb(98, 164, 240)',
-        borderColor: 'rgb(72,98,237)',
+        backgroundColor: 'rgb(0, 128, 249)',
+        borderColor: 'rgb(88,181,252)',
         data: data.map(i => i[name]),
       }],
     },
@@ -250,7 +251,7 @@ export const RegionsCharts = (elem, data, name)  =>
           }
         }],
         yAxes: [{
-          barPercentage: 0.95,
+          barPercentage: 1.222222,
           // categoryPercentage: 1,
           ticks: {
             padding: 25,
@@ -282,7 +283,7 @@ export const RegionsCharts = (elem, data, name)  =>
             let meta = chartInstance.controller.getDatasetMeta(i);
             meta.data.forEach(function (bar, index) {
               let data = dataset.data[index];
-              ctx.fillText(data, bar._model.x + 30, bar._model.y + 7);
+              ctx.fillText(data, bar._model.x + 25, bar._model.y + 7);
             });
           });
         }
