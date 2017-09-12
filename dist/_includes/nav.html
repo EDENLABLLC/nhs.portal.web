@@ -1,7 +1,7 @@
 <nav class="nav">
     <ul>
         <li>
-            <a class="nav__link" href="/#about">Про нас</a>
+            <a class="nav__link {% if (layout.activeNav == 'about' or page.activeNav == 'about') %} nav__link_active {% endif %}" href="/about.html">Про нас</a>
         </li>
         <li>
             <a class="nav__link {% if (layout.activeNav == 'join' or page.activeNav == 'join') %} nav__link_active {% endif %}" href="/join.html">Долучитися</a>
