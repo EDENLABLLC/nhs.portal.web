@@ -199,15 +199,15 @@ export const DinamicalMonthChart = (elem, names, values) =>
 });
 
 
-export const RegionsCharts = (elem, names, values)  =>
+export const RegionsCharts = (elem, data, name)  =>
   new Chart(elem, {
     type: 'horizontalBar',
     data: {
-      labels: names,
+      labels: data.map(i => i.region),
       datasets: [{
         backgroundColor: 'rgb(98, 164, 240)',
         borderColor: 'rgb(72,98,237)',
-        data: values,
+        data: data.map(i => i[name]),
       }],
     },
     onAnimationComplete: function() {
@@ -289,4 +289,5 @@ export const RegionsCharts = (elem, names, values)  =>
       }
     }
   });
+
 
