@@ -40,6 +40,10 @@
     font-size: 22px;
     font-weight: 700;
     margin: 40px 0;
+
+    &-done {
+       padding-bottom: 30px;
+    }
   }
 
   &__list {

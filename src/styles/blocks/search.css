@@ -92,6 +92,7 @@
     padding: 0 60px;
     flex: 1 1 auto;
     overflow: auto;
+    max-height: 500px;
     transform: translate3d(0, 0, 0);
 
     &::before,
@@ -195,5 +196,6 @@
     font-weight: bold;
     display: block;
     cursor: pointer;
+    letter-spacing: 0.1em;
   }
 }
