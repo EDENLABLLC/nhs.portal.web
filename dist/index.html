@@ -248,7 +248,7 @@ date: '2017-05-24T14:42:52.381Z'
 
                     {% capture document_layout %}
                       <li class="docs__item">
-                        <a href="{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}">
+                        <a target="_blank" href="{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}">
                           <div class="docs__item-icon">
                             <i class="icon icon_name_doc"></i>
                             {{ document.type }}

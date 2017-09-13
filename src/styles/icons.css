@@ -44,7 +44,9 @@
 
   &_name_doc {
     background-image: url('../images/icons/doc.png');
-    background-size: 100%;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
   }
 
   &_name_admin {
