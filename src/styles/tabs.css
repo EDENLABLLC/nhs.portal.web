@@ -5,8 +5,7 @@
     border-bottom: #dad9d8 1px solid;
 
     &-small {
-       margin: 0 260px;
-       border-bottom: none;
+       margin: 0 320px;
     }
 
     &-title {
@@ -29,11 +28,6 @@
     align-content: space-between;
     list-style: none;
     margin-bottom: 4px;
-
-    &-small {
-       margin: 0 83px;
-       border-bottom: 1px solid #dad9d8;
-    }
   }
 
   &__nav-item {

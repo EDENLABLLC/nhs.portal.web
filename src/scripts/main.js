@@ -22,9 +22,8 @@ SmoothScroll.polyfill();
 
 AOS.init({
   duration: 1200,
+  disable: 'mobile',
 });
-
-console.log('here', AOS);
 
 $('.nav').forEach(node => new Nav(node));
 $('.tabs').forEach(node => {
