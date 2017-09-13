@@ -8,7 +8,7 @@ export const DinamicalMonthChart = (elem, names, values) =>
   data: {
     labels: names,
     datasets: [{
-      backgroundColor: 'rgb(98, 164, 240)',
+      backgroundColor: 'rgba(66,147,243, .9)',
       borderColor: 'rgb(72,98,237)',
       data: values,
     }]
