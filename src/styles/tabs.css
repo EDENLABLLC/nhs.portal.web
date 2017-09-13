@@ -5,7 +5,7 @@
     border-bottom: #dad9d8 1px solid;
 
     &-small {
-       margin: 0 260px;
+       margin: 0 320px;
     }
 
     &-title {
@@ -13,6 +13,10 @@
        font-weight: 700;
        text-align: center;
        margin-bottom: 45px;
+
+       &-small {
+          margin-bottom: 25px;
+       }
      }
   }
 
@@ -49,6 +53,9 @@
     &:hover {
       //font-weight: 700;
     }
+  }
+  &__centered {
+   margin: 0 150px;
   }
 
   &__main {
