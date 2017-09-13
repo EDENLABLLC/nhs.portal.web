@@ -3,5 +3,6 @@
 
   &__tabs-content {
     height: 520px;
+    margin-top: 40px;
   }
 }

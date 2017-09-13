@@ -1,6 +1,7 @@
 import Promise from 'promise-polyfill';
 import SmoothScroll from 'smoothscroll-polyfill';
 import Chart from 'chart.js';
+import AOS from 'aos';
 
 import { $ } from './dom';
 import { fetchJSON } from './utils';
@@ -18,6 +19,12 @@ if (!window.Promise) {
 }
 
 SmoothScroll.polyfill();
+
+AOS.init({
+  duration: 1200,
+});
+
+console.log('here', AOS);
 
 $('.nav').forEach(node => new Nav(node));
 $('.tabs').forEach(node => {

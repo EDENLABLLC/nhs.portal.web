@@ -6,6 +6,7 @@
 
     &-small {
        margin: 0 260px;
+       border-bottom: none;
     }
 
     &-title {
@@ -13,6 +14,10 @@
        font-weight: 700;
        text-align: center;
        margin-bottom: 45px;
+
+       &-small {
+          margin-bottom: 25px;
+       }
      }
   }
 
@@ -24,6 +29,11 @@
     align-content: space-between;
     list-style: none;
     margin-bottom: 4px;
+
+    &-small {
+       margin: 0 83px;
+       border-bottom: 1px solid #dad9d8;
+    }
   }
 
   &__nav-item {
@@ -49,6 +59,9 @@
     &:hover {
       //font-weight: 700;
     }
+  }
+  &__centered {
+   margin: 0 150px;
   }
 
   &__main {
