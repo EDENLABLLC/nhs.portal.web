@@ -9,7 +9,6 @@ clarificationTypes:
   - "Закладам"
   - "Лікарям"
   - "Пацієнтам"
-  - "Аптекам"
   - "Діагностичним центрам"
 collections:
   clarifications:

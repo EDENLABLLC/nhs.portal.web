@@ -4,6 +4,7 @@
 @import "icons.css";
 @import "tabs.css";
 @import "slider.css";
+@import "choices.js/assets/styles/css/choices.css";
 
 @import "blocks/nav.css";
 @import "blocks/header.css";
@@ -24,6 +25,10 @@ body {
 .header {
   height: 370px;
   overflow: hidden;
+}
+
+a:hover {
+  cursor: pointer !important;
 }
 
 .main {
@@ -48,4 +53,8 @@ body {
 
 .link {
   color: #4880ed;
+}
+
+.choices__inner {
+  background-color: #fff !important;
 }

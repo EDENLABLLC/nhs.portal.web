@@ -281,14 +281,14 @@ date: '2017-05-24T14:42:52.381Z'
         <article class="contacts__main">
             <p>
                 Національна Служба Здоров’я України <br />
-                вул. Грушевського 7, <br />
-                м. Київ, 01601
+                <!--вул. Грушевського 7, <br />-->
+                <!--м. Київ, 01601-->
             </p>
 
-            <p>
-                тел. (044)253-61-94, <br />
-                факс (044)253-40-17
-            </p>
+            <!--<p>-->
+                <!--тел. (044)253-61-94, <br />-->
+                <!--факс (044)253-40-17-->
+            <!--</p>-->
 
             <p>
                 <a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>
@@ -307,7 +307,18 @@ date: '2017-05-24T14:42:52.381Z'
                     Зворотній зв’язок
                 </div>
                 <div class="contacts__form-row">
+                    <select id="select">
+                        <option>Тема 1</option>
+                        <option>Тема 2</option>
+                        <option>Тема 3</option>
+                        <option>Тема 4</option>
+                    </select>
+                </div>
+                <div class="contacts__form-row">
                     <input required class="feedback__name" type="text" name="name" placeholder="Ваше ім’я" />
+                </div>
+                <div class="contacts__form-row">
+                    <input required class="feedback__name" type="email" name="name" placeholder="Email" />
                 </div>
                 <div class="contacts__form-row">
                     <textarea required class="feedback__message" name="message" placeholder="Текст повідомлення"></textarea>

@@ -1,6 +1,7 @@
 import Promise from 'promise-polyfill';
 import SmoothScroll from 'smoothscroll-polyfill';
 import Chart from 'chart.js';
+import './select';
 import AOS from 'aos';
 
 import { $ } from './dom';
