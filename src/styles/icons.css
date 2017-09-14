@@ -53,6 +53,7 @@
     background-image: url('../images/icons/admin.svg');
     background-size: 100%;
   }
+
   &_name_fb {
      background-image: url('../images/icons/fb.svg');
      background-size: contain;

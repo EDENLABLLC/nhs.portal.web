@@ -66,8 +66,8 @@
   },
   "dependencies": {
     "aos": "^2.2.0",
-    "chart.js": "^2.6.0",
-    "choices.js": "^3.0.2",
+    "chart.js": "2.6.0",
+    "choices.js": "3.0.2",
     "classnames": "^2.2.5",
     "ejs": "^2.5.5",
     "es6-promise": "^4.1.1",
