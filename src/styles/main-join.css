@@ -99,7 +99,7 @@
     display: flex;
     flex-flow: column wrap;
     align-content: space-between;
-    justify-content: space-between;
+    justify-content: flex-start;
     counter-reset: next-list;
     list-style: none;
   }
