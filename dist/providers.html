@@ -24,26 +24,175 @@ backTitle: "Назад"
         </div>
         {% include nav.html %}
         {% include header-back.html %}
+      </div>
     </header>
     <main class="main">
       <div class="main__in">
         <section class="providers-page">
             <h1 class="providers-page__title">Обрати медичну інформаційну систему</h1>
             <p class="providers-page__subtitle">Для продовження роботи з системою eHealth,<br />оберіть одне з рішень медичних інформаційних систем</p>
-            <div class="providers-list">
-              {% for provider in site.providers %}
-                <div class="providers-list__item">
-                  <div><img src="{{ provider.logo }}" alt="{{ provider.title }}" /></div>
-                  <a href="#" class="providers-list__requirements">
-                    Технічні вимоги
-                    <i class="icon icon_name_caret-bottom"></i>
-                  </a>
-                  <div class="providers-list__item-tooltip">
-                    <p>{{ provider.requirements }}</p>
-                    <a href="{{ provider.url }}">Дізнатися більше про МІС</a>
-                  </div>
+            <!--<div class="providers-list">-->
+              <!--{% for provider in site.providers %}-->
+                <!--<div class="providers-list__item">-->
+                  <!--<div><img src="{{ provider.logo }}" alt="{{ provider.title }}" /></div>-->
+                  <!--<a href="#" class="providers-list__requirements">-->
+                    <!--Технічні вимоги-->
+                    <!--<i class="icon icon_name_caret-bottom"></i>-->
+                  <!--</a>-->
+                  <!--<div class="providers-list__item-tooltip">-->
+                    <!--<p>{{ provider.requirements }}</p>-->
+                    <!--<a href="{{ provider.url }}">Дізнатися більше про МІС</a>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--{% endfor %}-->
+            <!--</div>-->
+            <div class="partners">
+                <div class="partners__item">
+                    <img src="./images/partners/helsi-me.jpeg" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>Helsi</b> – це перевірена та повнофункціональна система для керування медичним закладом. Ми допоможемо на усіх етапах впровадження та відповімо на Ваші питання, адже маємо великий досвід роботи з комунальними закладами. Весь функціонал системи розроблений та адаптований з урахуванням специфіки роботи та вимог МОЗ, та є безкоштовним для державних установ.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Ноутбук або персональний комп'ютер офісного рівня.
+                        Має працювати браузер Google Chrome останньої версії.
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/uciq7PhPnBA" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        Контакт-центр Helsi<br>
+                        <a href="tel:+380445801090">044 580 10 90 (міський)</a><br>
+                        <a href="tel:+380685801090">068 580 10 90 (Київстар)</a><br>
+                        <a href="tel:+380665801090">066 580 10 90 (Водафон)</a><br>
+                        <a href="tel:+380735801090">073 580 10 90 (Лайфселл)</a><br><br>
+                        з 8:00 до 18:00, Пн-Пт
+                    </p>
                 </div>
-              {% endfor %}
+                <div class="partners__item">
+                    <img src="./images/partners/emcimed.jpeg" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>МІС ЕМСІМЕД®</b> - розроблена відповідно до стандартів ISO та МОЗ України. Модулі: електронна медична картка пацієнта, мед. документи, мед. кадри, поліклініка та реєстратура, стаціонар, лабораторія, склад, статистика, послуги, контакт-центр, PACS, партнери, он-лайн запис до лікаря.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Процесор: 2 core Intel/AMD 2 GHz і вище <br>
+                        Відеокарта: Будь-яка <br>
+                        Оперативна пам'ять: 1 Гб і вище <br>
+                        Операційна система: Windows XP / 7 Pro / 8 Pro<br>
+                        Програмне забезпечення: NET Framework 3.5<br>
+
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/P1KxgDUdDbE?list=PLzkInLMWdfgXTv5LaQ1gjuH3-wQUcIORs" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        ТОВ "АЛТ Україна ЛТД" <br>
+                        вул. Митрополита Андрея Шептицького, 4,<br>
+                        м. Київ, 02002<br>
+                        <br><br>
+
+                        044 492 72 70<br>
+                        <a href="mailto:info@mcmed.ua">info@mcmed.ua</a>
+                    </p>
+                </div>
+                <div class="partners__item">
+                    <img src="./images/partners/query.jpeg" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>MEDICS</b> – це хмарна медична інформаційна система, яка допоможе виконувати щоденні задачі швидше та ефективніше, надаючи зручні і якісні послуги своїм клієнтам. Ми пропонуємо медичним закладам автоматизацію, яка дозволить заробляти і створювати нові фінансові потоки. Безкоштовна, постійно вдосконалюється, мінімальні витрати на встановлення.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Один з браузерів: Chrome (36+), Firefox (29+), Internet Explorer (11+), Opera (15+), Safari.
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="//www.youtube.com/embed/3Evvr6cDsBA?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        <a href="tel:+380985534315">(098) 553-43-15</a>
+                        <a href="mailto:info@newmedicine.com.ua">info@newmedicine.com.ua</a>
+                    </p>
+                </div>
+                <div class="partners__item">
+                    <img src="./images/partners/medics.png" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>Поліклініка без черг</b> – програма, яка полегшує життя пацієнтів та лікарів. Пацієнтам програма надає можливість легко обрати потрібну медичну послугу та потрапити на прийом до лікаря у зручний час. Медичні установи  мають змогу керувати пацієнтопотоком та реєстратурою  максимально легко та ефективно.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Ноутбук, планшет, смартфон або <br>
+                        персональний комп’ютер офісного рівня.<br>
+                        Браузер Google Chrome (від версії 54.0.0.)<br>
+                        або Mozilla Firefox (від версії 48.0.0.)<br>
+                        Доступ до Інтернет від 1 Мб/с.
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/zLMQ--oFvCY" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        <a href="tel:+380636484988">063 648 49 88</a><br>
+                        <a href="tel:+380932950208">093 295 02 08</a><br>
+                        <a href="mailto:info@medics.com.ua">info@medics.com.ua</a>
+                    </p>
+                </div>
+                <div class="partners__item">
+                    <img src="./images/partners/medstar.png" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>MEDSTAR</b> – це зручні та надійні рішення для медичних закладів та пацієнтів.  Наша місія – покращення якості життя людей через покращення охорони здоров'я. Ми маємо багаторічний досвід роботи з лікарями та глибоке розуміння їх потреб. Реалізуємо як електронну медичну систему в усьому регіоні, так і окремі продукти для медичного закладу.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Будь який гаджет, ноутбук або ПК з одним із браузерів, Windows XP; Intel Pentium 4 / Athlon 64 з підтримкою SSE2; 350 Мб.
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="//www.youtube.com/embed/3Evvr6cDsBA?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        <a href="tel:+380577140080">057 714 00 80</a><br>
+                        <a href="tel:+380577192137">057 719 21 37</a><br>
+                        <a href="mailto:office@medstar.ua">office@medstar.ua</a><br>
+                        Skype: medstar_solutions
+                    </p>
+                </div>
+                <div class="partners__item">
+                    <img src="./images/partners/doktor.jpeg" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>Доктор Елекс</b> - найпоширеніша в Україні медична система, що з 2005 року успішно працює в державних та приватних закладах Києва, Вінниці, Львова, Маріуполя та інших міст. Сьогодні в ній ведуться електронні картки більш ніж 5 млн. пацієнтів. Система забезпечує автоматизацію всіх ключових процесів установи - від ведення електронної історії хвороби, до формування управлінської звітності та документації згідно вимог МОЗ.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Процесор: 2-3 ГГц Core i3+. <br>
+                        ОЗУ: 4 Гб +.<br>
+                        ЖД: 40 Гб +.<br>
+                        ОС: MS Windows 8<br>
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="//www.youtube.com/embed/0zwbQJOxhq4?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        вул. Наукова 7, корпус Г <br>
+                        м. Львів, 79060 <br>
+                        <a href="tel:+380679249053">067 924 90 53</a><br>
+                        <a href="mailto:doctor@eleks.com">doctor@eleks.com</a><br>
+                    </p>
+                </div>
+                <div class="partners__item">
+                    <img src="./images/partners/nhealth.png" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>МІС «nHealth»</b> («Здоров’я Нації») це повністю самостійне комплексне рішення для управління всіма процесами функціонування медичних закладів. Програма включає в себе роботу з базою даних пацієнтів (первинних та існуючих), комфорт комунікації, інформаційну підтримку лікарів з приводу хвороб, скарг та подальшого лікування пацієнтів. Документообіг відповідає всім вимогам МОЗ України.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Ноутбук або ПК офісного рівня. <br> Має працювати Adobe Air
+                    </p>
+                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/VmxVXTY3f9I" frameborder="0" allowfullscreen=""></iframe>
+                    <p>
+                        <a href="tel:+380443627886">044 362 78 86</a><br>
+                        <a href="mailto:info@vikisoft.kiev.ua">info@vikisoft.kiev.ua</a><br>
+                    </p>
+                </div>
+                <div class="partners__item">
+                    <img src="./images/partners/medair.png" alt="" class="">
+                    <div class="partners__item-title">ПРО МІС</div>
+                    <p><b>МедЕйр</b> – повнофункціональна МІС розроблена українськими розробниками для лікарів.
+                        Ми знаємо, що потрібно нашим лікарям та впевнено втілюємо їх побажання в реальність.
+                        За допомогою кабінету пацієнта ми забезпечуємо комунікацію пацієнта з медичним закладом та надаємо доступ до власної медичної інформації.
+                        Особливу увагу ми приділяємо захисту інформації та відповідності національним та міжнародним стандартам.</p>
+                    <div class="partners__item-title">ТЕХНІЧНІ ХАРАКТЕРИСТИКИ</div>
+                    <p>
+                        Процесор: 2-3 ГГц Core i3+. <br>
+                        ОЗУ: 2-4 Гб +.<br>
+                        ЖД: 2-10 Гб +.<br>
+                        ОС: MS Windows XP SP3 та вище<br>
+                    </p>
+                    <p>
+                        ТОВ «Ілайф» <br>
+                        <a href="tel:+380443530139">044 353 01 39</a><br>
+                        <a href="mailto:contact@e-life.com.ua">contact@e-life.com.ua</a><br>
+                    </p>
+                </div>
+
             </div>
             <div class="providers-page__back">
               <a href="/join.html">
