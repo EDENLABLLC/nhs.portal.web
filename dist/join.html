@@ -24,7 +24,7 @@ activeNav: "join"
     </header>
     <main class="main">
         <section class="join-page">
-            <h1 class="join-page__title">Як співпрацювати з eHealth</h1>
+            <h1 class="join-page__title">Як приєднатися до системи eHealth</h1>
             <section class="tabs tabs_theme_large">
                 <header class="tabs__header">
                     <ul class="tabs__nav">
@@ -65,6 +65,10 @@ activeNav: "join"
                                 <li class="join-rules__list-item">
                                     ЕЦП керівника <br />
                                     медичного закладу
+                                    <div
+                                        class="tooltip join-rules__list-tooltip"
+                                        data-message="ЕЦП від суб’єкта господарювання для керівника закладу"
+                                    ></div>
                                 </li>
                                 <li class="join-rules__list-item">
                                     робочу адресу <br />
@@ -78,29 +82,53 @@ activeNav: "join"
                                 <li class="join-rules__list-item">
                                     особисті <br />
                                     документи
+                                    <div
+                                        class="tooltip join-rules__list-tooltip"
+                                        data-message="паспорт та податковий номер"
+                                    ></div>
                                 </li>
                             </ul>
                             <h3 class="join-rules__sub-title">
                                 ДАЛІ
                             </h3>
-                            <ul class="join-rules__next-list join-rules__next-list_one">
+                            <ul class="join-rules__next-list join-rules__next-list_three">
                                 <li class="join-rules__next-list-item">
-                                    Отримати на електронну пошту <br />
-                                    <b>лист із запрошенням до eHealth</b>
+                                    Обрати одну з <br />
+                                    <b>медичних інформаційних систем </b>
+                                    <div
+                                        class="tooltip join-rules__list-tooltip"
+                                        data-message="Усі функції, необхідні для роботи з центральним компонентом системи eHealth надаються безкоштовно"
+                                    ></div>
+                                    підключених до системи eHealth
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    Затвердити власний <br />
-                                    обліковий запис користувача
+                                    Заповнити поля про медичний
+                                    заклад та керівника медичного закладу
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    В обраній медичній інформаційній <br />
-                                    системі заповнити поля <br />
-                                    про кожного лікаря первинної ланки
+                                    Накласти ЕЦП керівника медичного закладу
+                                </li>
+                                <li class="join-rules__next-list-item">
+                                    Перейти за посиланням у запрошенні <br />
+                                    до системи eHealth,
+                                    <div
+                                        class="tooltip join-rules__list-tooltip"
+                                        data-message=" Ви отримаєте лист на вказану робочу електронну адресу"
+                                    ></div>, що прийде на електронну пошту
+                                </li>
+                                <li class="join-rules__next-list-item">
+                                    Затвердити обліковий запис користувача для керівника медичного закладу
+                                </li>
+                                <li class="join-rules__next-list-item">
+                                    За потреби запросити працівника відділу кадрів
                                 </li>
                             </ul>
-                            <h3 class="join-rules__sub-title-done">
+                            <h3>
                                 ГОТОВО!
                             </h3>
+                            <p class="join-rules__attention">
+                                Важливо! Заповнена та підписана форма надає закладові статус: заявка на участь у реформі фінансування первинної ланки у 2017 році задекларована. На наступному етапі подані дані буде верифіковано відповідно до ЄДР про код ЄДРПОУ та КВЕД, та автоматизованою базою даних медичних, фармацевтичних та науково-педагогічних працівників сфери управління МОЗ України.
+                            </p>
 
                             <footer class="join-rules__footer">
                                 <a class="join-rules__button btn" href="/providers.html">
@@ -119,7 +147,8 @@ activeNav: "join"
                             </h3>
                             <ul class="join-rules__list">
                                 <li class="join-rules__list-item">
-                                    власний ЕЦП
+                                    ЕЦП працівника <br />
+                                    медичного закладу
                                 </li>
                                 <li class="join-rules__list-item">
                                     робочу адресу <br />
@@ -134,34 +163,33 @@ activeNav: "join"
                             </h3>
                             <ul class="join-rules__next-list join-rules__next-list_two">
                                 <li class="join-rules__next-list-item">
-                                    Отримати на електронну пошту <br />
-                                    <b>лист із запрошенням до eHealth</b>
+                                    Перейти за посиланням у <br />
+                                    <b>запрошенні до системи eHealth,</b>
                                     <div class="tooltip join-rules__list-tooltip" data-message="Ви отримаєте лист на вашу робочу електронну адресу"></div>
+                                    що прийде на електронну пошту
                                 </li>
                                 <li class="join-rules__next-list-item">
                                     Затвердити власний <br />
                                     обліковий запис користувача
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    В обраній медичній інформаційній <br />
-                                    системі заповнити поля <br />
-                                    про кожного лікаря первинної ланки
+                                    В медичній інформаційній <br />
+                                    системі перейти до підписання <br />
+                                    Декларацій з пацієнтами
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    Ввести дані пацієнта у <br />
-                                    електронну форму Декларації <br />
-                                    або перевірити достовірність <br />
-                                    попередньо введених Реєстратором
+                                    Ввести дані пацієнта у електронну <br />
+                                    форму Декларації або перевірити <br />
+                                    достовірність попередньо введених Реєстратором
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    Вказати <b>код з СМС-повідомлення</b>
-                                    <div class="tooltip join-rules__list-tooltip" data-message="Ви отримаєте лист на вашу робочу електронну адресу"></div>
-                                    пацієнту або прикріпити <br />
-                                    фото/скан копії документів пацієнта
+                                    Вказати код, що пацієнт отримав <br />
+                                    у СМС-повідомленні або прикріпити <br />
+                                    фото/скан копії його документів
                                 </li>
                                 <li class="join-rules__next-list-item">
                                     Роздрукувати заповнену Декларацію <br />
-                                    у двох примірниках <br />
+                                    у двох примірниках: <br />
                                     один – пацієнту, один – лікарю.
                                 </li>
                                 <li class="join-rules__next-list-item">
@@ -169,10 +197,12 @@ activeNav: "join"
                                     разом з пацієнтом.
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    Накласти власний ЕЦП <br />
-                                    на електронну форму Декларації <br />
-                                    як підтвердження її підписання
+                                    Накласти власний ЕЦП працівника <br />
+                                    медичного закладу на електронну <br />
+                                    форму Декларації як підтвердження її підписання
                                 </li>
+
+
                             </ul>
                             <h3 class="join-rules__sub-title">
                                 ГОТОВО!
@@ -180,7 +210,7 @@ activeNav: "join"
 
                             <footer class="join-rules__footer">
                                 <a class="join-rules__button btn" href="/providers.html">
-                                    Долучитись до eHealth
+                                    Увійти до системи eHealth
                                 </a>
                             </footer>
                         </section>
@@ -201,9 +231,13 @@ activeNav: "join"
                                 </li>
                                 <li class="join-rules__list-item">
                                     податковий номер
+                                    &nbsp;
+                                    <div class="tooltip join-rules__list-tooltip" data-message="за наявності"></div>
                                 </li>
                                 <li class="join-rules__list-item">
                                     мобільний телефон
+                                    &nbsp;
+                                    <div class="tooltip join-rules__list-tooltip" data-message="за наявності"></div>
                                 </li>
                             </ul>
                             <h3 class="join-rules__sub-title">
@@ -212,7 +246,8 @@ activeNav: "join"
                             <ul class="join-rules__next-list join-rules__next-list_three">
                                 <li class="join-rules__next-list-item">
                                     На сайті eHealth в розділі “Мапа” <br />
-                                    ознайомитись з Мапою <br />
+                                    ознайомитись з
+                                    <a href="http://portal.demo.ehealth.world/map.html"><b>мапою</b></a> <br />
                                     зареєстрованих закладів та лікарів
                                 </li>
                                 <li class="join-rules__next-list-item">
@@ -222,6 +257,11 @@ activeNav: "join"
                                 <li class="join-rules__next-list-item">
                                     Взявши особисті документи, <br />
                                     <b>звернутись до закладу</b>
+                                    <div
+                                        class="tooltip join-rules__list-tooltip"
+                                        data-message="Для підписання Декларації з особами, які знаходяться під опікою, необхідно мати: особисті документи опікуна/-ів, документи особи під опікою, та документи, що посвідчують факт представництва (посвідчення або рішення суду)">
+
+                                    </div>
                                 </li>
                                 <li class="join-rules__next-list-item">
                                     Вказати прізвище обраного лікаря <br />
@@ -242,8 +282,8 @@ activeNav: "join"
                             </h3>
 
                             <footer class="join-rules__footer">
-                                <a class="join-rules__button btn" href="/providers.html">
-                                    Долучитись до eHealth
+                                <a class="join-rules__button btn" href="/map.html">
+                                    Обрати заклад на мапі
                                 </a>
                             </footer>
                         </section>
@@ -284,31 +324,16 @@ activeNav: "join"
                             </h3>
                             <ul class="join-rules__next-list join-rules__next-list_three">
                                 <li class="join-rules__next-list-item">
-                                    На сайті eHealth в розділі “Долучитися” <br />
-                                    обрати одне з рішень <br />
-                                    медичних інформаційних систем
+                                    Перейти за посиланням у <br />
+                                    <b>запрошенні до системи eHealth</b>
+                                    <div class="tooltip join-rules__list-tooltip" data-message="Ви отримаєте лист на робочу електронну адресу"></div>
+                                    ,<br /> що прийде на електронну пошту
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    В обраній медичній інформаційній <br />
-                                    системі заповнити поля про <br />
-                                    медичний заклад та керівника <br />
-                                    медичного закладу
+                                    Затвердити власний обліковий запис користувача
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    Накласти ЕЦП керівника
-                                </li>
-                                <li class="join-rules__next-list-item">
-                                    Отримати на електронну пошту <br />
-                                    лист із підтвердженням <br />
-                                    та запрошенням до eHealth
-                                </li>
-                                <li class="join-rules__next-list-item">
-                                    Затвердити власний <br />
-                                    обліковий запис користувача
-                                </li>
-                                <li class="join-rules__next-list-item">
-                                    За потреби запросити <br />
-                                    працівника відділу кадрів
+                                    В медичній інформаційній системі заповнити поля про кожного лікаря первинної ланки
                                 </li>
                             </ul>
                             <h3 class="join-rules__sub-title">
@@ -317,7 +342,7 @@ activeNav: "join"
 
                             <footer class="join-rules__footer">
                                 <a class="join-rules__button btn" href="/providers.html">
-                                    Долучитись до eHealth
+                                    Увійти до системи eHealth
                                 </a>
                             </footer>
                         </section>
@@ -348,8 +373,10 @@ activeNav: "join"
                             </h3>
                             <ul class="join-rules__next-list join-rules__next-list_three">
                                 <li class="join-rules__next-list-item">
-                                    Отримати на електронну пошту
-                                    <b>лист із запрошенням до eHealth</b>
+                                    Перейти за посиланням у <br />
+                                    <b>запрошенні до системи eHealth</b>
+                                    <div class="tooltip join-rules__list-tooltip" data-message="Ви отримаєте лист на робочу електронну адресу"></div>
+                                    ,<br /> що прийде на електронну пошту
                                 </li>
                                 <li class="join-rules__next-list-item">
                                     Затвердити власний <br />
@@ -366,13 +393,9 @@ activeNav: "join"
                                     фото/скан копії документів пацієнта
                                 </li>
                                 <li class="join-rules__next-list-item">
-                                    Роздрукувати заповнену Декларацію <br />
-                                    у двох примірниках: <br />
+                                    За потреби поздрукувати заповнену <br />
+                                    Декларацію у двох примірниках: <br />
                                     один – пацієнту, один – лікарю.
-                                </li>
-                                <li class="join-rules__next-list-item">
-                                    Передати примірники пацієнту <br />
-                                    або лікарю
                                 </li>
                             </ul>
                             <h3 class="join-rules__sub-title">
@@ -381,7 +404,7 @@ activeNav: "join"
 
                             <footer class="join-rules__footer">
                                 <a class="join-rules__button btn" href="/providers.html">
-                                    Долучитись до eHealth
+                                    Увійти до системи eHealth
                                 </a>
                             </footer>
                         </section>
@@ -391,7 +414,7 @@ activeNav: "join"
         </section>
     </main>
     <footer class="footer">
-        ©2017 All Rights Recerved
+        Електронна система охорони здоров’я eHealth
     </footer>
 
     <script type="text/javascript" src="/scripts/config.js"></script>

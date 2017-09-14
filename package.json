@@ -66,7 +66,8 @@
   },
   "dependencies": {
     "aos": "^2.2.0",
-    "chart.js": "^2.6.0",
+    "chart.js": "2.6.0",
+    "choices.js": "3.0.2",
     "classnames": "^2.2.5",
     "ejs": "^2.5.5",
     "es6-promise": "^4.1.1",
@@ -81,6 +82,7 @@
     "react-infinite-scroll": "^0.1.5",
     "react-infinite-scroller": "^1.0.14",
     "react-lite": "^0.15.37",
+    "smart-plurals": "^1.1.0",
     "smoothscroll-polyfill": "^0.3.5"
   }
 }

@@ -23,7 +23,7 @@ date: '2017-05-24T14:42:52.381Z'
     </header>
     <article class="header__main">
         <h2>Піклуємося про ваше здоров’я!</h2>
-        <h1>eHealth - Національна об’єднана система електронних послуг у медицині</h1>
+        <h1>“eHealth” – Національна електронна система охорони здоров’я</h1>
     </article>
     <footer class="header__footer">
         <a class="header__main-link" href="about.html">
@@ -276,38 +276,49 @@ date: '2017-05-24T14:42:52.381Z'
     </section>
     <section class="contacts" id="contacts" data-aos="fade-up">
         <header class="contacts__header">
-            <h3>КОНТАКТИ</h3>
+            <h3>Зворотній зв‘язок</h3>
         </header>
         <article class="contacts__main">
-            <p>
-                Національна Служба Здоров’я України <br />
-                вул. Грушевського 7, <br />
-                м. Київ, 01601
-            </p>
+            <!--<p>-->
+                <!--Національна Служба Здоров’я України <br />-->
+                <!--вул. Грушевського 7, <br />-->
+                <!--м. Київ, 01601-->
+            <!--</p>-->
 
-            <p>
-                тел. (044)253-61-94, <br />
-                факс (044)253-40-17
-            </p>
+            <!--<p>-->
+                <!--тел. (044)253-61-94, <br />-->
+                <!--факс (044)253-40-17-->
+            <!--</p>-->
 
-            <p>
-                <a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>
-            </p>
+            <!--<p>-->
+                <!--<a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>-->
+            <!--</p>-->
             <p class="social">
-                <a href="">
-                    <span class="icon icon-fb"></span>
+                <a target="_blank" href="https://www.facebook.com/E-Health-323399904773248">
+                    <span class="icon icon_name_fb"></span>
                 </a>
-                <a href="">
-                    <span class="icon icon-youtube"></span>
+                <a target="_blank" href="https://twitter.com/eHealthUa">
+                    <span class="icon icon_name_tw"></span>
                 </a>
             </p>
 
             <form class="feedback contacts__form">
-                <div class="contacts__form-title">
-                    Зворотній зв’язок
+                <!--<div class="contacts__form-title">-->
+                    <!--Зворотній зв‘язок-->
+                <!--</div>-->
+                <div class="contacts__form-row">
+                    <select id="select">
+                        <option placeholder>Оберіть тему</option>
+                        <option>консультування лікарів</option>
+                        <option>організаційні питання</option>
+                        <option>запит від  ЗМІ</option>
+                    </select>
                 </div>
                 <div class="contacts__form-row">
                     <input required class="feedback__name" type="text" name="name" placeholder="Ваше ім’я" />
+                </div>
+                <div class="contacts__form-row">
+                    <input required class="feedback__name" type="email" name="name" placeholder="Email" />
                 </div>
                 <div class="contacts__form-row">
                     <textarea required class="feedback__message" name="message" placeholder="Текст повідомлення"></textarea>
@@ -329,7 +340,7 @@ date: '2017-05-24T14:42:52.381Z'
   </div>
 </main>
 <footer class="footer">
-    ©2017 All Rights Recerved
+    Електронна система охорони здоров’я eHealth
 </footer>
 <script type="text/javascript" src="/scripts/config.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>

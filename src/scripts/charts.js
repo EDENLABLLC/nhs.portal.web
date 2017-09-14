@@ -1,4 +1,9 @@
 import { $, addRule } from './dom';
+import Smart from 'smart-plurals';
+
+
+const ukrainian = Smart.Plurals.getRule('ru');
+const dict = [ ' декларація', ' декларації', ' декларацій' ];
 
 const MONTHS = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня",  "Серпня", "Вересня", "Жовтеня",  "Листопада", "Грудня"];
 
@@ -90,7 +95,7 @@ export const DinamicalMonthChart = (elem, names, values) =>
           let title = document.createElement('div');
           let value = document.createElement('div');
           title.innerText = titleLines;
-          const doctor = tooltip.dataPoints[0].yLabel % 2 ? ' лікаря' : ' лікарів';
+          const doctor = ukrainian(tooltip.dataPoints[0].yLabel, dict);
           value.innerHTML = '<span>' + tooltip.dataPoints[0].yLabel + doctor + '</span>' ;
           Object.assign(title.style, {
             color: '#17184e',

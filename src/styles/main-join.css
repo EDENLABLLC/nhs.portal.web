@@ -22,12 +22,16 @@
   }
 
   &__tabs {
-    min-height: 1000px;
+    min-height: 1100px;
   }
 }
 
 .join-rules {
   margin: 0 60px;
+
+  &__attention {
+     padding-bottom: 45px;
+  }
 
   &__title {
     font-size: 21px;
@@ -95,7 +99,7 @@
     display: flex;
     flex-flow: column wrap;
     align-content: space-between;
-    justify-content: space-between;
+    justify-content: flex-start;
     counter-reset: next-list;
     list-style: none;
   }

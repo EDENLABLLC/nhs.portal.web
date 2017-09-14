@@ -1,9 +1,7 @@
 .about {
-
-
     &__main {
         max-width: 600px;
-        h2 {
+        & > h2 {
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 30px;
@@ -25,9 +23,10 @@
             vertical-align: top;
             padding: 0 20px;
             position: relative;
+
             &:first-child {
-                 padding-left: 0;
-             }
+              padding-left: 0;
+            }
 
 
             &::after {
@@ -35,7 +34,7 @@
                 content: '';
                 display: block;
                 background-color: #e7e8ea;
-                height: 950px;
+                height: 520px;
                 width: 1px;
                 right: 0;
                 top: 0;
@@ -45,8 +44,26 @@
 
             }
             p {
-                font-size: 16px;
+                font-size: 12px;
             }
         }
+    }
+
+    &__partners {
+        h2 {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        &-img {
+             margin: 40px auto 50px;
+             background-image: url(../images/partners.jpg);
+             background-repeat: no-repeat;
+             background-size: 100%;
+             width: 800px;
+             height: 400px;
+         }
     }
 }
