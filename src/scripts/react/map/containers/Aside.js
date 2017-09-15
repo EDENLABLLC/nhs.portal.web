@@ -5,7 +5,7 @@ import SearchResult from '../components/SearchResult';
 const types = [
   { type: 'CLINIC', title: 'Заклади охорони здоров’я' },
   { type: 'AMBULANT_CLINIC', title: 'Амбулаторії' },
-  { type: 'FAP', title: 'Аптеки' },
+  // { type: 'FAP', title: 'Аптеки' },
 ];
 
 export default ({
