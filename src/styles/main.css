@@ -58,3 +58,7 @@ a:hover {
 .choices__inner {
   background-color: #fff !important;
 }
+
+#declarations__graph-canvas {
+  margin-top: 70px;
+}

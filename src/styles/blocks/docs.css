@@ -2,6 +2,10 @@
   padding-bottom: 60px;
   border-bottom: #dad9d8 1px solid;
 
+  &__attention {
+     color: #b8312f;
+  }
+
   &__list {
     display: flex;
     flex-flow: row wrap;
@@ -39,6 +43,6 @@
   }
 
   &__slider-content {
-    height: 390px;
+    height: 540px;
   }
 }
