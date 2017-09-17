@@ -1,6 +1,9 @@
 import { $, addRule } from './dom';
 import Smart from 'smart-plurals';
+import Chart from 'chart.js';
 
+Chart.defaults.global.defaultFontFamily='GothamPro';
+Chart.defaults.global.defaultFontColor='#292b37';
 
 const ukrainian = Smart.Plurals.getRule('ru');
 const dict = [' декларація', ' декларації', ' декларацій' ];
