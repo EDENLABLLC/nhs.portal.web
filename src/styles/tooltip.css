@@ -43,6 +43,12 @@
     z-index: 3;
   }
 
+  &_br {
+    &::after {
+     white-space: pre-line;
+    }
+  }
+
   &::before {
     content: "";
     transform: translateX(-50%);
