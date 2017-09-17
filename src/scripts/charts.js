@@ -1,11 +1,44 @@
 import { $, addRule } from './dom';
 import Smart from 'smart-plurals';
+import Chart from 'chart.js';
 
+Chart.defaults.global.defaultFontFamily='GothamPro';
+Chart.defaults.global.defaultFontColor='#292b37';
 
 const ukrainian = Smart.Plurals.getRule('ru');
-const dict = [ ' декларація', ' декларації', ' декларацій' ];
+const dict = [' декларація', ' декларації', ' декларацій' ];
 
 const MONTHS = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня",  "Серпня", "Вересня", "Жовтеня",  "Листопада", "Грудня"];
+
+const REGIONS = {
+  "ІВАНО-ФРАНКІВСЬКА": "Івано-Франківська",
+  "АВТОНОМНА РЕСПУБЛІКА КРИМ": "Aвтономна Республіка Крим",
+  "ВІННИЦЬКА": "Вінницька",
+  "ВОЛИНСЬКА": "Волинська",
+  "ДНІПРОПЕТРОВСЬКА": "Дніпропетровська",
+  "ДОНЕЦЬКА": "Донецька",
+  "ЖИТОМИРСЬКА": "Житомирська",
+  "ЗАКАРПАТСЬКА": "Закарпатська",
+  "ЗАПОРІЗЬКА": "Запорізька",
+  "КІРОВОГРАДСЬКА": "Кіровоградська",
+  "КИЇВСЬКА": "Київська",
+  "ЛУГАНСЬКА": "Луганська",
+  "ЛЬВІВСЬКА": "Львівська",
+  "М.КИЇВ": "м. Київ",
+  "М.СЕВАСТОПОЛЬ": "м. Севастополь",
+  "МИКОЛАЇВСЬКА": "Миколаївська",
+  "ОДЕСЬКА": "Одеська",
+  "ПОЛТАВСЬКА": "Полтавська",
+  "РІВНЕНСЬКА": "Рівненська",
+  "СУМСЬКА": "Сумська",
+  "ТЕРНОПІЛЬСЬКА": "Тернопільська",
+  "ХАРКІВСЬКА": "Харківська",
+  "ХЕРСОНСЬКА": "Херсонська",
+  "ХМЕЛЬНИЦЬКА": "Хмельницька",
+  "ЧЕРКАСЬКА": "Черкаська",
+  "ЧЕРНІВЕЦЬКА": "Чернівецька",
+  "ЧЕРНІГІВСЬКА": "Чернігівська"
+};
 
 export const DinamicalMonthChart = (elem, names, values) =>
   new Chart(elem, {
@@ -208,8 +241,7 @@ export const RegionsCharts = (elem, data, name)  =>
   new Chart(elem, {
     type: 'horizontalBar',
     data: {
-      labels: data.map(i =>
-        i.region.charAt(0).toUpperCase() + i.region.slice(1).toLowerCase()),
+      labels: data.map(i => REGIONS[i.region]),
       datasets: [{
         backgroundColor: 'rgb(0, 128, 249)',
         borderColor: 'rgb(88,181,252)',
@@ -245,7 +277,7 @@ export const RegionsCharts = (elem, data, name)  =>
         xAxes: [{
           gridLines: {
             display: true,
-            lineWidth: 0,
+            // lineWidth: 0,
             drawTicks: false,
             drawBorder: false,
             color: "rgba(0,0,0,0)",
@@ -253,11 +285,14 @@ export const RegionsCharts = (elem, data, name)  =>
           },
           ticks: {
             display: false,
+            beginAtZero:true,
+            min: 0,
+            max: Math.max.apply(this, data.map(i => i[name])) * 2,
           }
         }],
         yAxes: [{
-          barPercentage: 1.222222,
-          // categoryPercentage: 1,
+          barPercentage: .99,
+          categoryPercentage: .97,
           ticks: {
             padding: 25,
           },
@@ -265,6 +300,7 @@ export const RegionsCharts = (elem, data, name)  =>
             display: false,
             drawBorder: false,
             drawTicks: false,
+            showBorder:false
           },
         }]
       },
@@ -295,5 +331,3 @@ export const RegionsCharts = (elem, data, name)  =>
       }
     }
   });
-
-
