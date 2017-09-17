@@ -274,7 +274,7 @@ export const RegionsCharts = (elem, data, name)  =>
         xAxes: [{
           gridLines: {
             display: true,
-            lineWidth: 0,
+            // lineWidth: 0,
             drawTicks: false,
             drawBorder: false,
             color: "rgba(0,0,0,0)",
@@ -282,11 +282,14 @@ export const RegionsCharts = (elem, data, name)  =>
           },
           ticks: {
             display: false,
+            beginAtZero:true,
+            min: 0,
+            max: Math.max.apply(this, data.map(i => i[name])) * 2,
           }
         }],
         yAxes: [{
-          barPercentage: 1.222222,
-          // categoryPercentage: 1,
+          barPercentage: .99,
+          categoryPercentage: .97,
           ticks: {
             padding: 25,
           },
@@ -294,6 +297,7 @@ export const RegionsCharts = (elem, data, name)  =>
             display: false,
             drawBorder: false,
             drawTicks: false,
+            showBorder:false
           },
         }]
       },
@@ -324,32 +328,3 @@ export const RegionsCharts = (elem, data, name)  =>
       }
     }
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
