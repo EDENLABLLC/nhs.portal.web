@@ -1,13 +1,13 @@
 ---
 title: Як розробникам підключитись до системи eHealth?
-excerpt: ""
+excerpt_separator: <!--more-->
 layout: document
 clarification_types:
 - "Розробникам"
 date: '2017-09-15T00:00:05.000+00:00'
 ---
 
-Вся розробка системи eHealth є відкритою і з нею можна ознайомитися на майданчику GitHub за посиланням: [https://github.com/ehealth-ua/api-spec](https://github.com/ehealth-ua/api-spec)
+Вся розробка системи eHealth є відкритою і з нею можна ознайомитися на майданчику GitHub<!--more--> за посиланням: [https://github.com/ehealth-ua/api-spec](https://github.com/ehealth-ua/api-spec)
  
 АРІ доступне за цим посиланням [http://docs.ehealthapi1.apiary.io/#reference](http://docs.ehealthapi1.apiary.io/#reference)
  
