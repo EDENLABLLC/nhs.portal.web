@@ -151,7 +151,7 @@ export default class App extends React.Component {
           rightbottom_longitude: topRight.lng(),
           type: this.state.type,
           name: this.state.search,
-          page_size: 5,
+          page_size: 50,
           page: page,
         }
       )).then((resp) => {
