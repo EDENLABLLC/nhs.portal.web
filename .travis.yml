@@ -35,5 +35,5 @@ script:
   == "1" ]; then echo "[E] Container is not started\!"; docker logs nhs.portal.web
   --details --since 5h; exit 1; fi;
 - sleep 5
-- ./bin/ci/push.sh || travis_terminate 1
+- ./bin/ci/push.sh 
 - sudo ./bin/deploy.sh || travis_terminate 1
