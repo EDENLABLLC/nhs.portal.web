@@ -8,12 +8,11 @@ export default class Feedback extends BEM {
     this.$message = this.elem('message');
     this.$mailTo = this.elem('mailto');
     this.$theme = this.elem('theme');
-    console.log('this.$theme', this.$theme);
 
     node.onsubmit = (e) => {
       e.preventDefault();
 
-      this.$mailTo.href = `mailto:info@ehealth-ukraine.org?subject=Зворотній зв’язок: ${this.$theme.value} ${this.$name.value}&body=${this.$message.value}`;
+      this.$mailTo.href = `mailto:info@ehealth-ukraine.org?subject=Зворотній зв’язок: ${this.$theme.value}: ${this.$name.value}&body=${this.$message.value}`;
       this.$mailTo.click();
       return false;
     }
