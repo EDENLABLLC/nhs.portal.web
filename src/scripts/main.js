@@ -45,7 +45,7 @@ fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${year}-${month}-01
     const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
     const DATA = data.data.reduce((acc, cur, index) => {
       acc.push({
-        value: cur.declarations_active_start,
+        value: cur.declarations_active_end,
         label: index + 1,
         ...cur.stats,
       });
