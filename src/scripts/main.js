@@ -40,6 +40,7 @@ const day = new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().
 const month = new Date().getMonth() < 10 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
 const year = new Date().getFullYear();
 
+
 fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${year}-${month}-01&to_date=${year}-${month}-${day}&interval=DAY`)
   .then(data => {
     const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
