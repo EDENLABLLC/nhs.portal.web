@@ -291,8 +291,8 @@ export const RegionsCharts = (elem, data, name)  =>
           }
         }],
         yAxes: [{
-          barPercentage: .99,
-          categoryPercentage: .97,
+          barPercentage: .98,
+          categoryPercentage: 1,
           ticks: {
             padding: 25,
           },
