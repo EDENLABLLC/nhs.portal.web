@@ -1,6 +1,8 @@
 .about {
     &__main {
-        max-width: 600px;
+        width: 800px;
+        padding-right: 20px;
+
         & > h2 {
             font-size: 22px;
             font-weight: bold;
@@ -15,7 +17,7 @@
     }
 
     &__history {
-        min-width: 800px;
+        width: 800px;
 
         li {
             display: inline-block;

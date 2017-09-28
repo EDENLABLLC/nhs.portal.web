@@ -42,7 +42,7 @@ export default ({
       <div className="search__result" ref={onMountList}>
         { !!items.length && (
           <div className="search__result-total">
-            Знайдено {items.length} закрадів
+            Знайдено {items.length} закладів
           </div>
         )}
         <ul className="search__result-list">
