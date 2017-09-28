@@ -43,6 +43,7 @@
   }
 
   &__slider-content {
-    height: 540px;
+    height: 570px;
+    overflow: hidden;
   }
 }

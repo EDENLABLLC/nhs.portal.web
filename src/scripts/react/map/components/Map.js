@@ -100,12 +100,14 @@ export default withGoogleMap(({
             disableAutoPan
             pixelOffset={new google.maps.Size(136,800)}
           >
-            <SearchMapTooltip
-              {...hoverMarker}
-              active={hoverMarker && activeMarker && hoverMarker.id === activeMarker.id}
-              address={hoverMarker.addresses[0]}
-              phones={hoverMarker.contacts.phones}
-            />
+           <div style={{ overflow: `hidden` }}>
+              <SearchMapTooltip
+                {...hoverMarker}
+                active={hoverMarker && activeMarker && hoverMarker.id === activeMarker.id}
+                address={hoverMarker.addresses[0]}
+                phones={hoverMarker.contacts.phones}
+                />
+          </div>
           </InfoBox>
         </Marker>
       )}
