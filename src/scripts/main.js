@@ -37,7 +37,7 @@ $('.feedback').forEach(node => new Feedback(node));
 const { API_ENDPOINT } = window.__CONFIG__;
 
 const day = new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate();
-const month = new Date().getMonth() < 10 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
+const month = new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
 const year = new Date().getFullYear();
 
 
