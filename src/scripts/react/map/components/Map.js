@@ -42,8 +42,11 @@ export default withGoogleMap(({
         }}
       ></Marker>
     )}
+    {
+      console.log(markers, activeMarker, hoverMarker)
+    }
     <MarkerClusterer>
-      {uniqBy(markers.concat([activeMarker, hoverMarker]).filter(i => i), 'id').map((marker, index) => (
+      {uniqBy((markers || []).concat([activeMarker, hoverMarker]).filter(i => i), 'id').map((marker, index) => (
           <Marker
             {...{
               position: {
