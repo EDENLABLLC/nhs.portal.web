@@ -158,8 +158,8 @@ export default class App extends React.Component {
         return resp.json().then((json) => {
           this.setState({
             isLoading: false,
-            items: newSet ? json.data.entries : [].concat(this.state.items).concat(json.data.entries),
-            pagination: pickFn(json.data, ['page_number', 'page_size', 'total_entries', 'total_pages']),
+            items: json.data.length > 0 ? (newSet ? json.data : [].concat(this.state.items).concat(json.data)) : [].concat(this.state.items),
+            pagination: pickFn(json.paging, ['page_number', 'page_size', 'total_entries', 'total_pages']),
           }, () => {
             if (this.list && newSet) this.list.scrollTop = 0;
             else this.list.scrollTop = oldTopScroll;
