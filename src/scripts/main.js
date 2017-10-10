@@ -61,9 +61,19 @@ fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${year}-${month}-01
 
 fetchJSON(`${API_ENDPOINT}/reports/stats/regions`).then(data => {
   $('.map').forEach(node => new Map(node, data.data));
-  const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
   const NUMBER_BY_REGION_MSPS = document.getElementById('msp_number__graph-canvas').getContext('2d');
-  const NUMBER_BY_REGION_DOCTORS= document.getElementById('doctors_number__graph-canvas').getContext('2d');
+  const NUMBER_BY_REGION_FARMACIES = document.getElementById('pharmacies_number__graph-canvas').getContext('2d');
+  const NUMBER_BY_REGION_DOCTORS = document.getElementById('doctors_number__graph-canvas').getContext('2d');
+  const NUMBER_BY_REGION_FARMACIST = document.getElementById('pharmacists_requests_number__graph-canvas').getContext('2d');
+  const NUMBER_BY_REGION_REQUEST = document.getElementById('medication_requests_number__graph-canvas').getContext('2d');
+  const NUMBER_BY_REGION_DECLARATION = document.getElementById('declarations_number__graph-canvas').getContext('2d');
+
+  // msps
+  // pharmacies
+  // doctors
+  // pharmacists
+  // medication_requests
+  // declarations
 
   let DATA = data.data.reduce((acc, cur ) => {
     acc.push({
@@ -74,27 +84,43 @@ fetchJSON(`${API_ENDPOINT}/reports/stats/regions`).then(data => {
   }, []);
 
   RegionsCharts(
-    NUMBER_BY_REGION_DECLARATION,
-    DATA.sort((a, b) => a.declarations - b.declarations).reverse(),
-    'declarations'
-  );
-  RegionsCharts(
     NUMBER_BY_REGION_MSPS,
     DATA.sort((a, b) => a.msps - b.msps).reverse(),
     'msps',
+  );
+  RegionsCharts(
+    NUMBER_BY_REGION_FARMACIES,
+    DATA.sort((a, b) => a.pharmacies - b.pharmacies).reverse(),
+    'pharmacies',
   );
   RegionsCharts(
     NUMBER_BY_REGION_DOCTORS,
     DATA.sort((a, b) => a.doctors - b.doctors).reverse(),
     'doctors',
   );
+  RegionsCharts(
+    NUMBER_BY_REGION_FARMACIST,
+    DATA.sort((a, b) => a.pharmacists - b.pharmacists).reverse(),
+    'pharmacists',
+  );
+  RegionsCharts(
+    NUMBER_BY_REGION_REQUEST,
+    DATA.sort((a, b) => a.medication_requests - b.medication_requests).reverse(),
+    'medication_requests',
+  );
+  RegionsCharts(
+    NUMBER_BY_REGION_DECLARATION,
+    DATA.sort((a, b) => a.declarations - b.declarations).reverse(),
+    'declarations'
+  );
 });
 
 fetchJSON(`${API_ENDPOINT}/reports/stats/`).then(data => {
   const joined_items = $('.joined__item-count');
+
   joined_items[0].innerText = data.data.msps;
-  joined_items[1].innerText = data.data.doctors;
-  joined_items[2].innerText = data.data.pharmacists;
-  joined_items[3].innerText = data.data.pharmacies;
+  joined_items[1].innerText = data.data.pharmacies;
+  joined_items[2].innerText = data.data.doctors;
+  joined_items[3].innerText = data.data.pharmacists;
   joined_items[4].innerText = data.data.declarations;
 });

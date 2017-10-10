@@ -77,6 +77,10 @@ date: '2017-05-24T14:42:52.381Z'
             </div>
             <div class="joined__item">
                 <div class="joined__item-count">-</div>
+                Аптеки
+            </div>
+            <div class="joined__item">
+                <div class="joined__item-count">-</div>
                 Лікарі
             </div>
             <div class="joined__item">
@@ -85,11 +89,7 @@ date: '2017-05-24T14:42:52.381Z'
             </div>
             <div class="joined__item">
                 <div class="joined__item-count">-</div>
-                Рецепти
-            </div>
-            <div class="joined__item">
-                <div class="joined__item-count">-</div>
-                Декларації
+                Пацієнтів
             </div>
         </article>
     </section>
@@ -149,7 +149,7 @@ date: '2017-05-24T14:42:52.381Z'
                         <section>
                             <section class="tabs">
                                 <header>
-                                    <p class="tabs__header-title tabs__header-title-small">Кількість закладів, лікарів, декларацій  по регіонах</p>
+                                    <p class="tabs__header-title tabs__header-title-small">Кількість закладів, аптек, лікарів, співробітників аптек, рецептів та  декларацій  по регіонах</p>
                                     <div class="tabs__header tabs__header-small">
                                         <ul class="tabs__nav tabs__nav-small">
                                             <li class="tabs__nav-item tabs__nav-item_small tabs__nav-item_active">
@@ -181,7 +181,22 @@ date: '2017-05-24T14:42:52.381Z'
                                     </section>
                                     <section class="tabs__slide">
                                         <section>
+                                            <canvas class="declarations__graph" id="pharmacies_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
                                             <canvas class="declarations__graph" id="doctors_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="pharmacists_requests_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="medication_requests_number__graph-canvas" width="700" height="350"></canvas>
                                         </section>
                                     </section>
                                     <section class="tabs__slide">
