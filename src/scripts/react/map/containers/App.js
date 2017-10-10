@@ -158,7 +158,7 @@ export default class App extends React.Component {
         return resp.json().then((json) => {
           this.setState({
             isLoading: false,
-            items: json.data.length > 0 ? (newSet ? json.data : this.state.items.concat(json.data)) : [],
+            items: json.data.length > 0 ? (newSet ? json.data : [].concat(this.state.items).concat(json.data)) : [],
             pagination: pickFn(json.paging, ['page_number', 'page_size', 'total_entries', 'total_pages']),
           }, () => {
             if (this.list && newSet) this.list.scrollTop = 0;
@@ -180,7 +180,7 @@ export default class App extends React.Component {
             onSearchTypeUpdate={this.onSearchTypeUpdate}
             onClickSearchItem={this.onClickSearchItem}
             onLoadMore={this.onLoadMore}
-            hasMore={this.state.pagination.page_number <= this.state.pagination.total_pages}
+            hasMore={this.state.pagination.page_number < this.state.pagination.total_pages}
             isLoading={this.state.isLoading}
             onMountList={this.onMountList}
           />
