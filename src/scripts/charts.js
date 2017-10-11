@@ -6,7 +6,8 @@ Chart.defaults.global.defaultFontFamily='GothamPro';
 Chart.defaults.global.defaultFontColor='#292b37';
 
 const ukrainian = Smart.Plurals.getRule('ru');
-const dict = [' декларація', ' декларації', ' декларацій' ];
+const dict_declaration = [' декларація', ' декларації', ' декларацій' ];
+const dict_medications = [' рецепт', ' рецепти', ' рецептів'];
 
 const MONTHS = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня",  "Серпня", "Вересня", "Жовтня",  "Листопада", "Грудня"];
 
@@ -40,7 +41,7 @@ const REGIONS = {
   "ЧЕРНІГІВСЬКА": "Чернігівська"
 };
 
-export const DinamicalMonthChart = (elem, names, values) =>
+export const DinamicalMonthChart = (elem, names, values, name) =>
   new Chart(elem, {
   type: 'line',
   data: {
@@ -87,12 +88,12 @@ export const DinamicalMonthChart = (elem, names, values) =>
       custom: function(tooltip) {
 
         // Tooltip Element
-        let tooltipEl = $('#chartjs-tooltip')[0];
+        let tooltipEl = $('#chartjs-tooltip'+'_'+name)[0];
         if (!tooltipEl) {
           const el = document.createElement('div');
-          el.setAttribute("id", "chartjs-tooltip");
-          $('#declarations__graph-canvas')[0].offsetParent.appendChild(el);
-          tooltipEl = $('#chartjs-tooltip')[0];
+          el.setAttribute("id", "chartjs-tooltip"+"_"+ name);
+          $('#'+name)[0].offsetParent.appendChild(el);
+          tooltipEl = $('#chartjs-tooltip' +'_' +name)[0];
         }
 
         // Hide if no tooltip
@@ -128,8 +129,15 @@ export const DinamicalMonthChart = (elem, names, values) =>
           let title = document.createElement('div');
           let value = document.createElement('div');
           title.innerText = titleLines;
-          const doctor = ukrainian(tooltip.dataPoints[0].yLabel, dict);
-          value.innerHTML = '<span>' + tooltip.dataPoints[0].yLabel + doctor + '</span>' ;
+          let label;
+          if (name === 'declarations__graph-canvas') {
+            label = ukrainian(tooltip.dataPoints[0].yLabel, dict_declaration);
+          }
+          if (name === 'medication_requests__graph-canvas') {
+            label = ukrainian(tooltip.dataPoints[0].yLabel, dict_medications);
+          }
+
+          value.innerHTML = '<span>' + tooltip.dataPoints[0].yLabel + label + '</span>' ;
           Object.assign(title.style, {
             color: '#17184e',
             fontSize: '16px',
@@ -165,7 +173,7 @@ export const DinamicalMonthChart = (elem, names, values) =>
           }
         }
 
-        let elem = $('#declarations__graph-canvas')[0];
+        let elem = $('#'+name)[0];
         const position = {
           left: elem.offsetLeft,
           top: elem.offsetTop - 100,
@@ -200,7 +208,7 @@ export const DinamicalMonthChart = (elem, names, values) =>
             left: position.left + tooltip.caretX + 7 + 'px',
           });
 
-          addRule("#chartjs-tooltip:before", {
+          addRule("#chartjs-tooltip" +"_"+ name + ":before", {
             content: "''",
             position: "absolute",
             background: "#4880ed",
@@ -218,7 +226,7 @@ export const DinamicalMonthChart = (elem, names, values) =>
             left: position.left + tooltip.caretX + 8 - 200 + 'px',
           });
 
-          addRule("#chartjs-tooltip:before", {
+          addRule("#chartjs-tooltip" + "_" + name + "::before", {
             content: "''",
             position: "absolute",
             background: "#4880ed",
