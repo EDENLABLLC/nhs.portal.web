@@ -1,6 +1,6 @@
 {
   "name": "nhs.portal.web",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "NHS Portal Landing",
   "main": "index.js",
   "scripts": {
