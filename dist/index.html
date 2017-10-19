@@ -72,16 +72,23 @@ date: '2017-05-24T14:42:52.381Z'
         </header>
         <article class="joined__main">
             <div class="joined__item">
-                <div class="joined__item-count">–</div>
-                Медичних <br />
-                закладів
+                <div class="joined__item-count">-</div>
+                Медзаклади
             </div>
             <div class="joined__item">
-                <div class="joined__item-count">–</div>
-                Лікарів
+                <div class="joined__item-count">-</div>
+                Аптеки
             </div>
             <div class="joined__item">
-                <div class="joined__item-count">–</div>
+                <div class="joined__item-count">-</div>
+                Лікарі
+            </div>
+            <div class="joined__item">
+                <div class="joined__item-count">-</div>
+                Співробітники <br /> аптек
+            </div>
+            <div class="joined__item">
+                <div class="joined__item-count">-</div>
                 Пацієнтів
             </div>
         </article>
@@ -128,7 +135,10 @@ date: '2017-05-24T14:42:52.381Z'
                             Динаміка реєстрації декларацій
                         </li>
                         <li class="tabs__nav-item">
-                            Кількість закладів, лікарів, декларацій<br />  по регіонах
+                            Кількість закладів, аптек, лікарів, <br /> співробітників аптек, рецептів <br />та  декларацій  по регіонах
+                        </li>
+                        <li class="tabs__nav-item">
+                            Динаміка відпуску рецептів
                         </li>
                     </ul>
                 </header>
@@ -142,14 +152,23 @@ date: '2017-05-24T14:42:52.381Z'
                         <section>
                             <section class="tabs">
                                 <header>
-                                    <p class="tabs__header-title tabs__header-title-small">Кількість закладів, лікарів, декларацій  по регіонах</p>
+                                    <p class="tabs__header-title tabs__header-title-small">Кількість закладів, аптек, лікарів, співробітників аптек, рецептів та  декларацій  по регіонах</p>
                                     <div class="tabs__header tabs__header-small">
                                         <ul class="tabs__nav tabs__nav-small">
                                             <li class="tabs__nav-item tabs__nav-item_small tabs__nav-item_active">
-                                                Заклади
+                                                Медзаклади
+                                            </li>
+                                            <li class="tabs__nav-item tabs__nav-item_small">
+                                                Аптеки
                                             </li>
                                             <li class="tabs__nav-item tabs__nav-item_small">
                                                 Лікарі
+                                            </li>
+                                            <li class="tabs__nav-item tabs__nav-item_small">
+                                                Співробітники аптек
+                                            </li>
+                                            <li class="tabs__nav-item tabs__nav-item_small">
+                                                Рецепти
                                             </li>
                                             <li class="tabs__nav-item tabs__nav-item_small">
                                                 Декларації
@@ -165,7 +184,22 @@ date: '2017-05-24T14:42:52.381Z'
                                     </section>
                                     <section class="tabs__slide">
                                         <section>
+                                            <canvas class="declarations__graph" id="pharmacies_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
                                             <canvas class="declarations__graph" id="doctors_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="pharmacists_requests_number__graph-canvas" width="700" height="350"></canvas>
+                                        </section>
+                                    </section>
+                                    <section class="tabs__slide">
+                                        <section>
+                                            <canvas class="declarations__graph" id="medication_requests_number__graph-canvas" width="700" height="350"></canvas>
                                         </section>
                                     </section>
                                     <section class="tabs__slide">
@@ -175,6 +209,11 @@ date: '2017-05-24T14:42:52.381Z'
                                     </section>
                                 </article>
                             </section>
+                        </section>
+                    </section>
+                    <section class="tabs__slide">
+                        <section>
+                            <canvas class="declarations__graph" id="medication_requests__graph-canvas" width="700" height="350"></canvas>
                         </section>
                     </section>
                 </article>
