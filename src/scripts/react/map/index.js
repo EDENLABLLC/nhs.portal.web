@@ -10,5 +10,5 @@ import Route from 'react-router/lib/Router';
 import App from './containers/App';
 
 ReactDOM.render(<Router history={hashHistory}>
-  <Route path="*" component={App} />
+  <Route path="/" component={App} />
 </Router>, document.getElementById('map'));

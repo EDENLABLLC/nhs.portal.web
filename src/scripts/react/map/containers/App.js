@@ -11,6 +11,173 @@ import { createUrl } from '../helpers/url';
 
 const { API_ENDPOINT } = window.__CONFIG__;
 
+const REGIONS = {
+  "М.КИЇВ": {
+    coord: {
+      lat: 50.461,
+      lng: 30.531
+    },
+    zoom: 11,
+  },
+  "КИЇВСЬКА": {
+    coord: {
+      lat: 50.173,
+      lng: 30.509
+    },
+  },
+  "ВОЛИНСЬКА": {
+    coord: {
+      lat: 48.9026,
+      lng: 28.5205
+    },
+  },
+  "ЛЬВІВСЬКА": {
+    coord: {
+      lat: 49.657,
+      lng: 23.741
+    },
+  },
+  "ЗАКАРПАТСЬКА": {
+    coord: {
+      lat: 48.4128,
+      lng: 23.1400
+    },
+  },
+  "ІВАНО-ФРАНКІВСЬКА": {
+    coord: {
+      lat: 48.753,
+      lng: 24.527
+    },
+  },
+  "ЧЕРНІВЕЦЬКА": {
+    coord: {
+      lat: 48.3836,
+      lng: 26.1145
+    },
+  },
+  "ТЕРНОПІЛЬСЬКА": {
+    coord: {
+      lat: 49.461,
+      lng: 25.543
+    },
+  },
+  "РІВНЕНСЬКА": {
+    coord: {
+      lat: 51.066,
+      lng: 26.472
+    },
+  },
+  "ХМЕЛЬНИЦЬКА": {
+    coord: {
+      lat: 49.564,
+      lng: 26.922
+    },
+  },
+  "ЖИТОМИРСЬКА": {
+    coord: {
+      lat: 50.639,
+      lng: 28.521
+    },
+  },
+  "ВІННИЦЬКА": {
+    coord: {
+      lat: 48.904,
+      lng: 28.510
+    },
+  },
+  "ЧЕРКАСЬКА": {
+    coord: {
+      lat: 49.157,
+      lng: 31.234
+    },
+  },
+  "КІРОВОГРАДСЬКА": {
+    coord: {
+      lat: 48.509,
+      lng: 32.267
+    },
+  },
+  "ПОЛТАВСЬКА": {
+    coord: {
+      lat: 49.870,
+      lng: 33.772
+    },
+  },
+  "ЧЕРНІГІВСЬКА": {
+    coord: {
+      lat: 51.269,
+      lng: 31.756
+    },
+  },
+  "СУМСЬКА": {
+    coord: {
+      lat: 50.775,
+      lng: 34.338
+    },
+  },
+  "ХАРКІВСЬКА": {
+    coord: {
+      lat: 49.664,
+      lng: 36.464
+    },
+  },
+  "ЛУГАНСЬКА": {
+    coord: {
+      lat: 48.915,
+      lng: 39.029
+    },
+  },
+  "ДНІПРОПЕТРОВСЬКА": {
+    coord: {
+      lat: 48.542,
+      lng: 34.964
+    },
+  },
+  "ДОНЕЦЬКА": {
+    coord: {
+      lat: 48.041,
+      lng: 37.694
+    },
+  },
+  "ЗАПОРІЗЬКА": {
+    coord: {
+      lat: 47.421,
+      lng: 35.914
+    },
+  },
+  "ХЕРСОНСЬКА": {
+    coord: {
+      lat: 46.563,
+      lng: 33.415
+    },
+  },
+  "МИКОЛАЇВСЬКА": {
+    coord: {
+      lat: 47.376,
+      lng: 31.965
+    },
+  },
+  "ОДЕСЬКА": {
+    coord: {
+      lat: 46.536,
+      lng: 30.267
+    },
+  },
+  "АВТОНОМНА РЕСПУБЛІКА КРИМ": {
+    coord: {
+      lat: 45.228,
+      lng: 34.162
+    },
+  },
+  "М.СЕВАСТОПОЛЬ": {
+    coord: {
+      lat: 44.6100,
+      lng: 33.5426
+    },
+    zoom: 11,
+  }
+}
+
 @withRouter
 export default class App extends React.Component {
   constructor(props) {
@@ -21,7 +188,7 @@ export default class App extends React.Component {
       bounds: null,
       type: 'CLINIC',
       search: null,
-      zoom: 11,
+      zoom: 9,
       items: [],
       isLoading: false,
       pagination: {
@@ -48,6 +215,16 @@ export default class App extends React.Component {
 
     this.map = null;
 
+  }
+  componentDidMount() {
+    const url = new URLSearchParams(window.location.search);
+    const region = url.get('name');
+    if(REGIONS[region]) {
+      this.setState({
+        center: REGIONS[region].coord,
+        zoom: REGIONS[region].zoom ? REGIONS[region].zoom: this.state.zoom,
+      });
+    }
   }
   onBoundsChanged(v) {
     if (!this.map) return;
@@ -185,7 +362,7 @@ export default class App extends React.Component {
             onMountList={this.onMountList}
           />
           <Map
-            defaultZoom={11}
+            defaultZoom={this.state.zoom}
             bounds={this.state.bounds}
             center={this.state.center}
             onMarkerClick={this.onMarkerClick}
