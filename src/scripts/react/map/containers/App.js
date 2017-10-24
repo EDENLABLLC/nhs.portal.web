@@ -217,12 +217,11 @@ export default class App extends React.Component {
 
   }
   componentDidMount() {
-    const url = new URLSearchParams(window.location.search);
-    const region = url.get('name');
-    if(REGIONS[region]) {
+    const { params } = this.props;
+    if(params && REGIONS[params.splat]) {
       this.setState({
-        center: REGIONS[region].coord,
-        zoom: REGIONS[region].zoom ? REGIONS[region].zoom: this.state.zoom,
+        center: REGIONS[params.splat].coord,
+        zoom: REGIONS[params.splat].zoom ? REGIONS[params.splat].zoom: this.state.zoom,
       });
     }
   }
