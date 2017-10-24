@@ -92,7 +92,7 @@ export default class Map extends BEM {
             const $tooltipLink = this.$tooltip.querySelectorAll(`${buildClass('map', 'tooltip-link')}`)[0];
 
             var att = document.createAttribute("href");
-            att.value = `map.html?name=${data.region.name}`;
+            att.value = `map.html#${data.region.name}`;
             $tooltipLink.setAttributeNode(att);
             this.$tooltip.style.top = target.style.top;
             this.$tooltip.style.left = target.style.left;
