@@ -19,12 +19,19 @@
 @import "blocks/declarations.css";
 
 body {
-  min-width: 1280px;
+  min-width: 320px;
+  max-width: 1280px;
 }
 
 .header {
-  height: 370px;
-  overflow: hidden;
+  padding: 20px 20px 50px;
+  text-align: center;
+
+  @media screen and (min-width: 767px) {
+    height: 370px;
+    overflow: hidden;
+    text-align: left;
+  }
 }
 
 a:hover {
@@ -34,10 +41,19 @@ a:hover {
 .main {
   min-height: 100vh;
   overflow: hidden;
+  padding: 0 20px;
+
+  @media screen and (min-width: 767px) {
+    height: auto;
+    overflow: hidden;
+    text-align: left;
+    padding: 0;
+  }
 }
 
 .main__in {
-  width: var(--max-content-width);
+  max-width: var(--max-content-width);
+  min-width: var(--min-content-width);
   margin: 0 auto;
 }
 

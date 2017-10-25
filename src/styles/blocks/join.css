@@ -2,26 +2,49 @@
   padding-bottom: 60px;
   border-bottom: #dad9d8 1px solid;
 
-  &__main {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+  &__header {
+
+    h3 {
+      font-size: 22px;
+      line-height: 1.2;
+
+      @media screen and (min-width: 767px) {
+        font-size: 18px;
+      }  
+    }
   }
 
+  &__main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+  
   &__item {
-    flex: 1 1 33%;
-    font-size: 22px;
+    flex: 1 1 50%;
     line-height: 26px;
     text-align: center;
+    padding: 17px 0 0;
+
+    @media screen and (min-width: 767px) {
+      font-size: 22px;
+      flex: 1 1 auto;
+    }   
   }
 
   &__item-icon {
     position: relative;
-    width: 135px;
-    height: 135px;
-    line-height: 132px;
+    width: 90px;
+    height: 90px;
+    line-height: 92px;
     margin: 0 auto 30px auto;
     border-radius: 50%;
+
+    @media screen and (min-width: 767px) {
+      width: 135px;
+      height: 135px;
+      line-height: 137px;
+    }
 
     &::after, &::before {
       content: "";
@@ -35,15 +58,23 @@
     }
 
     &::before {
-      left: 30px;
-      top: 30px;
-      right: 30px;
-      bottom: 30px;
-    }
+      
+      @media screen and (min-width: 767px) {
+        left: 30px;
+        top: 30px;
+        right: 30px;
+        bottom: 30px;
+      } 
+    }    
 
     i {
-      width: 35px;
-      height: 35px;
+      width: 20px;
+      height: 20px;
+
+      @media screen and (min-width: 767px) {
+        width: 35px;
+        height: 35px;
+      }   
     }
 
     &_color_green {

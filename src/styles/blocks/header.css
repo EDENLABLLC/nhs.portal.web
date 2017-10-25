@@ -7,15 +7,18 @@
   background-image: url('../images/header-bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  align-items: center;
+
+  @media screen and (min-width: 767px) {
+    align-items: left;
+  }
 
   &__head {
-    width: var(--max-content-width);
     margin: 0 auto;
     font-size: 0;
   }
 
   &__main {
-    width: var(--max-content-width);
     margin: 0 auto;
 
     &-link {
@@ -24,20 +27,36 @@
       font-size: 18px;
       color: #4880ed;
     }
+    h1 {
+      font-size: 16px;
+      @media screen and (min-width: 767px) {
+        font-size: 20px;
+      }
+    }
 
     h2 {
       margin: 70px 0 26px 0;
+      font-size: 30px;
+      
+      @media screen and (min-width: 767px) {
+        align-items: left;
+        font-size: 45px;
+      }
     }
   }
 
   &__footer {
-    width: var(--max-content-width);
     margin: 0 auto;
   }
 
   &__logo {
-    display: inline-block;
-    margin-right: 90px;
+    display: block;
+    text-align: center;
+
+    @media screen and (min-width: 767px) {
+      display: inline-block;
+      margin-right: 90px;  
+    }
 
     img {
       height: 40px;

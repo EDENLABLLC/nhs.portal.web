@@ -1,7 +1,12 @@
 .nav {
-  display: inline-block;
+  
   vertical-align: top;
   line-height: 40px;
+  display: none;
+
+  @media screen and (min-width: 767px) {
+    display: inline-block;
+  }
 
   &__link {
     display: inline-block;
