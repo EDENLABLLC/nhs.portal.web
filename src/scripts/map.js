@@ -32,12 +32,12 @@ const REGION_POINT_MAP = {
   "М.СЕВАСТОПОЛЬ": { left: 614, top: 588 }
 };
 
-const createPoint = ({ left, top }) => {
+const createPoint = ({ left, top }, scale = 1 ) => {
   const node = document.createElement('div');
 
   node.classList.add('map__point');
-  node.style.left = `${left}px`;
-  node.style.top = `${top}px`;
+  node.style.left = `${ left / scale}px`;
+  node.style.top = `${top / scale}px`;
 
   return node;
 };
@@ -54,9 +54,16 @@ export default class Map extends BEM {
     this.$tooltip = this.elem('tooltip');
 
     const fragment = document.createDocumentFragment();
+    const normal = 960;
+    const scale= normal /  this.elem('main').offsetWidth;
+    console.log(scale);
 
-    data.forEach((item, index) => {
-      const point = createPoint(REGION_POINT_MAP[item.region.name]);
+    window.addEventListener("resize", points);
+
+
+    const points = () => data.forEach((item, index) => {
+
+      const point = createPoint(REGION_POINT_MAP[item.region.name], scale);
       point.dataset.index = index;
 
       point.addEventListener('mouseover', this, false);
@@ -64,6 +71,7 @@ export default class Map extends BEM {
 
       fragment.appendChild(point);
     });
+    points();
 
     this.$tooltip.addEventListener('mouseover', this, false);
     this.$tooltip.addEventListener('mouseout', this, false);

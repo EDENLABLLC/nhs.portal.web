@@ -53,7 +53,7 @@ a:hover {
 
 .main__in {
   max-width: var(--max-content-width);
-  min-width: var(--min-content-width);
+  min-width: 280px;
   margin: 0 auto;
 }
 

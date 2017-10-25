@@ -8,27 +8,37 @@
 
   &__main {
     position: relative;
-    height: 630px;
+    max-height: 630px;
+    min-height: 220px;
     margin-bottom: 40px;
     background: url('../images/map.png') no-repeat;
     background-size: 100%;
+
+    @media screen and (min-width: 500px) {
+      height: 600px;
+    }
   }
 
   &__point {
     position: absolute;
     margin: 1px 0 0 1px;
-    width: 18px;
-    height: 18px;
+    width: 10px;
+    height: 10px;
     background-color: #528ded;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s ease;
 
+    @media screen and (min-width: 767px) {
+      width: 18px;
+      height: 18px;
+    }
+
     &::after, &::before {
       content: "";
       display: block;
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       position: absolute;
       left: 50%;
       top: 50%;
@@ -36,6 +46,11 @@
       background-color: transparent;
       border-radius: 50%;
       transition: background-color 0.2s ease;
+
+      @media screen and (min-width: 767px) {
+        width: 8px;
+        height: 8px;
+      }
     }
 
     &::before {
@@ -44,7 +59,11 @@
     }
 
     &_active {
-      transform: scale(2.5);
+      transform: scale(1.5);
+      
+      @media screen and (min-width: 767px) {
+        transform: scale(2.5);
+      } 
 
       &::after {
         background-color: #fff;
@@ -59,11 +78,10 @@
 
   &__tooltip {
     position: absolute;
-    margin: 68px 0 0 9px;
-    padding: 32px;
+    margin: 48px 0 0 5px;
     left: 453px;
     top: 170px;
-    width: 245px;
+    padding: 32px;
     border: 1px solid #dad9d8;
     background-color: #fff;
     opacity: 0;
@@ -72,16 +90,31 @@
     transition: all 0.2s ease;
     z-index: 4;
 
+    @media screen and (min-width: 767px) {
+      margin: 68px 0 0 9px;
+      width: 245px;
+    }
+
     &_show {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
+
+
     }
 
     &-title {
       font-size: 14px;
       line-height: 18px;
       margin-bottom: 20px;
+
+       @media screen and (max-width: 767px) {
+        text-transform: lowercase;
+        
+        &:first-letter {
+          text-transform: uppercase;
+        }
+      }
     }
 
     &-link {
@@ -100,6 +133,10 @@
         display: block;
         margin-bottom: 20px;
         line-height: 22px;
+        
+        @media screen and (max-width: 767px) {
+          font-size: 16px
+        }
       }
     }
 
@@ -120,9 +157,13 @@
   }
 
   &__link {
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 700;
     color: #4880ed;
     text-transform: uppercase;
+
+    @media screen and (min-width: 767px) {
+      font-size: 22px;
+    }
   }
 }
