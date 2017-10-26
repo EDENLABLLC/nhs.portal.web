@@ -1,11 +1,16 @@
 .tabs {
   &__header {
     position: relative;
-    margin: 0 60px;
     border-bottom: #dad9d8 1px solid;
 
+    @media screen and (min-width: 767px) {
+        margin: 0 60px;
+    }
+
     &-small {
-       margin: 0 320px;
+      @media screen and (min-width: 767px) {
+        margin: 0 320px;
+      }
     }
 
     &-title {
@@ -31,11 +36,15 @@
   }
 
   &__nav-item {
-    display: inline-block;
     padding-bottom: 38px;
     cursor: pointer;
-    white-space: nowrap;
-    //overflow: hidden;
+    
+    flex: 1 1 auto;
+
+    @media screen and (min-width: 767px) {
+      display: inline-block;
+      white-space: nowrap;
+    } 
 
     &_small {
        padding-bottom: 15px;
@@ -55,7 +64,10 @@
     }
   }
   &__centered {
-   margin: 0 150px;
+   
+     @media screen and (min-width: 767px) {
+        margin: 0 150px; 
+      }
   }
 
   &__main {

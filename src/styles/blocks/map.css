@@ -9,7 +9,7 @@
   &__main {
     position: relative;
     max-height: 630px;
-    min-height: 220px;
+    min-height: 280px;
     margin-bottom: 40px;
     background: url('../images/map.png') no-repeat;
     background-size: 100%;
@@ -99,8 +99,6 @@
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
-
-
     }
 
     &-title {
