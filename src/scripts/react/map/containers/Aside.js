@@ -3,11 +3,11 @@ import React from 'react';
 import SearchResult from '../components/SearchResult';
 
 const types = [
-  { type: 'FAP', title: 'ФАП' },
-  { type: 'DRUGSTORE_POINT', title: 'Аптечні пункти' },
-  { type: 'DRUGSTORE', title: 'Аптеки' },
   { type: 'CLINIC', title: 'Філія (інший відокремлений підрозділ)' },
   { type: 'AMBULANT_CLINIC', title: 'Амбулаторії' },
+  { type: 'FAP', title: 'ФАП' },
+  { type: 'DRUGSTORE', title: 'Аптеки' },
+  { type: 'DRUGSTORE_POINT', title: 'Аптечні пункти' },
 ];
 
 export default ({
