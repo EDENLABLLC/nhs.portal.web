@@ -3,9 +3,11 @@ import React from 'react';
 import SearchResult from '../components/SearchResult';
 
 const types = [
-  { type: 'CLINIC', title: 'Заклади охорони здоров’я' },
+  { type: 'FAP', title: 'ФАП' },
+  { type: 'DRUGSTORE_POINT', title: 'Аптечні пункти' },
+  { type: 'DRUGSTORE', title: 'Аптеки' },
+  { type: 'CLINIC', title: 'Філія (інший відокремлений підрозділ)' },
   { type: 'AMBULANT_CLINIC', title: 'Амбулаторії' },
-  // { type: 'FAP', title: 'Аптеки' },
 ];
 
 export default ({
