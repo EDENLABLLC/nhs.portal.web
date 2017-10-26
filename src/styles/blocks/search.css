@@ -18,6 +18,10 @@
   align-items: stretch;
   align-content: stretch;
 
+  input {
+    padding: 10px 16px 10px 50px;
+  }
+
   &__aside {
     flex: 0 0 auto;
     width: 384px;
@@ -41,19 +45,19 @@
   }
 
   &__input {
-    margin-bottom: 25px;
-    padding-left: 70px;
+    margin-bottom: 15px;
+    padding-left: 30px;
     background: url('../images/icons/search.png') 25px center no-repeat;
-    background-size: 23px;
+    background-size: 18px;
     width: 260px;
-    margin-left: 5px;
+    /*margin-left: 5px;*/
   }
 
   &__back {
     color: #4880ed;
     text-transform: uppercase;
-    margin: 0 0 30px;
-    font-size: 12px;
+    margin: 0 0 15px;
+    font-size: 10px;
     cursor: pointer;
     font-weight: bold;
     display: block;
@@ -64,7 +68,7 @@
     }
   }
   &__header {
-    padding: 12px 60px 0;
+    padding: 0 60px 0;
     flex: 0 0 auto;
     border-bottom: #dad9d8 1px solid;
   }
@@ -77,9 +81,9 @@
 
   &__nav-item {
     line-height: 1;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 
     &_active {
@@ -118,7 +122,7 @@
 
   &__result-item {
     margin-bottom: 20px;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 
     &-title {
