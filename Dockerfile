@@ -13,6 +13,6 @@ RUN set -x && \
     apk del build_deps
 
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./nginx/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.vh.default.conf /etc/nginx/conf.d/default.tmpl
 
-CMD /usr/local/bin/envsubst < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+CMD /usr/local/bin/envsubst < /etc/nginx/conf.d/default.tmpl > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
