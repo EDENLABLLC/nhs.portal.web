@@ -13,23 +13,23 @@
 @import "blocks/about-main.css";
 
 
-body {
-}
-
 .header__in {
-  width: var(--max-content-width);
+  max-width: var(--max-content-width);
+  min-width: var(--min-content-width);
   margin: 0 auto;
 }
-
-
 
 .main {
   min-height: calc(100vh - 155px - 100px);
 }
 
 .main__in {
-  width: var(--max-content-width);
+  max-width: 960px;
   margin: 0 auto;
+
+  @media screen and (max-width: 768px) {
+      padding: 0 20px;
+  } 
 }
 
 .footer {

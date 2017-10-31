@@ -2,15 +2,22 @@
   position: relative;
   overflow-x: hidden;
 
+  &__main {
+    display: flex;
+    align-items: flex-start;  
+    justify-content: left;
+    width: 100%;
+  }
+
   &__slide {
-    position: absolute;
-    left: 0;
-    right: 0;
-    transform: translateX(100%);
-    will-change: transform;
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*transform: translateX(100%);*/
+    /*will-change: transform;*/
 
     &_active {
-      transform: translateX(0);
+      /*transform: translateX(0);*/
     }
   }
 

@@ -12,14 +12,17 @@
   @media screen and (min-width: 767px) {
     align-items: left;
   }
+  &__in {
+    margin: 0 auto;
+  }
 
   &__head {
-    margin: 0 auto;
     font-size: 0;
   }
 
   &__main {
     margin: 0 auto;
+    text-align: left;
 
     &-link {
       display: inline-block;

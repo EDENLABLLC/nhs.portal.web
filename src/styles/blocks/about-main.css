@@ -1,6 +1,6 @@
 .about {
     &__main {
-        width: 800px;
+        /*width: 800px;*/
         padding-right: 20px;
 
         & > h2 {
@@ -17,14 +17,19 @@
     }
 
     &__history {
-        width: 800px;
-
+        ul {
+            display: flex;
+            flex-flow: row wrap;
+            list-style-type: none;     
+        }
+        
         li {
-            display: inline-block;
-            width: 24%;
-            vertical-align: top;
-            padding: 0 20px;
+            flex: 1 1 auto;
             position: relative;
+            @media screen and (min-width: 768px) {
+                padding: 0 20px;
+                flex: 1 1 150px;
+            }
 
             &:first-child {
               padding-left: 0;
@@ -32,14 +37,16 @@
 
 
             &::after {
-                position: absolute;
-                content: '';
-                display: block;
-                background-color: #e7e8ea;
-                height: 520px;
-                width: 1px;
-                right: 0;
-                top: 0;
+                @media screen and (min-width: 768px) {
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    background-color: #e7e8ea;
+                    height: 520px;
+                    width: 1px;
+                    right: 0;
+                    top: 0;
+                }       
             }
             h4 {
                 font-weight: bold;
@@ -64,8 +71,8 @@
              background-image: url(../images/partners.jpg);
              background-repeat: no-repeat;
              background-size: 100%;
-             width: 800px;
-             height: 500px;
+             width: 100%;
+             height: 600px;
          }
     }
 }
