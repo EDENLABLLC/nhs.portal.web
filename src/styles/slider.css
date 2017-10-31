@@ -10,21 +10,21 @@
   }
 
   &__slide {
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*transform: translateX(100%);*/
-    /*will-change: transform;*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateX(100%);
+    will-change: transform;
 
     &_active {
-      /*transform: translateX(0);*/
+      transform: translateX(0);
     }
   }
 
   &__markers {
-    /*display: flex;*/
-    /*flex-flow: row nowrap;*/
-    /*justify-content: center;*/
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
     display: block;
     text-align: center;
     margin-top: 50px;

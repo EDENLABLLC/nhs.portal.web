@@ -1,6 +1,5 @@
 .about {
     &__main {
-        /*width: 800px;*/
         padding-right: 20px;
 
         & > h2 {
