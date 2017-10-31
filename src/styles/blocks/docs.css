@@ -52,5 +52,7 @@
   }
 
   &__slider-content {
+    height: 570px;    
+    overflow: hidden;
   }
 }
