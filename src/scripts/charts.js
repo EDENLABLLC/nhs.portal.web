@@ -78,7 +78,7 @@ export const DinamicalMonthChart = (elem, names, values) =>
         ticks: {
           beginAtZero:true,
           min: 0,
-          max: Math.max.apply(this, values) + 1,
+          max: Math.max.apply(this, values),
         }
       }]
     },
