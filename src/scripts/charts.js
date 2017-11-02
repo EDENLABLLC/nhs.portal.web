@@ -43,7 +43,6 @@ const REGIONS = {
 export const DinamicalMonthChart = (elem, days, months, values) =>
   new Chart(elem, {
     type: 'line',
-    showXLabels: 10,
     data: {
       labels: days,
       datasets: [{

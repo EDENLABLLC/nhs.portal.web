@@ -39,14 +39,14 @@ const { API_ENDPOINT } = window.__CONFIG__;
 
 
 const today = new Date();
-const goBackDay = subDays(new Date(), 30);
-const last_days_30 = eachDay(goBackDay, new Date(), 1);
+const goBackDay = subDays(today, 30);
+const last_days_30 = eachDay(goBackDay, today, 1);
 console.log(last_days_30);
 
 const today_day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
 const last_day = goBackDay.getDate() < 10 ? `0${goBackDay.getDate()}` : goBackDay.getDate();
 
-const today_month = new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
+const today_month = today.getMonth() < 9 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
 const last_month = goBackDay.getMonth() < 9 ? `0${goBackDay.getMonth() + 1}` : goBackDay.getMonth() + 1;
 
 
