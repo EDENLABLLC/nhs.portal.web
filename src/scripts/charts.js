@@ -235,7 +235,6 @@ export const DinamicalMonthChart = (elem, days, months, values) =>
       }
     }
   })
-}
 
 export const RegionsCharts = (elem, data, name)  =>
   new Chart(elem, {
