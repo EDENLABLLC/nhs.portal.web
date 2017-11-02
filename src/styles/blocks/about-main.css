@@ -19,12 +19,13 @@
         ul {
             display: flex;
             flex-flow: row wrap;
-            list-style-type: none;     
+            list-style-type: none;
         }
         
         li {
             flex: 1 1 auto;
             position: relative;
+
             @media screen and (min-width: 768px) {
                 padding: 0 20px;
                 flex: 1 1 150px;
@@ -58,6 +59,8 @@
     }
 
     &__partners {
+        margin: 0 auto;
+
         h2 {
             margin-top: 30px;
             font-size: 22px;
@@ -66,12 +69,15 @@
         }
 
         &-img {
-             margin: 40px auto 50px;
-             background-image: url(../images/partners.jpg);
-             background-repeat: no-repeat;
-             background-size: 100%;
-             width: 100%;
-             height: 600px;
+            margin: 40px auto 50px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            height: 600px;
+
+            @media screen and (max-width: 768px) {
+                background-image: url(../images/partners_mobile.png);
+            }
          }
     }
 }

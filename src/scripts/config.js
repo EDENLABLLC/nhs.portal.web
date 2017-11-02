@@ -1,4 +1,4 @@
 
 window.__CONFIG__ = {
-  API_ENDPOINT: 'http://dev.ehealth.world'
+  API_ENDPOINT: 'http://demo.ehealth.world'
 };

@@ -86,6 +86,13 @@ export const DinamicalMonthChart = (elem, days, months, values) =>
         enabled: false,
         custom: function(tooltip) {
 
+          const $this = document.getElementById('declarations__graph-canvas');
+          const width = $this.offsetWidth;
+          const scale = 960 / width;
+
+          //hide in small screens
+          if(width < 750) return;
+
           // Tooltip Element
           let tooltipEl = $('#chartjs-tooltip')[0];
           if (!tooltipEl) {
@@ -165,18 +172,18 @@ export const DinamicalMonthChart = (elem, days, months, values) =>
             }
           }
 
-          let elem = $('#declarations__graph-canvas')[0];
-          const position = {
-            left: elem.offsetLeft,
-            top: elem.offsetTop - 100,
-          };
-          let height = 580 - tooltip.caretY - 74;
-          if(tooltip.yAlign === 'top') {
-            height -= 29;
-          }
-          if(tooltip.yAlign === 'bottom') {
-            height += 29;
-          }
+        let elem = $('#declarations__graph-canvas')[0];
+        const position = {
+          left: elem.offsetLeft,
+          top: (elem.offsetTop - 100) / scale,
+        };
+        let height = (580 / scale) - tooltip.caretY - (74 / scale);
+        if(tooltip.yAlign === 'top') {
+          height -= 29;
+        }
+        if(tooltip.yAlign === 'bottom') {
+          height += 29;
+        }
 
           // Display, position, and set styles for font
           Object.assign(tooltipEl.style, {
@@ -234,7 +241,7 @@ export const DinamicalMonthChart = (elem, days, months, values) =>
         }
       }
     }
-  })
+  });
 
 export const RegionsCharts = (elem, data, name)  =>
   new Chart(elem, {
@@ -284,7 +291,7 @@ export const RegionsCharts = (elem, data, name)  =>
           },
           ticks: {
             display: false,
-            beginAtZero:true,
+            beginAtZero: true,
             min: 0,
             max: Math.max.apply(this, data.map(i => i[name])) * 2,
           }

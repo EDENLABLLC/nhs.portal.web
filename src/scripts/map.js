@@ -61,7 +61,6 @@ export default class Map extends BEM {
 
 
     const points = () => data.forEach((item, index) => {
-      console.log('resize', item);
       const point = createPoint(REGION_POINT_MAP[item.region.name], scale);
       point.dataset.index = index;
 
