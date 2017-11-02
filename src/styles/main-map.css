@@ -15,8 +15,7 @@
 .header {
   flex: 0 0 auto;
   min-height: 40px;
-  padding: 54px 0;
-  height: 110px;
+  padding: 25px 0;
   text-align: center;
   display: flex;
 
@@ -30,7 +29,7 @@
     padding-left: 65px;
 
     img {
-      height: 48px;
+      height: 40px;
     }
   }
 }
@@ -43,8 +42,8 @@
 }
 
 .footer {
-  flex: 0 0 100px;
-  padding: 40px 0;
+  flex: 0 0 50px;
+  padding: 20px 0;
   text-align: center;
   font-size: 10px;
   line-height: 1;
