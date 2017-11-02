@@ -3,6 +3,7 @@ import SmoothScroll from 'smoothscroll-polyfill';
 import Chart from 'chart.js';
 import './select';
 import AOS from 'aos';
+import { subDays, eachDay } from 'date-fns';
 
 import { $ } from './dom';
 import { fetchJSON } from './utils';
@@ -36,25 +37,35 @@ $('.feedback').forEach(node => new Feedback(node));
 
 const { API_ENDPOINT } = window.__CONFIG__;
 
-const day = new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate();
-const month = new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
-const year = new Date().getFullYear();
+
+const today = new Date();
+const goBackDay = subDays(new Date(), 30);
+const last_days_30 = eachDay(goBackDay, new Date(), 1);
+console.log(last_days_30);
+
+const today_day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+const last_day = goBackDay.getDate() < 10 ? `0${goBackDay.getDate()}` : goBackDay.getDate();
+
+const today_month = new Date().getMonth() < 9 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1;
+const last_month = goBackDay.getMonth() < 9 ? `0${goBackDay.getMonth() + 1}` : goBackDay.getMonth() + 1;
 
 
-fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${year}-${month}-01&to_date=${year}-${month}-${day}&interval=DAY`)
+fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${goBackDay.getFullYear()}-${last_month}-${last_day}&to_date=${today.getFullYear()}-${today_month}-${today_day}&interval=DAY`)
   .then(data => {
     const MONTH_REGION_DECLARATION = document.getElementById('declarations__graph-canvas').getContext('2d');
     const DATA = data.data.reduce((acc, cur, index) => {
       acc.push({
         value: cur.declarations_active_end,
-        label: index + 1,
+        day: last_days_30[index].getDate() + 1,
+        month: last_days_30[index].getMonth(),
         ...cur.stats,
       });
       return acc
     },[]);
     DinamicalMonthChart(
       MONTH_REGION_DECLARATION,
-      DATA.map(i => i.label),
+      DATA.map(i => i.day),
+      DATA.map(i => i.month),
       DATA.map(i => i.value),
     );
   });
