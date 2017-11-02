@@ -56,7 +56,7 @@ fetchJSON(`${API_ENDPOINT}/reports/stats/histogram?from_date=${goBackDay.getFull
     const DATA = data.data.reduce((acc, cur, index) => {
       acc.push({
         value: cur.declarations_active_end,
-        day: last_days_30[index].getDate() + 1,
+        day: last_days_30[index].getDate(),
         month: last_days_30[index].getMonth(),
         ...cur.stats,
       });
