@@ -13,10 +13,14 @@
 .search {
   flex: 1 1 auto;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: space-between;
   align-items: stretch;
   align-content: stretch;
+
+  @media screen and (min-width: 768px) {
+    flex-flow: row nowrap;
+  }
 
   input {
     padding: 10px 16px 10px 50px;
@@ -24,16 +28,21 @@
 
   &__aside {
     flex: 0 0 auto;
-    width: 384px;
+    
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+
+    @media screen and (min-width: 768px) {
+      width: 384px;
+    }
   }
 
   &__map {
     flex: 1 1 auto;
     transform: translate3d(0, 0, 0);
     position: relative;
+    height: 100vh;
 
     &__el {
       position: absolute;
@@ -41,6 +50,7 @@
       left: 0;
       right: 0;
       bottom: 0;
+
     }
   }
 
@@ -68,15 +78,27 @@
     }
   }
   &__header {
-    padding: 0 60px 0;
+    padding: 0 20px; 
     flex: 0 0 auto;
     border-bottom: #dad9d8 1px solid;
+    
+    @media screen and (min-width: 768px) {
+      padding: 0 60px 0;
+    }
   }
 
   &__nav {
     list-style: none;
     margin: 0 -60px;
     padding: 0 60px 5px;
+    
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0 15px;
+    }
   }
 
   &__nav-item {
@@ -93,11 +115,15 @@
   }
 
   &__result {
-    padding: 0 60px;
+    padding: 0 20px;
     flex: 1 1 auto;
     overflow: auto;
     max-height: 500px;
     transform: translate3d(0, 0, 0);
+
+    @media screen and (min-width: 768px) {
+      padding: 0 60px;
+    }
 
     &::before,
     &::after {
