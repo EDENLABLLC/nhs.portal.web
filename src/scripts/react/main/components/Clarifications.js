@@ -15,11 +15,11 @@ class Clarifications extends Component {
     const { activeTypeIndex } = this.state;
 
     return (
-      <section class="explain">
-        <header class="explain__header">
+      <section className="explain">
+        <header className="explain__header">
           <h3>Пояснення</h3>
         </header>
-        <article class="explain__main">
+        <article className="explain__main">
           <header className="tabs__header">
             <ul className="tabs__nav">
               {types.map((type, index) => (
@@ -57,7 +57,7 @@ class Clarifications extends Component {
                   .map(({ id, url, title, excerpt, date }) => (
                     <a key={id} className="explain__item" href={url}>
                       <h4>{title}</h4>
-                      <time>{format(date, "DD-MM-YYYY")}</time>
+                      <time>{format(date, "DD.MM.YYYY")}</time>
                       {excerpt}
                     </a>
                   ))}
@@ -65,23 +65,23 @@ class Clarifications extends Component {
             ))}
           </Carousel>
         </article>
-        {/* <section class="explain__tags">
-              <div class="explain__tags-title">
+        {/* <section className="explain__tags">
+              <div className="explain__tags-title">
                   Теги:
               </div>
-              <ul class="explain__tags-list">
-                  <li class="explain__tags-item">
-                      <a class="explain__tags-link" href="#">ЕЦП</a>
+              <ul className="explain__tags-list">
+                  <li className="explain__tags-item">
+                      <a className="explain__tags-link" href="#">ЕЦП</a>
                   </li>
-                  <li class="explain__tags-item">
-                      <a class="explain__tags-link" href="#">НСЗУ</a>
+                  <li className="explain__tags-item">
+                      <a className="explain__tags-link" href="#">НСЗУ</a>
                   </li>
-                  <li class="explain__tags-item">
-                      <a class="explain__tags-link" href="#">Пояснення</a>
+                  <li className="explain__tags-item">
+                      <a className="explain__tags-link" href="#">Пояснення</a>
                   </li>
               </ul>
           </section> */}
-        <footer class="explain__footer">
+        <footer className="explain__footer">
           <a href="clarifications.html">Показати більше</a>
         </footer>
       </section>
@@ -92,8 +92,14 @@ class Clarifications extends Component {
     const tab = this.tabs[index];
     const { types } = this.props;
 
+    // const inline = index > 0 && index < types.length - 1 ? "center" : "nearest";
+
     this.setState({ activeTypeIndex: index });
-    tab.scrollIntoView({ behavior: "smooth" });
+    tab.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "nearest"
+    });
     if (updateCarousel) this.carousel.goToSlide(index);
   };
 }

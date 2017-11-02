@@ -257,8 +257,8 @@ date: '2017-05-24T14:42:52.381Z'
 </footer>
 <script>
   window.__CLARIFICATION_TYPES__ = JSON.parse('{{ site.clarificationTypes | jsonify }}');
-  window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html | escape_once}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
-  window.__DOCUMENTS__ = JSON.parse('[{% for document in site.documents %}{"id": "{{document.id}}","type": "{{document.type}}", "header": "{{document.header}}", "title": "{{document.title | strip_newlines | strip_html | escape_once}}"}{% unless forloop.last %},{% endunless %}{% endfor %}]');
+  window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
+  window.__DOCUMENTS__ = JSON.parse(`[{% for document in site.documents %}{"id": "{{document.id}}","url":"{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}","type": "{{document.type}}", "header": "{{document.header}}", "title": "{{document.title | strip_newlines | strip_html}}"}{% unless forloop.last %},{% endunless %}{% endfor %}]`);
 </script>
 <script type="text/javascript" src="/scripts/config.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>
