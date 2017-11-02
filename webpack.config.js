@@ -28,6 +28,7 @@ const config = webpackMerge(
       'main-join': ['./src/scripts/main-join.js'],
       'main': ['./src/scripts/main.js'],
       'config': ['./src/scripts/config.js'],
+      'main.bundle': ['./src/scripts/react/main'],
       'map.bundle': ['./src/scripts/react/map'],
     },
     output: {
@@ -40,7 +41,11 @@ const config = webpackMerge(
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },
       }),
-    ]
+    ],
+    externals : {
+      react: 'React',
+      'react-dom': 'ReactDOM'
+    }
   },
   genConfig
 );

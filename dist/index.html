@@ -32,7 +32,7 @@ date: '2017-05-24T14:42:52.381Z'
             <i class="icon icon_name_arrow-right"></i>
         </a>
     </footer>
-    </div>     
+    </div>
 </header>
 <main class="main">
   <div class="main__in">
@@ -183,102 +183,8 @@ date: '2017-05-24T14:42:52.381Z'
             </section>
         </article>
     </section>
-    <section class="explain" id="explain" data-aos="fade-up">
-        <header class="explain__header">
-            <h3>ПОЯСНЕННЯ</h3>
-        </header>
-        <article class="explain__main">
-            <section class="tabs">
-                <header class="tabs__header">
-                    <ul class="tabs__nav">
-                      {% for type in site.clarificationTypes %}
-                        <li class="tabs__nav-item {% if forloop.first %} tabs__nav-item_active {% endif %}">
-                            {{ type }}
-                        </li>
-                      {% endfor %}
-                    </ul>
-                </header>
-                <article class="tabs__main explain__tabs-content">
-                  {% for type in site.clarificationTypes %}
-                  {% assign isTypesLoopFirst = forloop.first %}
-                    <div class="tabs__slide {% if forloop.first %} tabs__slide_active {% endif %}">
-                      <div class="explain__list">
-                        {% for clarification in site.clarifications limit:4 %}
-                          {% if isTypesLoopFirst or clarification.clarification_types contains type %}
-                            <a class="explain__item" href="{{ clarification.url }}">
-                                <h4>{{ clarification.title }}</h4>
-                                <time>{{ clarification.date | date: '%d-%m-%Y' }}</time>
-                                {{ clarification.excerpt }}
-                            </a>
-                          {% endif %}
-                        {% endfor %}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </article>
-            </section>
-        </article>
-        <!-- <section class="explain__tags">
-            <div class="explain__tags-title">
-                Теги:
-            </div>
-            <ul class="explain__tags-list">
-                <li class="explain__tags-item">
-                    <a class="explain__tags-link" href="#">ЕЦП</a>
-                </li>
-                <li class="explain__tags-item">
-                    <a class="explain__tags-link" href="#">НСЗУ</a>
-                </li>
-                <li class="explain__tags-item">
-                    <a class="explain__tags-link" href="#">Пояснення</a>
-                </li>
-            </ul>
-        </section> -->
-        <footer class="explain__footer">
-            <a href="clarifications.html">Показати більше</a>
-        </footer>
-    </section>
-    <section class="docs" id="documents" data-aos="fade-up">
-        <header class="docs__header">
-            <h3>документи</h3>
-        </header>
-        <article class="docs__main">
-            <section class="slider">
-                <div class="slider__main docs__slider-content">
-                  {% for document in site.documents %}
-                    {% assign loopindex = forloop.index | modulo: 6 %}
-
-                    {% capture document_layout %}
-                      <li class="docs__item">
-                        <a target="_blank" href="{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}">
-                          <div class="docs__item-icon">
-                            <i class="icon icon_name_doc"></i>
-                            {{ document.type }}
-                          </div>
-                          <div>
-                            <span class="docs__attention">{{ document.header }}</span>
-                            {{ document.title }}
-                          </div>
-                        </a>
-                      </li>
-                    {% endcapture %}
-
-                    {% if loopindex == 1 %}
-                      <div class="slider__slide {% if forloop.first %} slider__slide_active {% endif %}">
-                        <ul class="docs__list">
-                          {{ document_layout }}
-                    {% elsif loopindex == 0 or forloop.last %}
-                        {{ document_layout }}
-                        </ul>
-                      </div>
-                    {% else %}
-                      {{ document_layout }}
-                    {% endif %}
-                  {% endfor %}
-                </div>
-            </section>
-        </article>
-    </section>
+    <div id="explain" data-aos="fade-up"></div>
+    <div id="documents" data-aos="fade-up"></div>
     <section class="contacts" id="contacts" data-aos="fade-up">
         <header class="contacts__header">
             <h3>Зворотній зв&#8217;язок</h3>
@@ -349,10 +255,17 @@ date: '2017-05-24T14:42:52.381Z'
 <footer class="footer">
     Електронна система охорони здоров’я eHealth
 </footer>
+<script>
+  window.__CLARIFICATION_TYPES__ = JSON.parse('{{ site.clarificationTypes | jsonify }}');
+  window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html | escape_once}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
+  window.__DOCUMENTS__ = JSON.parse('[{% for document in site.documents %}{"id": "{{document.id}}","type": "{{document.type}}", "header": "{{document.header}}", "title": "{{document.title | strip_newlines | strip_html | escape_once}}"}{% unless forloop.last %},{% endunless %}{% endfor %}]');
+</script>
 <script type="text/javascript" src="/scripts/config.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
 <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
 <script type="text/javascript" src="/scripts/main.js"></script>
-
+<script type="text/javascript" src="/scripts/main.bundle.js"></script>
 </body>
 </html>

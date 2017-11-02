@@ -4,7 +4,7 @@
     border-bottom: #dad9d8 1px solid;
 
     @media screen and (min-width: 767px) {
-        margin: 0 60px;
+      margin: 0 60px;
     }
 
     &-small {
@@ -14,15 +14,15 @@
     }
 
     &-title {
-       font-style: 16px;
-       font-weight: 700;
-       text-align: center;
-       margin-bottom: 45px;
+      font-style: 16px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 45px;
 
-       &-small {
-          margin-bottom: 25px;
-       }
-     }
+      &-small {
+        margin-bottom: 25px;
+      }
+    }
   }
 
   &__nav {
@@ -32,22 +32,25 @@
     align-items: stretch;
     align-content: space-between;
     list-style: none;
-    margin-bottom: 4px;
+    padding-bottom: 4px;
+    overflow-x: auto;
   }
 
   &__nav-item {
     padding-bottom: 38px;
     cursor: pointer;
-    
-    flex: 1 1 auto;
+    margin: 0 10px;
 
-    @media screen and (min-width: 767px) {
-      display: inline-block;
-      white-space: nowrap;
-    } 
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &_small {
-       padding-bottom: 15px;
+      padding-bottom: 15px;
     }
 
     &_active {
@@ -64,10 +67,9 @@
     }
   }
   &__centered {
-   
-     @media screen and (min-width: 767px) {
-        margin: 0 150px; 
-      }
+    @media screen and (min-width: 767px) {
+      margin: 0 150px;
+    }
   }
 
   &__main {
@@ -76,8 +78,8 @@
     //overflow-x: hidden;
 
     &-small {
-       margin-top: 40px;
-     }
+      margin-top: 40px;
+    }
   }
 
   &__slide {
@@ -90,7 +92,7 @@
 
     &_active {
       opacity: 1;
-       z-index: 1;
+      z-index: 1;
       transform: translateX(0);
     }
   }
