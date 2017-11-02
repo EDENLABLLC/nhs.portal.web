@@ -42,7 +42,7 @@
                     content: '';
                     display: block;
                     background-color: #e7e8ea;
-                    height: 520px;
+                    height: 100%;
                     width: 1px;
                     right: 0;
                     top: 0;
@@ -74,6 +74,7 @@
             background-size: contain;
             background-position: center center;
             height: 600px;
+            background-image: url(../images/partners.jpg);
 
             @media screen and (max-width: 768px) {
                 background-image: url(../images/partners_mobile.png);

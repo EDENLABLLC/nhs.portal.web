@@ -39,7 +39,9 @@ const { API_ENDPOINT } = window.__CONFIG__;
 
 
 const today = new Date();
-const goBackDay = subDays(today, 30);
+const number_of_days = screen.width > 768 ? 30 : 15;
+
+const goBackDay = subDays(today, number_of_days);
 const last_days_30 = eachDay(goBackDay, today, 1);
 
 const today_day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();

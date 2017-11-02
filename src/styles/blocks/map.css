@@ -8,14 +8,17 @@
 
   &__main {
     position: relative;
-    max-height: 630px;
-    min-height: 280px;
     margin-bottom: 40px;
     background: url('../images/map.png') no-repeat;
     background-size: 100%;
+    padding-top: 71.42%;
 
-    @media screen and (min-width: 500px) {
-      height: 600px;
+    @media screen and (max-width: 480px) {
+      margin: 0 40px;
+    }
+
+    @media screen and (min-width: 768px) {
+      margin: 0 70px;
     }
   }
 
