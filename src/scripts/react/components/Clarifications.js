@@ -11,15 +11,15 @@ class Clarifications extends Component {
   tabs = {};
 
   render() {
-    const { clarifications, types } = this.props;
+    const { clarifications, types, limit } = this.props;
     const { activeTypeIndex } = this.state;
 
     return (
-      <section className="explain">
-        <header className="explain__header">
+      <section className="clarifications">
+        <header>
           <h3>Пояснення</h3>
         </header>
-        <article className="explain__main">
+        <article>
           <header className="tabs__header">
             <ul className="tabs__nav">
               {types.map((type, index) => (
@@ -46,16 +46,16 @@ class Clarifications extends Component {
             swiping
           >
             {types.map(type => (
-              <div key={type} className="explain__list">
+              <div key={type} className="clarifications__list">
                 {clarifications
                   .filter(
                     ({ clarificationTypes }) =>
                       type === "Всім" ||
                       (clarificationTypes && clarificationTypes.includes(type))
                   )
-                  .slice(0, 4)
+                  .slice(0, limit)
                   .map(({ id, url, title, excerpt, date }) => (
-                    <a key={id} className="explain__item" href={url}>
+                    <a key={id} className="clarifications__item" href={url}>
                       <h4>{title}</h4>
                       <time>{format(date, "DD.MM.YYYY")}</time>
                       {excerpt}
@@ -81,9 +81,11 @@ class Clarifications extends Component {
                   </li>
               </ul>
           </section> */}
-        <footer className="explain__footer">
-          <a href="clarifications.html">Показати більше</a>
-        </footer>
+        {limit && (
+          <footer className="explain__footer">
+            <a href="clarifications.html">Показати більше</a>
+          </footer>
+        )}
       </section>
     );
   }
@@ -91,8 +93,6 @@ class Clarifications extends Component {
   changeType = (index, updateCarousel) => {
     const tab = this.tabs[index];
     const { types } = this.props;
-
-    // const inline = index > 0 && index < types.length - 1 ? "center" : "nearest";
 
     this.setState({ activeTypeIndex: index });
     tab.scrollIntoView({

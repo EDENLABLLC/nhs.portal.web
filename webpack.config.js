@@ -28,8 +28,9 @@ const config = webpackMerge(
       'main-join': ['./src/scripts/main-join.js'],
       'main': ['./src/scripts/main.js'],
       'config': ['./src/scripts/config.js'],
-      'main.bundle': ['./src/scripts/react/main'],
-      'map.bundle': ['./src/scripts/react/map'],
+      'main.bundle': ['./src/scripts/react/pages/main.js'],
+      'map.bundle': ['./src/scripts/react/pages/map.js'],
+      'clarifications.bundle': ['./src/scripts/react/pages/clarifications.js']
     },
     output: {
       path: path.join(__dirname, 'dist', 'scripts'),

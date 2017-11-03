@@ -13,6 +13,7 @@
 @import "blocks/joined.css";
 @import "blocks/map.css";
 @import "blocks/statistic.css";
+@import "blocks/clarifications.css";
 @import "blocks/explain.css";
 @import "blocks/docs.css";
 @import "blocks/contacts.css";
@@ -46,7 +47,6 @@ a:hover {
     height: auto;
     overflow: hidden;
     text-align: left;
-    padding: 0 20px;
   }
 }
 

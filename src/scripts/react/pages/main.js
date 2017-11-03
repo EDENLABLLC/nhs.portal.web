@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Clarifications from "./components/Clarifications";
-import Documents from "./components/Documents";
+import Clarifications from "../components/Clarifications";
+import Documents from "../components/Documents";
 
 const {
   __CLARIFICATIONS__: clarifications,
@@ -11,7 +11,11 @@ const {
 } = window;
 
 ReactDOM.render(
-  <Clarifications clarifications={clarifications} types={clarificationTypes} />,
+  <Clarifications
+    clarifications={clarifications}
+    types={clarificationTypes}
+    limit={4}
+  />,
   document.getElementById("explain")
 );
 
