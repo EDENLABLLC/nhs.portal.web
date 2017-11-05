@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Clarifications from "../components/Clarifications";
-import Documents from "../components/Documents";
-import Header from "../components/Header";
+import Menu from "../../componenent/Menu";
+
 
 const {
   __CLARIFICATIONS__: clarifications,
@@ -24,9 +23,3 @@ ReactDOM.render(
   <Documents documents={documents} />,
   document.getElementById("documents")
 );
-
-ReactDOM.render(
-  <Header />,
-  document.getElementById("header")
-);
-

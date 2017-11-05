@@ -6,6 +6,7 @@
 @import "slider.css";
 @import "choices.js/assets/styles/css/choices.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
 @import "blocks/header.css";
 @import "blocks/about.css";

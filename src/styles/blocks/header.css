@@ -18,6 +18,7 @@
 
   &__head {
     font-size: 0;
+     position: relative;
   }
 
   &__main {
