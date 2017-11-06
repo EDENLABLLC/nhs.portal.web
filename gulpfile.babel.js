@@ -39,6 +39,7 @@ const SCRIPTS_SRC = [
   `${SCRIPTS_PATH}/main-doc.js`,
   `${SCRIPTS_PATH}/main-join.js`,
   `${SCRIPTS_PATH}/react/pages/main.js`,
+  `${SCRIPTS_PATH}/react/pages/join.js`,
   `${SCRIPTS_PATH}/react/pages/map.js`,
   `${SCRIPTS_PATH}/react/pages/clarifications.js`
 ];

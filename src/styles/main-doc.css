@@ -15,7 +15,6 @@
 
 .header__in {
   max-width: var(--max-content-width);
-  min-width: var(--min-content-width);
   margin: 0 auto;
   padding: 0 10px;
 

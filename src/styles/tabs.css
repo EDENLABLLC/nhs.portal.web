@@ -37,9 +37,13 @@
   }
 
   &__nav-item {
-    padding-bottom: 38px;
     cursor: pointer;
     margin: 0 10px;
+    padding-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+      padding-bottom: 38px;
+    }
 
     &:first-child {
       margin-left: 0;
@@ -67,7 +71,7 @@
     }
   }
   &__centered {
-    @media screen and (min-width: 767px) {
+    @media screen and (min-width: 768px) {
       margin: 0 150px;
     }
   }
@@ -108,11 +112,16 @@
 
   &_theme_large {
     .tabs__nav {
-      font-size: 20px;
+      font-size: 14px;
       font-weight: 700;
-      line-height: 26px;
+      line-height: 16px;
       text-align: center;
       text-transform: uppercase;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 20px;
+        line-height: 26px;
+      }
     }
 
     .tabs__nav-item {
