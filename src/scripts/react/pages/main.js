@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import Header from "../components/Header";
+import Statistics from "../components/Statistics";
 import Clarifications from "../components/Clarifications";
 import Documents from "../components/Documents";
-import Header from "../components/Header";
 
 const {
   __CLARIFICATIONS__: clarifications,
@@ -18,6 +19,11 @@ ReactDOM.render(
     limit={4}
   />,
   document.getElementById("explain")
+);
+
+ReactDOM.render(
+  <Statistics />,
+  document.getElementById("statistic")
 );
 
 ReactDOM.render(
