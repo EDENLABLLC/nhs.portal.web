@@ -7,18 +7,16 @@
 
 body {
   width: 100vw;
-  min-width: 1200px;
   min-height: 100vh;
-  font: 16px 'GothamPro';
+  font: 16px "GothamPro";
   line-height: 22px;
   background-color: #fff;
   color: #292b37;
 }
 
 a {
-  color: #292B37;
+  color: #292b37;
   text-decoration: none;
-
 
   &:hover {
     color: #4880ed;
@@ -65,8 +63,10 @@ p {
   margin-bottom: 20px;
 }
 
-input, button, textarea {
-  font: 14px 'GothamPro';
+input,
+button,
+textarea {
+  font: 14px "GothamPro";
   color: #292b37;
 
   &::placeholder {
@@ -75,7 +75,8 @@ input, button, textarea {
   }
 }
 
-input, textarea {
+input,
+textarea {
   display: block;
   width: 100%;
   border: #dad9d8 1px solid;
@@ -90,21 +91,29 @@ textarea {
 
 button,
 .btn {
-  padding: 28px 62px;
+  display: inline-block;
+  padding: 14px 28px;
   border: none;
   color: #fff;
   font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
   background-color: #5791ef;
-  background-image: linear-gradient(to top, rgba(75, 133, 238, 0.67) 0%, rgba(116, 176, 248, 0.67) 99%, rgba(116, 176, 248, 0.67) 100%);
+  background-image: linear-gradient(
+    to top,
+    rgba(75, 133, 238, 0.67) 0%,
+    rgba(116, 176, 248, 0.67) 99%,
+    rgba(116, 176, 248, 0.67) 100%
+  );
   cursor: pointer;
 
   &:hover {
     color: #fff;
   }
 
-  &.btn--small {
-    padding: 14px 28px;
+  @media screen and (min-width: 768px) {
+    &:not(.btn--small) {
+      padding: 28px 62px;
+    }
   }
 }

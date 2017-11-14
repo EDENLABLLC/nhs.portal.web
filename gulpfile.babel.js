@@ -38,7 +38,10 @@ const SCRIPTS_SRC = [
   `${SCRIPTS_PATH}/main.js`,
   `${SCRIPTS_PATH}/main-doc.js`,
   `${SCRIPTS_PATH}/main-join.js`,
-  `${SCRIPTS_PATH}/react/map/index.js`
+  `${SCRIPTS_PATH}/react/pages/main.js`,
+  `${SCRIPTS_PATH}/react/pages/join.js`,
+  `${SCRIPTS_PATH}/react/pages/map.js`,
+  `${SCRIPTS_PATH}/react/pages/clarifications.js`
 ];
 
 gulp.task('clean', () => (
@@ -72,7 +75,7 @@ gulp.task('build:jekyll', (cb) => (
 ));
 
 gulp.task('serve', () => (
-  cp.spawn('jekyll', ['serve', '--incremental', '--dest', EXPORT_PATH], { stdio: 'inherit' }) // Adding incremental reduces build time.
+  cp.spawn('bundle', ['exec', 'jekyll', 'serve', '--incremental', '--dest', EXPORT_PATH], { stdio: 'inherit' }) // Adding incremental reduces build time.
     .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
 ));
 

@@ -1,6 +1,5 @@
 .about {
     &__main {
-        width: 800px;
         padding-right: 20px;
 
         & > h2 {
@@ -17,14 +16,20 @@
     }
 
     &__history {
-        width: 800px;
-
+        ul {
+            display: flex;
+            flex-flow: row wrap;
+            list-style-type: none;
+        }
+        
         li {
-            display: inline-block;
-            width: 24%;
-            vertical-align: top;
-            padding: 0 20px;
+            flex: 1 1 auto;
             position: relative;
+
+            @media screen and (min-width: 768px) {
+                padding: 0 20px;
+                flex: 1 1 150px;
+            }
 
             &:first-child {
               padding-left: 0;
@@ -32,14 +37,16 @@
 
 
             &::after {
-                position: absolute;
-                content: '';
-                display: block;
-                background-color: #e7e8ea;
-                height: 520px;
-                width: 1px;
-                right: 0;
-                top: 0;
+                @media screen and (min-width: 768px) {
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    background-color: #e7e8ea;
+                    height: 100%;
+                    width: 1px;
+                    right: 0;
+                    top: 0;
+                }       
             }
             h4 {
                 font-weight: bold;
@@ -52,6 +59,8 @@
     }
 
     &__partners {
+        margin: 0 auto;
+
         h2 {
             margin-top: 30px;
             font-size: 22px;
@@ -60,12 +69,16 @@
         }
 
         &-img {
-             margin: 40px auto 50px;
-             background-image: url(../images/partners.jpg);
-             background-repeat: no-repeat;
-             background-size: 100%;
-             width: 800px;
-             height: 500px;
+            margin: 40px auto 50px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            height: 600px;
+            background-image: url(../images/partners.jpg);
+
+            @media screen and (max-width: 768px) {
+                background-image: url(../images/partners_mobile.png);
+            }
          }
     }
 }

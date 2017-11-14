@@ -1,23 +1,28 @@
 .tabs {
   &__header {
     position: relative;
-    margin: 0 60px;
     border-bottom: #dad9d8 1px solid;
 
+    @media screen and (min-width: 767px) {
+      margin: 0 60px;
+    }
+
     &-small {
-       margin: 0 320px;
+      @media screen and (min-width: 767px) {
+        margin: 0 320px;
+      }
     }
 
     &-title {
-       font-style: 16px;
-       font-weight: 700;
-       text-align: center;
-       margin-bottom: 45px;
+      font-style: 16px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 45px;
 
-       &-small {
-          margin-bottom: 25px;
-       }
-     }
+      &-small {
+        margin-bottom: 25px;
+      }
+    }
   }
 
   &__nav {
@@ -27,18 +32,29 @@
     align-items: stretch;
     align-content: space-between;
     list-style: none;
-    margin-bottom: 4px;
+    padding-bottom: 4px;
+    overflow-x: auto;
   }
 
   &__nav-item {
-    display: inline-block;
-    padding-bottom: 38px;
     cursor: pointer;
-    white-space: nowrap;
-    //overflow: hidden;
+    margin: 0 10px;
+    padding-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+      padding-bottom: 38px;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &_small {
-       padding-bottom: 15px;
+      padding-bottom: 15px;
     }
 
     &_active {
@@ -55,7 +71,9 @@
     }
   }
   &__centered {
-   margin: 0 150px;
+    @media screen and (min-width: 768px) {
+      margin: 0 150px;
+    }
   }
 
   &__main {
@@ -64,8 +82,8 @@
     //overflow-x: hidden;
 
     &-small {
-       margin-top: 40px;
-     }
+      margin-top: 40px;
+    }
   }
 
   &__slide {
@@ -78,7 +96,7 @@
 
     &_active {
       opacity: 1;
-       z-index: 1;
+      z-index: 1;
       transform: translateX(0);
     }
   }
@@ -94,11 +112,16 @@
 
   &_theme_large {
     .tabs__nav {
-      font-size: 20px;
+      font-size: 14px;
       font-weight: 700;
-      line-height: 26px;
+      line-height: 16px;
       text-align: center;
       text-transform: uppercase;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 20px;
+        line-height: 26px;
+      }
     }
 
     .tabs__nav-item {

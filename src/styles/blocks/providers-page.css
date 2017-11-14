@@ -1,6 +1,5 @@
 
 .providers-page {
-  width: 1100px;
   margin: 0 auto;
 
   &__title {
@@ -128,14 +127,24 @@
 
 .partners {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  @media screen and (max-width: 860px) {
+    justify-content: space-around;
+  }
 
   &__item {
-     width: calc(33.33% - 20px);
+     width: 250px;
      padding: 0 20px;
-     /*border: 1px solid #efefef;*/
      margin: 0 10px;
      margin-bottom: 20px;
+     
+     @media screen and (max-width: 600px) {
+      flex: 1 1 auto;
+      padding: 0;
+    }
+     
 
      img {
        text-align: center;

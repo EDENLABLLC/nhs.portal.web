@@ -1,22 +1,29 @@
 .tooltip {
   position: relative;
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 9px;
+  height: 9px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  background-image: url('../images/icons/info.png');
+  background-image: url("../images/icons/info.png");
   cursor: pointer;
 
+  @media screen and (min-width: 768px) {
+    width: 12px;
+    height: 12px;
+  }
+
   &:hover {
-    &::after, &::before {
+    &::after,
+    &::before {
       opacity: 1;
       visibility: visible;
     }
   }
 
-  &::after, &::before {
+  &::after,
+  &::before {
     position: absolute;
     left: 50%;
     top: 100%;
@@ -32,28 +39,40 @@
     position: absolute;
     display: block;
     white-space: nowrap;
-    padding: 24px 48px;
-    margin-top: 20px;
-    font-size: 16px;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 15px;
     text-transform: none;
     box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     z-index: 3;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+      line-height: 20px;
+      padding: 24px 48px;
+      margin-top: 20px;
+    }
   }
 
   &_br {
     &::after {
-     white-space: pre-line;
+      white-space: pre-line;
     }
   }
 
   &::before {
     content: "";
     transform: translateX(-50%);
-    border: 10px solid transparent;
-    border-bottom: 10px solid #fff;
+    border: 5px solid transparent;
+    border-bottom: 5px solid #fff;
     z-index: 4;
+
+    @media screen and (min-width: 768px) {
+      border: 10px solid transparent;
+      border-bottom: 10px solid #fff;
+    }
   }
 }

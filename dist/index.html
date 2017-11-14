@@ -12,26 +12,7 @@ date: '2017-05-24T14:42:52.381Z'
 </head>
 <body>
 
-<header class="header">
-    <header class="header__head">
-        <div class="header__logo">
-            <a href="/">
-                <img src="images/logo.svg" alt="NHS Logo">
-            </a>
-        </div>
-        {% include nav.html %}
-    </header>
-    <article class="header__main">
-        <h2>Піклуємося про ваше здоров’я!</h2>
-        <h1>“eHealth” – Національна електронна система охорони здоров’я</h1>
-    </article>
-    <footer class="header__footer">
-        <a class="header__main-link" href="about.html">
-            докладніше
-            <i class="icon icon_name_arrow-right"></i>
-        </a>
-    </footer>
-</header>
+<header class="header" id="header"></header>
 <main class="main">
   <div class="main__in">
     <section class="join" id="join" data-aos="fade">
@@ -116,167 +97,9 @@ date: '2017-05-24T14:42:52.381Z'
             </a>
         </footer>
     </section>
-    <section class="statistic" id="statistic" data-aos="fade-up">
-        <header class="statistic__header">
-            <h3>статистика</h3>
-        </header>
-        <article class="statistic__main">
-            <section class="tabs">
-                <header class="tabs__header tabs__centered">
-                    <ul class="tabs__nav">
-                        <li class="tabs__nav-item tabs__nav-item_active">
-                            Динаміка реєстрації декларацій
-                        </li>
-                        <li class="tabs__nav-item">
-                            Кількість закладів, лікарів, декларацій<br />  по регіонах
-                        </li>
-                    </ul>
-                </header>
-                <article class="tabs__main statistic__tabs-content">
-                    <section class="tabs__slide tabs__slide_active">
-                        <section>
-                            <canvas class="declarations__graph" id="declarations__graph-canvas" width="700" height="350"></canvas>
-                        </section>
-                    </section>
-                    <section class="tabs__slide">
-                        <section>
-                            <section class="tabs">
-                                <header>
-                                    <p class="tabs__header-title tabs__header-title-small">Кількість закладів, лікарів, декларацій  по регіонах</p>
-                                    <div class="tabs__header tabs__header-small">
-                                        <ul class="tabs__nav tabs__nav-small">
-                                            <li class="tabs__nav-item tabs__nav-item_small tabs__nav-item_active">
-                                                Заклади
-                                            </li>
-                                            <li class="tabs__nav-item tabs__nav-item_small">
-                                                Лікарі
-                                            </li>
-                                            <li class="tabs__nav-item tabs__nav-item_small">
-                                                Декларації
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </header>
-                                <article class="tabs__main tabs__main-smallc statistic__tabs-content">
-                                    <section class="tabs__slide tabs__slide_active">
-                                        <section>
-                                            <canvas class="declarations__graph" id="msp_number__graph-canvas" width="700" height="350"></canvas>
-                                        </section>
-                                    </section>
-                                    <section class="tabs__slide">
-                                        <section>
-                                            <canvas class="declarations__graph" id="doctors_number__graph-canvas" width="700" height="350"></canvas>
-                                        </section>
-                                    </section>
-                                    <section class="tabs__slide">
-                                        <section>
-                                            <canvas class="declarations__graph" id="declarations_number__graph-canvas" width="700" height="350"></canvas>
-                                        </section>
-                                    </section>
-                                </article>
-                            </section>
-                        </section>
-                    </section>
-                </article>
-            </section>
-        </article>
-    </section>
-    <section class="explain" id="explain" data-aos="fade-up">
-        <header class="explain__header">
-            <h3>ПОЯСНЕННЯ</h3>
-        </header>
-        <article class="explain__main">
-            <section class="tabs">
-                <header class="tabs__header">
-                    <ul class="tabs__nav">
-                      {% for type in site.clarificationTypes %}
-                        <li class="tabs__nav-item {% if forloop.first %} tabs__nav-item_active {% endif %}">
-                            {{ type }}
-                        </li>
-                      {% endfor %}
-                    </ul>
-                </header>
-                <article class="tabs__main explain__tabs-content">
-                  {% for type in site.clarificationTypes %}
-                  {% assign isTypesLoopFirst = forloop.first %}
-                    <div class="tabs__slide {% if forloop.first %} tabs__slide_active {% endif %}">
-                      <div class="explain__list">
-                        {% for clarification in site.clarifications limit:4 %}
-                          {% if isTypesLoopFirst or clarification.clarification_types contains type %}
-                            <a class="explain__item" href="{{ clarification.url }}">
-                                <h4>{{ clarification.title }}</h4>
-                                <time>{{ clarification.date | date: '%d-%m-%Y' }}</time>
-                                {{ clarification.excerpt }}
-                            </a>
-                          {% endif %}
-                        {% endfor %}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </article>
-            </section>
-        </article>
-        <!-- <section class="explain__tags">
-            <div class="explain__tags-title">
-                Теги:
-            </div>
-            <ul class="explain__tags-list">
-                <li class="explain__tags-item">
-                    <a class="explain__tags-link" href="#">ЕЦП</a>
-                </li>
-                <li class="explain__tags-item">
-                    <a class="explain__tags-link" href="#">НСЗУ</a>
-                </li>
-                <li class="explain__tags-item">
-                    <a class="explain__tags-link" href="#">Пояснення</a>
-                </li>
-            </ul>
-        </section> -->
-        <footer class="explain__footer">
-            <a href="clarifications.html">Показати більше</a>
-        </footer>
-    </section>
-    <section class="docs" id="documents" data-aos="fade-up">
-        <header class="docs__header">
-            <h3>документи</h3>
-        </header>
-        <article class="docs__main">
-            <section class="slider">
-                <div class="slider__main docs__slider-content">
-                  {% for document in site.documents %}
-                    {% assign loopindex = forloop.index | modulo: 6 %}
-
-                    {% capture document_layout %}
-                      <li class="docs__item">
-                        <a target="_blank" href="{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}">
-                          <div class="docs__item-icon">
-                            <i class="icon icon_name_doc"></i>
-                            {{ document.type }}
-                          </div>
-                          <div>
-                            <span class="docs__attention">{{ document.header }}</span>
-                            {{ document.title }}
-                          </div>
-                        </a>
-                      </li>
-                    {% endcapture %}
-
-                    {% if loopindex == 1 %}
-                      <div class="slider__slide {% if forloop.first %} slider__slide_active {% endif %}">
-                        <ul class="docs__list">
-                          {{ document_layout }}
-                    {% elsif loopindex == 0 or forloop.last %}
-                        {{ document_layout }}
-                        </ul>
-                      </div>
-                    {% else %}
-                      {{ document_layout }}
-                    {% endif %}
-                  {% endfor %}
-                </div>
-            </section>
-        </article>
-    </section>
+    <div id="statistic" class="statistic" data-aos="fade-up"></div>
+    <div id="explain" class="explain" data-aos="fade-up"></div>
+    <div id="documents" data-aos="fade-up"></div>
     <section class="contacts" id="contacts" data-aos="fade-up">
         <header class="contacts__header">
             <h3>Зворотній зв&#8217;язок</h3>
@@ -347,10 +170,17 @@ date: '2017-05-24T14:42:52.381Z'
 <footer class="footer">
     Електронна система охорони здоров’я eHealth
 </footer>
+<script>
+  window.__CLARIFICATION_TYPES__ = JSON.parse('{{ site.clarificationTypes | jsonify }}');
+  window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
+  window.__DOCUMENTS__ = JSON.parse(`[{% for document in site.documents %}{"id": "{{document.id}}","url":"{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}","type": "{{document.type}}", "header": "{{document.header}}", "title": "{{document.title | strip_newlines | strip_html}}"}{% unless forloop.last %},{% endunless %}{% endfor %}]`);
+</script>
 <script type="text/javascript" src="/scripts/config.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
 <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
 <script type="text/javascript" src="/scripts/main.js"></script>
-
+<script type="text/javascript" src="/scripts/main.bundle.js"></script>
 </body>
 </html>
