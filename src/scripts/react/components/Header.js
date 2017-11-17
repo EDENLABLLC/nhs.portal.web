@@ -90,7 +90,8 @@ export default class Header extends React.Component {
             onToggle={() =>
               this.setState(() => ({
                 open: !this.state.open
-              }))}
+              }))
+            }
           />
         </header>
         <article className="header__main">

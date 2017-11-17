@@ -1,5 +1,9 @@
 import Promise from "promise-polyfill";
 import SmoothScroll from "smoothscroll-polyfill";
+<<<<<<< HEAD
+=======
+import Chart from "chart.js";
+>>>>>>> stable
 import "./select";
 import AOS from "aos";
 import { subDays, eachDay } from "date-fns";
@@ -13,6 +17,10 @@ import Slider from "./slider";
 import Map from "./map";
 
 import Feedback from "./feedback";
+<<<<<<< HEAD
+=======
+import { RegionsCharts, DinamicalMonthChart } from "./charts";
+>>>>>>> stable
 
 if (!window.Promise) {
   window.Promise = Promise;
@@ -30,12 +38,101 @@ $(".tabs").forEach(node => {
   const tab = new Tabs(node);
   tab.selectElemByHash(location.hash.slice(1));
 });
+<<<<<<< HEAD
+=======
+$(".slider").forEach(node => new Slider(node));
+>>>>>>> stable
 $(".feedback").forEach(node => new Feedback(node));
 
 const { API_ENDPOINT } = window.__CONFIG__;
 
+<<<<<<< HEAD
 fetchJSON(`${API_ENDPOINT}/reports/stats/regions`).then(data => {
   $(".map").forEach(node => new Map(node, data.data));
+=======
+const today = new Date();
+const number_of_days = screen.width > 768 ? 30 : 15;
+
+const goBackDay = subDays(today, number_of_days);
+const last_days_30 = eachDay(goBackDay, today, 1);
+
+const today_day =
+  today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+const last_day =
+  goBackDay.getDate() < 10 ? `0${goBackDay.getDate()}` : goBackDay.getDate();
+
+const today_month =
+  today.getMonth() < 9 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+const last_month =
+  goBackDay.getMonth() < 9
+    ? `0${goBackDay.getMonth() + 1}`
+    : goBackDay.getMonth() + 1;
+
+fetchJSON(
+  `${
+    API_ENDPOINT
+  }/reports/stats/histogram?from_date=${goBackDay.getFullYear()}-${
+    last_month
+  }-${last_day}&to_date=${today.getFullYear()}-${today_month}-${
+    today_day
+  }&interval=DAY`
+).then(data => {
+  const MONTH_REGION_DECLARATION = document
+    .getElementById("declarations__graph-canvas")
+    .getContext("2d");
+  const DATA = data.data.reduce((acc, cur, index) => {
+    acc.push({
+      value: cur.declarations_active_end,
+      day: last_days_30[index].getDate(),
+      month: last_days_30[index].getMonth(),
+      ...cur.stats
+    });
+    return acc;
+  }, []);
+  DinamicalMonthChart(
+    MONTH_REGION_DECLARATION,
+    DATA.map(i => i.day),
+    DATA.map(i => i.month),
+    DATA.map(i => i.value)
+  );
+});
+
+fetchJSON(`${API_ENDPOINT}/reports/stats/regions`).then(data => {
+  $(".map").forEach(node => new Map(node, data.data));
+  const NUMBER_BY_REGION_DECLARATION = document
+    .getElementById("declarations_number__graph-canvas")
+    .getContext("2d");
+  const NUMBER_BY_REGION_MSPS = document
+    .getElementById("msp_number__graph-canvas")
+    .getContext("2d");
+  const NUMBER_BY_REGION_DOCTORS = document
+    .getElementById("doctors_number__graph-canvas")
+    .getContext("2d");
+
+  let DATA = data.data.reduce((acc, cur) => {
+    acc.push({
+      region: cur.region.name,
+      ...cur.stats
+    });
+    return acc;
+  }, []);
+
+  RegionsCharts(
+    NUMBER_BY_REGION_DECLARATION,
+    DATA.sort((a, b) => a.declarations - b.declarations).reverse(),
+    "declarations"
+  );
+  RegionsCharts(
+    NUMBER_BY_REGION_MSPS,
+    DATA.sort((a, b) => a.msps - b.msps).reverse(),
+    "msps"
+  );
+  RegionsCharts(
+    NUMBER_BY_REGION_DOCTORS,
+    DATA.sort((a, b) => a.doctors - b.doctors).reverse(),
+    "doctors"
+  );
+>>>>>>> stable
 });
 
 fetchJSON(`${API_ENDPOINT}/reports/stats/`).then(data => {

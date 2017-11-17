@@ -3,7 +3,6 @@ import { Slider, Slide } from "react-projector";
 import { ResponsiveSlide } from "react-projector-responsive";
 
 import TabControl from "./TabControl";
-// import TabView from "./TabView";
 import DeclarationsDynamicsChart from "./DeclarationDynamicsChart";
 import RegionsChart from "./RegionsChart";
 
