@@ -47,6 +47,7 @@ const Markers = ({ slideCount, currentSlide, goToSlide }) => (
   <ul className="slider__markers">
     {Array.from({ length: slideCount }, (_, i) => i).map(slide => (
       <li
+        key={slide}
         className={classnames("slider__marker", {
           slider__marker_active: slide === currentSlide
         })}

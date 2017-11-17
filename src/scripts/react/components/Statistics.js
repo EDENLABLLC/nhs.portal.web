@@ -1,40 +1,53 @@
-import React from 'react';
-import TabView from "./TabView";
+import React, { Component } from "react";
+import { Slider, Slide } from "react-projector";
+import { ResponsiveSlide } from "react-projector-responsive";
 
-export default class Statistics extends React.Component {
+import TabControl from "./TabControl";
+import DeclarationsDynamicsChart from "./DeclarationDynamicsChart";
+import RegionsChart from "./RegionsChart";
+
+export default class Statistics extends Component {
+  state = {
+    activeTab: 0
+  };
+
   render() {
-    return (<section class="statistic" id="statistic" data-aos="fade-up">
-        <header class="statistic__header">
-          <h3>статистика</h3>
+    const { theme, children } = this.props;
+    const { activeTab } = this.state;
+
+    return (
+      <section className="statistic">
+        <header className="statistic__header">
+          <h3>Статистика</h3>
         </header>
-        <article class="statistic__main">
-          <TabView>
-            {[{
-                title: "Динаміка реєстрації декларацій",
-                content: <canvas class="declarations__graph" id="declarations__graph-canvas" width="700" height="350"></canvas>
-            }, {
-              title: "Кількість закладів, лікарів, декларацій \n по регіонах",
-              content: (
-                <TabView>
-                  {[
-                    {
-                      title: "Заклади",
-                      content: <canvas ref={i => this.declaration = i} class="declarations__graph" id="msp_number__graph-canvas" width="700" height="350"></canvas>
-                    },{
-                      title: "Лікарі",
-                      content: <canvas class="declarations__graph" id="doctors_number__graph-canvas" width="700" height="350"></canvas>
-                    }, {
-                      title: "Декларації",
-                      content: <canvas class="declarations__graph" id="declarations_number__graph-canvas" width="700" height="350"></canvas>
-                    }
-                  ]}
-                </TabView>
-              )
-            }]
-            }
-          </TabView>
+        <article className="statistic__main">
+          <div className="tabs">
+            <TabControl
+              activeTab={activeTab}
+              onChange={index => this.setState({ activeTab: index })}
+              tabs={[
+                "Динаміка реєстрації декларацій",
+                <div>
+                  Кількість закладів, лікарів, декларацій<br />
+                  по регіонах
+                </div>
+              ]}
+            />
+            <Slider
+              className="tabs__main"
+              activeSlide={activeTab}
+              onSlideChange={index => this.setState({ activeTab: index })}
+            >
+              <Slide key="declarations" component={ResponsiveSlide}>
+                <DeclarationsDynamicsChart />
+              </Slide>
+              <Slide key="regions" component={ResponsiveSlide}>
+                <RegionsChart />
+              </Slide>
+            </Slider>
+          </div>
         </article>
       </section>
-    )
+    );
   }
 }

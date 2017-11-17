@@ -1,3 +1,5 @@
+import "isomorphic-fetch";
+
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -21,18 +23,11 @@ ReactDOM.render(
   document.getElementById("explain")
 );
 
-ReactDOM.render(
-  <Statistics />,
-  document.getElementById("statistic")
-);
+ReactDOM.render(<Statistics />, document.getElementById("statistic"));
 
 ReactDOM.render(
   <Documents documents={documents} />,
   document.getElementById("documents")
 );
 
-ReactDOM.render(
-  <Header />,
-  document.getElementById("header")
-);
-
+ReactDOM.render(<Header />, document.getElementById("header"));

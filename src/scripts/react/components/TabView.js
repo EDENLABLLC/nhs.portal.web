@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import Carousel from "nuka-carousel";
+import { Slider, Slide } from "react-projector";
 import classnames from "classnames";
+
+import TabControl from "./TabControl";
 
 const THEMES = {
   large: "tabs_theme_large"
@@ -11,54 +13,29 @@ export default class TabView extends Component {
     activeTab: 0
   };
 
-  tabs = {};
-
   render() {
     const { theme, children } = this.props;
     const { activeTab } = this.state;
 
     return (
       <div className={classnames("tabs", THEMES[theme])}>
-        <div className="tabs__header">
-          <ul className="tabs__nav">
-            {children.map(({ title }, index) => (
-              <li
-                key={index}
-                ref={e => (this.tabs[index] = e)}
-                className={classnames("tabs__nav-item", {
-                  "tabs__nav-item_active": activeTab === index,
-                  "tabs__nav-item_marker": activeTab === index
-                })}
-                onClick={() => this.changeTab(index, true)}
-              >
-                {title}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Carousel
-          ref={e => (this.carousel = e)}
+        <TabControl
+          activeTab={activeTab}
+          onChange={this.changeTab}
+          tabs={children.map(({ title }) => title)}
+        />
+        <Slider
           className="tabs__main"
-          afterSlide={this.changeTab}
-          decorators={null}
-          cellSpacing={20}
-          swiping
+          activeSlide={activeTab}
+          onSlideChange={this.changeTab}
         >
-          {children.map(({ content }) => content)}
-        </Carousel>
+          {children.map(({ content }, index) => (
+            <Slide key={index}>{content}</Slide>
+          ))}
+        </Slider>
       </div>
     );
   }
 
-  changeTab = (index, updateCarousel) => {
-    const tab = this.tabs[index];
-
-    this.setState({ activeTab: index });
-    tab.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "nearest"
-    });
-    if (updateCarousel) this.carousel.goToSlide(index);
-  };
+  changeTab = index => this.setState({ activeTab: index });
 }

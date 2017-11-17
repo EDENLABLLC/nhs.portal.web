@@ -64,7 +64,6 @@ p {
 }
 
 input,
-button,
 textarea {
   font: 14px "GothamPro";
   color: #292b37;
@@ -89,7 +88,11 @@ textarea {
   max-width: 400px;
 }
 
-button,
+button {
+  font: inherit;
+  color: inherit;
+}
+
 .btn {
   display: inline-block;
   padding: 14px 28px;
