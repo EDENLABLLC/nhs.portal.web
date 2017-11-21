@@ -8,17 +8,17 @@ export default class TabControl extends Component {
 
   tabs = [];
 
-  componentDidUpdate(prevProps) {
-    const { activeTab } = this.props;
-
-    if (activeTab !== prevProps.activeTab) {
-      this.tabs[activeTab].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "nearest"
-      });
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const { activeTab } = this.props;
+  //
+  //   if (activeTab !== prevProps.activeTab) {
+  //     this.tabs[activeTab].scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "nearest",
+  //       inline: "nearest"
+  //     });
+  //   }
+  // }
 
   render() {
     const { tabs, activeTab, onChange } = this.props;
