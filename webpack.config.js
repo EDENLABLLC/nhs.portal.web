@@ -24,7 +24,6 @@ const genConfig = webpackMerge(
 const config = webpackMerge(
   {
     entry: {
-      'main-doc': ['./src/scripts/main-doc.js'],
       'main-join': ['./src/scripts/main-join.js'],
       'main': ['./src/scripts/main.js'],
       'config': ['./src/scripts/config.js'],

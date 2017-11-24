@@ -9,12 +9,13 @@
 
   &__item {
     margin-top: 48px;
-    font-size: 12px;
     font-weight: bold;
+    font-size: 12px;
+    line-height: normal;
 
     @media screen and (min-width: 767px) {
+      font-weight: normal;
       font-size: inherit;
-      font-weight: normal;  
     }
   }
 
@@ -23,12 +24,12 @@
     margin-bottom: 20px;
     color: #4880ed;
     font-size: 45px;
-    
+
     font-weight: 300;
     line-height: 1;
 
     @media screen and (min-width: 767px) {
-      font-size: 70px;    
-    }  
+      font-size: 70px;
+    }
   }
 }

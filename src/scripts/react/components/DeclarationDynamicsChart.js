@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { subDays, format } from "date-fns";
 import { ua } from "date-fns/esm/locale";
-import { Plurals } from "smart-plurals";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -12,10 +11,10 @@ import {
   Area
 } from "recharts";
 
+import ChartTooltip from "./ChartTooltip";
+
 const { API_ENDPOINT } = window.__CONFIG__;
 const DECLARATIONS_DICT = ["декларація", "декларації", "декларацій"];
-
-const pluralize = Plurals.getRule("uk");
 
 export default class DeclarationsDynamicsChart extends Component {
   state = {
@@ -47,9 +46,18 @@ export default class DeclarationsDynamicsChart extends Component {
             dataKey="period_name"
             interval="preserveStartEnd"
             tickFormatter={date => format(date, "D")}
+            tick={{ fontSize: 12 }}
           />
-          <YAxis scale="linear" />
-          <Tooltip content={PeriodTooltip} cursor={{ stroke: "#4880ed" }} />
+          <YAxis scale="linear" tick={{ fontSize: 12 }} />
+          <Tooltip
+            content={
+              <ChartTooltip
+                units={DECLARATIONS_DICT}
+                labelFormatter={l => format(l, "D MMMM", { locale: ua })}
+              />
+            }
+            cursor={{ stroke: "#4880ed" }}
+          />
           <Area
             type="natural"
             dataKey="declarations_active_end"
@@ -64,35 +72,6 @@ export default class DeclarationsDynamicsChart extends Component {
     );
   }
 }
-
-const PeriodTooltip = ({
-  payload: [
-    { payload: { declarations_active_end, period_name } = {} } = {}
-  ] = []
-}) => (
-  <div
-    style={{
-      backgroundColor: "#fff",
-      border: "1px solid #d6d6d6",
-      padding: 10
-    }}
-  >
-    <div style={{ color: "#17184e", fontSize: 16, lineHeight: "1.5em" }}>
-      {format(period_name, "D MMMM", { locale: ua })}
-    </div>
-    <div
-      style={{
-        color: "#292b37",
-        fontSize: 16,
-        fontWeight: 700,
-        lineHeight: "1.5em"
-      }}
-    >
-      {declarations_active_end}{" "}
-      {pluralize(declarations_active_end, DECLARATIONS_DICT)}
-    </div>
-  </div>
-);
 
 const getHistogramParams = daysAmount => {
   const params = new URLSearchParams();

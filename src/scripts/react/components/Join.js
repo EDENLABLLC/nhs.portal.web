@@ -23,29 +23,26 @@ const Join = () => (
               <h3 className="join-rules__sub-title">НЕОБХІДНО МАТИ</h3>
               <ul className="join-rules__list">
                 <li className="join-rules__list-item">
-                  ЕЦП керівника <br />
-                  медичного закладу
-                  <div
-                    className="tooltip join-rules__list-tooltip"
-                    data-message="ЕЦП від суб’єкта господарювання для керівника закладу"
-                  />
+                  <div>
+                    ЕЦП керівника медичного закладу&nbsp;
+                    <div
+                      className="tooltip join-rules__list-tooltip"
+                      data-message="ЕЦП від суб’єкта господарювання для керівника закладу"
+                    />
+                  </div>
                 </li>
                 <li className="join-rules__list-item">
-                  робочу адресу <br />
-                  електронної <br />
-                  пошти
+                  робочу адресу електронної пошти
                 </li>
+                <li className="join-rules__list-item">документи закладу</li>
                 <li className="join-rules__list-item">
-                  документи <br />
-                  закладу
-                </li>
-                <li className="join-rules__list-item">
-                  особисті <br />
-                  документи
-                  <div
-                    className="tooltip join-rules__list-tooltip"
-                    data-message="паспорт та податковий номер"
-                  />
+                  <div>
+                    особисті документи&nbsp;
+                    <div
+                      className="tooltip join-rules__list-tooltip"
+                      data-message="паспорт та податковий номер"
+                    />
+                  </div>
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ДАЛІ</h3>
@@ -114,12 +111,10 @@ const Join = () => (
               <h3 className="join-rules__sub-title">НЕОБХІДНО МАТИ</h3>
               <ul className="join-rules__list">
                 <li className="join-rules__list-item">
-                  ЕЦП працівника <br />
-                  медичного закладу
+                  ЕЦП працівника медичного закладу
                 </li>
                 <li className="join-rules__list-item">
-                  робочу адресу <br />
-                  електронної пошти
+                  робочу адресу електронної пошти
                 </li>
                 <li className="join-rules__list-item">документи пацієнта</li>
               </ul>
@@ -186,30 +181,32 @@ const Join = () => (
               <h3 className="join-rules__sub-title">НЕОБХІДНО МАТИ</h3>
               <ul className="join-rules__list">
                 <li className="join-rules__list-item">
-                  паспорт або свідоцтво <br />
-                  про народження <br />
-                  для дитини
+                  паспорт або свідоцтво про народження для дитини
                 </li>
                 <li className="join-rules__list-item">
-                  податковий номер &nbsp;
-                  <div
-                    className="tooltip join-rules__list-tooltip"
-                    data-message="за наявності"
-                  />
+                  <div>
+                    податковий номер&nbsp;
+                    <div
+                      className="tooltip join-rules__list-tooltip"
+                      data-message="за наявності"
+                    />
+                  </div>
                 </li>
                 <li className="join-rules__list-item">
-                  мобільний телефон &nbsp;
-                  <div
-                    className="tooltip join-rules__list-tooltip"
-                    data-message="за наявності"
-                  />
+                  <div>
+                    мобільний телефон&nbsp;
+                    <div
+                      className="tooltip join-rules__list-tooltip"
+                      data-message="за наявності"
+                    />
+                  </div>
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ДАЛІ</h3>
               <ul className="join-rules__next-list join-rules__next-list_three">
                 <li className="join-rules__next-list-item">
                   На сайті eHealth в розділі “Мапа” <br />
-                  ознайомитись з
+                  ознайомитись з{" "}
                   <a href="/map.html">
                     <b>мапою</b>
                   </a>
@@ -266,37 +263,27 @@ const Join = () => (
               <h3 className="join-rules__sub-title">НЕОБХІДНО МАТИ</h3>
               <ul className="join-rules__list">
                 <li className="join-rules__list-item">
-                  робочу адресу <br />
-                  електронної <br />
-                  пошти
+                  робочу адресу електронної пошти
+                </li>
+                <li className="join-rules__list-item">особисті документи</li>
+                <li className="join-rules__list-item">
+                  інформацію про особисті документи лікарів
                 </li>
                 <li className="join-rules__list-item">
-                  особисті <br />
-                  документи
-                </li>
-                <li className="join-rules__list-item">
-                  інформацію <br />
-                  про особисті <br />
-                  документи <br />
-                  лікарів
-                </li>
-                <li className="join-rules__list-item">
-                  робочу адресу <br />
-                  електронної <br />
-                  пошти <br />
-                  кожного лікаря
+                  робочу адресу електронної пошти кожного лікаря
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ДАЛІ</h3>
               <ul className="join-rules__next-list join-rules__next-list_three">
                 <li className="join-rules__next-list-item">
                   Перейти за посиланням у <br />
-                  <b>запрошенні до системи eHealth</b>
+                  <b>запрошенні до системи eHealth</b>&nbsp;
                   <div
                     className="tooltip join-rules__list-tooltip"
                     data-message="Ви отримаєте лист на робочу електронну адресу"
                   />
-                  ,<br /> що прийде на електронну пошту
+                  ,<br />
+                  що прийде на електронну пошту
                 </li>
                 <li className="join-rules__next-list-item">
                   Затвердити власний обліковий запис користувача
@@ -329,9 +316,7 @@ const Join = () => (
               <h3 className="join-rules__sub-title">НЕОБХІДНО МАТИ</h3>
               <ul className="join-rules__list">
                 <li className="join-rules__list-item">
-                  робочу адресу<br />
-                  електронної<br />
-                  пошти
+                  робочу адресу електронної пошти
                 </li>
                 <li className="join-rules__list-item">особисті документи</li>
                 <li className="join-rules__list-item">документи пацієнта</li>

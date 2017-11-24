@@ -6,116 +6,46 @@
     padding-bottom: 32px;
   }
 
-  &__main {
+  &__wrapper {
     position: relative;
     margin-bottom: 40px;
-    background: url('../images/map.png') no-repeat;
-    background-size: 100%;
-    padding-top: 71.42%;
-
-    @media screen and (max-width: 480px) {
-      margin: 0 40px;
-    }
-
-    @media screen and (min-width: 768px) {
-      margin: 0 70px;
-    }
   }
 
-  &__point {
-    position: absolute;
-    margin: 1px 0 0 1px;
-    width: 10px;
-    height: 10px;
-    background-color: #528ded;
-    border-radius: 50%;
-    cursor: pointer;
+  &__surface {
+    display: block;
+  }
+
+  &__circle {
     transition: transform 0.2s ease;
-
-    @media screen and (min-width: 767px) {
-      width: 18px;
-      height: 18px;
-    }
-
-    &::after, &::before {
-      content: "";
-      display: block;
-      width: 9px;
-      height: 9px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background-color: transparent;
-      border-radius: 50%;
-      transition: background-color 0.2s ease;
-
-      @media screen and (min-width: 767px) {
-        width: 8px;
-        height: 8px;
-      }
-    }
-
-    &::before {
-      width: 32px;
-      height: 32px;
-    }
-
-    &_active {
-      transform: scale(1.5);
-      
-      @media screen and (min-width: 767px) {
-        transform: scale(2.5);
-      } 
-
-      &::after {
-        background-color: #fff;
-      }
-
-      &::before {
-        background-color: rgba(72, 128, 237, 0);
-        box-shadow: 0 0 9px rgba(174, 174, 174, 0.75);
-      }
-    }
   }
 
   &__tooltip {
-    position: absolute;
-    margin: 48px 0 0 5px;
-    left: 453px;
-    top: 170px;
-    padding: 32px;
-    border: 1px solid #dad9d8;
     background-color: #fff;
+    box-shadow: inset 2px 0 0 #5691f1, inset 0 0 0 1px #dad9d8;
+    padding: 30px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-50px);
-    transition: all 0.2s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.2s ease, opacity 0.2s 0.1s ease;
     z-index: 4;
-
-    @media screen and (min-width: 767px) {
-      margin: 68px 0 0 9px;
-      width: 245px;
-    }
 
     &_show {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+    }
+
+    &-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
     }
 
     &-title {
       font-size: 14px;
       line-height: 18px;
       margin-bottom: 20px;
-
-       @media screen and (max-width: 767px) {
-        text-transform: lowercase;
-        
-        &:first-letter {
-          text-transform: uppercase;
-        }
-      }
     }
 
     &-link {
@@ -133,23 +63,9 @@
       dd {
         display: block;
         margin-bottom: 20px;
+        font-size: 16px;
         line-height: 22px;
-        
-        @media screen and (max-width: 767px) {
-          font-size: 16px
-        }
       }
-    }
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      left: -1px;
-      top: -19px;
-      bottom: -1px;
-      width: 2px;
-      background-color: #5691f1;
     }
   }
 

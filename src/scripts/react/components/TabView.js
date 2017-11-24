@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Slider, Slide } from "react-projector";
+import { ResponsiveSlide } from "react-projector-responsive";
 import classnames from "classnames";
 
 import TabControl from "./TabControl";
@@ -30,7 +31,9 @@ export default class TabView extends Component {
           onSlideChange={this.changeTab}
         >
           {children.map(({ content }, index) => (
-            <Slide key={index}>{content}</Slide>
+            <Slide key={index} component={ResponsiveSlide}>
+              {content}
+            </Slide>
           ))}
         </Slider>
       </div>

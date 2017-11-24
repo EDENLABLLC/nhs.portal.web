@@ -89,6 +89,7 @@
     "react-lite": "^0.15.37",
     "react-projector": "^1.0.0-beta.1",
     "react-projector-responsive": "^1.0.0-beta.1",
+    "resize-observer-polyfill": "^1.5.0",
     "smart-plurals": "^1.1.0",
     "smoothscroll-polyfill": "^0.3.5"
   }
