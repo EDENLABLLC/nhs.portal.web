@@ -6,8 +6,9 @@
 @import "tabs.css";
 @import "tooltip.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
-@import "blocks/header-doc.css";
+@import "blocks/header.css";
 
 .main {
   padding: 0 20px;

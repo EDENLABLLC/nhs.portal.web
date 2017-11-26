@@ -40,7 +40,8 @@ const SCRIPTS_SRC = [
   `${SCRIPTS_PATH}/react/pages/main.js`,
   `${SCRIPTS_PATH}/react/pages/join.js`,
   `${SCRIPTS_PATH}/react/pages/map.js`,
-  `${SCRIPTS_PATH}/react/pages/clarifications.js`
+  `${SCRIPTS_PATH}/react/pages/clarifications.js`,
+  `${SCRIPTS_PATH}/react/pages/default.js`
 ];
 
 gulp.task('clean', () => (

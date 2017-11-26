@@ -30,7 +30,8 @@ const config = webpackMerge(
       'main.bundle': ['./src/scripts/react/pages/main.js'],
       'join.bundle': ['./src/scripts/react/pages/join.js'],
       'map.bundle': ['./src/scripts/react/pages/map.js'],
-      'clarifications.bundle': ['./src/scripts/react/pages/clarifications.js']
+      'clarifications.bundle': ['./src/scripts/react/pages/clarifications.js'],
+      'default.bundle': ['./src/scripts/react/pages/default.js']
     },
     output: {
       path: path.join(__dirname, 'dist', 'scripts'),
