@@ -5,4 +5,11 @@
     height: 520px;
     margin-top: 40px;
   }
+
+  &__regions-chart {
+    @media screen and (min-width: 768px) {
+      width: 60%;
+      margin: 0 auto;
+    }
+  }
 }

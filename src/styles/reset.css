@@ -99,7 +99,6 @@ button {
 .btn {
   display: inline-block;
   border: none;
-  color: #fff;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.563;
@@ -114,4 +113,10 @@ button {
   cursor: pointer;
   min-width: 230px;
   padding: 28px;
+
+  &,
+  &:hover,
+  &:active, {
+    color: #fff;
+  }
 }

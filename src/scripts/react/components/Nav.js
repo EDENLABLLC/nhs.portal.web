@@ -48,7 +48,7 @@ export default class Nav extends Component {
       <header className="header__head">
         <div className="header__logo">
           <a href="/">
-            <img src="images/logo.svg" alt="NHS Logo" />
+            <img src="/images/logo.svg" alt="NHS Logo" />
           </a>
         </div>
         <nav className={classnames("nav", this.state.open && "open")}>

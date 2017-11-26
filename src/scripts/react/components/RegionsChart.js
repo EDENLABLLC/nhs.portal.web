@@ -49,7 +49,7 @@ export default class RegionsChart extends Component {
     const { data, stats } = this.state;
 
     return (
-      <div>
+      <div className="statistic__regions-chart">
         <TabControl
           tabs={Object.values(STATS_NAMES)}
           activeTab={Object.keys(STATS_NAMES).indexOf(stats)}
