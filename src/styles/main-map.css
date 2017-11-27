@@ -3,46 +3,14 @@
 @import "fonts.css";
 @import "icons.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
+@import "blocks/header.css";
 @import "blocks/search.css";
 
 .map-page {
   display: flex;
   flex-flow: column nowrap;
-}
-
-.header {
-  flex: 0 0 auto;
-  min-height: 40px;
-  padding: 25px 0;
-  text-align: center;
-  display: flex;
-
-  @media screen and (max-width: 768px) {
-    padding: 20px;  
-  }
-  
-
-  &__logo {
-    display: inline-block;
-    margin-right: 90px;
-    flex: 1 1 auto;
-    max-width: 480px;
-    text-align: left;
-    margin-top: -16px;
-    padding-left: 65px;
-
-    @media screen and (max-width: 768px) {
-      padding-left: 0;
-      margin-top: 0;
-      text-align: center;
-      margin-right: 0;
-    }
-
-    img {
-      height: 40px;
-    }
-  }
 }
 
 .main {

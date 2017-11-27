@@ -4,24 +4,14 @@
 @import "icons.css";
 @import "tabs.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
-@import "blocks/header-doc.css";
+@import "blocks/header.css";
 @import "blocks/article.css";
 @import "blocks/clarifications.css";
 
 @import "blocks/providers-page.css";
 @import "blocks/about-main.css";
-
-
-.header__in {
-  max-width: var(--max-content-width);
-  margin: 0 auto;
-  padding: 0 10px;
-
-  @media screen and (min-width: 768px) {
-    padding: 0 20px;
-  }
-}
 
 .main {
   min-height: calc(100vh - 155px - 100px);

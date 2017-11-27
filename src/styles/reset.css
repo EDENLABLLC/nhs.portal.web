@@ -89,34 +89,34 @@ textarea {
 }
 
 button {
-  font: inherit;
+  background: none;
+  border: none;
+  border-radius: 0;
   color: inherit;
+  font: inherit;
 }
 
 .btn {
   display: inline-block;
-  padding: 14px 28px;
   border: none;
-  color: #fff;
   font-weight: 700;
   font-size: 16px;
+  line-height: 1.563;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   background-color: #5791ef;
   background-image: linear-gradient(
-    to top,
+    0deg,
     rgba(75, 133, 238, 0.67) 0%,
-    rgba(116, 176, 248, 0.67) 99%,
-    rgba(116, 176, 248, 0.67) 100%
+    rgba(116, 176, 248, 0.67) 99%
   );
   cursor: pointer;
+  min-width: 230px;
+  padding: 28px;
 
-  &:hover {
+  &,
+  &:hover,
+  &:active, {
     color: #fff;
-  }
-
-  @media screen and (min-width: 768px) {
-    &:not(.btn--small) {
-      padding: 28px 62px;
-    }
   }
 }

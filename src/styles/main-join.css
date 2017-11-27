@@ -6,8 +6,9 @@
 @import "tabs.css";
 @import "tooltip.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
-@import "blocks/header-doc.css";
+@import "blocks/header.css";
 
 .main {
   padding: 0 20px;
@@ -78,9 +79,9 @@
 
   &__list {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: stretch;
     list-style: none;
   }
 
@@ -95,45 +96,41 @@
   }
 
   &__list-item {
-    flex: 1 1 auto;
-
+    border-right: 1px solid #dad9d8;
+    flex-basis: 50%;
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 11px;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 13px;
+    line-height: 25px;
     color: #4880ed;
-    padding: 0 2px;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    @media screen and (max-width: 767px) {
+      &:nth-child(2n) {
+        border-right: none;
+      }
+    }
 
     @media screen and (min-width: 768px) {
-      font-size: 16px;
-      line-height: 19px;
+      flex-basis: 25%;
+
+      &:nth-child(4n) {
+        border-right: none;
+      }
     }
 
     @media screen and (min-width: 1024px) {
       font-size: 21px;
-      line-height: 25px;
-    }
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 67px;
-      width: 1px;
-      background-color: #dad9d8;
-    }
-
-    &:last-child {
-      &::before {
-        display: none;
-      }
     }
   }
 

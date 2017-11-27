@@ -14,12 +14,9 @@ title: 404
 </head>
 <body>
 <header class="header">
-    <div class="header__logo">
-        <a href="#">
-            <img src="images/logo.svg" alt="NHS Logo">
-        </a>
-    </div>
-    {% include nav.html %}
+  <div class="header__in">
+    <div id="nav"></div>
+  </div>
 </header>
 <main class="main">
     <section class="error">
@@ -37,5 +34,8 @@ title: 404
 <footer class="footer">
     Електронна система охорони здоров’я eHealth
 </footer>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
+<script type="text/javascript" src="/scripts/default.bundle.js"></script>
 </body>
 </html>

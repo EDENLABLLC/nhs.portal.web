@@ -2,27 +2,14 @@
 @import "reset.css";
 @import "fonts.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
+@import "blocks/header.css";
 @import "blocks/error.css";
 
 body {
   display: flex;
   flex-flow: column nowrap;
-}
-
-.header {
-  flex: 0 0 40px;
-  padding: 24px 0;
-  text-align: center;
-
-  &__logo {
-    display: inline-block;
-    margin-right: 90px;
-
-    img {
-      height: 40px;
-    }
-  }
 }
 
 .main {

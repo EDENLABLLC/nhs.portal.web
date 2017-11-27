@@ -36,12 +36,12 @@ const SCRIPTS_PATH = `${SRC_PATH}/scripts`;
 const SCRIPTS_DIST = `${TMP_PATH}/scripts`;
 const SCRIPTS_SRC = [
   `${SCRIPTS_PATH}/main.js`,
-  `${SCRIPTS_PATH}/main-doc.js`,
   `${SCRIPTS_PATH}/main-join.js`,
   `${SCRIPTS_PATH}/react/pages/main.js`,
   `${SCRIPTS_PATH}/react/pages/join.js`,
   `${SCRIPTS_PATH}/react/pages/map.js`,
-  `${SCRIPTS_PATH}/react/pages/clarifications.js`
+  `${SCRIPTS_PATH}/react/pages/clarifications.js`,
+  `${SCRIPTS_PATH}/react/pages/default.js`
 ];
 
 gulp.task('clean', () => (

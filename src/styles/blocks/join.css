@@ -10,71 +10,65 @@
 
       @media screen and (min-width: 767px) {
         font-size: 18px;
-      }  
+      }
     }
   }
 
   &__main {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
-  }
-  
-  &__item {
-    flex: 1 1 50%;
-    line-height: 26px;
-    text-align: center;
-    padding: 17px 0 0;
+    margin: 0 calc((50% - 135px) / -2);
 
-    @media screen and (min-width: 767px) {
+    @media screen and (min-width: 768px) {
+      margin: 0 calc((25% - 135px) / -2);
+    }
+  }
+
+  &__item {
+    flex-basis: 50%;
+    line-height: 26px;
+    padding: 17px 0 0;
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+      flex-basis: 25%;
       font-size: 22px;
-      flex: 1 1 25%;
-    }   
+    }
   }
 
   &__item-icon {
     position: relative;
-    width: 90px;
-    height: 90px;
-    line-height: 92px;
-    margin: 0 auto 30px auto;
+    width: 135px;
+    height: 135px;
+    line-height: 135px;
+    margin: 0 auto 30px;
     border-radius: 50%;
 
-    @media screen and (min-width: 767px) {
-      width: 135px;
-      height: 135px;
-      line-height: 137px;
-    }
-
-    &::after, &::before {
+    &::before,
+    &::after {
       content: "";
       position: absolute;
-      left: 16px;
-      top: 16px;
-      right: 16px;
-      bottom: 16px;
       box-shadow: 0 0 18px 0 hsla(0, 0%, 0%, 0.12);
       border-radius: 50%;
     }
 
     &::before {
-      
-      @media screen and (min-width: 767px) {
-        left: 30px;
-        top: 30px;
-        right: 30px;
-        bottom: 30px;
-      } 
-    }    
+      left: 30px;
+      top: 30px;
+      right: 30px;
+      bottom: 30px;
+    }
+
+    &::after {
+      left: 15px;
+      top: 15px;
+      right: 15px;
+      bottom: 15px;
+    }
 
     i {
-      width: 20px;
-      height: 20px;
-
-      @media screen and (min-width: 767px) {
-        width: 35px;
-        height: 35px;
-      }   
+      width: 35px;
+      height: 35px;
     }
 
     &_color_green {
@@ -91,11 +85,6 @@
 
     &_color_pink {
        background-color: #dd8de6;
-    }
-
-    i {
-      width: 35px;
-      height: 35px;
     }
   }
 }

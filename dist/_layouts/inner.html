@@ -9,12 +9,7 @@
 <body>
     <header class="header">
         <div class="header__in">
-          <div class="header__logo">
-              <a href="/">
-                  <img src="/images/logo.svg" alt="NHS Logo">
-              </a>
-          </div>
-          {% include nav.html %}
+          <div id="nav"></div>
           {% include header-back.html %}
         </div>
     </header>
@@ -27,7 +22,9 @@
         Електронна система охорони здоров’я eHealth
     </footer>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
     <script type="text/javascript" src="/scripts/config.js"></script>
-    <script type="text/javascript" src="/scripts/main-doc.js"></script>
+    <script type="text/javascript" src="/scripts/default.bundle.js"></script>
 </body>
 </html>

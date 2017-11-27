@@ -8,12 +8,12 @@
 
   &_name_arrow-right,
   &_name_arrow-left {
-    background-image: url('../images/icons/arrow-right.svg');
+    background-image: url("../images/icons/arrow-right.svg");
     width: 36px;
   }
 
   &_name_caret-bottom {
-    background-image: url('../images/icons/caret-bottom.svg');
+    background-image: url("../images/icons/caret-bottom.svg");
     width: 10px;
   }
 
@@ -22,46 +22,51 @@
   }
 
   &_name_clinic {
-    background-image: url('../images/icons/clinic.png');
+    background-image: url("../images/icons/clinic.png");
     background-size: 100%;
   }
 
   &_name_doctors {
-    background-image: url('../images/icons/doctors.png');
+    background-image: url("../images/icons/doctors.png");
     background-size: 100%;
   }
 
   &_name_persons {
-    background-image: url('../images/icons/persons.png');
+    background-image: url("../images/icons/persons.png");
     background-size: 100%;
   }
 
   &_name_employees {
-     background-image: url('../images/icons/employees.png');
-     background-size: 100%;
-     height: 100% !important;
-   }
+    background-image: url("../images/icons/employees.png");
+    background-size: 100%;
+    height: 100% !important;
+  }
 
   &_name_doc {
-    background-image: url('../images/icons/doc.png');
+    background-image: url("../images/icons/doc.png");
     background-size: contain;
     width: 20px;
     height: 20px;
   }
 
   &_name_admin {
-    background-image: url('../images/icons/admin.svg');
+    background-image: url("../images/icons/admin.svg");
     background-size: 100%;
   }
 
   &_name_fb {
-     background-image: url('../images/icons/fb.svg');
-     background-size: contain;
-     margin-left: 10px;
+    background-image: url("../images/icons/fb.svg");
+    background-size: contain;
+    margin-left: 10px;
   }
 
   &_name_tw {
-   background-image: url('../images/icons/twitter.svg');
-   background-size: contain;
- }
+    background-image: url("../images/icons/twitter.svg");
+    background-size: contain;
+  }
+
+  &_name_close {
+    background-image: url("../images/icons/close.svg");
+    background-size: 100%;
+  }
 }

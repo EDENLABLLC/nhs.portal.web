@@ -3,7 +3,8 @@ import "isomorphic-fetch";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Header from "../components/Header";
+import Nav from "../components/Nav";
+import RegionsMap from "../components/RegionsMap";
 import Statistics from "../components/Statistics";
 import Clarifications from "../components/Clarifications";
 import Documents from "../components/Documents";
@@ -14,6 +15,12 @@ const {
   __DOCUMENTS__: documents
 } = window;
 
+ReactDOM.render(<Nav />, document.getElementById("nav"));
+
+ReactDOM.render(<RegionsMap />, document.getElementById("regions_map"));
+
+ReactDOM.render(<Statistics />, document.getElementById("statistic"));
+
 ReactDOM.render(
   <Clarifications
     clarifications={clarifications}
@@ -23,11 +30,7 @@ ReactDOM.render(
   document.getElementById("explain")
 );
 
-ReactDOM.render(<Statistics />, document.getElementById("statistic"));
-
 ReactDOM.render(
   <Documents documents={documents} />,
   document.getElementById("documents")
 );
-
-ReactDOM.render(<Header />, document.getElementById("header"));
