@@ -30,7 +30,6 @@ export default class Statistics extends Component {
   }
   render(){
     const { data } = this.state;
-    console.log(data);
     return (
       <section className="statistic">
         <header className="statistic__header">
