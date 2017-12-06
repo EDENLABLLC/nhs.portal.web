@@ -32,6 +32,7 @@ defaults:
   values:
     layout: provider
 source: dist
+host: 0.0.0.0
 gems:
 - jekyll-sitemap
 - jekyll-seo-tag

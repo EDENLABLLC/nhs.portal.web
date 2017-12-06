@@ -1,86 +1,56 @@
 .tabs {
   &__header {
     position: relative;
-    margin: 0 60px;
-    border-bottom: #dad9d8 1px solid;
 
-    &-small {
-       margin: 0 320px;
+    @media screen and (min-width: 768px) {
+      margin: 0 60px;
     }
 
     &-title {
-       font-style: 16px;
-       font-weight: 700;
-       text-align: center;
-       margin-bottom: 45px;
-
-       &-small {
-          margin-bottom: 25px;
-       }
-     }
+      font-style: 16px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 45px;
+    }
   }
 
   &__nav {
+    background: repeating-linear-gradient(
+      transparent,
+      transparent 54px,
+      #dad9d8 54px,
+      #dad9d8 55px
+    );
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: stretch;
-    align-content: space-between;
+    flex-flow: row wrap;
+    justify-content: center;
     list-style: none;
-    margin-bottom: 4px;
+
+    @media screen and (min-width: 768px) {
+      justify-content: space-around;
+    }
   }
 
   &__nav-item {
-    display: inline-block;
-    padding-bottom: 38px;
     cursor: pointer;
+    margin: 0 5px 1px;
+    padding: 16px 0;
     white-space: nowrap;
-    //overflow: hidden;
 
-    &_small {
-       padding-bottom: 15px;
+    @media screen and (min-width: 768px) {
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
     &_active {
       font-weight: 700;
-      //box-shadow: 0 5px 0 0 #4880ed;
+      box-shadow: inset 0 -5px 0 #4880ed;
     }
-
-    &_marker {
-      box-shadow: 0 5px 0 0 #4880ed;
-    }
-
-    &:hover {
-      //font-weight: 700;
-    }
-  }
-  &__centered {
-   margin: 0 150px;
   }
 
   &__main {
     position: relative;
     margin-top: 60px;
-    //overflow-x: hidden;
-
-    &-small {
-       margin-top: 40px;
-     }
-  }
-
-  &__slide {
-    position: absolute;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    transform: translateX(100%);
-    will-change: transform;
-
-    &_active {
-      opacity: 1;
-       z-index: 1;
-      transform: translateX(0);
-    }
   }
 
   &__marker {
@@ -94,17 +64,38 @@
 
   &_theme_large {
     .tabs__nav {
-      font-size: 20px;
+      background: repeating-linear-gradient(
+        transparent,
+        transparent 80px,
+        #dad9d8 80px,
+        #dad9d8 81px
+      );
+      font-size: 14px;
       font-weight: 700;
-      line-height: 26px;
+      line-height: 16px;
       text-align: center;
       text-transform: uppercase;
+
+      @media screen and (min-width: 1024px) {
+        background: repeating-linear-gradient(
+          transparent,
+          transparent 110px,
+          #dad9d8 110px,
+          #dad9d8 111px
+        );
+        font-size: 20px;
+        line-height: 26px;
+      }
     }
 
     .tabs__nav-item {
+      height: 80px;
       display: flex;
       align-items: center;
-      align-self: stretch;
+
+      @media screen and (min-width: 1024px) {
+        height: 110px;
+      }
     }
   }
 }

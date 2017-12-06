@@ -1,26 +1,5 @@
 .explain {
-  padding-bottom: 60px;
   border-bottom: #dad9d8 1px solid;
-
-  &__tabs-content {
-    height: 220px;
-  }
-
-  &__list {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    list-style: none;
-  }
-
-  &__item {
-    margin-right: 20px;
-    flex: 0 0 200px;
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
 
   &__tags {
     display: flex;

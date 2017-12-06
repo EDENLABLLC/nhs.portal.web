@@ -24,11 +24,14 @@ const genConfig = webpackMerge(
 const config = webpackMerge(
   {
     entry: {
-      'main-doc': ['./src/scripts/main-doc.js'],
       'main-join': ['./src/scripts/main-join.js'],
       'main': ['./src/scripts/main.js'],
       'config': ['./src/scripts/config.js'],
-      'map.bundle': ['./src/scripts/react/map'],
+      'main.bundle': ['./src/scripts/react/pages/main.js'],
+      'join.bundle': ['./src/scripts/react/pages/join.js'],
+      'map.bundle': ['./src/scripts/react/pages/map.js'],
+      'clarifications.bundle': ['./src/scripts/react/pages/clarifications.js'],
+      'default.bundle': ['./src/scripts/react/pages/default.js']
     },
     output: {
       path: path.join(__dirname, 'dist', 'scripts'),
@@ -40,7 +43,11 @@ const config = webpackMerge(
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         },
       }),
-    ]
+    ],
+    externals : {
+      react: 'React',
+      'react-dom': 'ReactDOM'
+    }
   },
   genConfig
 );

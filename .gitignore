@@ -5,12 +5,16 @@ npm-debug.log*
 
 # Dependency directories
 node_modules
+vendor/bundle
 
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
+
+# Bundler config
+.bundle
 
 .idea
 .publish

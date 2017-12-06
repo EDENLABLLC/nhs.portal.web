@@ -6,6 +6,7 @@
 @import "slider.css";
 @import "choices.js/assets/styles/css/choices.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
 @import "blocks/header.css";
 @import "blocks/about.css";
@@ -13,18 +14,25 @@
 @import "blocks/joined.css";
 @import "blocks/map.css";
 @import "blocks/statistic.css";
+@import "blocks/clarifications.css";
 @import "blocks/explain.css";
 @import "blocks/docs.css";
 @import "blocks/contacts.css";
 @import "blocks/declarations.css";
 
 body {
-  min-width: 1280px;
+  min-width: 320px;
 }
 
 .header {
-  height: 370px;
-  overflow: hidden;
+  background-image: url("../images/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media screen and (min-width: 768px) {
+    height: 370px;
+    overflow: hidden;
+  }
 }
 
 a:hover {
@@ -34,10 +42,18 @@ a:hover {
 .main {
   min-height: 100vh;
   overflow: hidden;
+  padding: 0 20px;
+
+  @media screen and (min-width: 767px) {
+    height: auto;
+    overflow: hidden;
+    text-align: left;
+  }
 }
 
 .main__in {
-  width: var(--max-content-width);
+  max-width: var(--max-content-width);
+  min-width: 280px;
   margin: 0 auto;
 }
 

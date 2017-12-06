@@ -1,20 +1,35 @@
 .joined {
-  //padding-bottom: 60px;
-  //border-bottom: #dad9d8 1px solid;
-
   &__main {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+    flex-flow: row wrap;
+    justify-content: space-around;
     font-size: 22px;
     line-height: 26px;
   }
 
+  &__item {
+    margin-top: 48px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: normal;
+
+    @media screen and (min-width: 767px) {
+      font-weight: normal;
+      font-size: inherit;
+    }
+  }
+
   &__item-count {
+    padding-right: 10px;
     margin-bottom: 20px;
     color: #4880ed;
-    font-size: 70px;
+    font-size: 45px;
+
     font-weight: 300;
     line-height: 1;
+
+    @media screen and (min-width: 767px) {
+      font-size: 70px;
+    }
   }
 }

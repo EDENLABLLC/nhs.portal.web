@@ -6,41 +6,11 @@ backLink: "/"
 backTitle: "Назад на головну"
 ---
 
-<section class="clarifications">
-    <header class="clarifications__header">
-        <h3>ПОЯСНЕННЯ</h3>
-    </header>
-
-    <article class="clarifications__main">
-        <section class="tabs">
-            <header class="tabs__header">
-                <ul class="tabs__nav">
-                    {% for type in site.clarificationTypes %}
-                    <li class="tabs__nav-item {% if forloop.first %} tabs__nav-item_active {% endif %}">
-                        {{ type }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </header>
-            <article class="tabs__main clarifications__tabs-content">
-                {% for type in site.clarificationTypes %}
-                {% assign isTypesLoopFirst = forloop.first %}
-                <div class="tabs__slide {% if forloop.first %} tabs__slide_active {% endif %}">
-                    <div class="clarifications__list">
-                        {% for clarification in site.clarifications %}
-                        {% if isTypesLoopFirst or clarification.clarification_types contains type %}
-                        <a class="clarifications__item" href="{{ clarification.url }}">
-                            <h4>{{ clarification.title }}</h4>
-                            <time>{{ clarification.date | date: '%d-%m-%Y' }}</time>
-                            {{ clarification.excerpt }}
-                        </a>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endfor %}
-            </article>
-        </section>
-    </article>
-    {{page.url.params.tag}}
-</section>
+<div id="clarifications"></div>
+<script>
+  window.__CLARIFICATION_TYPES__ = JSON.parse('{{ site.clarificationTypes | jsonify }}');
+  window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
+<script type="text/javascript" src="/scripts/clarifications.bundle.js"></script>

@@ -1,71 +1,74 @@
 .about {
-    &__main {
-        width: 800px;
-        padding-right: 20px;
-
-        & > h2 {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        p {
-            padding-bottom: 30px;
-            margin-bottom: 0;
-
-        }
+  &__main {
+    & > h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 30px;
     }
 
-    &__history {
-        width: 800px;
+    p {
+      padding-bottom: 30px;
+      margin-bottom: 0;
+    }
+  }
 
-        li {
-            display: inline-block;
-            width: 24%;
-            vertical-align: top;
-            padding: 0 20px;
-            position: relative;
+  &__history {
+    ul {
+      display: flex;
+      flex-flow: row wrap;
+      list-style-type: none;
 
-            &:first-child {
-              padding-left: 0;
-            }
-
-
-            &::after {
-                position: absolute;
-                content: '';
-                display: block;
-                background-color: #e7e8ea;
-                height: 520px;
-                width: 1px;
-                right: 0;
-                top: 0;
-            }
-            h4 {
-                font-weight: bold;
-
-            }
-            p {
-                font-size: 12px;
-            }
-        }
+      @media screen and (min-width: 768px) {
+        margin: 0 -20px;
+      }
     }
 
-    &__partners {
-        h2 {
-            margin-top: 30px;
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-        }
+    li {
+      flex: 1 1 auto;
+      position: relative;
 
-        &-img {
-             margin: 40px auto 50px;
-             background-image: url(../images/partners.jpg);
-             background-repeat: no-repeat;
-             background-size: 100%;
-             width: 800px;
-             height: 500px;
-         }
+      @media screen and (min-width: 768px) {
+        border-right: 1px solid #e7e8ea;
+        flex: 1 1 150px;
+        padding: 0 20px;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+
+      h4 {
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 12px;
+        padding-bottom: 10px;
+      }
     }
+  }
+
+  &__partners {
+    margin: 0 auto;
+
+    h2 {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &-img {
+      margin: 40px auto 50px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center center;
+      height: 600px;
+      background-image: url(../images/partners.jpg);
+
+      @media screen and (max-width: 768px) {
+        background-image: url(../images/partners_mobile.png);
+      }
+    }
+  }
 }

@@ -16,15 +16,10 @@ backTitle: "Назад"
 </head>
 <body>
     <header class="header">
-      <div class="header__in">
-        <div class="header__logo">
-            <a href="/">
-                <img src="images/logo.svg" alt="NHS Logo">
-            </a>
+        <div class="header__in">
+            <div id="nav"></div>
+            {% include header-back.html %}
         </div>
-        {% include nav.html %}
-        {% include header-back.html %}
-      </div>
     </header>
     <main class="main">
       <div class="main__in">
@@ -190,6 +185,9 @@ backTitle: "Назад"
 
     <script type="text/javascript" src="/scripts/config.js"></script>
     <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
     <script type="text/javascript" src="/scripts/main-join.js"></script>
+    <script type="text/javascript" src="/scripts/default.bundle.js"></script>
 </body>
 </html>

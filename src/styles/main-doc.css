@@ -4,32 +4,25 @@
 @import "icons.css";
 @import "tabs.css";
 
+@import "blocks/controll.css";
 @import "blocks/nav.css";
-@import "blocks/header-doc.css";
+@import "blocks/header.css";
 @import "blocks/article.css";
 @import "blocks/clarifications.css";
 
 @import "blocks/providers-page.css";
 @import "blocks/about-main.css";
 
-
-body {
-}
-
-.header__in {
-  width: var(--max-content-width);
-  margin: 0 auto;
-}
-
-
-
 .main {
   min-height: calc(100vh - 155px - 100px);
+  padding: 0 20px;
 }
 
 .main__in {
-  width: var(--max-content-width);
+  max-width: 960px;
   margin: 0 auto;
+  /*padding: 0 10px;*/
+
 }
 
 .footer {
