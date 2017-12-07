@@ -107,6 +107,7 @@
     font-weight: 700;
     font-size: 12px;
     cursor: pointer;
+    padding-right: 10px;
 
     &_active {
       font-weight: 400;
