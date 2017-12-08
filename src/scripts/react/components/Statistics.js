@@ -49,16 +49,16 @@ export default class Statistics extends Component {
                 )
               },
               { title: "Кількість по регіонах", content: <RegionsChart /> },
-              {
-                title: "Динаміка відпуску рецептів",
-                content: (
-                  <DynamicsChart
-                    data={data}
-                    dataKey="medication_requests_active_end"
-                    units={MEDICATIONS_DICT}
-                  />
-                )
-              }
+              // {
+              //   title: "Динаміка відпуску рецептів",
+              //   content: (
+              //     <DynamicsChart
+              //       data={data}
+              //       dataKey="medication_requests_active_end"
+              //       units={MEDICATIONS_DICT}
+              //     />
+              //   )
+              // }
             ]}
           </TabView>
         </article>
