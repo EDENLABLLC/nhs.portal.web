@@ -49,16 +49,6 @@ export default class Statistics extends Component {
                 )
               },
               { title: "Кількість по регіонах", content: <RegionsChart /> },
-              // {
-              //   title: "Динаміка відпуску рецептів",
-              //   content: (
-              //     <DynamicsChart
-              //       data={data}
-              //       dataKey="medication_requests_active_end"
-              //       units={MEDICATIONS_DICT}
-              //     />
-              //   )
-              // }
             ]}
           </TabView>
         </article>
@@ -66,6 +56,17 @@ export default class Statistics extends Component {
     )
   }
 }
+
+// {
+//   title: "Динаміка відпуску рецептів",
+//   content: (
+//     <DynamicsChart
+//       data={data}
+//       dataKey="medication_requests_active_end"
+//       units={MEDICATIONS_DICT}
+//     />
+//   )
+// }
 
 const getHistogramParams = daysAmount => {
   const params = new URLSearchParams();

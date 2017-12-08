@@ -5,10 +5,11 @@ import SearchResult from '../components/SearchResult';
 const types = [
   { type: 'CLINIC', title: 'Клініки' }, // Філія (інший відокремлений підрозділ)
   { type: 'AMBULANT_CLINIC', title: 'Амбулаторії' }
-  // { type: 'FAP', title: 'ФАП' },
-  // { type: 'DRUGSTORE', title: 'Аптеки' },
-  // { type: 'DRUGSTORE_POINT', title: 'Аптечні пункти' },
 ];
+
+// { type: 'FAP', title: 'ФАП' },
+// { type: 'DRUGSTORE', title: 'Аптеки' },
+// { type: 'DRUGSTORE_POINT', title: 'Аптечні пункти' },
 
 export default ({
   type,
