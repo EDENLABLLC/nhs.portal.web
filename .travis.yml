@@ -24,6 +24,7 @@ install:
 - npm install
 - bundler install
 before_install:
+- gem update bundler
 - chmod -R +x bin
 script:
 - ./bin/version-increment.sh || travis_terminate 1
