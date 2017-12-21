@@ -6,7 +6,7 @@ cache:
   - ~/.nvm
   - node_modules
 notifications:
-  slack: 
+  slack:
     rooms:
       - secure: "aT8bVV0DzMS+TkH+BBN5F8Hq3/TinuD1okvizQIKdjAuv7YbBTe2KCjytRf1mmPEq9QU/4sDnt6kk6PWpmz1luePtIBrbYLD/6Nna0NcT3JN22ZtJ01Xkm7NTk9XZxSsMVImO6uamTThD3kZPNayoNFf/CIebbkhDeUT5n2zfLhSxjfA03HStzU496xq/uspZHlBlFpR1W6tYnN37IOpzeBpwo6jCuGs1045fTzemZ1iIl4RLmP/u+7UpAioxnvgSPQI6BDt7j/YNVSBzZFI7WYQ/q2RN45pa/NaKfuklHQ5ZmUQCYpV/xbPHGk59UtML594Y62wFSIXWlLD8u7uDXFlsf6BH5jKcT+QafqH1QJIsi0O8BZJFMYkUnxzDrP42eFeTJjphjEZz+dbAEF9e78XlwwpYZDZwFZqqqfN0QD90N21bbSoiNsXOpFr0GrzHPdKfvnyTPh/BTOY7XJBS9h7+KGzxVrbOPpJ+oP3gTxGD0SA3tkDeEre073fi73AViBdRKwupjikfILqrnhSVYkRRTMO6o3HV25XYG21OUex8fPTgaWoVyyPQy2NKmCR/8M800lIJamn1dhrIAOjAL2skpdeUh5X7lKbxuZvcHs6kRtRZOJzV2QmQYEvF9V9xd4xMZ5aXqx356+P1yWlJaZS2vtlqTLqzXwpcLdPwa4="
     on_success: always
@@ -22,9 +22,8 @@ node_js:
 - 7.5.0
 install:
 - npm install
-- bundler install
+- bundle install
 before_install:
-- gem install bundler
 - chmod -R +x bin
 script:
 - ./bin/version-increment.sh || travis_terminate 1
@@ -36,6 +35,6 @@ script:
   == "1" ]; then echo "[E] Container is not started\!"; docker logs nhs.portal.web
   --details --since 5h; exit 1; fi;
 - sleep 5
-- ./bin/ci/push.sh 
+- ./bin/ci/push.sh
 - openssl aes-256-cbc -K $encrypted_2bd61e9ad530_key -iv $encrypted_2bd61e9ad530_iv -in eHealth-8110bd102a69.json.enc -out eHealth-8110bd102a69.json -d
 - sudo ./bin/deploy.sh || travis_terminate 1
