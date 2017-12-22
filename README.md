@@ -2,11 +2,11 @@
 
 NHS Portal landing, document and map pages
 
-Demo: https://nebo15.github.io/nhs.portal.web/
+Demo: https://edenlabllc.github.io/nhs.portal.web/
 
 ### Docker
 
-Dashboard can be deployed as a single container from [nebo15/nhs.portal.web](https://hub.docker.com/r/nebo15/nhs.portal.web/) Docker Hub.
+Dashboard can be deployed as a single container from [edenlabllc/nhs.portal.web](https://hub.docker.com/r/edenlabllc/nhs.portal.web/) Docker Hub.
 
 ## Configurations
 
