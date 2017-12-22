@@ -104,6 +104,7 @@ export default withGoogleMap(({
               <SearchMapTooltip
                 {...hoverMarker}
                 active={hoverMarker && activeMarker && hoverMarker.id === activeMarker.id}
+                legal_entity_name={hoverMarker.legal_entity.name}
                 address={hoverMarker.addresses[0]}
                 phones={hoverMarker.contacts.phones}
                 />

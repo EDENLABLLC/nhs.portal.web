@@ -55,6 +55,7 @@ export default ({
               key={i.id}
               {...i}
               phones={i.contacts.phones}
+              legal_entity_name={i.legal_entity.name}
               address={i.addresses[0]}
               active={activeItem === i}
               onClick={() => onClickSearchItem(i)}
