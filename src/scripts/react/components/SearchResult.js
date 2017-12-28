@@ -1,25 +1,28 @@
-import React from 'react';
+import React from "react";
+import classnames from "classnames";
 
-export default ({ active, legal_entity_name, name, address, onClick, phones = [] }) => (
-  <li className={`search__result-item ${active ? 'search__result-item_active' : ''}`} onClick={onClick}>
-    <div className="search__result-item-title">
-        {name}
+const SearchResult = ({
+  active,
+  name,
+  legalEntity,
+  addresses: [address],
+  contacts: { phones: [phone] },
+  onClick
+}) => (
+  <li
+    className={classnames("search__result-item", {
+      "search__result-item_active": active
+    })}
+    onClick={onClick}
+  >
+    <div className="search__result-item-title">{name} ({legalEntity.name})</div>
+    {active && <div>{address.settlement}</div>}
+    <div>
+      {address.street}, {address.building}
     </div>
-    { active && (
-      <div>
-        <span className="search__result-item-title">({legal_entity_name})</span> <br />
-        {address.settlement} <br />
-        {address.street}, {address.building} <br />
-        Тел.: {phones[0].number} <br />
-        Години роботи: Пн-Пт, 9:00-19:00
-      </div>
-    )}
-    { !active && (
-      <div>
-        <span className="search__result-item-title">({legal_entity_name})</span> <br />
-        {address.street}, {address.building} <br />
-        Години роботи: Пн-Пт, 9:00-19:00
-      </div>
-    )}
+    {active && <div>Тел.: {phone.number}</div>}
+    Години роботи: Пн-Пт, 9:00-19:00
   </li>
-)
+);
+
+export default SearchResult;

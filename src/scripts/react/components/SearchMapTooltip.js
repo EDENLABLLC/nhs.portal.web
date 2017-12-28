@@ -1,13 +1,28 @@
-import React from 'react';
-import MoreArrow from './MoreArrow';
+import React from "react";
+import classnames from "classnames";
 
-export default ({legal_entity_name, name, active, address, phones = [], doctors, declarations }) => (
-  <div className={`search__map-tooltip ${active ? 'search__map-tooltip--active' : ''}`}>
-    <b>{name}</b> <br />
-    <span className="search__result-item-title">({legal_entity_name})</span> <br />
-    {address.settlement} <br />
-    {address.street}, {address.building} <br />
-    Тел.: {phones[0].number} <br />
+import MoreArrow from "./MoreArrow";
+
+const SearchMapTooltip = ({
+  active,
+  name,
+  legalEntity,
+  addresses: [address],
+  contacts: { phones: [phone] },
+}) => (
+  <div
+    className={classnames("search__map-tooltip", {
+      "search__map-tooltip--active": active
+    })}
+  >
+    <div className="search__result-item-title">
+      {name} ({legalEntity.name})
+    </div>
+    <div>{address.settlement}</div>
+    <div>{address.street}, {address.building}</div>
+    <div>Тел.: {phone.number}</div>
     <MoreArrow />
   </div>
-)
+);
+
+export default SearchMapTooltip;

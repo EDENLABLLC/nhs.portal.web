@@ -29,7 +29,7 @@ const config = webpackMerge(
       'config': ['./src/scripts/config.js'],
       'main.bundle': ['./src/scripts/react/pages/main.js'],
       'join.bundle': ['./src/scripts/react/pages/join.js'],
-      'map.bundle': ['./src/scripts/react/pages/map.js'],
+      'divisions.bundle': ['./src/scripts/react/pages/divisions.js'],
       'clarifications.bundle': ['./src/scripts/react/pages/clarifications.js'],
       'default.bundle': ['./src/scripts/react/pages/default.js']
     },
@@ -46,7 +46,8 @@ const config = webpackMerge(
     ],
     externals : {
       react: 'React',
-      'react-dom': 'ReactDOM'
+      'react-dom': 'ReactDOM',
+      'react-router-dom': 'ReactRouterDOM'
     }
   },
   genConfig

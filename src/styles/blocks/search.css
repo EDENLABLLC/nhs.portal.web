@@ -28,7 +28,6 @@
 
   &__aside {
     flex: 0 0 auto;
-    
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -50,7 +49,6 @@
       left: 0;
       right: 0;
       bottom: 0;
-
     }
   }
 
@@ -77,11 +75,12 @@
       margin-top: -3px;
     }
   }
+
   &__header {
-    padding: 0 20px; 
+    padding: 0 20px;
     flex: 0 0 auto;
     border-bottom: #dad9d8 1px solid;
-    
+
     @media screen and (min-width: 768px) {
       padding: 0 60px 0;
     }
@@ -91,7 +90,7 @@
     list-style: none;
     margin: 0 -60px;
     padding: 0 60px 5px;
-    
+
     @media screen and (max-width: 768px) {
       display: flex;
       flex-flow: row wrap;
