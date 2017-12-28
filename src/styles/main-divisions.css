@@ -8,6 +8,7 @@
 @import "blocks/header.css";
 @import "blocks/search.css";
 @import "blocks/form.css";
+@import "blocks/table.css";
 
 .map-page {
   display: flex;
