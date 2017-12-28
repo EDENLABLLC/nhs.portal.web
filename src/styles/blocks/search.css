@@ -119,7 +119,7 @@
     padding: 0 20px;
     flex: 1 1 auto;
     overflow: auto;
-    max-height: 500px;
+    height: calc(100vh - 380px);
     transform: translate3d(0, 0, 0);
 
     @media screen and (min-width: 768px) {
