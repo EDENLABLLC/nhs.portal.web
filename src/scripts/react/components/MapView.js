@@ -1,10 +1,10 @@
 import React from "react";
-
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import InfoBox from "react-google-maps/lib/addons/InfoBox";
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
+import classnames from "classnames";
 
-import SearchMapTooltip from "../components/SearchMapTooltip";
+import ArrowLink from "./ArrowLink";
 
 const CIRCLE_ICON = {
   path: google.maps.SymbolPath.CIRCLE,
@@ -40,6 +40,7 @@ const ACTIVE_PIN_ICON = {
 const MapView = ({
   center,
   zoom,
+  options,
   items,
   activeItemId,
   hoverItemId,
@@ -58,6 +59,7 @@ const MapView = ({
       ref={ref => (map = ref)}
       center={center}
       zoom={zoom}
+      options={options}
       onIdle={() =>
         onMapChange({
           bounds: map.getBounds(),
@@ -108,6 +110,7 @@ const MapView = ({
           <InfoBox>
             <SearchMapTooltip
               active={hoverItemId === activeItemId}
+              id={hoverItem.id}
               name={hoverItem.name}
               legalEntity={hoverItem.legal_entity}
               addresses={hoverItem.addresses}
@@ -121,3 +124,26 @@ const MapView = ({
 };
 
 export default withGoogleMap(MapView);
+
+const SearchMapTooltip = ({
+  active,
+  id,
+  name,
+  legalEntity,
+  addresses: [address],
+  contacts: { phones: [phone] },
+}) => (
+  <div
+    className={classnames("search__map-tooltip", {
+      "search__map-tooltip--active": active
+    })}
+  >
+    <div className="search__result-item-title">
+      {name} ({legalEntity.name})
+    </div>
+    <div>{address.settlement}</div>
+    <div>{address.street}, {address.building}</div>
+    <div>Тел.: {phone.number}</div>
+    <ArrowLink to={`/${id}`} title="Детальніше" />
+  </div>
+);

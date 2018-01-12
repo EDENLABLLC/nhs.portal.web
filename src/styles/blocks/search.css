@@ -52,12 +52,9 @@
   }
 
   &__input {
-    margin-bottom: 15px;
     padding-left: 30px;
     background: url('../images/icons/search.png') 25px center no-repeat;
     background-size: 18px;
-    width: 260px;
-    /*margin-left: 5px;*/
   }
 
   &__back {
@@ -85,10 +82,21 @@
     }
   }
 
+  &__switch {
+    text-align: right;
+
+    &-link {
+      color: #4880ed;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+
   &__nav {
     list-style: none;
     margin: 0 -60px;
-    padding: 0 60px 5px;
+    padding: 5px 60px;
 
     @media screen and (max-width: 768px) {
       display: flex;
