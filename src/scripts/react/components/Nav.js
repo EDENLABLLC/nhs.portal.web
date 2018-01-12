@@ -13,7 +13,7 @@ const NAV_ITEMS = [
     title: "Долучитися"
   },
   {
-    link: "/map.html",
+    link: "/divisions.html",
     title: "Мапа"
   },
   {

@@ -11,6 +11,6 @@ backTitle: "Назад на головну"
   window.__CLARIFICATION_TYPES__ = JSON.parse('{{ site.clarificationTypes | jsonify }}');
   window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.1/react-dom.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.production.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react-dom/16.2.0/umd/react-dom.production.min.js"></script>
 <script type="text/javascript" src="/scripts/clarifications.bundle.js"></script>

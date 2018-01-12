@@ -28,7 +28,6 @@
 
   &__aside {
     flex: 0 0 auto;
-    
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -42,7 +41,6 @@
     flex: 1 1 auto;
     transform: translate3d(0, 0, 0);
     position: relative;
-    height: 100vh;
 
     &__el {
       position: absolute;
@@ -50,17 +48,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-
     }
   }
 
   &__input {
-    margin-bottom: 15px;
     padding-left: 30px;
     background: url('../images/icons/search.png') 25px center no-repeat;
     background-size: 18px;
-    width: 260px;
-    /*margin-left: 5px;*/
   }
 
   &__back {
@@ -77,21 +71,33 @@
       margin-top: -3px;
     }
   }
+
   &__header {
-    padding: 0 20px; 
+    padding: 0 20px;
     flex: 0 0 auto;
     border-bottom: #dad9d8 1px solid;
-    
+
     @media screen and (min-width: 768px) {
       padding: 0 60px 0;
+    }
+  }
+
+  &__switch {
+    text-align: right;
+
+    &-link {
+      color: #4880ed;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
   }
 
   &__nav {
     list-style: none;
     margin: 0 -60px;
-    padding: 0 60px 5px;
-    
+    padding: 5px 60px;
+
     @media screen and (max-width: 768px) {
       display: flex;
       flex-flow: row wrap;

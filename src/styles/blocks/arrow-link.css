@@ -1,0 +1,25 @@
+.arrow-link {
+  color: #5691f1;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: auto;
+
+  &__title,
+  &__icon {
+    vertical-align: top;
+  }
+
+  &__title {
+    .arrow-link--forward & {
+      margin-right: 20px;
+    }
+
+    .arrow-link--backward & {
+      margin-left: 0 20px;
+    }
+  }
+}

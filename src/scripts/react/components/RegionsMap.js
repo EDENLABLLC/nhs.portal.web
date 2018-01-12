@@ -80,7 +80,7 @@ export default class RegionsMap extends Component {
 
   render() {
     const { activeRegion, regionsData } = this.state;
-    console.log(regionsData[activeRegion]);
+
     const {
       msps = "–",
       doctors = "–",
