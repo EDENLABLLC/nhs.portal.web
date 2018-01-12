@@ -9,8 +9,12 @@
 @import "blocks/search.css";
 @import "blocks/form.css";
 @import "blocks/table.css";
+@import "blocks/definition-list.css";
+@import "blocks/arrow-link.css";
+@import "blocks/pagination.css";
 
 .map-page {
+  min-height: 100vh;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -20,6 +24,12 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
+}
+
+.main__in {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 50px;
 }
 
 .footer {
@@ -32,5 +42,9 @@
 }
 
 .link {
-  color: #4880ed;
+  color: #5691f1;
+}
+
+.bold {
+  font-weight: 700;
 }

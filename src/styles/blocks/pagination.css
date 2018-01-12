@@ -1,0 +1,64 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  list-style: none;
+
+  &__page,
+  &__direction,
+  &__delimiter {
+    margin-left: 10px;
+    text-align: center;
+    user-select: none;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      font-weight: 700;
+    }
+  }
+
+  &__page {
+    border: 1px solid #cbcbcb;
+
+    a {
+      text-align: center;
+      text-decoration: none;
+      color: black;
+      display: block;
+      min-width: 26px;
+      font-size: 12px;
+      line-height: 20px;
+      padding: 4px;
+    }
+
+    &--current,
+    &:hover {
+      border: #eee 1px solid;
+      background: #f7f6f6;
+    }
+  }
+
+  &__direction {
+    &--hidden {
+      visibility: hidden;
+    }
+
+    a {
+      width: 48px;
+      height: 38px;
+      line-height: 38px;
+      text-align: center;
+      vertical-align: middle;
+      padding: 0;
+    }
+  }
+
+  &__delimiter {
+    width: 34px;
+  }
+}

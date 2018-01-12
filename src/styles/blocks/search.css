@@ -41,7 +41,6 @@
     flex: 1 1 auto;
     transform: translate3d(0, 0, 0);
     position: relative;
-    height: 100vh;
 
     &__el {
       position: absolute;

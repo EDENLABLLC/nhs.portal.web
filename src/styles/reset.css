@@ -53,6 +53,13 @@ h4 {
   margin-bottom: 16px;
 }
 
+h5 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  margin-bottom: 24px;
+}
+
 time {
   display: block;
   font-size: 14px;

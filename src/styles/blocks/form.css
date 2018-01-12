@@ -1,9 +1,9 @@
 .form {
-  margin-bottom: 16px;
+  margin: 32px 0;
 
   &__title {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 22px;
     margin-bottom: 27px;
   }
@@ -22,13 +22,12 @@
 }
 
 .field {
-  margin-bottom: 16px;
   position: relative;
 
   &__label {
     display: inline-block;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 16px;
     margin-bottom: 16px;
   }
@@ -90,7 +89,7 @@
     }
 
     &--selected {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 }
