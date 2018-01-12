@@ -13,6 +13,7 @@ import {
 
 import Nav from "../components/Nav";
 import DivisionsMap from "../components/DivisionsMap";
+import DivisionsList from "../components/DivisionsList";
 
 ReactDOM.render(<Nav />, document.getElementById("nav"));
 
@@ -21,8 +22,7 @@ ReactDOM.render(
     <Switch>
       <Redirect exact from="/" to="/map" />
       <Route exact path="/map" component={DivisionsMap} />
-      {/* <Route path="/list" component={} />
-      <Route path="/:id" component={} /> */}
+      <Route exact path="/list" component={DivisionsList} />
     </Switch>
   </Router>,
   document.getElementById("divisions")
