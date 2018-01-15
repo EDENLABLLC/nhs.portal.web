@@ -1,7 +1,7 @@
 import React from "react";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import InfoBox from "react-google-maps/lib/addons/InfoBox";
-import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
+import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
+import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 import classnames from "classnames";
 
 import ArrowLink from "./ArrowLink";
@@ -105,9 +105,9 @@ const MapView = ({
           defaultAnimation={0}
           icon={HOVER_CIRCLE_ICON}
           opacity={0.1}
-          onMouseOut={() => onMarkerOut(hoverItemId)}
+          onMouseOut={onMarkerOut}
         >
-          <InfoBox>
+          <InfoBox options={{ closeBoxURL: "", enableEventPropagation: true }}>
             <SearchMapTooltip
               active={hoverItemId === activeItemId}
               id={hoverItem.id}
@@ -115,6 +115,7 @@ const MapView = ({
               legalEntity={hoverItem.legal_entity}
               addresses={hoverItem.addresses}
               contacts={hoverItem.contacts}
+              onMouseLeave={onMarkerOut}
             />
           </InfoBox>
         </Marker>
@@ -132,17 +133,21 @@ const SearchMapTooltip = ({
   legalEntity,
   addresses: [address],
   contacts: { phones: [phone] },
+  onMouseLeave
 }) => (
   <div
     className={classnames("search__map-tooltip", {
       "search__map-tooltip--active": active
     })}
+    onMouseLeave={onMouseLeave}
   >
     <div className="search__result-item-title">
       {name} ({legalEntity.name})
     </div>
     <div>{address.settlement}</div>
-    <div>{address.street}, {address.building}</div>
+    <div>
+      {address.street}, {address.building}
+    </div>
     <div>Тел.: {phone.number}</div>
     <ArrowLink to={`/${id}`} title="Детальніше" />
   </div>

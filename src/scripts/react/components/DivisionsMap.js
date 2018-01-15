@@ -42,17 +42,21 @@ export default class DivisionsMap extends Component {
 
   render() {
     const {
+      location: { state: { prevLocation } = {} },
+      query: { name, active: activeItemId }
+    } = this.props;
+
+    const {
       isLoading,
       items,
       paging: { page_number: currentPage, total_pages: totalPages },
       hoverItemId
     } = this.state;
 
-    const { name, active: activeItemId } = this.props.query;
-
     return (
       <section className="search">
         <Aside
+          prevLocation={prevLocation}
           type={this.type}
           name={name}
           isLoading={isLoading}
@@ -77,7 +81,7 @@ export default class DivisionsMap extends Component {
           onMapChange={({ bounds, center, zoom }) => {
             const { lat, lng } = center.toJSON();
             this.setState({ bounds });
-            this.props.setQuery({ lat, lng, zoom });
+            this.props.setQueryImmediate({ lat, lng, zoom }, "replace");
           }}
           onMarkerClick={this.setActiveItem}
           onMarkerOver={hoverItemId => this.setState({ hoverItemId })}
@@ -147,6 +151,7 @@ class Aside extends Component {
 
   render() {
     const {
+      prevLocation,
       type,
       name,
       isLoading,
@@ -163,10 +168,12 @@ class Aside extends Component {
     return (
       <aside className="search__aside">
         <div className="search__header">
-          <a href="/" className="search__back">
-            <i className="icon icon_name_arrow-left" />
-            Повернутися
-          </a>
+          {prevLocation && (
+            <Link className="search__back" to={prevLocation}>
+              <i className="icon icon_name_arrow-left" />
+              Повернутися
+            </Link>
+          )}
           <input
             placeholder="Пошук"
             type="text"
@@ -207,22 +214,18 @@ class Aside extends Component {
           )}
           <ul className="search__result-list">
             {items.length
-              ? items.map(i => {
-                  const { id, name, legal_entity, addresses, contacts } = i;
-
-                  return (
-                    <SearchResult
-                      key={id}
-                      active={activeItemId === id}
-                      id={id}
-                      name={name}
-                      legalEntity={legal_entity}
-                      addresses={addresses}
-                      contacts={contacts}
-                      onClick={() => onSearchResultClick(id)}
-                    />
-                  );
-                })
+              ? items.map(({ id, name, legal_entity, addresses, contacts }) => (
+                  <SearchResult
+                    key={id}
+                    active={activeItemId === id}
+                    id={id}
+                    name={name}
+                    legalEntity={legal_entity}
+                    addresses={addresses}
+                    contacts={contacts}
+                    onClick={() => onSearchResultClick(id)}
+                  />
+                ))
               : "Результати відсутні"}
           </ul>
           {isLoading
