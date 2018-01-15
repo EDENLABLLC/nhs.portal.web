@@ -77,7 +77,7 @@ export default class DivisionsMap extends Component {
           onMapChange={({ bounds, center, zoom }) => {
             const { lat, lng } = center.toJSON();
             this.setState({ bounds });
-            this.props.setQuery({ lat, lng, zoom });
+            this.props.setQueryImmediate({ lat, lng, zoom }, "replace");
           }}
           onMarkerClick={this.setActiveItem}
           onMarkerOver={hoverItemId => this.setState({ hoverItemId })}

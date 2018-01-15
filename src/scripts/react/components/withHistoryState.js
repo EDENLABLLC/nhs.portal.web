@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import isEqual from "lodash/isEqual";
 import debounce from "lodash/debounce";
+import compose from "recompose/compose";
 
 import { parseSearchParams, stringifySearchParams } from "../helpers/url";
 
@@ -21,26 +22,47 @@ const enhanceWithHistoryState = WrappedComponent => {
       }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-      if (!isEqual(this.state, prevState)) {
-        this.updateHistory();
-      }
+    shouldComponentUpdate(nextProps, nextState) {
+      return !(
+        isEqual(nextProps, this.props) && isEqual(nextState, this.state)
+      );
     }
 
     render() {
-      const { props, state, setState } = this;
-      return <WrappedComponent query={state} setQuery={setState} {...props} />;
+      const { props, state, setQuery, setQueryImmediate } = this;
+
+      return (
+        <WrappedComponent
+          query={state}
+          setQuery={setQuery}
+          setQueryImmediate={setQueryImmediate}
+          {...props}
+        />
+      );
     }
 
-    setState = this.setState.bind(this);
+    setQuery = (query, method) => {
+      this.setState(compose(stringifyValues, createUpdater(query)), () =>
+        this.updateHistoryFromState(method)
+      );
+    };
 
-    updateHistory = debounce(
-      () =>
-        this.props.history.push({
-          search: stringifySearchParams(this.state)
-        }),
+    updateHistoryFromState = debounce(
+      method => this.setQueryImmediate(this.state, method),
       UPDATE_DEBOUNCE
     );
+
+    setQueryImmediate = (query, method = "push") => {
+      const { location, history } = this.props;
+
+      const search = compose(
+        stringifySearchParams,
+        createUpdater(query, true),
+        parseSearchParams
+      )(location.search);
+
+      history[method]({ search });
+    };
   }
 
   return withRouter(HistoryState);
@@ -50,3 +72,16 @@ export default enhanceWithHistoryState;
 
 const getDisplayName = WrappedComponent =>
   WrappedComponent.displayName || WrappedComponent.name || "Component";
+
+const stringifyValues = object =>
+  Object.entries(object).reduce(
+    (object, [key, value]) => ({ ...object, [key]: String(value) }),
+    {}
+  );
+
+const createUpdater = (partialState, merge) => {
+  const updater =
+    typeof partialState === "function" ? partialState : () => partialState;
+
+  return merge ? state => ({ ...state, ...updater(state) }) : updater;
+};
