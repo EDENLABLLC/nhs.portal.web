@@ -1,11 +1,8 @@
-
-@keyframes slideIn {
+@keyframes fadeIn {
   from {
-    transform: translateY(0);
     opacity: 0;
   }
   to {
-    transform: translateY(10px);
     opacity: 1;
   }
 }
@@ -53,7 +50,7 @@
 
   &__input {
     padding-left: 30px;
-    background: url('../images/icons/search.png') 25px center no-repeat;
+    background: url("../images/icons/search.png") 25px center no-repeat;
     background-size: 18px;
   }
 
@@ -134,7 +131,7 @@
 
     &::before,
     &::after {
-      content: '';
+      content: "";
       display: block;
       height: 20px;
       width: 100%;
@@ -177,38 +174,19 @@
     z-index: -1;
   }
 
-  .infoBox {
-    & > img {
-      display: none;
-    }
-  }
-
   &__map-tooltip {
     width: 250px;
-    /*height: 140px;*/
+    margin-top: 10px;
     padding: 32px;
     background-color: #fff;
-    border: #dad9d8 1px solid;
+    box-shadow: inset 2px 0 0 #5691f1, inset 0 0 0 1px #dad9d8;
     line-height: 20px !important;
-    font: 14px 'GothamPro';
+    font: 14px "GothamPro";
     opacity: 1;
-    animation: slideIn 200ms ease-in-out forwards;
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: -10px;
-      bottom: 0;
-      width: 2px;
-      background-color: #4880ed;
-      z-index: 2;
-    }
+    animation: fadeIn 200ms ease-in-out forwards;
 
     &--active {
-      animation: none;
-      transform: translateY(15px);
+      margin-top: 15px;
     }
   }
 

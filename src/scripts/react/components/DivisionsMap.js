@@ -214,22 +214,18 @@ class Aside extends Component {
           )}
           <ul className="search__result-list">
             {items.length
-              ? items.map(i => {
-                  const { id, name, legal_entity, addresses, contacts } = i;
-
-                  return (
-                    <SearchResult
-                      key={id}
-                      active={activeItemId === id}
-                      id={id}
-                      name={name}
-                      legalEntity={legal_entity}
-                      addresses={addresses}
-                      contacts={contacts}
-                      onClick={() => onSearchResultClick(id)}
-                    />
-                  );
-                })
+              ? items.map(({ id, name, legal_entity, addresses, contacts }) => (
+                  <SearchResult
+                    key={id}
+                    active={activeItemId === id}
+                    id={id}
+                    name={name}
+                    legalEntity={legal_entity}
+                    addresses={addresses}
+                    contacts={contacts}
+                    onClick={() => onSearchResultClick(id)}
+                  />
+                ))
               : "Результати відсутні"}
           </ul>
           {isLoading
