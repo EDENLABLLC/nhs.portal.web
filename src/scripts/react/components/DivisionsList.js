@@ -228,7 +228,7 @@ class DivisionSearchForm extends Component {
   handleChange(changes) {
     const { value, onChange } = this.props;
 
-    onChange({ ...value, ...changes });
+    onChange({ ...value, ...changes, page: 1 });
   }
 
   async fetchSettlements({ page = 1, page_size = 10 } = {}) {
