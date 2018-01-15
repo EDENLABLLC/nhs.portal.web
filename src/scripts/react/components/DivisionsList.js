@@ -42,7 +42,8 @@ export default class DivisionsList extends Component {
         <ArrowLink
           to={{
             pathname: "/map",
-            search: stringifySearchParams({ name: query.name })
+            search: stringifySearchParams({ name: query.name }),
+            state: { prevLocation: location }
           }}
           title="Шукати на мапі"
         />
@@ -100,7 +101,8 @@ export default class DivisionsList extends Component {
                     lat,
                     lng,
                     zoom: 15
-                  })
+                  }),
+                  state: { prevLocation: location }
                 }}
                 className="link bold"
               >

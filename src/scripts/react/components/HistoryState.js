@@ -56,7 +56,7 @@ export default class HistoryState extends Component {
       parseSearchParams
     )(location.search);
 
-    history[method]({ search });
+    history[method]({ ...location, search });
   };
 }
 

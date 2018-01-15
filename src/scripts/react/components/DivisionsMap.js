@@ -42,17 +42,21 @@ export default class DivisionsMap extends Component {
 
   render() {
     const {
+      location: { state: { prevLocation } = {} },
+      query: { name, active: activeItemId }
+    } = this.props;
+
+    const {
       isLoading,
       items,
       paging: { page_number: currentPage, total_pages: totalPages },
       hoverItemId
     } = this.state;
 
-    const { name, active: activeItemId } = this.props.query;
-
     return (
       <section className="search">
         <Aside
+          prevLocation={prevLocation}
           type={this.type}
           name={name}
           isLoading={isLoading}
@@ -147,6 +151,7 @@ class Aside extends Component {
 
   render() {
     const {
+      prevLocation,
       type,
       name,
       isLoading,
@@ -163,10 +168,12 @@ class Aside extends Component {
     return (
       <aside className="search__aside">
         <div className="search__header">
-          <a href="/" className="search__back">
-            <i className="icon icon_name_arrow-left" />
-            Повернутися
-          </a>
+          {prevLocation && (
+            <Link className="search__back" to={prevLocation}>
+              <i className="icon icon_name_arrow-left" />
+              Повернутися
+            </Link>
+          )}
           <input
             placeholder="Пошук"
             type="text"

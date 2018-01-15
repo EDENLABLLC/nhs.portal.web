@@ -20,7 +20,10 @@ export default class DivisionDetails extends Component {
   }
 
   render() {
-    const { location: { state: { prevLocation } = {} } } = this.props;
+    const {
+      location: { state: { prevLocation } = {}, ...location }
+    } = this.props;
+
     const { isLoading, division } = this.state;
 
     return !isLoading ? (
@@ -63,12 +66,13 @@ export default class DivisionDetails extends Component {
                   to={{
                     pathname: "/map",
                     search: stringifySearchParams({
-                      activeItemId: id,
+                      active: id,
                       type,
                       lat,
                       lng,
                       zoom: 15
-                    })
+                    }),
+                    state: { prevLocation: location }
                   }}
                 >
                   показати на мапі
