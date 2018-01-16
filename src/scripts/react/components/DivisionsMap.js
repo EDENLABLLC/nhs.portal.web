@@ -142,112 +142,127 @@ export default class DivisionsMap extends Component {
   }
 }
 
-const Aside = ({
-  prevLocation,
-  type,
-  name,
-  isLoading,
-  items,
-  activeItemId,
-  currentPage,
-  totalPages,
-  onSearchResultClick,
-  onNameChange,
-  onTypeChange,
-  onLoadMore
-}) => {
-  let firstSearchResultMounted;
+class Aside extends Component {
+  componentWillUpdate() {
+    this.searchResultScrolled = null;
+  }
 
-  return (
-    <aside className="search__aside">
-      <div className="search__header">
-        {prevLocation && (
-          <Link className="search__back" to={prevLocation}>
-            <i className="icon icon_name_arrow-left" />
-            Повернутися
-          </Link>
-        )}
-        <input
-          placeholder="Пошук"
-          type="text"
-          className="search__input"
-          value={name}
-          onChange={event => onNameChange(event.target.value)}
-        />
-        <div className="search__switch">
-          <Link
-            className="search__switch-link"
-            to={{
-              pathname: "/list",
-              search: stringifySearchParams({ name })
-            }}
-          >
-            Відобразити списком
-          </Link>
-        </div>
-        <ul className="search__nav">
-          {DIVISION_TYPES.map(({ name, title }) => (
-            <li
-              key={name}
-              className={classnames("search__nav-item", {
-                "search__nav-item_active": name === type
-              })}
-              onClick={() => onTypeChange(name)}
+  render() {
+    const {
+      prevLocation,
+      type,
+      name,
+      isLoading,
+      items,
+      activeItemId,
+      currentPage,
+      totalPages,
+      onSearchResultClick,
+      onNameChange,
+      onTypeChange,
+      onLoadMore
+    } = this.props;
+
+    return (
+      <aside className="search__aside">
+        <div className="search__header">
+          {prevLocation && (
+            <Link className="search__back" to={prevLocation}>
+              <i className="icon icon_name_arrow-left" />
+              Повернутися
+            </Link>
+          )}
+          <input
+            placeholder="Пошук"
+            type="text"
+            className="search__input"
+            value={name}
+            onChange={event => onNameChange(event.target.value)}
+          />
+          <div className="search__switch">
+            <Link
+              className="search__switch-link"
+              to={{
+                pathname: "/list",
+                search: stringifySearchParams({ name })
+              }}
             >
-              {title}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="search__result">
-        {items.length > 0 && (
-          <div className="search__result-total">
-            Знайдено {items.length} закладів
+              Відобразити списком
+            </Link>
           </div>
-        )}
-
-        {items.length ? (
-          <ul className="search__result-list">
-            {items.map(
-              ({ id, name, legal_entity, addresses, contacts }, index) => (
-                <SearchResult
-                  key={id}
-                  onMount={element => {
-                    if (firstSearchResultMounted) return;
-
-                    firstSearchResultMounted = true;
-
-                    element.scrollIntoView({
-                      behavior: "smooth",
-                      block: index === 0 ? "nearest" : "start"
-                    });
-                  }}
-                  active={activeItemId === id}
-                  id={id}
-                  name={name}
-                  legalEntity={legal_entity}
-                  addresses={addresses}
-                  contacts={contacts}
-                  onClick={() => onSearchResultClick(id)}
-                />
-              )
-            )}
+          <ul className="search__nav">
+            {DIVISION_TYPES.map(({ name, title }) => (
+              <li
+                key={name}
+                className={classnames("search__nav-item", {
+                  "search__nav-item_active": name === type
+                })}
+                onClick={() => onTypeChange(name)}
+              >
+                {title}
+              </li>
+            ))}
           </ul>
-        ) : (
-          isLoading || "Результати відсутні"
-        )}
+        </div>
+        <div className="search__result">
+          {items.length > 0 && (
+            <div className="search__result-total">
+              Знайдено {items.length} закладів
+            </div>
+          )}
 
-        {isLoading
-          ? "Шукаємо записи..."
-          : currentPage < totalPages && (
-              <a className="search__more" onClick={onLoadMore}>
-                Показати більше
-              </a>
-            )}
-      </div>
-    </aside>
-  );
-};
+          {items.length ? (
+            <ul className="search__result-list">
+              {items.map(
+                ({ id, name, legal_entity, addresses, contacts }, index) => {
+                  const active = activeItemId === id;
+                  return (
+                    <SearchResult
+                      key={id}
+                      onMount={element =>
+                        this.scrollSearchResultIntoView(element, index, active)
+                      }
+                      active={active}
+                      id={id}
+                      name={name}
+                      legalEntity={legal_entity}
+                      addresses={addresses}
+                      contacts={contacts}
+                      onClick={() => onSearchResultClick(id)}
+                    />
+                  );
+                }
+              )}
+            </ul>
+          ) : (
+            isLoading || "Результати відсутні"
+          )}
+
+          {isLoading
+            ? "Шукаємо записи..."
+            : currentPage < totalPages && (
+                <a className="search__more" onClick={onLoadMore}>
+                  Показати більше
+                </a>
+              )}
+        </div>
+      </aside>
+    );
+  }
+
+  scrollSearchResultIntoView(element, index, active) {
+    if (!active && this.searchResultScrolled) return;
+
+    this.searchResultScrolled = true;
+
+    const firstPage = index === 0 || active;
+
+    element.scrollIntoView({
+      behavior: firstPage ? "instant" : "smooth",
+      block: firstPage ? "center" : "start"
+    });
+  }
+}
 
 class SearchResult extends Component {
   componentDidMount() {
