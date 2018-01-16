@@ -142,132 +142,151 @@ export default class DivisionsMap extends Component {
   }
 }
 
-class Aside extends Component {
-  componentWillUpdate(nextProps) {
-    if (nextProps.currentPage <= this.props.currentPage) {
-      this.resultList.scrollTop = 0;
-    }
+const Aside = ({
+  prevLocation,
+  type,
+  name,
+  isLoading,
+  items,
+  activeItemId,
+  currentPage,
+  totalPages,
+  onSearchResultClick,
+  onNameChange,
+  onTypeChange,
+  onLoadMore
+}) => {
+  let firstSearchResultMounted;
+
+  return (
+    <aside className="search__aside">
+      <div className="search__header">
+        {prevLocation && (
+          <Link className="search__back" to={prevLocation}>
+            <i className="icon icon_name_arrow-left" />
+            Повернутися
+          </Link>
+        )}
+        <input
+          placeholder="Пошук"
+          type="text"
+          className="search__input"
+          value={name}
+          onChange={event => onNameChange(event.target.value)}
+        />
+        <div className="search__switch">
+          <Link
+            className="search__switch-link"
+            to={{
+              pathname: "/list",
+              search: stringifySearchParams({ name })
+            }}
+          >
+            Відобразити списком
+          </Link>
+        </div>
+        <ul className="search__nav">
+          {DIVISION_TYPES.map(({ name, title }) => (
+            <li
+              key={name}
+              className={classnames("search__nav-item", {
+                "search__nav-item_active": name === type
+              })}
+              onClick={() => onTypeChange(name)}
+            >
+              {title}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="search__result">
+        {items.length > 0 && (
+          <div className="search__result-total">
+            Знайдено {items.length} закладів
+          </div>
+        )}
+
+        {items.length ? (
+          <ul className="search__result-list">
+            {items.map(
+              ({ id, name, legal_entity, addresses, contacts }, index) => (
+                <SearchResult
+                  key={id}
+                  onMount={element => {
+                    if (firstSearchResultMounted) return;
+
+                    firstSearchResultMounted = true;
+
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: index === 0 ? "nearest" : "start"
+                    });
+                  }}
+                  active={activeItemId === id}
+                  id={id}
+                  name={name}
+                  legalEntity={legal_entity}
+                  addresses={addresses}
+                  contacts={contacts}
+                  onClick={() => onSearchResultClick(id)}
+                />
+              )
+            )}
+          </ul>
+        ) : (
+          isLoading || "Результати відсутні"
+        )}
+
+        {isLoading
+          ? "Шукаємо записи..."
+          : currentPage < totalPages && (
+              <a className="search__more" onClick={onLoadMore}>
+                Показати більше
+              </a>
+            )}
+      </div>
+    </aside>
+  );
+};
+
+class SearchResult extends Component {
+  componentDidMount() {
+    this.props.onMount(this.element);
   }
 
   render() {
     const {
-      prevLocation,
-      type,
+      active,
+      id,
       name,
-      isLoading,
-      items,
-      activeItemId,
-      currentPage,
-      totalPages,
-      onSearchResultClick,
-      onNameChange,
-      onTypeChange,
-      onLoadMore
+      legalEntity,
+      addresses: [address],
+      contacts: { phones: [phone] },
+      onClick
     } = this.props;
 
     return (
-      <aside className="search__aside">
-        <div className="search__header">
-          {prevLocation && (
-            <Link className="search__back" to={prevLocation}>
-              <i className="icon icon_name_arrow-left" />
-              Повернутися
-            </Link>
-          )}
-          <input
-            placeholder="Пошук"
-            type="text"
-            className="search__input"
-            value={name}
-            onChange={event => onNameChange(event.target.value)}
-          />
-          <div className="search__switch">
-            <Link
-              className="search__switch-link"
-              to={{
-                pathname: "/list",
-                search: stringifySearchParams({ name })
-              }}
-            >
-              Відобразити списком
-            </Link>
+      <li
+        ref={e => (this.element = e)}
+        className={classnames("search__result-item", {
+          "search__result-item_active": active
+        })}
+        onClick={onClick}
+      >
+        <div className="search__result-item-title">
+          {name} ({legalEntity.name})
+        </div>
+        {active && <div>{address.settlement}</div>}
+        <div>
+          {address.street}, {address.building}
+        </div>
+        {active && (
+          <div>
+            <div>Тел.: {phone.number}</div>
+            <ArrowLink to={`/${id}`} title="Детальніше" />
           </div>
-          <ul className="search__nav">
-            {DIVISION_TYPES.map(({ name, title }) => (
-              <li
-                key={name}
-                className={classnames("search__nav-item", {
-                  "search__nav-item_active": name === type
-                })}
-                onClick={() => onTypeChange(name)}
-              >
-                {title}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div ref={e => (this.resultList = e)} className="search__result">
-          {items.length > 0 && (
-            <div className="search__result-total">
-              Знайдено {items.length} закладів
-            </div>
-          )}
-          <ul className="search__result-list">
-            {items.length
-              ? items.map(({ id, name, legal_entity, addresses, contacts }) => (
-                  <SearchResult
-                    key={id}
-                    active={activeItemId === id}
-                    id={id}
-                    name={name}
-                    legalEntity={legal_entity}
-                    addresses={addresses}
-                    contacts={contacts}
-                    onClick={() => onSearchResultClick(id)}
-                  />
-                ))
-              : "Результати відсутні"}
-          </ul>
-          {isLoading
-            ? "Шукаємо записи..."
-            : currentPage < totalPages && (
-                <a className="search__more" onClick={onLoadMore}>
-                  Показати більше
-                </a>
-              )}
-        </div>
-      </aside>
+        )}
+      </li>
     );
   }
 }
-
-const SearchResult = ({
-  active,
-  id,
-  name,
-  legalEntity,
-  addresses: [address],
-  contacts: { phones: [phone] },
-  onClick
-}) => (
-  <li
-    className={classnames("search__result-item", {
-      "search__result-item_active": active
-    })}
-    onClick={onClick}
-  >
-    <div className="search__result-item-title">
-      {name} ({legalEntity.name})
-    </div>
-    {active && <div>{address.settlement}</div>}
-    <div>
-      {address.street}, {address.building}
-    </div>
-    {active && (
-      <div>
-        <div>Тел.: {phone.number}</div>
-        <ArrowLink to={`/${id}`} title="Детальніше" />
-      </div>
-    )}
-  </li>
-);
