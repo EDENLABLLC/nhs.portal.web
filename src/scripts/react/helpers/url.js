@@ -1,5 +1,6 @@
 import Url from "url";
 import qs from "qs";
+import isNil from "lodash/isNil";
 
 Object.entries =
   Object.entries || (object => Object.keys(object).map(i => [i, object[i]]));
@@ -32,5 +33,5 @@ export const parseSearchParams = queryString =>
 
 export const stringifySearchParams = params =>
   new URLSearchParams(
-    Object.entries(params).filter(([key, value]) => Boolean(value))
+    Object.entries(params).filter(([key, value]) => !isNil(value))
   ).toString();

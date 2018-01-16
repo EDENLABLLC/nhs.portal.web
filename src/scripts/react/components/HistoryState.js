@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import compose from "recompose/compose";
 import isEqual from "lodash/isEqual";
+import isNil from "lodash/isNil";
 import debounce from "lodash/debounce";
 
 import { parseSearchParams, stringifySearchParams } from "../helpers/url";
@@ -62,7 +63,10 @@ export default class HistoryState extends Component {
 
 const stringifyValues = object =>
   Object.entries(object).reduce(
-    (object, [key, value]) => ({ ...object, [key]: String(value) }),
+    (object, [key, value]) => ({
+      ...object,
+      [key]: isNil(value) ? value : String(value)
+    }),
     {}
   );
 
