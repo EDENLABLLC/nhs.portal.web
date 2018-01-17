@@ -143,10 +143,8 @@ export default class DivisionsMap extends Component {
 }
 
 class Aside extends Component {
-  componentWillUpdate(nextProps) {
-    if (nextProps.currentPage <= this.props.currentPage) {
-      this.resultList.scrollTop = 0;
-    }
+  componentWillUpdate() {
+    this.searchResultScrolled = null;
   }
 
   render() {
@@ -206,28 +204,40 @@ class Aside extends Component {
             ))}
           </ul>
         </div>
-        <div ref={e => (this.resultList = e)} className="search__result">
+        <div className="search__result">
           {items.length > 0 && (
             <div className="search__result-total">
               Знайдено {items.length} закладів
             </div>
           )}
-          <ul className="search__result-list">
-            {items.length
-              ? items.map(({ id, name, legal_entity, addresses, contacts }) => (
-                  <SearchResult
-                    key={id}
-                    active={activeItemId === id}
-                    id={id}
-                    name={name}
-                    legalEntity={legal_entity}
-                    addresses={addresses}
-                    contacts={contacts}
-                    onClick={() => onSearchResultClick(id)}
-                  />
-                ))
-              : "Результати відсутні"}
-          </ul>
+
+          {items.length ? (
+            <ul className="search__result-list">
+              {items.map(
+                ({ id, name, legal_entity, addresses, contacts }, index) => {
+                  const active = activeItemId === id;
+                  return (
+                    <SearchResult
+                      key={id}
+                      onMount={element =>
+                        this.scrollSearchResultIntoView(element, index, active)
+                      }
+                      active={active}
+                      id={id}
+                      name={name}
+                      legalEntity={legal_entity}
+                      addresses={addresses}
+                      contacts={contacts}
+                      onClick={() => onSearchResultClick(id)}
+                    />
+                  );
+                }
+              )}
+            </ul>
+          ) : (
+            isLoading || "Результати відсутні"
+          )}
+
           {isLoading
             ? "Шукаємо записи..."
             : currentPage < totalPages && (
@@ -239,35 +249,59 @@ class Aside extends Component {
       </aside>
     );
   }
+
+  scrollSearchResultIntoView(element, index, active) {
+    if (!active && this.searchResultScrolled) return;
+
+    this.searchResultScrolled = true;
+
+    const firstPage = index === 0 || active;
+
+    element.scrollIntoView({
+      behavior: firstPage ? "instant" : "smooth",
+      block: firstPage ? "center" : "start"
+    });
+  }
 }
 
-const SearchResult = ({
-  active,
-  id,
-  name,
-  legalEntity,
-  addresses: [address],
-  contacts: { phones: [phone] },
-  onClick
-}) => (
-  <li
-    className={classnames("search__result-item", {
-      "search__result-item_active": active
-    })}
-    onClick={onClick}
-  >
-    <div className="search__result-item-title">
-      {name} ({legalEntity.name})
-    </div>
-    {active && <div>{address.settlement}</div>}
-    <div>
-      {address.street}, {address.building}
-    </div>
-    {active && (
-      <div>
-        <div>Тел.: {phone.number}</div>
-        <ArrowLink to={`/${id}`} title="Детальніше" />
-      </div>
-    )}
-  </li>
-);
+class SearchResult extends Component {
+  componentDidMount() {
+    this.props.onMount(this.element);
+  }
+
+  render() {
+    const {
+      active,
+      id,
+      name,
+      legalEntity,
+      addresses: [address],
+      contacts: { phones: [phone] },
+      onClick
+    } = this.props;
+
+    return (
+      <li
+        ref={e => (this.element = e)}
+        className={classnames("search__result-item", {
+          "search__result-item_active": active
+        })}
+        onClick={onClick}
+      >
+        <div className="search__result-item-title">
+          {name} ({legalEntity.name})
+        </div>
+        {active && <div>{address.settlement}</div>}
+        <div>
+          {address.street}, {address.building}
+        </div>
+        {active && (
+          <div>
+            <div>Тел.: {phone.number}</div>
+            <ArrowLink to={`/${id}`} title="Детальніше" />
+          </div>
+        )}
+      </li>
+    );
+  }
+}
