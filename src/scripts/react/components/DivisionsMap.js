@@ -183,7 +183,7 @@ class Aside extends Component {
             <Link
               className="search__switch-link"
               to={{
-                pathname: "/list",
+                pathname: "/",
                 search: stringifySearchParams({ name })
               }}
             >

@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   },
   {
     link: "/divisions.html",
-    title: "Мапа"
+    title: "Пошук"
   },
   {
     link: "/#statistic",

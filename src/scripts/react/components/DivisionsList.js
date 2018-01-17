@@ -37,8 +37,7 @@ export default class DivisionsList extends Component {
 
     return (
       <div className="main__in">
-        <ArrowLink href="/" title="Назад на головну" backwards />
-        <h3>Учасники</h3>
+        <h3>Відділення</h3>
         <ArrowLink
           to={{
             pathname: "/map",
@@ -91,24 +90,25 @@ export default class DivisionsList extends Component {
               </Fragment>
             ),
             legalEntityName,
-            action: (
-              <Link
-                to={{
-                  pathname: "/map",
-                  search: stringifySearchParams({
-                    active: id,
-                    type,
-                    lat,
-                    lng,
-                    zoom: 15
-                  }),
-                  state: { prevLocation: location }
-                }}
-                className="link bold"
-              >
-                показати на мапі
-              </Link>
-            )
+            action:
+              lat && lng ? (
+                <Link
+                  to={{
+                    pathname: "/map",
+                    search: stringifySearchParams({
+                      active: id,
+                      type,
+                      lat,
+                      lng,
+                      zoom: 15
+                    }),
+                    state: { prevLocation: location }
+                  }}
+                  className="link bold"
+                >
+                  показати на мапі
+                </Link>
+              ) : null
           })}
           rowKeyExtractor={({ id }) => id}
         />
