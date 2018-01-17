@@ -24,23 +24,21 @@ export default class DivisionDetails extends Component {
       location: { state: { prevLocation } = {}, ...location }
     } = this.props;
 
-    const { isLoading, division } = this.state;
+    const {
+      isLoading,
+      division: { legal_entity = {}, ...division }
+    } = this.state;
 
     return !isLoading ? (
       <div className="main__in">
-        <ArrowLink href="/" title="Назад на головну" backwards />
-        <h3>Учасники</h3>
+        <h3>Відділення</h3>
+
         <h5>{division.name}</h5>
         <DefinitionListView
           data={division}
           terms={{
-            edrpou: "ЄДРПОУ",
             address: "Адреса",
-            contacts: "Контакти",
-            ownerFullName: "Керівник",
-            legalEntityName: "Медзаклад",
-            legalEntityAddress: "Адреса медзакладу",
-            legalEntityContacts: "Контакти медзакладу"
+            contacts: "Контакти"
           }}
           renderDetails={({
             id,
@@ -48,35 +46,29 @@ export default class DivisionDetails extends Component {
             name,
             addresses: [address],
             coordinates: { latitude: lat, longitude: lng },
-            contacts: { phones, email },
-            legal_entity: {
-              edrpou,
-              owner,
-              name: legalEntityName,
-              addresses: [legalEntityAddress],
-              phones: legalEntityPhones
-            }
+            contacts: { phones, email }
           }) => ({
-            edrpou,
             address: (
               <Fragment>
                 <p>{formatAddress(address)}</p>
-                <Link
-                  className="link bold"
-                  to={{
-                    pathname: "/map",
-                    search: stringifySearchParams({
-                      active: id,
-                      type,
-                      lat,
-                      lng,
-                      zoom: 15
-                    }),
-                    state: { prevLocation: location }
-                  }}
-                >
-                  показати на мапі
-                </Link>
+                {lat && lng ? (
+                  <Link
+                    className="link bold"
+                    to={{
+                      pathname: "/map",
+                      search: stringifySearchParams({
+                        active: id,
+                        type,
+                        lat,
+                        lng,
+                        zoom: 15
+                      }),
+                      state: { prevLocation: location }
+                    }}
+                  >
+                    показати на мапі
+                  </Link>
+                ) : null}
               </Fragment>
             ),
             contacts: (
@@ -86,19 +78,29 @@ export default class DivisionDetails extends Component {
                   {email}
                 </a>
               </Fragment>
-            ),
-            ownerFullName: formatFullName(owner.party),
-            legalEntityName,
-            legalEntityAddress: formatAddress(legalEntityAddress),
-            legalEntityContacts: (
-              <Fragment>
-                {legalEntityPhones.map(({ number }) => (
-                  <div key={number}>{number}</div>
-                ))}
-              </Fragment>
             )
           })}
         />
+
+        <h5>{legal_entity.name}</h5>
+        <DefinitionListView
+          data={legal_entity}
+          terms={{
+            edrpou: "ЄДРПОУ",
+            address: "Адреса",
+            phones: "Контакти",
+            owner: "Керівник"
+          }}
+          renderDetails={({ edrpou, addresses: [address], phones, owner }) => ({
+            edrpou,
+            address: formatAddress(address),
+            phones: phones.map(({ number }) => (
+              <div key={number}>{number}</div>
+            )),
+            owner: formatFullName(owner.party)
+          })}
+        />
+
         {prevLocation && (
           <ArrowLink
             to={prevLocation}

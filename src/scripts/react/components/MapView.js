@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
@@ -69,43 +69,30 @@ const MapView = ({
       }
     >
       <MarkerClusterer>
-        {items
-          .filter(({ id }) => id !== activeItemId)
-          .map(({ id, coordinates: { latitude: lat, longitude: lng } }) => (
-            <Marker
-              key={id}
-              position={{ lat, lng }}
-              zIndex={2}
-              defaultAnimation={0}
-              icon={CIRCLE_ICON}
-              onMouseOver={() => onMarkerOver(id)}
-              onClick={() => onMarkerClick(id)}
-            />
-          ))}
+        {items.map(({ id, coordinates: { latitude: lat, longitude: lng } }) => (
+          <Marker
+            key={id}
+            position={{ lat, lng }}
+            zIndex={2}
+            defaultAnimation={0}
+            icon={id === activeItemId ? ACTIVE_CIRCLE_ICON : CIRCLE_ICON}
+            onMouseOver={() => onMarkerOver(id)}
+            onClick={() => onMarkerClick(id)}
+          />
+        ))}
       </MarkerClusterer>
 
       {activeItem && (
-        <Fragment>
-          <Marker
-            position={{
-              lat: activeItem.coordinates.latitude,
-              lng: activeItem.coordinates.longitude
-            }}
-            zIndex={2}
-            defaultAnimation={0}
-            icon={ACTIVE_CIRCLE_ICON}
-            onMouseOver={() => onMarkerOver(activeItemId)}
-          />
-          <Marker
-            position={{
-              lat: activeItem.coordinates.latitude,
-              lng: activeItem.coordinates.longitude
-            }}
-            zIndex={3}
-            defaultAnimation={0}
-            icon={ACTIVE_PIN_ICON}
-          />
-        </Fragment>
+        <Marker
+          position={{
+            lat: activeItem.coordinates.latitude,
+            lng: activeItem.coordinates.longitude
+          }}
+          zIndex={3}
+          defaultAnimation={0}
+          icon={ACTIVE_PIN_ICON}
+          onClick={() => onMarkerClick(activeItemId)}
+        />
       )}
 
       {hoverItem && (
@@ -123,7 +110,7 @@ const MapView = ({
           <InfoBox options={{ closeBoxURL: "", enableEventPropagation: true }}>
             <SearchMapTooltip
               active={hoverItemId === activeItemId}
-              id={hoverItemId}
+              id={hoverItem.id}
               name={hoverItem.name}
               legalEntity={hoverItem.legal_entity}
               addresses={hoverItem.addresses}

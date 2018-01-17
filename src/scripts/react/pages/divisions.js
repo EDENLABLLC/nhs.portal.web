@@ -21,9 +21,8 @@ ReactDOM.render(<Nav />, document.getElementById("nav"));
 ReactDOM.render(
   <Router>
     <Switch>
-      <Redirect exact from="/" to="/map" />
+      <Route exact path="/" component={DivisionsList} />
       <Route exact path="/map" component={DivisionsMap} />
-      <Route exact path="/list" component={DivisionsList} />
       <Route path="/:id" component={DivisionDetails} />
     </Switch>
   </Router>,
