@@ -84,7 +84,7 @@ export default class DivisionsList extends Component {
             contacts: (
               <Fragment>
                 {phones.map(({ number }) => <div key={number}>{number}</div>)}
-                <a href={`mailto:${email}`} className="link">
+                <a href={`mailto:${email}`} title={email} className="link">
                   {email}
                 </a>
               </Fragment>
