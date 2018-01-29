@@ -85,11 +85,11 @@ export default class RegionsMap extends Component {
       msps = "–",
       doctors = "–",
       declarations = "–",
-      medication_requests = '-',
-      pharmacies = '-',
-      pharmacists = '-',
-    } = regionsData[activeRegion] || {};
-
+      medication_requests = "-",
+      pharmacies = "-",
+      pharmacists = "-"
+    } =
+      regionsData[activeRegion] || {};
 
     return (
       <div ref={e => (this.container = e)} className="map__wrapper">
@@ -153,20 +153,21 @@ export default class RegionsMap extends Component {
             <dd>лікарів</dd>
             <dt>{declarations}</dt>
             <dd>декларацій підписано</dd>
-              {
-              /*
+            {/*
                 <dt>{pharmacies}</dt>
                 <dd>аптек</dd>
                 <dt>{pharmacists}</dt>
                 <dd>аптекарів</dd>
                 <dt>{medication_requests}</dt>
                 <dd>виписано рецептів</dd>
-              */
-              }
+              */}
           </dl>
-          <a href={`map.html#${activeRegion}`} className="map__tooltip-link">
+          {/* <a
+            href={`divisions.html#${activeRegion}`}
+            className="map__tooltip-link"
+          >
             Детальніше <i className="icon icon_name_arrow-right" />
-          </a>
+          </a> */}
         </div>
       </div>
     );
