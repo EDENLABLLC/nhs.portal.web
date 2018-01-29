@@ -207,7 +207,7 @@ const Join = () => (
                 <li className="join-rules__next-list-item">
                   На сайті eHealth в розділі “Мапа” <br />
                   ознайомитись з{" "}
-                  <a href="/map.html">
+                  <a href="/divisions.html">
                     <b>мапою</b>
                   </a>
                   <br />
@@ -242,7 +242,7 @@ const Join = () => (
               <h3 className="join-rules__sub-title">ГОТОВО!</h3>
 
               <footer className="join-rules__footer">
-                <a className="join-rules__button btn" href="/map.html">
+                <a className="join-rules__button btn" href="/divisions.html">
                   Обрати заклад на мапі
                 </a>
               </footer>
