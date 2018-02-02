@@ -231,7 +231,7 @@ class DivisionSearchForm extends Component {
     onChange({ ...value, ...changes, page: 1 });
   }
 
-  async fetchSettlements({ page = 1, page_size = 10 } = {}) {
+  async fetchSettlements({ page = 1, page_size = 20 } = {}) {
     const { settlement_name } = this.state;
 
     if (settlement_name.length < 2) {
