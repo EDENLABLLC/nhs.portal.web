@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import debounce from "lodash/debounce";
 
 import { createUrl, stringifySearchParams } from "../helpers/url";
 import { formatAddress } from "../helpers/address";
@@ -148,7 +149,7 @@ class DivisionSearchForm extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.settlement_name !== prevState.settlement_name) {
-      this.fetchSettlements();
+      this.fetchSettlementsDebounced();
     }
   }
 
@@ -226,10 +227,10 @@ class DivisionSearchForm extends Component {
   }
 
   handleChange(changes) {
-    const { value, onChange } = this.props;
-
-    onChange({ ...value, ...changes, page: 1 });
+    this.props.onChange(value => ({ ...value, ...changes, page: 1 }));
   }
+
+  fetchSettlementsDebounced = debounce(this.fetchSettlements, 500);
 
   async fetchSettlements({ page = 1, page_size = 20 } = {}) {
     const { settlement_name } = this.state;
