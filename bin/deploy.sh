@@ -27,7 +27,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
                 | tr -d '[[:space:]]')
 			#PROJECT_VERSION="0.1.261"
 			sed -i'' -e "35,42s/tag:.*/tag: \"$PROJECT_VERSION\"/g" "$Chart/values.yaml"
-			helm init --upgrade
+			#helm init --upgrade
 			sleep 15
 			helm upgrade  -f $Chart/values.yaml  $Chart $Chart
 			cd $TRAVIS_BUILD_DIR/bin
