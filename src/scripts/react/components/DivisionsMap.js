@@ -31,11 +31,7 @@ export default class DivisionsMap extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.props.query.name !== prevProps.query.name ||
-      this.props.query.type !== prevProps.query.type ||
-      this.state.bounds !== prevState.bounds
-    ) {
+    if (this.props.location.search !== prevProps.location.search) {
       this.fetchDivisions();
     }
   }

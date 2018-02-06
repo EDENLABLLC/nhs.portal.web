@@ -27,7 +27,7 @@ export default class DivisionsList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.query !== prevProps.query) {
+    if (this.props.location.search !== prevProps.location.search) {
       this.fetchDivisions();
     }
   }
