@@ -6,6 +6,7 @@ import { formatAddress } from "../helpers/address";
 
 import ArrowLink from "./ArrowLink";
 import DefinitionListView from "./DefinitionListView";
+import WorkingHours from "./WorkingHours";
 
 const { API_ENDPOINT } = window.__CONFIG__;
 
@@ -38,7 +39,8 @@ export default class DivisionDetails extends Component {
           data={division}
           terms={{
             address: "Адреса",
-            contacts: "Контакти"
+            contacts: "Контакти",
+            workingHours: "Робочий час"
           }}
           renderDetails={({
             id,
@@ -46,7 +48,8 @@ export default class DivisionDetails extends Component {
             name,
             addresses: [address],
             coordinates: { latitude: lat, longitude: lng },
-            contacts: { phones, email }
+            contacts: { phones, email },
+            working_hours
           }) => ({
             address: (
               <Fragment>
@@ -78,6 +81,9 @@ export default class DivisionDetails extends Component {
                   {email}
                 </a>
               </Fragment>
+            ),
+            workingHours: (
+              <WorkingHours workingHours={working_hours} />
             )
           })}
         />

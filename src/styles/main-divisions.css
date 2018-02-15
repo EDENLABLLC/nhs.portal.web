@@ -12,6 +12,7 @@
 @import "blocks/definition-list.css";
 @import "blocks/arrow-link.css";
 @import "blocks/pagination.css";
+@import "blocks/working-hours.css";
 
 .map-page {
   min-height: 100vh;

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
+import isEqual from "lodash/isEqual";
 
 import { createUrl, stringifySearchParams } from "../helpers/url";
 
 import withHistoryState from "./withHistoryState";
+import WorkingHours from "./WorkingHours";
 import ArrowLink from "./ArrowLink";
 import MapView from "./MapView";
 
@@ -31,7 +33,10 @@ export default class DivisionsMap extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.location.search !== prevProps.location.search) {
+    if (
+      this.props.location.search !== prevProps.location.search ||
+      !isEqual(this.state.bounds, prevState.bounds)
+    ) {
       this.fetchDivisions();
     }
   }
@@ -210,7 +215,17 @@ class Aside extends Component {
           {items.length ? (
             <ul className="search__result-list">
               {items.map(
-                ({ id, name, legal_entity, addresses, contacts }, index) => {
+                (
+                  {
+                    id,
+                    name,
+                    legal_entity,
+                    addresses,
+                    contacts,
+                    working_hours
+                  },
+                  index
+                ) => {
                   const active = activeItemId === id;
                   return (
                     <SearchResult
@@ -224,6 +239,7 @@ class Aside extends Component {
                       legalEntity={legal_entity}
                       addresses={addresses}
                       contacts={contacts}
+                      workingHours={working_hours}
                       onClick={() => onSearchResultClick(id)}
                     />
                   );
@@ -273,6 +289,7 @@ class SearchResult extends Component {
       legalEntity,
       addresses: [address],
       contacts: { phones: [phone] },
+      workingHours,
       onClick
     } = this.props;
 
@@ -294,6 +311,7 @@ class SearchResult extends Component {
         {active && (
           <div>
             <div>Тел.: {phone.number}</div>
+            {workingHours && <WorkingHours workingHours={workingHours} />}
             <ArrowLink to={`/${id}`} title="Детальніше" />
           </div>
         )}
