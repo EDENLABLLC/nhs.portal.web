@@ -1,0 +1,12 @@
+.today-working-hours {
+  display: flex;
+
+  &__status {
+    padding-right: 5px;
+  }
+
+  &__hours {
+    flex-grow: 1;
+    white-space: nowrap;
+  }
+}

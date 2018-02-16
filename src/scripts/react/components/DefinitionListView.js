@@ -10,12 +10,17 @@ const DefinitionListView = ({
 
   return (
     <dl className="definition-list">
-      {Object.entries(terms).map(([name, term], index) => (
-        <Fragment key={keyExtractor(name, index)}>
-          <dt className="definition-list__term">{term}</dt>
-          <dd className="definition-list__details">{details[name]}</dd>
-        </Fragment>
-      ))}
+      {Object.entries(details)
+        .filter(
+          ([name, details]) =>
+            Object.keys(terms).includes(name) && Boolean(details)
+        )
+        .map(([name, details], index) => (
+          <Fragment key={keyExtractor(name, index)}>
+            <dt className="definition-list__term">{terms[name]}</dt>
+            <dd className="definition-list__details">{details}</dd>
+          </Fragment>
+        ))}
     </dl>
   );
 };

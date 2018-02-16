@@ -40,7 +40,7 @@ export default class DivisionDetails extends Component {
           terms={{
             address: "Адреса",
             contacts: "Контакти",
-            workingHours: "Робочий час"
+            workingHours: "Графік роботи"
           }}
           renderDetails={({
             id,
@@ -82,7 +82,7 @@ export default class DivisionDetails extends Component {
                 </a>
               </Fragment>
             ),
-            workingHours: (
+            workingHours: working_hours && (
               <WorkingHours workingHours={working_hours} />
             )
           })}
