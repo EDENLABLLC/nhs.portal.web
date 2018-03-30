@@ -85,14 +85,13 @@
     list-style: none;
   }
 
-  &__list-tooltip {
-    margin-bottom: 6px;
-    margin-left: -3px;
+  &__list-tooltip-title {
+    font-weight: 700;
+    text-align: center;
+  }
 
-    @media screen and (min-width: 768px) {
-      margin-bottom: 8px;
-      margin-left: -6px;
-    }
+  &__list-tooltip-list {
+    margin-left: 20px;
   }
 
   &__list-item {
@@ -185,6 +184,10 @@
 
     &__next-list_four {
       height: 560px;
+    }
+
+    &__next-list_five {
+      height: 700px;
     }
   }
 

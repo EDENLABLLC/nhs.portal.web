@@ -20,6 +20,7 @@ collections:
     permalink: /:collection/:name/
   documents:
     output: false
+excerpt_separator: <!--more-->
 defaults:
 - scope:
     path: ''

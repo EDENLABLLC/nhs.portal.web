@@ -31,7 +31,7 @@ const Documents = ({ documents }) => (
                   </div>
                   <div>
                     {header && <div className="docs__attention">{header}</div>}
-                    {title}
+                    <div dangerouslySetInnerHTML={{ __html: title }} />
                   </div>
                 </a>
               </li>

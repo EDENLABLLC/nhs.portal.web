@@ -62,7 +62,7 @@
     z-index: 1;
   }
 
-  &_theme_large {
+  &_theme_large > .tabs__header {
     .tabs__nav {
       background: repeating-linear-gradient(
         transparent,

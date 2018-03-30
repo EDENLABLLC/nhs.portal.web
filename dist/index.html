@@ -108,20 +108,8 @@ date: '2017-05-24T14:42:52.381Z'
               <h3>Зворотній зв&#8217;язок</h3>
           </header>
           <article class="contacts__main">
-              <!--<p>-->
-                  <!--Національна Служба Здоров’я України <br />-->
-                  <!--вул. Грушевського 7, <br />-->
-                  <!--м. Київ, 01601-->
-              <!--</p>-->
-
-              <!--<p>-->
-                  <!--тел. (044)253-61-94, <br />-->
-                  <!--факс (044)253-40-17-->
-              <!--</p>-->
-
-              <!--<p>-->
-                  <!--<a class="link" href="mailto:info@nszu.gov.ua">info@nszu.gov.ua</a>-->
-              <!--</p>-->
+              <p>З питань консультування лікарів та роз'яснення реформи – <a class="link" href="mailto:edu@ehealth-ukraine.org">edu@ehealth-ukraine.org</a></p>
+              <p>З інших організаційних питань – <a class="link" href="mailto:info@ehealth-ukraine.org">info@ehealth-ukraine.org</a></p>
               <p class="social">
                   <a target="_blank" href="https://www.facebook.com/E-Health-323399904773248">
                       <span class="icon icon_name_fb"></span>
@@ -130,42 +118,6 @@ date: '2017-05-24T14:42:52.381Z'
                       <span class="icon icon_name_tw"></span>
                   </a>
               </p>
-
-              <form class="feedback contacts__form">
-                  <!--<div class="contacts__form-title">-->
-                      <!--Зворотній зв‘язок-->
-                  <!--</div>-->
-                  <div class="contacts__form-row">
-                      <select required id="select" name="theme" class="feedback__theme">
-                          <option placeholder>Оберіть тему</option>
-                          <option>консультування лікарів</option>
-                          <option>організаційні питання</option>
-                          <option>запит від  ЗМІ</option>
-                          <option>інше</option>
-                      </select>
-                  </div>
-                  <div class="contacts__form-row">
-                      <input required class="feedback__name" type="text" name="name" placeholder="Ваше ім’я" />
-                  </div>
-                  <div class="contacts__form-row">
-                      <input required class="feedback__email" type="email" name="email" placeholder="Email" />
-                  </div>
-                  <div class="contacts__form-row">
-                      <textarea required class="feedback__message" name="message" placeholder="Текст повідомлення"></textarea>
-                  </div>
-                  <!--<div class="contacts__foscheck">xxx-->
-                      <!--<input type="checkbox" id="fos1" />-->
-                      <!--<label for="fos1"></label>-->
-                      <!--<span>Підписатися на розсилку від eHealth</span>-->
-                  <!--</div>-->
-
-                  <div class="contacts__form-submit-row">
-                      <button class="btn feedback__submit" type="submit">
-                          надіслати
-                      </button>
-                      <a class="feedback__mailto" hidden></a>
-                  </div>
-              </form>
           </article>
       </section>
     </div>
@@ -176,7 +128,7 @@ date: '2017-05-24T14:42:52.381Z'
 <script>
   window.__CLARIFICATION_TYPES__ = JSON.parse('{{ site.clarificationTypes | jsonify }}');
   window.__CLARIFICATIONS__ = JSON.parse('[{% for clarification in site.clarifications %}{"id":"{{clarification.id}}","url":"{{clarification.url}}","title":"{{clarification.title}}","excerpt":"{{clarification.excerpt | strip_newlines | strip_html}}","date":"{{clarification.date}}","clarificationTypes":{{ clarification.clarification_types | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]');
-  window.__DOCUMENTS__ = JSON.parse(`[{% for document in site.documents %}{"id": "{{document.id}}","url":"{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}","type": "{{document.type}}", "header": "{{document.header}}", "title": "{{document.title | strip_newlines | strip_html}}"}{% unless forloop.last %},{% endunless %}{% endfor %}]`);
+  window.__DOCUMENTS__ = JSON.parse(`[{% for document in site.documents %}{"id": "{{document.id}}","url":"{% if document.file_url.size > 0 %}{{ document.file_url }}{% else %}{{ document.file }}{% endif %}","type": "{{document.type}}", "header": "{{document.header}}", "title": "{{document.title | strip_newlines }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]`);
 </script>
 <script type="text/javascript" src="/scripts/config.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dom4/1.8.3/dom4.js"></script>
