@@ -1,73 +1,30 @@
 .tooltip {
-  position: relative;
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  background-image: url("../images/icons/info.png");
-  cursor: pointer;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  text-transform: none;
+  background-color: #fff;
+  box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  z-index: 3;
 
   @media screen and (min-width: 768px) {
-    width: 12px;
-    height: 12px;
-  }
-
-  &:hover {
-    &::after,
-    &::before {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  &::after,
-  &::before {
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    display: block;
-    transform: translateX(-50%);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-  }
-
-  &::after {
-    content: attr(data-message);
-    position: absolute;
-    display: block;
-    white-space: nowrap;
-    padding: 12px;
-    margin-top: 10px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 15px;
-    text-transform: none;
-    box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    z-index: 3;
-
-    @media screen and (min-width: 768px) {
-      font-size: 16px;
-      line-height: 20px;
-      padding: 24px 48px;
-      margin-top: 20px;
-    }
-  }
-
-  &_br {
-    &::after {
-      white-space: pre-line;
-    }
+    font-size: 16px;
+    line-height: 20px;
+    padding: 20px;
+    margin-top: 20px;
   }
 
   &::before {
-    content: "";
-    transform: translateX(-50%);
     border: 5px solid transparent;
     border-bottom: 5px solid #fff;
+    content: "";
+    display: block;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
     z-index: 4;
 
     @media screen and (min-width: 768px) {
@@ -75,4 +32,9 @@
       border-bottom: 10px solid #fff;
     }
   }
+}
+
+.info-tooltip-icon {
+  display: inline;
+  vertical-align: super;
 }
