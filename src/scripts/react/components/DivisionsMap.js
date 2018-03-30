@@ -32,6 +32,13 @@ export default class DivisionsMap extends Component {
     paging: {}
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      !isEqual(this.props, nextProps) ||
+      !isEqual(this.state, nextState)
+    );
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       this.props.location.search !== prevProps.location.search ||
@@ -81,7 +88,7 @@ export default class DivisionsMap extends Component {
           hoverItemId={hoverItemId}
           onMapChange={({ bounds, center, zoom }) => {
             const { lat, lng } = center.toJSON();
-            this.setState({ bounds });
+            this.setState({ bounds: bounds.toJSON() });
             this.props.setQueryImmediate({ lat, lng, zoom }, "replace");
           }}
           onMarkerClick={this.setActiveItem}
@@ -118,7 +125,7 @@ export default class DivisionsMap extends Component {
     this.setState({ isLoading: true });
 
     const { name } = this.props.query;
-    const { north, east, south, west } = bounds.toJSON();
+    const { north, east, south, west } = bounds;
 
     const divisionsResponse = await fetch(
       createUrl(`${API_ENDPOINT}/reports/stats/divisions`, {
