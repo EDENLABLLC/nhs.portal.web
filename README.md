@@ -2,8 +2,6 @@
 
 NHS Portal landing, document and map pages
 
-Demo: https://edenlabllc.github.io/nhs.portal.web/
-
 ### Docker
 
 Dashboard can be deployed as a single container from [edenlabllc/nhs.portal.web](https://hub.docker.com/r/edenlabllc/nhs.portal.web/) Docker Hub.
