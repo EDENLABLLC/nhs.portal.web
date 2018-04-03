@@ -46,14 +46,18 @@ export default class DivisionDetails extends Component {
             id,
             type,
             name,
-            addresses: [address],
+            addresses,
             coordinates: { latitude: lat, longitude: lng },
             contacts: { phones, email },
             working_hours
           }) => ({
             address: (
               <Fragment>
-                <p>{formatAddress(address)}</p>
+                <p>
+                  {formatAddress(
+                    addresses.find(({ type }) => type === "RESIDENCE")
+                  )}
+                </p>
                 {lat && lng ? (
                   <Link
                     className="link bold"
@@ -97,9 +101,11 @@ export default class DivisionDetails extends Component {
             phones: "Контакти",
             owner: "Керівник"
           }}
-          renderDetails={({ edrpou, addresses: [address], phones, owner }) => ({
+          renderDetails={({ edrpou, addresses, phones, owner }) => ({
             edrpou,
-            address: formatAddress(address),
+            address: formatAddress(
+              addresses.find(({ type }) => type === "REGISTRATION")
+            ),
             phones: phones.map(({ number }) => (
               <div key={number}>{number}</div>
             )),

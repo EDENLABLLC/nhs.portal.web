@@ -113,7 +113,9 @@ const MapView = ({
               id={hoverItem.id}
               name={hoverItem.name}
               legalEntity={hoverItem.legal_entity}
-              addresses={hoverItem.addresses}
+              address={hoverItem.addresses.find(
+                ({ type }) => type === "RESIDENCE"
+              )}
               contacts={hoverItem.contacts}
               onMouseLeave={onMarkerOut}
             />
@@ -131,7 +133,7 @@ const SearchMapTooltip = ({
   id,
   name,
   legalEntity,
-  addresses: [address],
+  address,
   contacts: { phones: [phone] },
   onMouseLeave
 }) => (

@@ -33,10 +33,7 @@ export default class DivisionsMap extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      !isEqual(this.props, nextProps) ||
-      !isEqual(this.state, nextState)
-    );
+    return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -234,6 +231,10 @@ class Aside extends Component {
                   index
                 ) => {
                   const active = activeItemId === id;
+                  const address = addresses.find(
+                    ({ type }) => type === "RESIDENCE"
+                  );
+
                   return (
                     <SearchResult
                       key={id}
@@ -244,7 +245,7 @@ class Aside extends Component {
                       id={id}
                       name={name}
                       legalEntity={legal_entity}
-                      addresses={addresses}
+                      address={address}
                       contacts={contacts}
                       workingHours={working_hours}
                       onClick={() => onSearchResultClick(id)}
@@ -294,7 +295,7 @@ class SearchResult extends Component {
       id,
       name,
       legalEntity,
-      addresses: [address],
+      address,
       contacts: { phones: [phone] },
       workingHours,
       onClick
