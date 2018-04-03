@@ -12,7 +12,7 @@ const MEDICATIONS_DICT = ["рецепт", "рецепти", "рецептів"];
 
 export default class Statistics extends Component {
   state = {
-    data: [],
+    data: []
   };
 
   async componentDidMount() {
@@ -30,6 +30,9 @@ export default class Statistics extends Component {
   }
   render(){
     const { data } = this.state;
+
+    if (data.length === 0) return null;
+
     return (
       <section className="statistic">
         <header className="statistic__header">

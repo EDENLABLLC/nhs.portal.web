@@ -48,6 +48,8 @@ export default class RegionsChart extends Component {
   render() {
     const { data, stats } = this.state;
 
+    if (data.length === 0) return null;
+
     return (
       <div className="statistic__regions-chart">
         <TabControl
