@@ -69,10 +69,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "aos": "^2.2.0",
     "babel-polyfill": "^6.26.0",
-    "chart.js": "2.7.0",
-    "choices.js": "3.0.2",
     "classnames": "^2.2.5",
     "downshift": "^1.22.5",
     "ejs": "^2.5.5",

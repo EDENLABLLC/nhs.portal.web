@@ -4,12 +4,16 @@ import { Plurals } from "smart-plurals";
 const pluralize = Plurals.getRule("uk");
 
 const ChartTooltip = ({
+  active,
   label,
-  payload: [{ value } = {}] = [],
+  payload,
   labelFormatter = s => s,
   formatter = s => s,
   units
 }) => {
+  if (!active) return null;
+
+  let [{ value }] = payload;
   label = labelFormatter(label);
   value = formatter(value);
 

@@ -1,27 +1,14 @@
 import Promise from "promise-polyfill";
 import SmoothScroll from "smoothscroll-polyfill";
-import "./select";
-import AOS from "aos";
 
 import { $ } from "./dom";
 import { fetchJSON } from "./utils";
-
-import Nav from "./nav";
-import Feedback from "./feedback";
 
 if (!window.Promise) {
   window.Promise = Promise;
 }
 
 SmoothScroll.polyfill();
-
-AOS.init({
-  duration: 1200,
-  disable: "mobile"
-});
-
-$(".nav").forEach(node => new Nav(node));
-$(".feedback").forEach(node => new Feedback(node));
 
 const { API_ENDPOINT } = window.__CONFIG__;
 
