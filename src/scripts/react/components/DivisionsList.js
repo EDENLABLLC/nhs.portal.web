@@ -68,7 +68,7 @@ export default class DivisionsList extends Component {
             type,
             name,
             legal_entity: { name: legalEntityName, edrpou },
-            addresses: [address],
+            addresses,
             contacts: { email, phones },
             coordinates: { latitude: lat, longitude: lng }
           }) => ({
@@ -81,7 +81,9 @@ export default class DivisionsList extends Component {
               </Link>
             ),
             edrpou,
-            address: formatAddress(address),
+            address: formatAddress(
+              addresses.find(({ type }) => type === "RESIDENCE")
+            ),
             contacts: (
               <Fragment>
                 {phones.map(({ number }) => <div key={number}>{number}</div>)}
