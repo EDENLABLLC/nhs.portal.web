@@ -71,6 +71,10 @@
 
   &__footer {
     text-align: center;
+
+    @media screen and (max-width: 860px) {
+      display: none;
+    }
   }
 
   &__link {

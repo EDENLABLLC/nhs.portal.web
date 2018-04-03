@@ -37,6 +37,7 @@
     letter-spacing: 0.1em;
     cursor: pointer;
   }
+
   ul li:last-child a {
     margin-right: 0;
   }
@@ -57,5 +58,11 @@
         margin: 0 auto;
       }
     }
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .nav a[href="/divisions.html"] {
+    display: none;
   }
 }
