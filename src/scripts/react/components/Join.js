@@ -79,6 +79,11 @@ const Join = () => (
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ГОТОВО!</h3>
+              <footer className="join-rules__footer">
+                <a className="join-rules__button btn" href="/providers.html">
+                  Долучитись до eHealth
+                </a>
+              </footer>
             </section>
           )
         },
@@ -149,6 +154,11 @@ const Join = () => (
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ГОТОВО!</h3>
+              <footer className="join-rules__footer">
+                <a className="join-rules__button btn" href="/providers.html">
+                  Увійти до системи eHealth
+                </a>
+              </footer>
             </section>
           )
         },
@@ -212,6 +222,11 @@ const Join = () => (
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ГОТОВО!</h3>
+              <footer className="join-rules__footer">
+                <a className="join-rules__button btn" href="/providers.html">
+                  Увійти до системи eHealth
+                </a>
+              </footer>
             </section>
           )
         },
@@ -370,6 +385,11 @@ const Join = () => (
                 </li>
               </ul>
               <h3 className="join-rules__sub-title">ГОТОВО!</h3>
+              <footer className="join-rules__footer">
+                <a className="join-rules__button btn" href="/divisions.html">
+                  Обрати заклад на мапі
+                </a>
+              </footer>
             </section>
           )
         }
