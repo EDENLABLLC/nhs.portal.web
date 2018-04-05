@@ -199,4 +199,10 @@
       margin-bottom: 40px;
     }
   }
+
+  &__button[href="/divisions.html"] {
+    @media screen and (max-width: 860px) {
+      display: none;
+    }
+  }
 }
