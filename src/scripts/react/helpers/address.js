@@ -1,2 +1,2 @@
-export const formatAddress = ({ zip, settlement, street, building }) =>
-  [zip, settlement, street, building].filter(Boolean).join(", ");
+export const formatAddress = ({ zip, area, region, settlement, street, building }) =>
+  [zip, area, region, settlement, street, building].filter(Boolean).join(", ");
