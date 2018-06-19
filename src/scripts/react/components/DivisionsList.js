@@ -234,7 +234,7 @@ class DivisionSearchForm extends Component {
 
   fetchSettlementsDebounced = debounce(this.fetchSettlements, 500);
 
-  async fetchSettlements({ page = 1, page_size = 20 } = {}) {
+  async fetchSettlements({ page = 1, page_size = 30 } = {}) {
     const { settlement_name } = this.state;
 
     if (settlement_name.length < 2) {

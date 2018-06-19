@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { format } from "date-fns";
-import { ua } from "date-fns/esm/locale";
+import { uk } from "date-fns/esm/locale";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -14,21 +14,22 @@ import {
 import ChartTooltip from "./ChartTooltip";
 
 const DynamicsChart = ({ data, dataKey, units }) => (
-  <ResponsiveContainer width="100%" aspect={2}>
+  <ResponsiveContainer width="100%"
+                       aspect={2}>
     <AreaChart data={data}>
       <CartesianGrid stroke="#e8e8e8" />
       <XAxis
         dataKey="period_name"
         interval="preserveStartEnd"
-        tickFormatter={date => format(date, "D")}
+        tickFormatter={date => format(date, "d")}
         tick={{ fontSize: 12 }}
       />
-      <YAxis scale="linear" tick={{ fontSize: 12 }} />
+      <YAxis scale="linear" width={80} tick={{ fontSize: 12 }} />
       <Tooltip
         content={
           <ChartTooltip
             units={units}
-            labelFormatter={l => format(l, "D MMMM", { locale: ua })}
+            labelFormatter={l => format(l, "d MMMM", { locale:  uk })}
           />
         }
         cursor={{ stroke: "#4880ed" }}
