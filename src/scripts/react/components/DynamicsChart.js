@@ -14,7 +14,8 @@ import {
 import ChartTooltip from "./ChartTooltip";
 
 const DynamicsChart = ({ data, dataKey, units }) => (
-  <ResponsiveContainer width="100%" aspect={2}>
+  <ResponsiveContainer width="100%"
+                       aspect={2}>
     <AreaChart data={data}>
       <CartesianGrid stroke="#e8e8e8" />
       <XAxis
@@ -23,7 +24,7 @@ const DynamicsChart = ({ data, dataKey, units }) => (
         tickFormatter={date => format(date, "d")}
         tick={{ fontSize: 12 }}
       />
-      <YAxis scale="linear" tick={{ fontSize: 12 }} />
+      <YAxis scale="linear" width={80} tick={{ fontSize: 12 }} />
       <Tooltip
         content={
           <ChartTooltip
