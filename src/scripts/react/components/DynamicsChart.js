@@ -20,7 +20,7 @@ const DynamicsChart = ({ data, dataKey, units }) => (
       <XAxis
         dataKey="period_name"
         interval="preserveStartEnd"
-        tickFormatter={date => format(date, "D")}
+        tickFormatter={date => format(date, "d")}
         tick={{ fontSize: 12 }}
       />
       <YAxis scale="linear" tick={{ fontSize: 12 }} />

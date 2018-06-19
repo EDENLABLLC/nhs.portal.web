@@ -36,7 +36,6 @@
     "browserify": "^13.1.1",
     "css-loader": "^0.28.7",
     "cssnano": "^3.8.2",
-    "date-fns": "^2.0.0-alpha.7",
     "del": "^2.2.2",
     "dotenv": "^4.0.0",
     "envify": "^4.1.0",
@@ -71,6 +70,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
+    "date-fns": "2.0.0-alpha.10",
     "downshift": "^1.22.5",
     "ejs": "^2.5.5",
     "es6-promise": "^4.1.1",
