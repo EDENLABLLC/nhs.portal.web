@@ -78,7 +78,7 @@ const getHistogramParams = daysAmount => {
   let from_date = subDays(to_date, daysAmount);
 
   [to_date, from_date] = [to_date, from_date].map(date =>
-    format(date, "YYYY-MM-DD")
+    format(date, "YYYY-MM-dd")
   );
 
   Object.entries({ to_date, from_date, interval: "DAY" }).forEach(

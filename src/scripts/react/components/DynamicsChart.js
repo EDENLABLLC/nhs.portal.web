@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { format } from "date-fns";
-import { ua } from "date-fns/esm/locale";
+import { uk } from "date-fns/esm/locale";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -28,7 +28,7 @@ const DynamicsChart = ({ data, dataKey, units }) => (
         content={
           <ChartTooltip
             units={units}
-            labelFormatter={l => format(l, "D MMMM", { locale: ua })}
+            labelFormatter={l => format(l, "d MMMM", { locale:  uk })}
           />
         }
         cursor={{ stroke: "#4880ed" }}

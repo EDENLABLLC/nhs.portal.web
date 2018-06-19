@@ -25,7 +25,7 @@ const Clarifications = ({ clarifications, types, limit }) => (
               .map(({ id, url, title, excerpt, date }) => (
                 <a key={id} className="clarifications__item" href={url}>
                   <h4>{title}</h4>
-                  <time>{format(date, "DD.MM.YYYY")}</time>
+                  <time>{format(date, "dd.MM.YYYY")}</time>
                   {excerpt}
                 </a>
               ))}
