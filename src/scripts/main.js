@@ -14,9 +14,9 @@ const { API_ENDPOINT } = window.__CONFIG__;
 
 fetchJSON(`${API_ENDPOINT}/reports/stats/`).then(data => {
   const joined_items = $(".joined__item-count");
-  joined_items[0].innerText = data.data.msps;
-  joined_items[1].innerText = data.data.doctors;
-  joined_items[2].innerText = data.data.declarations;
+  joined_items[0].innerText = data.data.msps.toLocaleString("uk-UA");
+  joined_items[1].innerText = data.data.doctors.toLocaleString("uk-UA");
+  joined_items[2].innerText = data.data.declarations.toLocaleString("uk-UA");
   // joined_items[3].innerText = data.data.pharmacies;
   // joined_items[4].innerText = data.data.pharmacists;
 });

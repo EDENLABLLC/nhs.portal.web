@@ -55,8 +55,11 @@ export default class RegionsMap extends Component {
 
   componentWillMount() {
     this.resizeObserver = new ResizeObserver(
-      ([{ contentRect: { width, height } }]) =>
-        this.setState({ containerWidth: width, containerHeight: height })
+      ([
+        {
+          contentRect: { width, height }
+        }
+      ]) => this.setState({ containerWidth: width, containerHeight: height })
     );
   }
 
@@ -147,11 +150,11 @@ export default class RegionsMap extends Component {
             )}
           </div>
           <dl className="map__tooltip-data">
-            <dt>{msps}</dt>
+            <dt>{msps.toLocaleString("uk-UA")}</dt>
             <dd>медзакладів</dd>
-            <dt>{doctors}</dt>
+            <dt>{doctors.toLocaleString("uk-UA")}</dt>
             <dd>лікарів</dd>
-            <dt>{declarations}</dt>
+            <dt>{declarations.toLocaleString("uk-UA")}</dt>
             <dd>декларацій підписано</dd>
             {/*
                 <dt>{pharmacies}</dt>

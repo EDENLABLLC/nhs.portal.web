@@ -83,6 +83,7 @@ export default class RegionsChart extends Component {
                 <ChartTooltip
                   labelFormatter={() => null}
                   units={STATS_PLURALS[stats]}
+                  formatter={v => v.toLocaleString("uk-UA")}
                 />
               }
             />

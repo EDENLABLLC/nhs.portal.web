@@ -14,8 +14,7 @@ import {
 import ChartTooltip from "./ChartTooltip";
 
 const DynamicsChart = ({ data, dataKey, units }) => (
-  <ResponsiveContainer width="100%"
-                       aspect={2}>
+  <ResponsiveContainer width="100%" aspect={2}>
     <AreaChart data={data}>
       <CartesianGrid stroke="#e8e8e8" />
       <XAxis
@@ -29,7 +28,8 @@ const DynamicsChart = ({ data, dataKey, units }) => (
         content={
           <ChartTooltip
             units={units}
-            labelFormatter={l => format(l, "d MMMM", { locale:  uk })}
+            labelFormatter={l => format(l, "d MMMM", { locale: uk })}
+            formatter={v => v.toLocaleString("uk-UA")}
           />
         }
         cursor={{ stroke: "#4880ed" }}
