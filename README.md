@@ -36,4 +36,3 @@ Application supports these environment variables:
 - `npm run dev` - Run build and start livereload server
 - `npm run build` - Build CSS and JS, copy static files
 - `npm run production` - Run build and minify
-- `npm run deploy` - Build, minify and deploy to GitHub Pages
