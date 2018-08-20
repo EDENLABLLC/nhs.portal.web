@@ -17,7 +17,7 @@ vendor/bundle
 .bundle
 
 .idea
-.tools-version
+.tool-versions
 .publish
 .DS_Store
 .tmp
