@@ -1,4 +1,3 @@
-
 window.__CONFIG__ = {
-  API_ENDPOINT: 'https://api.dev.asclepius.com.ua'
+  API_ENDPOINT: "https://api.ehealth-ukraine.org"
 };
