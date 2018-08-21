@@ -28,10 +28,10 @@ const NAV_ITEMS = [
     link: "/#documents",
     title: "Документи"
   },
-  {
-    link: "/#contacts",
-    title: "Контакти"
-  }
+  // {
+  //   link: "/#contacts",
+  //   title: "Контакти"
+  // }
 ];
 
 export default class Nav extends Component {
@@ -73,7 +73,7 @@ export default class Nav extends Component {
                 <i className="icon icon_name_fb" />
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 className="nav__link"
                 target="_blank"
@@ -81,7 +81,7 @@ export default class Nav extends Component {
               >
                 <i className="icon icon_name_tw" />
               </a>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <Gamburger
