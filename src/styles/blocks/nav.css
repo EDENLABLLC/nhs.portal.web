@@ -1,6 +1,7 @@
 .nav {
   vertical-align: top;
   line-height: 40px;
+  float: right;
 
   @media (max-width: 860px) {
     position: fixed;
