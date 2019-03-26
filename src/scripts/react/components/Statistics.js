@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { subDays, format } from "date-fns";
 
 import TabView from "./TabView";
 import DynamicsChart from "./DynamicsChart";
@@ -16,12 +15,9 @@ export default class Statistics extends Component {
   };
 
   async componentDidMount() {
-    const params = getHistogramParams(
-      document.body.clientWidth > 768 ? 30 : 15
-    );
 
     const dynamicsRequest = await fetch(
-      `${API_ENDPOINT}/reports/stats/histogram?${params}`
+      `${API_ENDPOINT}/reports/stats/histogram`
     );
 
     const { data } = await dynamicsRequest.json();
@@ -70,20 +66,3 @@ export default class Statistics extends Component {
 //     />
 //   )
 // }
-
-const getHistogramParams = daysAmount => {
-  const params = new URLSearchParams();
-
-  let to_date = new Date();
-  let from_date = subDays(to_date, daysAmount);
-
-  [to_date, from_date] = [to_date, from_date].map(date =>
-    format(date, "YYYY-MM-dd")
-  );
-
-  Object.entries({ to_date, from_date, interval: "DAY" }).forEach(
-    ([key, value]) => params.set(key, value)
-  );
-
-  return params;
-};

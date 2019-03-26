@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React  from "react";
 import { format } from "date-fns";
-import { uk } from "date-fns/esm/locale";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -20,7 +19,7 @@ const DynamicsChart = ({ data, dataKey, units }) => (
       <XAxis
         dataKey="period_name"
         interval="preserveStartEnd"
-        tickFormatter={date => format(date, "d")}
+        tickFormatter={date => format(date, "M")}
         tick={{ fontSize: 12 }}
       />
       <YAxis scale="linear" width={80} tick={{ fontSize: 12 }} />
@@ -28,7 +27,11 @@ const DynamicsChart = ({ data, dataKey, units }) => (
         content={
           <ChartTooltip
             units={units}
-            labelFormatter={l => format(l, "d MMMM", { locale: uk })}
+            labelFormatter={l => {
+              const date = new Date(l);
+              const month = date.toLocaleString('uk-UA', { month: 'long' });
+              return `${month.toLocaleUpperCase()} ${date.getFullYear()}`
+            }}
             formatter={v => v.toLocaleString("uk-UA")}
           />
         }
