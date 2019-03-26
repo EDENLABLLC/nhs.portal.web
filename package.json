@@ -86,7 +86,7 @@
     "react-portal-tooltip": "^2.4.0",
     "react-projector": "^1.0.0-beta.1",
     "react-projector-responsive": "^1.0.0-beta.1",
-    "recompose": "^0.26.0",
+    "recompose": "^0.30.0",
     "resize-observer-polyfill": "^1.5.0",
     "smart-plurals": "^1.1.0",
     "smoothscroll-polyfill": "^0.3.5"
