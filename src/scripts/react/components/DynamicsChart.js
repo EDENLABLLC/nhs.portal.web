@@ -38,7 +38,7 @@ const DynamicsChart = ({ data, dataKey, units }) => (
         cursor={{ stroke: "#4880ed" }}
       />
       <Area
-        type="natural"
+        type="monotone"
         dataKey={dataKey}
         stroke="#4862ed"
         strokeWidth={2}
