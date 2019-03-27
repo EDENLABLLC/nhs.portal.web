@@ -62,7 +62,7 @@
     "reactify": "^1.1.1",
     "recharts": "^1.0.0-beta.1",
     "uglifyify": "^4.0.3",
-    "vinyl-source-stream": "^1.1.0",
+    "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.9.0",
     "webpack": "^3.4.1",
     "webpack-merge": "^4.1.0"
