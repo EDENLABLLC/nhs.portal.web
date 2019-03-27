@@ -18,11 +18,10 @@ const DynamicsChart = ({ data, dataKey, units }) => (
       <CartesianGrid stroke="#e8e8e8" />
       <XAxis
         dataKey="period_name"
-        interval="preserveStartEnd"
-        tickFormatter={date => format(date, "M")}
-        tick={{ fontSize: 12 }}
+        height={90}
+        tick={<CustomizedAxisTick/>}
       />
-      <YAxis scale="linear" width={80} tick={{ fontSize: 12 }} />
+      <YAxis scale="linear" width={55} tick={{ fontSize: 12 }} />
       <Tooltip
         content={
           <ChartTooltip
@@ -49,5 +48,15 @@ const DynamicsChart = ({ data, dataKey, units }) => (
     </AreaChart>
   </ResponsiveContainer>
 );
+
+const CustomizedAxisTick = ({x, y, stroke, payload}) => {
+    const date = new Date(payload.value);
+    const month = date.toLocaleString('uk-UA', { month: 'long' });
+    return (
+        <g transform={`translate(${x},${y})`}>
+            <text x={0} y={0} dy={16} textAnchor="end" fill="#666" fontSize="12" transform="rotate(-55)">{month}</text>
+        </g>
+    );
+};
 
 export default DynamicsChart;
