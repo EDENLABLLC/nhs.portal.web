@@ -53,7 +53,7 @@ backTitle: "Назад"
                         Ноутбук або персональний комп'ютер офісного рівня.
                         Має працювати браузер Google Chrome останньої версії.
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/uciq7PhPnBA" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="uciq7PhPnBA"><div class="play-button"></div></div>
                     <p>
                         Контакт-центр Helsi<br>
                         <a href="tel:+380445801090">044 580 10 90 (міський)</a><br>
@@ -74,7 +74,7 @@ backTitle: "Назад"
                         Ноутбук або персональний комп'ютер офісного рівня.
                         Операційна система сімейства Windows.
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/UMuoFlfkC_A" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="UMuoFlfkC_A"><div class="play-button"></div></div>
                     <p>
                         ТОВ "АЛТ Україна ЛТД" <br />
                         вул. Митрополита Андрея <br />
@@ -98,7 +98,7 @@ backTitle: "Назад"
                         ЖД: 40 Гб +.<br>
                         ОС: MS Windows 8<br>
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="//www.youtube.com/embed/0zwbQJOxhq4?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="0zwbQJOxhq4"><div class="play-button"></div></div>
                     <p>
                         вул. Наукова 7, корпус Г <br>
                         м. Львів, 79060 <br>
@@ -119,7 +119,7 @@ backTitle: "Назад"
                         Веб-браузер Google Chrome версії не нижче 61.0.3163.100.
                         <br>
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/VNZ3gQUkGZQ" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="VNZ3gQUkGZQ"><div class="play-button"></div></div>
                     <p>
                         <a href="tel:+380577140080">057 714 00 80</a><br>
                         <a href="tel:+380675724320">067 572 43 20</a><br>
@@ -141,7 +141,7 @@ backTitle: "Назад"
                         Firefox (29+), Internet Explorer (11+),<br />
                         Opera (15+), Safari.
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/zLMQ--oFvCY" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="zLMQ--oFvCY"><div class="play-button"></div></div>
                     <p>
                         <a href="tel:+380636484988">063 648 49 88</a><br>
                         <a href="tel:+380932950208">093 295 02 08</a><br>
@@ -163,7 +163,7 @@ backTitle: "Назад"
                         Доступ до Інтернет від 1 Мб/с.
                         <br />
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/eAODqjt0V9k?rel=0" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="eAODqjt0V9k"><div class="play-button"></div></div>
                     <p>
                         <a href="tel:+380934986226">+ 38 093 498 62 26 (lifecell)</a><br>
                         <a href="tel:+380994986226">+ 38 099 498 62 26 (vodafone)</a><br>
@@ -267,7 +267,7 @@ backTitle: "Назад"
                     <p>
                         Ноутбук або ПК офісного рівня. Має працювати Adobe Air
                     </p>
-                    <iframe class="partners__item-video" width="100%" src="https://www.youtube.com/embed/VmxVXTY3f9I" frameborder="0" allowfullscreen=""></iframe>
+                    <div class="partners__item-video youtube" data-embed="VmxVXTY3f9I"><div class="play-button"></div></div>
                     <p>
                         <a href="tel:+380504040686">  +38 050 404 06 86</a><br>
                         <a href="tel:+380443627886">+38 044 362 78 86</a><br>
@@ -337,7 +337,7 @@ backTitle: "Назад"
                         <a href="mailto:info@ciet-holding.com">info@ciet-holding.com</a>
                     </p>
                 </div>
-                
+
                   <div class="partners__item">
                     <a href="https://simplex-med.com/" target="_blank"><img src="./images/partners/SimplexMed.png" alt="" class=""></a>
                     <div class="partners__item-title">Функції в системі eHealth</div>
@@ -368,7 +368,27 @@ backTitle: "Назад"
     <footer class="footer">
         Електронна система охорони здоров’я eHealth
     </footer>
-
+    <script>
+      (function() {
+        var youtube = document.querySelectorAll( ".youtube" );
+        for (var i = 0; i < youtube.length; i++) {
+          var source = "https://img.youtube.com/vi/"+ youtube[i].dataset.embed +"/default.jpg";
+          var image = new Image();
+          image.src = source;
+          image.addEventListener( "load", function() {
+            youtube[ i ].appendChild( image );
+          }( i ) );
+          youtube[i].addEventListener( "click", function() {
+            var iframe = document.createElement( "iframe" );
+            iframe.setAttribute( "frameborder", "0" );
+            iframe.setAttribute( "allowfullscreen", "" );
+            iframe.setAttribute( "src", "https://www.youtube.com/embed/"+ this.dataset.embed +"?rel=0&showinfo=0&autoplay=1" );
+            this.innerHTML = "";
+            this.appendChild( iframe );
+          } );
+        }
+      })();
+    </script>
     <script type="text/javascript" src="/scripts/config.js"></script>
     <script src="//cdn.jsdelivr.net/web-animations/latest/web-animations.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.production.min.js"></script>
