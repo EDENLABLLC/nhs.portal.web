@@ -44,6 +44,8 @@ const SCRIPTS_SRC = [
   `${SCRIPTS_PATH}/react/pages/default.js`
 ];
 
+const STATIC_PATH = `${SRC_PATH}/static/`;
+
 gulp.task("clean", () => del([SCRIPTS_DIST, STYLES_DIST, EXPORT_PATH]));
 
 gulp.task("build:scripts", done => {
@@ -81,6 +83,13 @@ gulp.task("build:styles", () =>
     .pipe(connect.reload())
 );
 
+gulp.task("build:static", () =>
+  gulp
+    .src(`${STATIC_PATH}/robots.txt`)
+    .pipe(gulp.dest(TMP_PATH))
+    .pipe(connect.reload())
+);
+
 gulp.task("build:jekyll", cb =>
   cp
     .spawn(
@@ -102,7 +111,10 @@ gulp.task("serve", () =>
     .on("error", error => gutil.log(gutil.colors.red(error.message)))
 );
 
-gulp.task("build", sequence("clean", ["build:scripts", "build:styles"]));
+gulp.task(
+  "build",
+  sequence("clean", ["build:scripts", "build:styles", "build:static"])
+);
 
 gulp.task("watch", ["build"], () => {
   gulp.watch(`${STYLES_PATH}/**/*.css`, ["build:styles"]);
